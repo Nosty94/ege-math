@@ -452,6 +452,67 @@ body{
   *{transition-duration:0.01ms !important;}
 }
 
+/* ── AUTO-HIDE HEADER ── */
+#hdr{transition:transform 0.32s cubic-bezier(0.4,0,0.2,1);}
+#hdr.hdr-hidden{transform:translateY(-110%);}
+
+/* ── SUBTOPIC CHIPS ── */
+.subtopic-nav{
+  display:flex;gap:6px;flex-wrap:nowrap;
+  overflow-x:auto;scrollbar-width:none;
+  padding:0 2px 16px;
+  -webkit-overflow-scrolling:touch;
+}
+.subtopic-nav::-webkit-scrollbar{display:none;}
+.st-chip{
+  flex-shrink:0;padding:6px 14px;border-radius:20px;
+  font-size:12px;font-weight:600;cursor:pointer;
+  border:1px solid var(--border2);background:var(--bg3);
+  color:var(--text2);transition:all 0.15s;white-space:nowrap;
+  font-family:'Outfit',sans-serif;min-height:34px;
+  -webkit-tap-highlight-color:transparent;
+}
+.st-chip:hover,.st-chip:active{background:var(--bg4);color:var(--text);}
+
+/* ── DETAILED SOLUTION STEPS ── */
+.sol-btn{
+  width:100%;padding:9px 16px;
+  background:rgba(74,158,255,0.04);border:none;
+  border-top:1px solid rgba(74,158,255,0.12);
+  color:var(--alg);font-size:12px;font-weight:600;
+  text-align:left;cursor:pointer;font-family:'Outfit',sans-serif;
+  letter-spacing:0.4px;display:flex;align-items:center;gap:6px;
+  transition:background 0.15s;min-height:40px;
+}
+.sol-btn:hover,.sol-btn:active{background:rgba(74,158,255,0.09);}
+.sol-btn .arr{transition:transform 0.2s;font-size:10px;display:inline-block;}
+.sol-btn.open .arr{transform:rotate(90deg);}
+.sol-body{
+  display:none;padding:12px 16px 14px;
+  background:rgba(74,158,255,0.03);
+  border-top:1px solid rgba(74,158,255,0.08);
+}
+.sol-body.open{display:block;}
+.sol-step{
+  display:flex;gap:10px;align-items:flex-start;
+  margin-bottom:9px;font-size:13px;line-height:1.55;color:var(--text);
+}
+.sol-step:last-child{margin-bottom:0;}
+.sol-num{
+  min-width:22px;height:22px;border-radius:50%;
+  background:rgba(74,158,255,0.18);color:var(--alg);
+  font-size:11px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:1px;
+}
+.sol-formula{
+  font-family:'Crimson Pro',Georgia,serif;font-size:1.05em;
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+}
+
+/* ── SEARCH HIGHLIGHT ── */
+mark{background:rgba(255,197,66,0.3);color:inherit;border-radius:2px;}
+
 /* ── LIGHT THEME ── */
 body.light{
   --bg:#f0f4ff;--bg2:#e6ecfa;--bg3:#dde5f7;--bg4:#d0daef;
@@ -491,16 +552,16 @@ body.light .test-opt:hover{background:var(--bg4);}
 
 /* ── COUNTDOWN TIMER ── */
 .countdown-wrap{
-  display:flex;align-items:center;gap:10px;
-  background:linear-gradient(135deg,rgba(74,158,255,0.08),rgba(180,123,255,0.08));
-  border:1px solid var(--border);border-radius:10px;
-  padding:8px 14px;margin-bottom:10px;
+  display:flex;align-items:center;gap:8px;
+  background:rgba(74,158,255,0.06);
+  border:1px solid rgba(74,158,255,0.15);border-radius:8px;
+  padding:6px 12px;margin-bottom:8px;
 }
-.countdown-label{font-size:11px;color:var(--text2);font-weight:600;letter-spacing:0.5px;}
-.countdown-num{font-size:22px;font-weight:700;color:var(--alg);line-height:1;}
-.countdown-unit{font-size:10px;color:var(--text3);font-weight:600;letter-spacing:0.5px;}
+.countdown-label{font-size:11px;color:var(--text2);font-weight:600;letter-spacing:0.3px;}
+.countdown-num{font-size:18px;font-weight:700;color:var(--alg);line-height:1;}
+.countdown-unit{font-size:9px;color:var(--text3);font-weight:600;letter-spacing:0.3px;}
 .countdown-block{display:flex;flex-direction:column;align-items:center;gap:1px;}
-.countdown-sep{font-size:18px;font-weight:700;color:var(--text3);padding-bottom:8px;}
+.countdown-sep{font-size:15px;font-weight:700;color:var(--text3);padding-bottom:6px;}
 
 /* ── NOTES ── */
 .note-btn{
@@ -591,7 +652,7 @@ body.light .test-opt:hover{background:var(--bg4);}
   </div>
   <!-- COUNTDOWN -->
   <div class="countdown-wrap" id="countdown-wrap">
-    <div class="countdown-label">До ЕГЭ (математика профиль):</div>
+    <div class="countdown-label">⏳ До ЕГЭ:</div>
     <div style="display:flex;gap:6px;align-items:flex-end;margin-left:auto;" id="countdown-blocks"></div>
   </div>
   <div class="srch-row">
@@ -752,7 +813,7 @@ sub:[
 {t:'Логарифм произведения',f:'\\log_a(mn)=\\log_a m+\\log_a n',d:'Логарифм произведения = сумма логарифмов.',ep:'\\log_2(8\\cdot4)',es:'3+2=5'},
 {t:'Логарифм частного',f:'\\log_a\\dfrac{m}{n}=\\log_a m-\\log_a n',d:'Логарифм дроби = разность логарифмов.',ep:'\\log_3 27-\\log_3 3',es:'\\log_3 9=2'},
 {t:'Логарифм степени',f:'\\log_a m^n=n\\cdot\\log_a m',d:'Показатель степени выносится за знак логарифма.',ep:'\\log_2 32',es:'5\\cdot\\log_2 2=5'},
-{t:'Формула перехода',f:'\\log_a b=\\dfrac{\\ln b}{\\ln a}=\\dfrac{\\log_c b}{\\log_c a}',d:'Смена основания логарифма.',ep:'\\log_4 8',es:'\\dfrac{3\\ln2}{2\\ln2}=\\dfrac{3}{2}'},
+{t:'Формула перехода',f:'\\log_a b=\\dfrac{\\ln b}{\\ln a}=\\dfrac{\\log_c b}{\\log_c a}',d:'Смена основания логарифма.',ep:'\\log_4 8',es:'\\dfrac{3\\ln2}{2\\ln2}=\\dfrac{3}{2}',sol:['Используй, когда удобнее считать через другое основание (обычно ln или lg)','Пример: log₄ 8 = ln8 / ln4','ln8 = ln(2³) = 3·ln2, ln4 = ln(2²) = 2·ln2','log₄ 8 = 3ln2 / 2ln2 = 3/2 = 1.5','Проверка: 4^(3/2) = (4^(1/2))^3 = 2^3 = 8 ✓']},
 {t:'Взаимообратные логарифмы',f:'\\log_a b=\\dfrac{1}{\\log_b a}',d:'Частный случай формулы перехода.',ep:'\\log_8 2',es:'\\dfrac{1}{3}'},
 {t:'Основное свойство',f:'a^{\\log_a b}=b',d:'Основание в степени логарифма равно аргументу.',ep:'5^{\\log_5 12}',es:'12'},
 {t:'Специальные значения',f:'\\log_a 1=0,\\quad\\log_a a=1,\\quad\\ln e=1,\\quad\\lg10=1',d:'Логарифм единицы = 0. Логарифм основания по себе = 1.',ep:'\\log_7 1+\\log_3 3',es:'0+1=1'},
@@ -767,28 +828,32 @@ sub:[
 {t:'Разность кубов',f:'a^3-b^3=(a-b)(a^2+ab+b^2)',d:'Разность кубов раскладывается на два множителя.',ep:'27-x^3',es:'(3-x)(9+3x+x^2)'},
 ]},
 {n:'Квадратные уравнения',clr:'var(--alg)',f:[
-{t:'Дискриминант',f:'D=b^2-4ac',d:'D>0: два корня, D=0: один корень, D<0: нет действительных корней.',ep:'x^2-5x+6=0',es:'D=25-24=1>0\\Rightarrow\\text{два корня}'},
-{t:'Формула корней',f:'x_{1,2}=\\dfrac{-b\\pm\\sqrt{D}}{2a}',d:'Корни квадратного уравнения через дискриминант.',ep:'x^2-5x+6=0',es:'x_{1,2}=\\dfrac{5\\pm1}{2};\\;x_1=3,\\;x_2=2'},
+{t:'Дискриминант',f:'D=b^2-4ac',d:'D>0: два корня, D=0: один корень, D<0: нет действительных корней.',ep:'x^2-5x+6=0',es:'D=25-24=1>0\\Rightarrow\\text{два корня}',
+sol:['Приведи уравнение к стандартному виду: ax² + bx + c = 0','Выдели коэффициенты: перед x² → a, перед x → b, свободный член → c','Пример: x² − 5x + 6 = 0  →  a = 1, b = −5, c = 6','Считай: D = b² − 4ac = (−5)² − 4·1·6 = 25 − 24 = 1','D = 1 > 0 → два различных вещественных корня. Если D = 0 → один корень. Если D < 0 → корней нет.']},
+{t:'Формула корней',f:'x_{1,2}=\\dfrac{-b\\pm\\sqrt{D}}{2a}',d:'Корни квадратного уравнения через дискриминант.',ep:'x^2-5x+6=0',es:'x_{1,2}=\\dfrac{5\\pm1}{2};\\;x_1=3,\\;x_2=2',
+sol:['Шаг 1 — найди D = b² − 4ac. Для x²−5x+6=0: a=1, b=−5, c=6 → D=1','Шаг 2 — если D < 0: корней нет. Если D = 0: один корень x = −b/(2a)','Шаг 3 — если D > 0: два корня. x₁ = (−b + √D) / 2a, x₂ = (−b − √D) / 2a','Пример: x₁ = (5 + 1)/2 = 3, x₂ = (5 − 1)/2 = 2','Проверка (теорема Виета): x₁+x₂ = 5 = −b/a ✓, x₁·x₂ = 6 = c/a ✓']},
 {t:'Теорема Виета',f:'x_1+x_2=-\\dfrac{b}{a},\\quad x_1\\cdot x_2=\\dfrac{c}{a}',d:'Сумма и произведение корней.',ep:'x^2-5x+6=0',es:'x_1+x_2=5,\\;x_1x_2=6'},
 {t:'Формула при чётном b',f:'x_{1,2}=\\dfrac{-b^{\\prime}\\pm\\sqrt{D^{\\prime}}}{a},\\quad D^{\\prime}=b^{\\prime2}-ac',d:'Упрощённая формула для ax²+2b′x+c=0.',ep:'2x^2-6x+4=0',es:"b'=3:\\;D'=1;\\;x_1=2,\\;x_2=1"},
 ]},
 {n:'Прогрессии',clr:'var(--alg)',f:[
 {t:'n-й член арифм. прогрессии',f:'a_n=a_1+(n-1)d',d:'d — разность прогрессии.',ep:'a_1=3,\\;d=5,\\;a_{10}=?',es:'3+9\\cdot5=48'},
-{t:'Сумма арифм. прогрессии',f:'S_n=\\dfrac{n(a_1+a_n)}{2}=\\dfrac{n(2a_1+(n-1)d)}{2}',d:'Сумма n первых членов.',ep:'1+2+\\ldots+100',es:'\\dfrac{100\\cdot101}{2}=5050'},
+{t:'Сумма арифм. прогрессии',f:'S_n=\\dfrac{n(a_1+a_n)}{2}=\\dfrac{n(2a_1+(n-1)d)}{2}',d:'Сумма n первых членов.',ep:'1+2+\\ldots+100',es:'\\dfrac{100\\cdot101}{2}=5050',sol:['Формула 1 (если знаешь первый и последний): Sₙ = n·(a₁+aₙ)/2','Формула 2 (если знаешь только начало и разность): Sₙ = n·(2a₁+(n−1)d)/2','Пример: 1+2+...+100. n=100, a₁=1, aₙ=100','Sₙ = 100·(1+100)/2 = 100·101/2 = 5050','Лайфхак: пары с концов дают одну и ту же сумму: 1+100=2+99=...=101. Таких пар 50.']},
 {t:'n-й член геом. прогрессии',f:'b_n=b_1\\cdot q^{n-1}',d:'q — знаменатель прогрессии.',ep:'b_1=2,\\;q=3,\\;b_5=?',es:'2\\cdot81=162'},
-{t:'Сумма геом. прогрессии',f:'S_n=\\dfrac{b_1(q^n-1)}{q-1},\\quad q\\neq1',d:'Сумма n первых членов.',ep:'b_1=1,\\;q=2,\\;S_5=?',es:'\\dfrac{2^5-1}{1}=31'},
-{t:'Бесконечная геом. прогрессия',f:'S_{\\infty}=\\dfrac{b_1}{1-q},\\quad|q|<1',d:'Сумма бесконечно убывающей прогрессии.',ep:'b_1=1,\\;q=\\tfrac{1}{2}',es:'\\dfrac{1}{1/2}=2'},
+{t:'Сумма геом. прогрессии',f:'S_n=\\dfrac{b_1(q^n-1)}{q-1},\\quad q\\neq1',d:'Сумма n первых членов.',ep:'b_1=1,\\;q=2,\\;S_5=?',es:'\\dfrac{2^5-1}{1}=31',
+sol:['Определи b₁ (первый член) и q (знаменатель = отношение соседних членов)','Пример: 1, 2, 4, 8, 16 → b₁=1, q=2, n=5','Считай числитель: b₁(qⁿ−1) = 1·(2⁵−1) = 1·31 = 31','Считай знаменатель: q−1 = 2−1 = 1','S₅ = 31/1 = 31. Проверь: 1+2+4+8+16 = 31 ✓']},
+{t:'Бесконечная геом. прогрессия',f:'S_{\\infty}=\\dfrac{b_1}{1-q},\\quad|q|<1',d:'Сумма бесконечно убывающей прогрессии.',ep:'b_1=1,\\;q=\\tfrac{1}{2}',es:'\\dfrac{1}{1/2}=2',
+sol:['Условие применения: |q| < 1 (прогрессия убывающая)','Пример: 1, 1/2, 1/4, 1/8, ... → b₁=1, q=1/2','Считай: S = b₁/(1−q) = 1/(1−1/2) = 1/(1/2) = 2','Смысл: если складывать всё больше и больше членов, сумма стремится к 2','Проверь первые 4 члена: 1+0.5+0.25+0.125 = 1.875 ≈ 2 (ещё не все члены) ✓']},
 ]},
 {n:'Производные',clr:'var(--alg)',f:[
 {t:'Таблица производных',isTable:true,tableType:'deriv'},
 {t:'Правило произведения',f:'(uv)^{\\prime}=u^{\\prime}v+uv^{\\prime}',d:'Производная произведения двух функций.',ep:'(x^2\\sin x)^{\\prime}',es:'2x\\sin x+x^2\\cos x'},
 {t:'Правило частного',f:'\\left(\\dfrac{u}{v}\\right)^{\\prime}=\\dfrac{u^{\\prime}v-uv^{\\prime}}{v^2}',d:'Производная дроби.',ep:'\\left(\\dfrac{x^2}{\\sin x}\\right)^{\\prime}',es:'\\dfrac{2x\\sin x-x^2\\cos x}{\\sin^2 x}'},
-{t:'Правило цепочки (сложная ф-ция)',f:'[f(g(x))]^{\\prime}=f^{\\prime}(g(x))\\cdot g^{\\prime}(x)',d:'Производная сложной функции.',ep:'(\\sin(3x^2))^{\\prime}',es:'\\cos(3x^2)\\cdot6x'},
+{t:'Правило цепочки (сложная ф-ция)',f:'[f(g(x))]^{\\prime}=f^{\\prime}(g(x))\\cdot g^{\\prime}(x)',d:'Производная сложной функции.',ep:'(\\sin(3x^2))^{\\prime}',es:'\\cos(3x^2)\\cdot6x',sol:['Сложная функция — «функция от функции». Например: sin(3x²) = f(g(x)), где f=sin, g=3x²','Правило: (внешняя производная) · (производная внутреннего аргумента)','Шаг 1: внешняя f=sin → f′=cos. Но аргумент не трогаем: cos(3x²)','Шаг 2: производная внутренней g=3x² → g′=6x','Итог: (sin(3x²))′ = cos(3x²) · 6x','Ещё пример: (e^(x²))′ = e^(x²) · 2x']},
 {t:'Уравнение касательной',f:'y=f(x_0)+f^{\\prime}(x_0)(x-x_0)',d:'Уравнение касательной в точке x₀.',ep:'y=x^2,\\;x_0=2',es:"f(2)=4,\\;f'(2)=4;\\;y=4x-4"},
 ]},
 {n:'Первообразная и интеграл',clr:'var(--alg)',f:[
 {t:'Таблица первообразных',isTable:true,tableType:'prim'},
-{t:'Формула Ньютона–Лейбница',f:'\\int_a^b f(x)\\,dx=F(b)-F(a)',d:'F(x) — любая первообразная f(x).',ep:'\\int_0^3 x^2\\,dx',es:'\\left[\\dfrac{x^3}{3}\\right]_0^3=9'},
+{t:'Формула Ньютона–Лейбница',f:'\\int_a^b f(x)\\,dx=F(b)-F(a)',d:'F(x) — любая первообразная f(x).',ep:'\\int_0^3 x^2\\,dx',es:'\\left[\\dfrac{x^3}{3}\\right]_0^3=9',sol:['Шаг 1: найди первообразную F(x) функции f(x) по таблице (или правилам интегрирования)','Шаг 2: подставь верхний предел: F(b). Затем нижний: F(a)','Шаг 3: вычти: F(b) − F(a). Константа C сокращается!','Пример: ∫₀³ x² dx. Первообразная x³/3. Подставляем: F(3)=27/3=9, F(0)=0','Ответ: 9 − 0 = 9. Геометрический смысл: площадь под y=x² от 0 до 3']},
 {t:'Геометрический смысл интеграла',f:'S=\\int_a^b f(x)\\,dx',d:'Площадь под графиком f(x) от a до b (если f(x)≥0).',ep:'S\\text{ под }y=\\sin x,\\;[0,\\pi]',es:'[-\\cos x]_0^\\pi=2'},
 ]},
 ]},
@@ -850,15 +915,20 @@ sub:[
 {n:'Треугольник — основное',clr:'var(--plan)',f:[
 {t:'Периметр',f:'P=a+b+c',d:'Сумма всех трёх сторон.',svg:'triangle',ep:'a=3,\\;b=4,\\;c=5',es:'P=12'},
 {t:'Площадь через высоту',f:'S=\\dfrac{1}{2}\\cdot a\\cdot h_a',d:'Половина произведения основания на высоту.',svg:'triangle',ep:'a=6,\\;h=4',es:'S=12'},
-{t:'Площадь через стороны и угол',f:'S=\\dfrac{1}{2}\\cdot a\\cdot b\\cdot\\sin C',d:'C — угол между сторонами a и b.',svg:'triangle',ep:'a=5,\\;b=8,\\;C=30°',es:'S=10'},
-{t:'Формула Герона',f:'S=\\sqrt{p(p-a)(p-b)(p-c)},\\quad p=\\dfrac{a+b+c}{2}',d:'p — полупериметр. Когда известны все три стороны.',svg:'triangle',ep:'a=3,\\;b=4,\\;c=5',es:'p=6;\\;S=\\sqrt{36}=6'},
+{t:'Площадь через стороны и угол',f:'S=\\dfrac{1}{2}\\cdot a\\cdot b\\cdot\\sin C',d:'C — угол между сторонами a и b.',svg:'triangle',ep:'a=5,\\;b=8,\\;C=30°',es:'S=10',
+sol:['C — угол между сторонами a и b (угол, зажатый между ними, внутри треугольника)','Пример: a=5, b=8, C=30° → sin30° = 0.5','S = ½ · 5 · 8 · 0.5 = ½ · 20 = 10','Частный случай: если C=90° (прямой угол), sin90°=1 → S = ½·a·b (формула для прямоугольного треугольника)','Применяй, когда знаешь две стороны и угол между ними']},
+{t:'Формула Герона',f:'S=\\sqrt{p(p-a)(p-b)(p-c)},\\quad p=\\dfrac{a+b+c}{2}',d:'p — полупериметр. Когда известны все три стороны.',svg:'triangle',ep:'a=3,\\;b=4,\\;c=5',es:'p=6;\\;S=\\sqrt{36}=6',
+sol:['Шаг 1 — найди полупериметр: p = (a+b+c)/2','Пример: a=3, b=4, c=5 → p = (3+4+5)/2 = 6','Шаг 2 — вычисли три разности: p−a = 3, p−b = 2, p−c = 1','Шаг 3 — перемножь все четыре множителя: p·(p−a)·(p−b)·(p−c) = 6·3·2·1 = 36','Шаг 4 — S = √36 = 6. Проверка: это прямоугольный треугольник 3-4-5, S = ½·3·4 = 6 ✓']},
 {t:'Площадь через описанную окружность',f:'S=\\dfrac{abc}{4R}',d:'R — радиус описанной окружности.',ep:'a=3,\\;b=4,\\;c=5,\\;R=2{,}5',es:'S=6'},
 {t:'Площадь через вписанную окружность',f:'S=p\\cdot r',d:'p — полупериметр, r — радиус вписанной окружности.',ep:'p=6,\\;r=1',es:'S=6'},
 ]},
 {n:'Теоремы треугольника',clr:'var(--plan)',f:[
-{t:'Теорема косинусов',f:'c^2=a^2+b^2-2ab\\cos C',d:'Обобщение теоремы Пифагора.',svg:'triangle',ep:'a=5,\\;b=7,\\;C=60°',es:'c=\\sqrt{39}'},
-{t:'Теорема синусов',f:'\\dfrac{a}{\\sin A}=\\dfrac{b}{\\sin B}=\\dfrac{c}{\\sin C}=2R',d:'Сторона / синус противолежащего угла = диаметр описанной окружности.',svg:'triangle',ep:'a=6,\\;A=30°,\\;B=45°',es:'b=6\\sqrt{2}'},
-{t:'Теорема Пифагора',f:'a^2+b^2=c^2',d:'Для прямоугольного треугольника.',svg:'rightTriangle',ep:'a=3,\\;b=4',es:'c=5'},
+{t:'Теорема косинусов',f:'c^2=a^2+b^2-2ab\\cos C',d:'Обобщение теоремы Пифагора.',svg:'triangle',ep:'a=5,\\;b=7,\\;C=60°',es:'c=\\sqrt{39}',
+sol:['c — сторона, которую ищем. C — угол, противолежащий ей (между сторонами a и b)','Важно: если C=90°, то cos90°=0 и формула превращается в теорему Пифагора: c²=a²+b²','Пример: a=5, b=7, C=60° → cos60°=0.5','c² = 5² + 7² − 2·5·7·0.5 = 25 + 49 − 35 = 39','c = √39 ≈ 6.24. Также по этой формуле можно найти УГОЛ, зная все три стороны: cosC = (a²+b²−c²)/(2ab)']},
+{t:'Теорема синусов',f:'\\dfrac{a}{\\sin A}=\\dfrac{b}{\\sin B}=\\dfrac{c}{\\sin C}=2R',d:'Сторона / синус противолежащего угла = диаметр описанной окружности.',svg:'triangle',ep:'a=6,\\;A=30°,\\;B=45°',es:'b=6\\sqrt{2}',
+sol:['Теорема: в любом треугольнике сторона / синус противолежащего угла = const = 2R','Составь пропорцию из двух известных пар (сторона + угол): a/sinA = b/sinB','Пример: a=6, A=30° → 6/sin30° = 6/0.5 = 12. Значит 2R = 12','Найди b: b = 2R · sinB = 12 · sin45° = 12 · (√2/2) = 6√2 ≈ 8.49','Применяй, когда знаешь хотя бы одну пару (сторона + противолежащий угол) и ещё один элемент']},
+{t:'Теорема Пифагора',f:'a^2+b^2=c^2',d:'Для прямоугольного треугольника.',svg:'rightTriangle',ep:'a=3,\\;b=4',es:'c=5',
+sol:['Применяется только к прямоугольному треугольнику!','c — гипотенуза (сторона напротив прямого угла, самая длинная)','a и b — катеты (стороны, образующие прямой угол)','Найди гипотенузу: c = √(a²+b²) = √(9+16) = √25 = 5','Найди катет: a = √(c²−b²). Запомни тройки Пифагора: 3-4-5, 5-12-13, 8-15-17']},
 ]},
 {n:'Прямоугольный треугольник',clr:'var(--plan)',f:[
 {t:'Тригонометрические отношения',f:'\\sin A=\\dfrac{a}{c},\\;\\cos A=\\dfrac{b}{c},\\;\\tan A=\\dfrac{a}{b}',d:'a — противолежащий катет, b — прилежащий, c — гипотенуза.',svg:'rightTriangle',ep:'c=10,\\;A=30°',es:'a=5'},
@@ -935,7 +1005,8 @@ sub:[
 {t:'Площадь полной поверхности',f:'S_{\\text{полн}}=S_{\\text{бок}}+2S_{\\text{осн}}',d:'Боковая + два основания.',ep:'S_{\\text{бок}}=90,\\;S_{\\text{осн}}=12',es:'S=114'},
 ]},
 {n:'Пирамида',clr:'var(--ster)',f:[
-{t:'Объём пирамиды',f:'V=\\dfrac{1}{3}\\cdot S_{\\text{осн}}\\cdot h',d:'Треть объёма охватывающей призмы.',svg:'pyramid',ep:'S_{\\text{осн}}=36,\\;h=5',es:'V=60'},
+{t:'Объём пирамиды',f:'V=\\dfrac{1}{3}\\cdot S_{\\text{осн}}\\cdot h',d:'Треть объёма охватывающей призмы.',svg:'pyramid',ep:'S_{\\text{осн}}=36,\\;h=5',es:'V=60',
+sol:['S_осн — площадь основания (квадрат, треугольник, шестиугольник и т.п.)','h — высота: перпендикуляр из вершины до плоскости основания','Ключевой факт: V(пирамида) = ⅓ · V(призмы). Три одинаковые пирамиды = одна призма','Пример: квадратное основание 6×6 → S_осн = 36, h = 5','V = ⅓ · 36 · 5 = 60. Проверяй размерность: м² · м = м³ ✓']},
 {t:'Площадь боковой поверхности (правильная)',f:'S_{\\text{бок}}=\\dfrac{1}{2}\\cdot P_{\\text{осн}}\\cdot a',d:'a — апофема (высота боковой грани).',svg:'pyramid',ep:'P_{\\text{осн}}=20,\\;a=6',es:'S=60'},
 {t:'Апофема правильной пирамиды',f:'a=\\sqrt{h^2+r^2}',d:'r — радиус вписанной окружности основания.',svg:'pyramid',ep:'h=4,\\;r=3',es:'a=5'},
 {t:'Площадь полной поверхности',f:'S_{\\text{полн}}=S_{\\text{бок}}+S_{\\text{осн}}',d:'Боковая + одно основание.',ep:'S_{\\text{бок}}=60,\\;S_{\\text{осн}}=36',es:'S=96'},
@@ -944,7 +1015,8 @@ sub:[
 {t:'Объём усечённой пирамиды',f:'V=\\dfrac{h}{3}\\left(S_1+S_2+\\sqrt{S_1S_2}\\right)',d:'S₁,S₂ — площади оснований, h — высота.',ep:'S_1=9,\\;S_2=4,\\;h=6',es:'V=2(9+4+6)=38'},
 ]},
 {n:'Конус',clr:'var(--ster)',f:[
-{t:'Объём конуса',f:'V=\\dfrac{1}{3}\\pi r^2h',d:'r — радиус основания, h — высота.',svg:'cone',ep:'r=3,\\;h=4',es:'V=12\\pi'},
+{t:'Объём конуса',f:'V=\\dfrac{1}{3}\\pi r^2h',d:'r — радиус основания, h — высота.',svg:'cone',ep:'r=3,\\;h=4',es:'V=12\\pi',
+sol:['r — радиус круглого основания, h — высота (перпендикуляр от вершины до основания)','Запомни: V(конус) = ⅓ · V(цилиндра). Конус в 3 раза меньше цилиндра с теми же r и h','Шаг 1: найди площадь основания: S = πr² = π·9 = 9π','Шаг 2: V = ⅓ · 9π · 4 = 12π ≈ 37.7','Образующая l (ребро боковой поверхности): l = √(r²+h²) = √(9+16) = 5']},
 {t:'Образующая конуса',f:'l=\\sqrt{r^2+h^2}',d:'Боковая образующая — гипотенуза (r,h,l).',svg:'cone',ep:'r=3,\\;h=4',es:'l=5'},
 {t:'Площадь боковой поверхности',f:'S_{\\text{бок}}=\\pi rl',d:'l — образующая.',svg:'cone',ep:'r=3,\\;l=5',es:'15\\pi'},
 {t:'Площадь полной поверхности',f:'S_{\\text{полн}}=\\pi r(l+r)',d:'Боковая + основание.',svg:'cone',ep:'r=3,\\;l=5',es:'24\\pi'},
@@ -960,7 +1032,7 @@ sub:[
 {t:'Площадь полной поверхности',f:'S_{\\text{полн}}=2\\pi r(h+r)',d:'Боковая + два основания.',svg:'cylinder',ep:'r=3,\\;h=10',es:'78\\pi'},
 ]},
 {n:'Шар и сфера',clr:'var(--ster)',f:[
-{t:'Объём шара',f:'V=\\dfrac{4}{3}\\pi r^3',d:'r — радиус шара.',svg:'sphere',ep:'r=3',es:'36\\pi'},
+{t:'Объём шара',f:'V=\\dfrac{4}{3}\\pi r^3',d:'r — радиус шара.',svg:'sphere',ep:'r=3',es:'36\\pi',sol:['r — радиус шара (половина диаметра)','V = (4/3)·π·r³. Запомни коэффициент 4/3!','Пример: r=3 → r³ = 27','V = 4/3 · π · 27 = 4·9·π = 36π ≈ 113.1','Сравни с цилиндром той же высоты 2r: V_цил = π·r²·2r = 2πr³. Шар = ⅔ цилиндра!']},
 {t:'Площадь поверхности сферы',f:'S=4\\pi r^2',svg:'sphere',ep:'r=3',es:'36\\pi'},
 {t:'Объём шарового сегмента',f:'V_{\\text{сег}}=\\dfrac{\\pi h^2}{3}(3r-h)',d:'h — высота сегмента.',svg:'sphere',ep:'r=5,\\;h=2',es:'\\dfrac{52\\pi}{3}'},
 {t:'Шар вписан в цилиндр',f:'R_{\\text{шара}}=r_{\\text{цил}}=\\dfrac{h_{\\text{цил}}}{2}',d:'Радиус шара = радиус цилиндра = половина высоты.',ep:'r_{цил}=5',es:'h_{цил}=10;\\;V=\\tfrac{4}{3}\\pi\\cdot125'},
@@ -994,18 +1066,18 @@ sub:[
 {t:'Условная вероятность',f:'P(B|A)=\\dfrac{P(A\\cap B)}{P(A)}',d:'Вероятность B при условии, что A произошло.',ep:'P(AB)=0{,}12,\\;P(A)=0{,}3',es:'P(B|A)=0{,}4'},
 ]},
 {n:'Полная вероятность и Байес',clr:'var(--prob)',f:[
-{t:'Формула полной вероятности',f:'P(B)=\\sum_{i=1}^{n}P(A_i)\\cdot P(B|A_i)',d:'A₁…Aₙ — полная группа гипотез.',ep:'P(A_1)=0{,}6,\\;P(B|A_1)=0{,}2;\\;P(A_2)=0{,}4,\\;P(B|A_2)=0{,}5',es:'P(B)=0{,}32'},
+{t:'Формула полной вероятности',f:'P(B)=\\sum_{i=1}^{n}P(A_i)\\cdot P(B|A_i)',d:'A₁…Aₙ — полная группа гипотез.',ep:'P(A_1)=0{,}6,\\;P(B|A_1)=0{,}2;\\;P(A_2)=0{,}4,\\;P(B|A_2)=0{,}5',es:'P(B)=0{,}32',sol:['Применяется когда событие B может произойти через разные «пути» (гипотезы A₁, A₂,...Aₙ)','Условие: гипотезы несовместны и исчерпывают все случаи: P(A₁)+P(A₂)+...+P(Aₙ) = 1','Пример: завод 1 (P=0.6) выдаёт брак с P=0.2; завод 2 (P=0.4) — с P=0.5','P(брак) = 0.6·0.2 + 0.4·0.5 = 0.12 + 0.20 = 0.32','Проверяй: сумма P(Aᵢ) = 0.6+0.4 = 1 ✓ (полная группа гипотез)']},
 {t:'Формула Байеса',f:'P(A_k|B)=\\dfrac{P(A_k)\\cdot P(B|A_k)}{P(B)}',d:'Обновление вероятности гипотезы после наблюдения.',ep:'P(A_1)=0{,}6,\\;P(B|A_1)=0{,}2,\\;P(B)=0{,}32',es:'P(A_1|B)=0{,}375'},
 ]},
 {n:'Случайная величина',clr:'var(--prob)',f:[
-{t:'Математическое ожидание',f:'M(X)=\\sum_{i}x_i\\cdot p_i',d:'Среднее взвешенное значений.',ep:'X:\\;1(p=0{,}2),\\;3(p=0{,}5),\\;5(p=0{,}3)',es:'M=3{,}2'},
+{t:'Математическое ожидание',f:'M(X)=\\sum_{i}x_i\\cdot p_i',d:'Среднее взвешенное значений.',ep:'X:\\;1(p=0{,}2),\\;3(p=0{,}5),\\;5(p=0{,}3)',es:'M=3{,}2',sol:['Для каждого значения xᵢ умножь его на вероятность pᵢ и сложи все произведения','Пример: X принимает значения 1, 3, 5 с вероятностями 0.2, 0.5, 0.3','M(X) = 1·0.2 + 3·0.5 + 5·0.3 = 0.2 + 1.5 + 1.5 = 3.2','Проверка: сумма всех вероятностей всегда = 1: 0.2+0.5+0.3 = 1 ✓','M(X) — это «центр тяжести» распределения, ожидаемое среднее значение при многих опытах']},
 {t:'Дисперсия',f:'D(X)=M(X^2)-[M(X)]^2=\\sum_i(x_i-M)^2p_i',d:'Мера разброса вокруг среднего.',ep:'X:\\;1(p=0{,}5),\\;3(p=0{,}5)',es:'D=1'},
 {t:'СКО',f:'\\sigma(X)=\\sqrt{D(X)}',d:'Корень дисперсии — в тех же единицах, что X.',ep:'D(X)=9',es:'\\sigma=3'},
 {t:'Свойства M(X)',f:'M(aX+b)=a\\,M(X)+b\\\\[4pt]M(X+Y)=M(X)+M(Y)',d:'Линейность математического ожидания.',ep:'M(X)=3,\\;M(2X+1)=?',es:'7'},
 {t:'Свойства D(X)',f:'D(aX+b)=a^2D(X)\\\\[4pt]D(X+Y)=D(X)+D(Y)\\text{ (незав.)}',d:'При умножении на константу — умножается на квадрат.',ep:'D(X)=4,\\;D(3X-2)=?',es:'36'},
 ]},
 {n:'Биномиальное распределение',clr:'var(--prob)',f:[
-{t:'Формула Бернулли',f:'P(X=k)=C_n^k\\cdot p^k\\cdot q^{n-k},\\quad q=1-p',d:'k успехов в n независимых испытаниях.',ep:'10 монет, 3 орла',es:'\\dfrac{15}{128}'},
+{t:'Формула Бернулли',f:'P(X=k)=C_n^k\\cdot p^k\\cdot q^{n-k},\\quad q=1-p',d:'k успехов в n независимых испытаниях.',ep:'10 монет, 3 орла',es:'\\dfrac{15}{128}',sol:['n — число испытаний, k — нужное число успехов, p — вероятность успеха, q = 1−p','Шаг 1: C(n,k) = n! / (k!·(n−k)!) — число способов выбрать k успехов из n попыток','Шаг 2: Пример — 10 бросков монеты, нужно ровно 3 орла: n=10, k=3, p=0.5, q=0.5','C(10,3) = 10!/(3!·7!) = 120','P = 120 · (0.5)³ · (0.5)⁷ = 120/1024 = 15/128 ≈ 0.117 или ≈ 11.7%']},
 {t:'Математическое ожидание (Бернулли)',f:'M(X)=np',d:'Среднее число успехов.',ep:'n=100,\\;p=0{,}4',es:'M=40'},
 {t:'Дисперсия (Бернулли)',f:'D(X)=npq',d:'Дисперсия биномиального распределения.',ep:'n=100,\\;p=0{,}4',es:'D=24'},
 {t:'СКО биномиального',f:'\\sigma(X)=\\sqrt{npq}',ep:'n=100,\\;p=0{,}4',es:'\\sigma=2\\sqrt{6}\\approx4{,}9'},
@@ -1089,6 +1161,10 @@ function makeTable(type){
   return '';
 }
 
+function toggleSol(id,btn){
+  document.getElementById(id).classList.toggle('open');
+  btn.classList.toggle('open');
+}
 // ─── MAKE CARD ───
 function makeCard(fm,sid,idx){
   if(fm.isTable){
@@ -1096,6 +1172,7 @@ function makeCard(fm,sid,idx){
     return `<div class="tbl-card" data-s="${sid}" style="border-left-color:${clr}"><div class="tbl-head" style="color:${clr}">${fm.t}</div>${makeTable(fm.tableType)}</div>`;
   }
   const id=`ex-${sid}-${idx}`;
+  const sid2=`sol-${sid}-${idx}`;
   const fid=`${sid}_${idx}`.replace(/\W/g,'_');
   const nid=`note-${fid}`;
   const clr=secColor(sid);
@@ -1103,6 +1180,17 @@ function makeCard(fm,sid,idx){
   const isLearned=STATE.learned.has(fid);
   const hasNote=!!STATE.notes[fid];
   const noteVal=(STATE.notes[fid]||'').replace(/"/g,'&quot;');
+  // Detailed solution steps HTML
+  const solHTML=fm.sol&&fm.sol.length?`
+    <button class="sol-btn" onclick="toggleSol('${sid2}',this)">
+      <span class="arr">▶</span> 📖 Разбор решения по шагам
+    </button>
+    <div class="sol-body" id="${sid2}">
+      ${fm.sol.map((step,i)=>`<div class="sol-step">
+        <div class="sol-num">${i+1}</div>
+        <div>${step}</div>
+      </div>`).join('')}
+    </div>`:'';
   return `<div class="fc${isLearned?' is-learned':''}" data-s="${sid}" data-fid="${fid}" data-title="${fm.t.toLowerCase()}" data-desc="${(fm.d||'').toLowerCase()}">
     <div class="fc-head">
       <div class="fc-title" style="color:${clr}">${fm.t}</div>
@@ -1117,6 +1205,7 @@ function makeCard(fm,sid,idx){
     ${fm.svg&&SVG[fm.svg]?`<div class="fc-svg">${SVG[fm.svg]}</div>`:''}
     ${fm.ep&&fm.es?`<button class="ex-btn" onclick="toggleEx('${id}',this)"><span class="arr">▶</span> Пример задачи</button>
     <div class="ex-body" id="${id}"><div class="ex-lbl">📝 Задача</div><div class="ex-p">${k(fm.ep)}</div><div class="ex-sep"></div><div class="ex-lbl2">✅ Решение</div><div class="ex-s">${k(fm.es)}</div></div>`:''}
+    ${solHTML}
     <div class="note-area${hasNote?' open':''}" id="${nid}">
       ${hasNote?`<div style="font-size:11px;color:var(--prob);font-weight:600;margin-bottom:4px;">📝 Заметка</div>`:''}
       <textarea placeholder="Напиши свою заметку, подсказку или ассоциацию..." oninput="autoResize(this)">${noteVal}</textarea>
@@ -1248,9 +1337,16 @@ updateCountdown();
 setInterval(updateCountdown,60000);
 
 // ─── BUILD SECTION HTML ───
+function subAnchorId(secId,subN){return `sub_${secId}_${subN}`.replace(/\W/g,'_');}
 function buildSectionHTML(sec){
   const clr=secColor(sec.id);
-  let html=`<div class="s-intro">
+  // Build subtopic chips
+  const chips=sec.sub.map(sub=>{
+    const aid=subAnchorId(sec.id,sub.n);
+    return `<button class="st-chip" onclick="scrollToSub('${aid}')" style="border-color:${sub.clr}33;color:${sub.clr}">${sub.n}</button>`;
+  }).join('');
+  let html=`<div class="subtopic-nav">${chips}</div>
+  <div class="s-intro">
     <div class="s-intro-top">
       <div class="s-intro-icon">${sec.icon}</div>
       <div class="s-intro-text"><b>${sec.name}</b> — ${sec.intro}</div>
@@ -1260,7 +1356,8 @@ function buildSectionHTML(sec){
   </div>`;
   sec.sub.forEach(sub=>{
     const cnt=sub.f.filter(f=>!f.isTable).length+sub.f.filter(f=>f.isTable).length;
-    html+=`<div class="sub-hdr">
+    const aid=subAnchorId(sec.id,sub.n);
+    html+=`<div class="sub-hdr" id="${aid}">
       <div class="sub-title" style="color:${sub.clr};background:${sub.clr}22">${sub.n}</div>
       <div class="sub-line"></div>
       <div class="sub-count">${cnt} формул</div>
@@ -1268,6 +1365,14 @@ function buildSectionHTML(sec){
     sub.f.forEach((fm,i)=>{html+=makeCard(fm,sec.id,`${sub.n}-${i}`);});
   });
   return html;
+}
+function scrollToSub(aid){
+  const el=document.getElementById(aid);
+  if(!el) return;
+  const hdr=document.getElementById('hdr');
+  const hdrH=hdr.classList.contains('hdr-hidden')?0:hdr.offsetHeight;
+  const top=el.getBoundingClientRect().top+window.scrollY-hdrH-8;
+  window.scrollTo({top,behavior:'smooth'});
 }
 
 function buildFavHTML(){
@@ -1289,22 +1394,42 @@ function buildFavHTML(){
   return html;
 }
 
-// ─── SEARCH ───
+// ─── SMART SEARCH (Russian morphology) ───
+function stemRU(w){
+  if(w.length<=3) return w;
+  return w
+    .replace(/(ость|ение|ений|ания|ской|ского|ских|ские|ском)$/,'')
+    .replace(/(ого|ему|ому|ее|ие|ые|ой|ий|ый|ая|яя|ая)$/,'')
+    .replace(/(ами|ях|ах|ев|ов|ей|ей|ем)$/,'')
+    .replace(/(ть|ться|тся|ет|ют|ал|ил|нь)$/,'')
+    .replace(/[аеёиоуыьэюя]$/,'');
+}
+function smartMatch(query,hay){
+  const words=query.toLowerCase().split(/\s+/).filter(w=>w.length>=2);
+  const hayL=hay.toLowerCase();
+  return words.every(w=>{
+    if(hayL.includes(w)) return true;          // точное вхождение
+    const s=stemRU(w);
+    if(s.length>=3&&hayL.includes(s)) return true;  // основа найдена
+    // проверяем каждое слово стога по основе запроса
+    return hayL.split(/\s+/).some(hw=>stemRU(hw)===s||stemRU(hw).startsWith(s)||s.startsWith(stemRU(hw)));
+  });
+}
 function doSearch(q){
-  const ql=q.toLowerCase().trim();
+  const qt=q.trim();
   let results=[];
   SECTIONS.forEach(sec=>{
     sec.sub.forEach(sub=>{
       sub.f.forEach((fm,i)=>{
         if(!fm.isTable){
-          const hay=(fm.t+' '+(fm.d||'')+' '+sub.n+' '+sec.name).toLowerCase();
-          if(hay.includes(ql)) results.push({fm,secId:sec.id,idx:`${sub.n}-${i}`,secName:sec.name,subName:sub.n});
+          const hay=`${fm.t} ${fm.d||''} ${sub.n} ${sec.name} ${fm.ep||''} ${fm.es||''}`;
+          if(smartMatch(qt,hay)) results.push({fm,secId:sec.id,idx:`${sub.n}-${i}`,secName:sec.name,subName:sub.n});
         }
       });
     });
   });
-  let html=`<div id="srch-info">Найдено: <b>${results.length}</b> по запросу «${q}»</div>`;
-  if(!results.length){html+=`<div class="empty"><div class="em">🔍</div><p>Ничего не найдено.</p></div>`;}
+  let html=`<div id="srch-info">Найдено: <b>${results.length}</b> по запросу «${qt}»</div>`;
+  if(!results.length){html+=`<div class="empty"><div class="em">🔍</div><p>Ничего не найдено.<br>Попробуй другой запрос.</p></div>`;}
   else results.forEach(r=>{
     html+=`<div style="font-size:11px;color:${secColor(r.secId)};padding:4px 2px 1px;font-weight:600;text-transform:uppercase;letter-spacing:0.7px;">${r.secName} → ${r.subName}</div>`;
     html+=makeCard(r.fm,r.secId,`srch-${r.idx}`);
@@ -1343,9 +1468,25 @@ srch.addEventListener('input',e=>{
   else render(curSec);
 });
 
+// ─── AUTO-HIDE HEADER ON SCROLL ───
+let lastScrollY=0,scrollTicking=false;
 window.addEventListener('scroll',()=>{
-  document.getElementById('bktop').classList.toggle('vis',window.scrollY>350);
-});
+  if(!scrollTicking){
+    requestAnimationFrame(()=>{
+      const cur=window.scrollY;
+      const hdr=document.getElementById('hdr');
+      if(cur>lastScrollY&&cur>120){
+        hdr.classList.add('hdr-hidden');
+      } else {
+        hdr.classList.remove('hdr-hidden');
+      }
+      lastScrollY=cur;
+      document.getElementById('bktop').classList.toggle('vis',cur>350);
+      scrollTicking=false;
+    });
+    scrollTicking=true;
+  }
+},{passive:true});
 
 // ══════════════════════════════════════════
 // SPACED REPETITION (SM-2 simplified)
