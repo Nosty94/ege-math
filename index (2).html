@@ -2,951 +2,1294 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="theme-color" content="#070c1a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ЕГЭ Мат">
+<meta name="description" content="Все формулы ЕГЭ Математика профиль 2026 — карточки, тесты, прогресс">
 <title>ЕГЭ Математика Профиль 2026</title>
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23070c1a'/%3E%3Ctext y='.9em' font-size='75' text-anchor='middle' x='50'%3E📐%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #070c1a;
-  --bg2: #0c1225;
-  --bg3: #131b33;
-  --bg4: #1a2340;
-  --card: rgba(255,255,255,0.035);
-  --card-h: rgba(255,255,255,0.065);
-  --border: rgba(255,255,255,0.08);
-  --border2: rgba(255,255,255,0.13);
-  --text: #dde4f8;
-  --text2: #7a8aa8;
-  --text3: #4a5a78;
-  --alg: #4a9eff;
-  --trig: #b47bff;
-  --plan: #34d08c;
-  --ster: #ff6b4a;
-  --prob: #ffc542;
-  --ex-c: #52c77c;
-  --r: 10px;
+:root{
+  --bg:#070c1a;--bg2:#0c1225;--bg3:#131b33;--bg4:#1a2340;
+  --card:rgba(255,255,255,0.035);--card-h:rgba(255,255,255,0.065);
+  --border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.13);
+  --text:#dde4f8;--text2:#7a8aa8;--text3:#4a5a78;
+  --alg:#4a9eff;--trig:#b47bff;--plan:#34d08c;--ster:#ff6b4a;--prob:#ffc542;
+  --fav:#ffd700;--ex-c:#52c77a;--r:10px;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Outfit', system-ui, sans-serif;
-  min-height: 100vh;
-  overflow-x: hidden;
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'Outfit',system-ui,sans-serif;
+  min-height:100vh;overflow-x:hidden;
+  padding-bottom:env(safe-area-inset-bottom,0px);
 }
 
-/* HEADER */
-#hdr {
-  position: sticky; top: 0; z-index: 200;
-  background: rgba(7,12,26,0.96);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-  padding: 10px 16px 0;
+/* ── HEADER ── */
+#hdr{
+  position:sticky;top:0;z-index:200;
+  background:rgba(7,12,26,0.97);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+  padding:10px 14px 0;
+  padding-top:calc(10px + env(safe-area-inset-top,0px));
 }
-.hdr-top {
-  display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 10px;
+.hdr-top{
+  display:flex;align-items:center;gap:8px;
+  margin-bottom:10px;
 }
-.app-name {
-  font-size: 17px; font-weight: 700; letter-spacing: 0.3px;
-  color: var(--text);
+.app-name{font-size:16px;font-weight:700;letter-spacing:0.3px;flex:1;}
+.app-badge{
+  font-size:10px;background:rgba(74,158,255,0.15);
+  color:var(--alg);border:1px solid rgba(74,158,255,0.3);
+  border-radius:20px;padding:2px 8px;letter-spacing:0.5px;white-space:nowrap;
 }
-.app-badge {
-  font-size: 11px; background: rgba(74,158,255,0.15);
-  color: var(--alg); border: 1px solid rgba(74,158,255,0.3);
-  border-radius: 20px; padding: 2px 10px; letter-spacing: 0.5px;
+.mode-btn{
+  background:var(--bg3);border:1px solid var(--border2);
+  color:var(--text2);border-radius:8px;
+  padding:6px 10px;font-size:13px;cursor:pointer;
+  display:flex;align-items:center;gap:4px;
+  white-space:nowrap;transition:all 0.18s;
+  font-family:'Outfit',sans-serif;font-weight:500;
+  min-height:34px;min-width:44px;justify-content:center;
 }
-#srch {
-  width: 100%; padding: 9px 16px 9px 38px;
-  background: var(--bg3); border: 1px solid var(--border);
-  border-radius: 24px; color: var(--text);
-  font-size: 14px; font-family: 'Outfit', sans-serif;
-  outline: none; transition: border-color 0.2s;
-  margin-bottom: 10px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%237a8aa8' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
-  background-repeat: no-repeat; background-position: 12px center;
-}
-#srch:focus { border-color: var(--alg); }
-#srch::placeholder { color: var(--text2); }
+.mode-btn:hover,.mode-btn:active{background:var(--bg4);color:var(--text);}
 
-/* TABS */
-#tabs {
-  display: flex; gap: 2px;
-  overflow-x: auto; scrollbar-width: none;
-  padding-bottom: 0;
+.srch-row{position:relative;margin-bottom:10px;}
+#srch{
+  width:100%;padding:10px 16px 10px 40px;
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:24px;color:var(--text);
+  font-size:15px;font-family:'Outfit',sans-serif;
+  outline:none;transition:border-color 0.2s;
+  -webkit-appearance:none;appearance:none;
 }
-#tabs::-webkit-scrollbar { display: none; }
-.tab {
-  flex-shrink: 0; padding: 8px 14px 10px;
-  font-size: 13px; font-weight: 500; font-family: 'Outfit', sans-serif;
-  cursor: pointer; background: transparent;
-  border: none; color: var(--text2);
-  display: flex; align-items: center; gap: 6px;
-  white-space: nowrap; border-bottom: 2px solid transparent;
-  transition: all 0.18s; border-radius: 0;
-}
-.tab .ti { font-size: 15px; }
-.tab:hover { color: var(--text); }
-.tab.active { color: #fff; font-weight: 600; }
-.tab[data-id="algebra"].active { color: var(--alg); border-bottom-color: var(--alg); }
-.tab[data-id="trig"].active { color: var(--trig); border-bottom-color: var(--trig); }
-.tab[data-id="plan"].active { color: var(--plan); border-bottom-color: var(--plan); }
-.tab[data-id="ster"].active { color: var(--ster); border-bottom-color: var(--ster); }
-.tab[data-id="prob"].active { color: var(--prob); border-bottom-color: var(--prob); }
-
-/* CONTENT */
-#content {
-  max-width: 820px; margin: 0 auto;
-  padding: 16px 14px 60px;
+#srch:focus{border-color:var(--alg);}
+#srch::placeholder{color:var(--text2);}
+.srch-ico{
+  position:absolute;left:13px;top:50%;transform:translateY(-50%);
+  color:var(--text2);font-size:15px;pointer-events:none;
 }
 
-/* SECTION INTRO */
-.s-intro {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: var(--r); padding: 14px 16px;
-  margin-bottom: 18px; font-size: 13px; color: var(--text2);
-  line-height: 1.6; display: flex; gap: 12px; align-items: center;
+/* ── TABS ── */
+#tabs{
+  display:flex;gap:0;overflow-x:auto;scrollbar-width:none;
+  padding-bottom:0;-webkit-overflow-scrolling:touch;
 }
-.s-intro-icon { font-size: 32px; flex-shrink: 0; }
-.s-intro-text b { color: var(--text); }
+#tabs::-webkit-scrollbar{display:none;}
+.tab{
+  flex-shrink:0;padding:9px 12px 11px;
+  font-size:12.5px;font-weight:500;font-family:'Outfit',sans-serif;
+  cursor:pointer;background:transparent;border:none;color:var(--text2);
+  display:flex;align-items:center;gap:5px;white-space:nowrap;
+  border-bottom:2px solid transparent;transition:all 0.18s;
+  min-height:44px;
+}
+.tab .ti{font-size:14px;}
+.tab:hover{color:var(--text);}
+.tab.active{color:#fff;font-weight:600;}
+.tab[data-id="algebra"].active{color:var(--alg);border-bottom-color:var(--alg);}
+.tab[data-id="trig"].active{color:var(--trig);border-bottom-color:var(--trig);}
+.tab[data-id="plan"].active{color:var(--plan);border-bottom-color:var(--plan);}
+.tab[data-id="ster"].active{color:var(--ster);border-bottom-color:var(--ster);}
+.tab[data-id="prob"].active{color:var(--prob);border-bottom-color:var(--prob);}
+.tab[data-id="fav"].active{color:var(--fav);border-bottom-color:var(--fav);}
+.tab .fav-cnt{
+  background:rgba(255,215,0,0.2);color:var(--fav);
+  border-radius:10px;padding:1px 6px;font-size:10px;font-weight:700;
+  display:none;
+}
+.tab .fav-cnt.has{display:inline;}
 
-/* SUBSECTION */
-.sub-hdr {
-  display: flex; align-items: center; gap: 10px;
-  margin: 22px 0 10px;
-}
-.sub-title {
-  font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px;
-  font-weight: 700; white-space: nowrap; padding: 3px 10px;
-  border-radius: 20px;
-}
-.sub-line { flex: 1; height: 1px; background: var(--border); }
-.sub-count { font-size: 11px; color: var(--text3); white-space: nowrap; }
-
-/* FORMULA CARD */
-.fc {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: var(--r); margin-bottom: 10px;
-  overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s;
-  border-left-width: 3px;
-}
-.fc:hover { border-color: var(--border2); box-shadow: 0 4px 24px rgba(0,0,0,0.35); }
-.fc[data-s="algebra"] { border-left-color: var(--alg); }
-.fc[data-s="trig"] { border-left-color: var(--trig); }
-.fc[data-s="plan"] { border-left-color: var(--plan); }
-.fc[data-s="ster"] { border-left-color: var(--ster); }
-.fc[data-s="prob"] { border-left-color: var(--prob); }
-
-.fc-head {
-  padding: 12px 16px 0;
-  display: flex; justify-content: space-between; align-items: flex-start;
-}
-.fc-title {
-  font-size: 12px; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.8px; color: var(--text2); line-height: 1.3;
-  flex: 1;
-}
-.fc-math {
-  padding: 10px 16px 4px;
-  text-align: center; font-size: 1.15em;
-  overflow-x: auto; font-family: 'Crimson Pro', Georgia, serif;
-}
-.fc-math::-webkit-scrollbar { height: 3px; }
-.fc-math::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
-
-.fc-desc {
-  padding: 2px 16px 12px;
-  font-size: 13px; color: var(--text2); line-height: 1.55;
+/* ── CONTENT ── */
+#content{
+  max-width:820px;margin:0 auto;
+  padding:16px 14px 80px;
 }
 
-.fc-svg {
-  padding: 4px 16px 10px;
-  display: flex; justify-content: center;
+/* ── PROGRESS BAR ── */
+.prog-bar-wrap{
+  background:rgba(255,255,255,0.04);border-radius:8px;
+  overflow:hidden;height:5px;margin-top:8px;
 }
-.fc-svg svg {
-  max-width: 100%; max-height: 155px; width: auto;
+.prog-bar{height:100%;border-radius:8px;transition:width 0.4s ease;min-width:0;}
+.prog-label{font-size:11px;color:var(--text3);margin-top:4px;text-align:right;}
+
+/* ── SECTION INTRO ── */
+.s-intro{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--r);padding:14px 16px;
+  margin-bottom:18px;font-size:13px;color:var(--text2);
+  line-height:1.6;
 }
+.s-intro-top{display:flex;gap:12px;align-items:center;}
+.s-intro-icon{font-size:28px;flex-shrink:0;}
+.s-intro-text b{color:var(--text);}
+
+/* ── SUBSECTION ── */
+.sub-hdr{display:flex;align-items:center;gap:10px;margin:22px 0 10px;}
+.sub-title{
+  font-size:11px;text-transform:uppercase;letter-spacing:1.5px;
+  font-weight:700;white-space:nowrap;padding:3px 10px;border-radius:20px;
+}
+.sub-line{flex:1;height:1px;background:var(--border);}
+.sub-count{font-size:11px;color:var(--text3);white-space:nowrap;}
+
+/* ── FORMULA CARD ── */
+.fc{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--r);margin-bottom:10px;
+  overflow:hidden;transition:border-color 0.2s,box-shadow 0.2s;
+  border-left-width:3px;
+}
+.fc:hover{border-color:var(--border2);box-shadow:0 4px 24px rgba(0,0,0,.35);}
+.fc[data-s="algebra"]{border-left-color:var(--alg);}
+.fc[data-s="trig"]{border-left-color:var(--trig);}
+.fc[data-s="plan"]{border-left-color:var(--plan);}
+.fc[data-s="ster"]{border-left-color:var(--ster);}
+.fc[data-s="prob"]{border-left-color:var(--prob);}
+.fc.is-learned{opacity:0.65;}
+.fc.is-learned .fc-title::after{
+  content:'✓';margin-left:6px;color:var(--ex-c);font-size:11px;
+}
+
+.fc-head{
+  padding:11px 12px 0;
+  display:flex;justify-content:space-between;align-items:flex-start;gap:8px;
+}
+.fc-title{
+  font-size:12px;font-weight:700;text-transform:uppercase;
+  letter-spacing:0.8px;color:var(--text2);line-height:1.4;flex:1;
+  padding-top:1px;
+}
+.fc-actions{display:flex;gap:4px;flex-shrink:0;}
+.fc-btn{
+  background:none;border:none;cursor:pointer;
+  padding:4px 6px;border-radius:6px;font-size:16px;
+  transition:all 0.15s;opacity:0.45;line-height:1;
+  min-width:32px;min-height:32px;display:flex;align-items:center;justify-content:center;
+}
+.fc-btn:hover,.fc-btn:active{opacity:1;background:rgba(255,255,255,0.07);}
+.fc-btn.fav-btn.active{opacity:1;filter:drop-shadow(0 0 4px var(--fav));}
+.fc-btn.learn-btn.active{opacity:1;color:var(--ex-c);}
+
+.fc-math{
+  padding:10px 16px 4px;
+  text-align:center;font-size:1.1em;
+  overflow-x:auto;font-family:'Crimson Pro',Georgia,serif;
+  -webkit-overflow-scrolling:touch;
+}
+.fc-math::-webkit-scrollbar{height:3px;}
+.fc-math::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+.fc-desc{padding:2px 16px 12px;font-size:13px;color:var(--text2);line-height:1.55;}
+.fc-svg{padding:4px 16px 10px;display:flex;justify-content:center;}
+.fc-svg svg{max-width:100%;max-height:150px;width:auto;}
 
 /* Example */
-.ex-btn {
-  width: 100%; padding: 9px 16px;
-  background: rgba(255,255,255,0.025); border: none;
-  border-top: 1px solid var(--border);
-  color: var(--ex-c); font-size: 12px; font-weight: 600;
-  text-align: left; cursor: pointer; font-family: 'Outfit', sans-serif;
-  letter-spacing: 0.4px; display: flex; align-items: center; gap: 6px;
-  transition: background 0.15s;
+.ex-btn{
+  width:100%;padding:10px 16px;
+  background:rgba(255,255,255,0.025);border:none;
+  border-top:1px solid var(--border);
+  color:var(--ex-c);font-size:12px;font-weight:600;
+  text-align:left;cursor:pointer;font-family:'Outfit',sans-serif;
+  letter-spacing:0.4px;display:flex;align-items:center;gap:6px;
+  transition:background 0.15s;min-height:40px;
 }
-.ex-btn:hover { background: rgba(82,199,124,0.07); }
-.ex-btn .arr { transition: transform 0.2s; display: inline-block; font-size: 10px; }
-.ex-btn.open .arr { transform: rotate(90deg); }
+.ex-btn:hover,.ex-btn:active{background:rgba(82,199,124,0.07);}
+.ex-btn .arr{transition:transform 0.2s;display:inline-block;font-size:10px;}
+.ex-btn.open .arr{transform:rotate(90deg);}
+.ex-body{display:none;padding:12px 16px;background:rgba(82,199,124,0.04);border-top:1px solid rgba(82,199,124,0.12);}
+.ex-body.open{display:block;}
+.ex-lbl{font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--ex-c);font-weight:700;margin-bottom:6px;}
+.ex-p{font-size:14px;font-family:'Crimson Pro',Georgia,serif;overflow-x:auto;margin-bottom:6px;line-height:1.7;-webkit-overflow-scrolling:touch;}
+.ex-sep{height:1px;background:rgba(82,199,124,0.2);margin:8px 0;}
+.ex-lbl2{font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--alg);font-weight:700;margin-bottom:6px;}
+.ex-s{font-size:14px;font-family:'Crimson Pro',Georgia,serif;color:var(--text);overflow-x:auto;line-height:1.8;-webkit-overflow-scrolling:touch;}
 
-.ex-body {
-  display: none; padding: 12px 16px;
-  background: rgba(82,199,124,0.04);
-  border-top: 1px solid rgba(82,199,124,0.12);
+/* ── TABLE CARDS ── */
+.tbl-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);margin-bottom:10px;overflow:hidden;border-left:3px solid var(--trig);}
+.tbl-head{padding:11px 16px;background:rgba(255,255,255,0.03);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--text2);border-bottom:1px solid var(--border);}
+.tbl-wrap{overflow-x:auto;padding:12px 16px;-webkit-overflow-scrolling:touch;}
+.trig-tbl{width:100%;border-collapse:collapse;font-size:12px;min-width:520px;font-family:'Crimson Pro',Georgia,serif;}
+.trig-tbl th{background:rgba(180,123,255,0.12);color:var(--trig);font-size:11px;text-transform:uppercase;letter-spacing:0.5px;padding:8px 5px;border:1px solid rgba(180,123,255,0.2);font-family:'Outfit',sans-serif;font-weight:700;}
+.trig-tbl td{padding:8px 5px;text-align:center;border:1px solid var(--border);color:var(--text);font-size:13px;}
+.trig-tbl tr:nth-child(even) td{background:rgba(255,255,255,0.02);}
+.trig-tbl .ang{color:var(--trig);font-weight:600;}
+.trig-tbl .undef{color:var(--text3);font-style:italic;font-size:11px;}
+.deriv-tbl{width:100%;border-collapse:collapse;font-size:13px;font-family:'Crimson Pro',Georgia,serif;}
+.deriv-tbl th{background:rgba(74,158,255,0.1);color:var(--alg);font-size:11px;text-transform:uppercase;letter-spacing:0.5px;padding:8px 12px;border:1px solid rgba(74,158,255,0.2);font-family:'Outfit',sans-serif;font-weight:700;}
+.deriv-tbl td{padding:8px 12px;border:1px solid var(--border);color:var(--text);text-align:center;}
+.deriv-tbl tr:nth-child(even) td{background:rgba(255,255,255,0.02);}
+.props-tbl{width:100%;border-collapse:collapse;font-size:12px;font-family:'Crimson Pro',Georgia,serif;}
+.props-tbl th{background:rgba(180,123,255,0.1);color:var(--trig);font-size:11px;padding:7px 10px;border:1px solid rgba(180,123,255,0.2);font-family:'Outfit',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;}
+.props-tbl td{padding:7px 10px;border:1px solid var(--border);color:var(--text);text-align:center;}
+.props-tbl tr:nth-child(even) td{background:rgba(255,255,255,0.02);}
+
+/* ── SEARCH INFO / EMPTY ── */
+#srch-info{font-size:12px;color:var(--text2);padding:4px 0 8px;letter-spacing:0.3px;}
+.empty{text-align:center;padding:64px 16px;color:var(--text2);}
+.empty .em{font-size:40px;margin-bottom:12px;}
+.empty p{font-size:14px;}
+
+/* ── BACK TOP ── */
+#bktop{
+  position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));right:16px;
+  width:40px;height:40px;border-radius:50%;
+  background:var(--bg3);border:1px solid var(--border2);
+  color:var(--text);font-size:16px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;
+  transform:translateY(8px);transition:all 0.25s;z-index:100;
 }
-.ex-body.open { display: block; }
-.ex-lbl {
-  font-size: 10px; text-transform: uppercase; letter-spacing: 1.2px;
-  color: var(--ex-c); font-weight: 700; margin-bottom: 6px;
+#bktop.vis{opacity:1;pointer-events:all;transform:translateY(0);}
+
+/* ── KATEX ── */
+.katex{color:var(--text) !important;}
+.katex-display{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;}
+
+/* ══════════════════════════════════════════
+   FLASHCARD MODAL
+══════════════════════════════════════════ */
+.modal-overlay{
+  position:fixed;inset:0;z-index:500;
+  background:rgba(7,12,26,0.96);
+  display:flex;flex-direction:column;
+  overflow:hidden;
+  padding:0;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
 }
-.ex-p {
-  font-size: 14px; font-family: 'Crimson Pro', Georgia, serif;
-  overflow-x: auto; margin-bottom: 6px; line-height: 1.7;
+.modal-overlay.hidden{display:none;}
+.modal-hdr{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 16px 12px;
+  border-bottom:1px solid var(--border);flex-shrink:0;
 }
-.ex-sep { height: 1px; background: rgba(82,199,124,0.2); margin: 8px 0; }
-.ex-lbl2 {
-  font-size: 10px; text-transform: uppercase; letter-spacing: 1.2px;
-  color: var(--alg); font-weight: 700; margin-bottom: 6px;
+.modal-title{font-size:15px;font-weight:700;}
+.modal-close{
+  background:var(--bg3);border:1px solid var(--border2);
+  color:var(--text);border-radius:8px;
+  padding:7px 12px;font-size:13px;cursor:pointer;
+  font-family:'Outfit',sans-serif;min-height:36px;
 }
-.ex-s {
-  font-size: 14px; font-family: 'Crimson Pro', Georgia, serif;
-  color: var(--text); overflow-x: auto; line-height: 1.8;
+.modal-close:hover{background:var(--bg4);}
+
+/* FLASHCARD */
+.fc-modal-body{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:16px;gap:16px;overflow:hidden;
+}
+.fc-scene{
+  width:100%;max-width:500px;
+  aspect-ratio:3/2;
+  perspective:1000px;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+.fc-card-inner{
+  width:100%;height:100%;
+  transform-style:preserve-3d;
+  transition:transform 0.45s cubic-bezier(0.4,0,0.2,1);
+  position:relative;border-radius:16px;
+}
+.fc-scene.flipped .fc-card-inner{transform:rotateY(180deg);}
+.fc-card-face{
+  position:absolute;inset:0;
+  border-radius:16px;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  padding:24px 20px;gap:10px;
+  border:1px solid var(--border2);
+}
+.fc-front{background:var(--bg2);}
+.fc-back{background:var(--bg3);transform:rotateY(180deg);}
+.fc-section-badge{
+  font-size:10px;text-transform:uppercase;letter-spacing:1.2px;
+  font-weight:700;padding:3px 10px;border-radius:20px;
+  background:rgba(255,255,255,0.07);
+}
+.fc-question{
+  font-size:18px;font-weight:600;text-align:center;line-height:1.4;
+  color:var(--text);
+}
+.fc-hint{font-size:12px;color:var(--text3);margin-top:4px;}
+.fc-formula{
+  font-family:'Crimson Pro',Georgia,serif;
+  font-size:1.25em;text-align:center;
+  overflow-x:auto;max-width:100%;
+  -webkit-overflow-scrolling:touch;
+}
+.fc-answer-label{
+  font-size:10px;text-transform:uppercase;letter-spacing:1px;
+  color:var(--text2);font-weight:700;
 }
 
-/* TABLE CARD (trig values) */
-.tbl-card {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: var(--r); margin-bottom: 10px; overflow: hidden;
-  border-left: 3px solid var(--trig);
+.fc-nav{
+  display:flex;align-items:center;gap:12px;
+  width:100%;max-width:500px;
 }
-.tbl-head {
-  padding: 11px 16px; background: rgba(255,255,255,0.03);
-  font-size: 12px; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.8px; color: var(--text2);
-  border-bottom: 1px solid var(--border);
+.fc-nav-btn{
+  background:var(--bg3);border:1px solid var(--border2);color:var(--text);
+  border-radius:10px;padding:12px 20px;font-size:18px;cursor:pointer;
+  min-height:48px;min-width:56px;transition:all 0.15s;
+  display:flex;align-items:center;justify-content:center;
 }
-.tbl-wrap { overflow-x: auto; padding: 12px 16px; }
-.trig-tbl {
-  width: 100%; border-collapse: collapse;
-  font-size: 12px; min-width: 540px;
-  font-family: 'Crimson Pro', Georgia, serif;
+.fc-nav-btn:hover,.fc-nav-btn:active{background:var(--bg4);}
+.fc-nav-btn:disabled{opacity:0.3;cursor:not-allowed;}
+.fc-counter{
+  flex:1;text-align:center;font-size:14px;font-weight:600;color:var(--text2);
 }
-.trig-tbl th {
-  background: rgba(180,123,255,0.12); color: var(--trig);
-  font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px;
-  padding: 8px 5px; border: 1px solid rgba(180,123,255,0.2);
-  font-family: 'Outfit', sans-serif; font-weight: 700;
+.fc-shuffle-btn{
+  background:none;border:none;color:var(--text2);
+  font-size:20px;cursor:pointer;padding:8px;
+  min-height:44px;min-width:44px;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:8px;transition:all 0.15s;
 }
-.trig-tbl td {
-  padding: 8px 5px; text-align: center;
-  border: 1px solid var(--border); color: var(--text); font-size: 13px;
+.fc-shuffle-btn:hover{color:var(--text);background:rgba(255,255,255,0.05);}
+.fc-fav-filter{
+  background:rgba(255,215,0,0.1);border:1px solid rgba(255,215,0,0.25);
+  color:var(--fav);border-radius:8px;
+  padding:8px 14px;font-size:12px;font-weight:600;cursor:pointer;
+  font-family:'Outfit',sans-serif;min-height:36px;transition:all 0.15s;
 }
-.trig-tbl tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
-.trig-tbl .ang { color: var(--trig); font-weight: 600; }
-.trig-tbl .undef { color: var(--text3); font-style: italic; font-size: 11px; }
-
-/* DERIV TABLE */
-.deriv-tbl {
-  width: 100%; border-collapse: collapse; font-size: 13px;
-  font-family: 'Crimson Pro', Georgia, serif;
-}
-.deriv-tbl th {
-  background: rgba(74,158,255,0.1); color: var(--alg);
-  font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px;
-  padding: 8px 12px; border: 1px solid rgba(74,158,255,0.2);
-  font-family: 'Outfit', sans-serif; font-weight: 700;
-}
-.deriv-tbl td {
-  padding: 8px 12px; border: 1px solid var(--border);
-  color: var(--text); text-align: center;
-}
-.deriv-tbl tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
-
-/* PROPS TABLE */
-.props-tbl {
-  width: 100%; border-collapse: collapse; font-size: 12px;
-  font-family: 'Crimson Pro', Georgia, serif;
-}
-.props-tbl th {
-  background: rgba(180,123,255,0.1); color: var(--trig);
-  font-size: 11px; padding: 7px 10px;
-  border: 1px solid rgba(180,123,255,0.2);
-  font-family: 'Outfit', sans-serif; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.5px;
-}
-.props-tbl td {
-  padding: 7px 10px; border: 1px solid var(--border); color: var(--text);
-  text-align: center;
-}
-.props-tbl tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
-
-/* SEARCH RESULTS */
-#srch-info {
-  font-size: 12px; color: var(--text2);
-  padding: 4px 0 8px; letter-spacing: 0.3px;
+.fc-fav-filter.active{background:rgba(255,215,0,0.2);}
+.fc-top-controls{
+  display:flex;gap:8px;width:100%;max-width:500px;justify-content:flex-end;
 }
 
-/* EMPTY */
-.empty {
-  text-align: center; padding: 64px 16px; color: var(--text2);
+/* ══════════════════════════════════════════
+   TEST MODAL
+══════════════════════════════════════════ */
+.test-body{
+  flex:1;overflow-y:auto;padding:16px;
+  -webkit-overflow-scrolling:touch;
 }
-.empty .em { font-size: 40px; margin-bottom: 12px; }
-.empty p { font-size: 14px; }
-
-/* BACK TOP */
-#bktop {
-  position: fixed; bottom: 20px; right: 16px;
-  width: 38px; height: 38px; border-radius: 50%;
-  background: var(--bg3); border: 1px solid var(--border2);
-  color: var(--text); font-size: 16px;
-  cursor: pointer; display: flex; align-items: center;
-  justify-content: center; opacity: 0; pointer-events: none;
-  transform: translateY(8px); transition: all 0.25s; z-index: 100;
+.test-progress-bar{
+  height:4px;background:var(--bg3);border-radius:2px;
+  margin-bottom:20px;overflow:hidden;
 }
-#bktop.vis { opacity: 1; pointer-events: all; transform: translateY(0); }
-#bktop:hover { background: var(--bg4); }
+.test-progress-fill{height:100%;border-radius:2px;background:var(--alg);transition:width 0.3s;}
+.test-q-num{font-size:12px;color:var(--text2);font-weight:600;letter-spacing:0.5px;margin-bottom:12px;}
+.test-formula-wrap{
+  background:var(--bg2);border:1px solid var(--border2);border-radius:12px;
+  padding:24px 16px;margin-bottom:20px;
+  display:flex;align-items:center;justify-content:center;
+  min-height:100px;
+  font-family:'Crimson Pro',Georgia,serif;font-size:1.2em;
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+}
+.test-section-hint{
+  font-size:11px;text-align:center;margin-bottom:16px;
+  font-weight:600;text-transform:uppercase;letter-spacing:0.8px;
+}
+.test-options{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+.test-opt{
+  background:var(--bg3);border:1.5px solid var(--border2);
+  border-radius:10px;padding:14px 16px;cursor:pointer;
+  font-size:14px;font-family:'Outfit',sans-serif;color:var(--text);
+  text-align:left;transition:all 0.18s;line-height:1.4;
+  min-height:50px;width:100%;
+}
+.test-opt:hover,.test-opt:active{background:var(--bg4);}
+.test-opt.correct{background:rgba(52,208,140,0.15);border-color:var(--plan);color:var(--plan);}
+.test-opt.wrong{background:rgba(255,107,74,0.12);border-color:var(--ster);color:var(--ster);}
+.test-opt:disabled{cursor:not-allowed;}
+.test-next-btn{
+  width:100%;background:var(--alg);color:#fff;border:none;
+  border-radius:10px;padding:14px;font-size:15px;font-weight:600;
+  cursor:pointer;font-family:'Outfit',sans-serif;
+  min-height:50px;transition:opacity 0.15s;
+}
+.test-next-btn:hover{opacity:0.9;}
+.test-next-btn.hidden{display:none;}
 
-/* KaTeX overrides for dark theme */
-.katex { color: var(--text) !important; }
-.katex-display { overflow-x: auto; overflow-y: hidden; }
+/* Score screen */
+.test-score-wrap{
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:16px;padding:32px 16px;text-align:center;
+}
+.test-score-circle{
+  width:110px;height:110px;border-radius:50%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  border:3px solid var(--plan);
+  background:rgba(52,208,140,0.08);
+}
+.test-score-num{font-size:32px;font-weight:700;color:var(--plan);}
+.test-score-label{font-size:12px;color:var(--text2);}
+.test-score-msg{font-size:16px;font-weight:600;max-width:300px;line-height:1.4;}
+.test-restart-btn{
+  background:var(--bg3);border:1px solid var(--border2);color:var(--text);
+  border-radius:10px;padding:13px 28px;font-size:14px;font-weight:600;
+  cursor:pointer;font-family:'Outfit',sans-serif;min-height:48px;
+}
 
-@media (max-width: 480px) {
-  .fc-math { font-size: 1em; }
-  .app-name { font-size: 15px; }
+/* ── MOBILE TWEAKS ── */
+@media(max-width:480px){
+  .fc-math{font-size:0.95em;}
+  .app-name{font-size:14px;}
+  .mode-btn span.label{display:none;}
+  .fc-question{font-size:16px;}
+  .test-formula-wrap{font-size:1.05em;padding:16px 12px;}
+  .test-opt{font-size:13px;padding:12px 14px;}
+  #content{padding-left:10px;padding-right:10px;}
+  .fc-card-face{padding:16px 14px;}
+  .fc-formula{font-size:1.1em;}
+}
+@media(max-width:360px){
+  .app-name{font-size:13px;}
+  .tab{font-size:11px;padding:9px 9px 11px;}
+  .fc-question{font-size:14px;}
+}
+@media(prefers-reduced-motion:reduce){
+  .fc-card-inner{transition:none;}
+  *{transition-duration:0.01ms !important;}
+}
+
+/* ── LIGHT THEME ── */
+body.light{
+  --bg:#f0f4ff;--bg2:#e6ecfa;--bg3:#dde5f7;--bg4:#d0daef;
+  --card:rgba(0,0,0,0.04);--card-h:rgba(0,0,0,0.07);
+  --border:rgba(0,0,0,0.10);--border2:rgba(0,0,0,0.18);
+  --text:#1a2340;--text2:#4a5a78;--text3:#8a9ab8;
+}
+body.light #hdr{background:rgba(240,244,255,0.97);}
+body.light .modal-overlay{background:rgba(240,244,255,0.98);}
+body.light .fc-front{background:var(--bg2);}
+body.light .fc-back{background:var(--bg3);}
+body.light .test-opt{background:var(--bg3);}
+body.light .test-opt:hover{background:var(--bg4);}
+
+/* ── FONT SIZE CONTROL ── */
+:root{--fs:1em;}
+.fc-math{font-size:calc(1.1em * var(--fs-mul, 1));}
+.katex-display{font-size:calc(1em * var(--fs-mul, 1));}
+
+/* ── SETTINGS BAR ── */
+.settings-bar{
+  display:flex;align-items:center;gap:6px;
+  padding:6px 14px 8px;
+  border-top:1px solid var(--border);
+  overflow-x:auto;scrollbar-width:none;
+}
+.settings-bar::-webkit-scrollbar{display:none;}
+.set-btn{
+  background:var(--bg3);border:1px solid var(--border);
+  color:var(--text2);border-radius:8px;
+  padding:5px 10px;font-size:12px;cursor:pointer;
+  white-space:nowrap;font-family:'Outfit',sans-serif;
+  min-height:32px;transition:all 0.15s;flex-shrink:0;
+}
+.set-btn:hover,.set-btn:active{background:var(--bg4);color:var(--text);}
+.set-btn.active{background:rgba(74,158,255,0.15);color:var(--alg);border-color:rgba(74,158,255,0.3);}
+
+/* ── COUNTDOWN TIMER ── */
+.countdown-wrap{
+  display:flex;align-items:center;gap:10px;
+  background:linear-gradient(135deg,rgba(74,158,255,0.08),rgba(180,123,255,0.08));
+  border:1px solid var(--border);border-radius:10px;
+  padding:8px 14px;margin-bottom:10px;
+}
+.countdown-label{font-size:11px;color:var(--text2);font-weight:600;letter-spacing:0.5px;}
+.countdown-num{font-size:22px;font-weight:700;color:var(--alg);line-height:1;}
+.countdown-unit{font-size:10px;color:var(--text3);font-weight:600;letter-spacing:0.5px;}
+.countdown-block{display:flex;flex-direction:column;align-items:center;gap:1px;}
+.countdown-sep{font-size:18px;font-weight:700;color:var(--text3);padding-bottom:8px;}
+
+/* ── NOTES ── */
+.note-btn{
+  background:none;border:none;cursor:pointer;
+  padding:4px 6px;border-radius:6px;font-size:14px;
+  transition:all 0.15s;opacity:0.4;line-height:1;
+  min-width:32px;min-height:32px;display:flex;align-items:center;justify-content:center;
+}
+.note-btn:hover,.note-btn:active{opacity:1;background:rgba(255,255,255,0.07);}
+.note-btn.has-note{opacity:1;color:var(--prob);}
+.note-area{
+  display:none;padding:10px 16px 12px;
+  border-top:1px solid var(--border);
+  background:rgba(255,197,66,0.04);
+}
+.note-area.open{display:block;}
+.note-area textarea{
+  width:100%;background:var(--bg3);border:1px solid var(--border2);
+  color:var(--text);border-radius:8px;padding:8px 12px;
+  font-size:13px;font-family:'Outfit',sans-serif;
+  resize:none;outline:none;min-height:68px;line-height:1.5;
+  transition:border-color 0.2s;
+}
+.note-area textarea:focus{border-color:var(--prob);}
+.note-save-btn{
+  margin-top:6px;background:rgba(255,197,66,0.15);
+  border:1px solid rgba(255,197,66,0.3);color:var(--prob);
+  border-radius:7px;padding:6px 14px;font-size:12px;font-weight:600;
+  cursor:pointer;font-family:'Outfit',sans-serif;
+}
+.note-save-btn:hover{background:rgba(255,197,66,0.25);}
+
+/* ── STATS MODAL ── */
+.stats-wrap{padding:16px;overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch;}
+.stats-header{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;}
+.stat-card{
+  flex:1;min-width:100px;
+  background:var(--bg3);border:1px solid var(--border2);
+  border-radius:10px;padding:12px 14px;text-align:center;
+}
+.stat-card-num{font-size:26px;font-weight:700;line-height:1;}
+.stat-card-lbl{font-size:11px;color:var(--text2);margin-top:4px;font-weight:500;}
+.history-item{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:10px;padding:12px 14px;margin-bottom:10px;
+}
+.history-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.history-score{font-size:16px;font-weight:700;}
+.history-date{font-size:12px;color:var(--text2);}
+.history-wrong{font-size:12px;color:var(--text2);line-height:1.6;}
+.wrong-tag{
+  display:inline-block;background:rgba(255,107,74,0.12);
+  color:var(--ster);border-radius:5px;padding:2px 8px;margin:2px;font-size:11px;
+}
+.no-history{text-align:center;padding:48px 16px;color:var(--text2);}
+
+/* ── SPACED REPETITION ── */
+.sr-btns{
+  display:flex;gap:8px;width:100%;max-width:500px;
+  padding-top:4px;
+}
+.sr-btn{
+  flex:1;padding:12px 8px;border:none;border-radius:10px;
+  font-size:13px;font-weight:700;cursor:pointer;
+  font-family:'Outfit',sans-serif;min-height:48px;
+  transition:all 0.15s;
+}
+.sr-btn-again{background:rgba(255,107,74,0.15);color:var(--ster);border:1.5px solid rgba(255,107,74,0.3);}
+.sr-btn-hard{background:rgba(255,197,66,0.12);color:var(--prob);border:1.5px solid rgba(255,197,66,0.25);}
+.sr-btn-good{background:rgba(52,208,140,0.12);color:var(--plan);border:1.5px solid rgba(52,208,140,0.25);}
+.sr-btn-easy{background:rgba(74,158,255,0.12);color:var(--alg);border:1.5px solid rgba(74,158,255,0.25);}
+.sr-btn:hover,.sr-btn:active{filter:brightness(1.15);}
+.sr-due-badge{
+  font-size:10px;color:var(--text3);text-align:center;
+  padding:2px 0;letter-spacing:0.3px;
 }
 </style>
 </head>
 <body>
-
+<!-- ══ HEADER ══ -->
 <div id="hdr">
   <div class="hdr-top">
     <div class="app-name">📐 ЕГЭ Математика 2026</div>
     <div class="app-badge">ПРОФИЛЬ</div>
+    <button class="mode-btn" onclick="openFlash()" title="Карточки">📚 <span class="label">Карточки</span></button>
+    <button class="mode-btn" onclick="openTest()" title="Тест">✏️ <span class="label">Тест</span></button>
+    <button class="mode-btn" onclick="openStats()" title="Статистика">📊</button>
   </div>
-  <input type="search" id="srch" placeholder="Поиск формул, тем, понятий...">
+  <!-- COUNTDOWN -->
+  <div class="countdown-wrap" id="countdown-wrap">
+    <div class="countdown-label">До ЕГЭ (математика профиль):</div>
+    <div style="display:flex;gap:6px;align-items:flex-end;margin-left:auto;" id="countdown-blocks"></div>
+  </div>
+  <div class="srch-row">
+    <span class="srch-ico">🔍</span>
+    <input type="search" id="srch" placeholder="Поиск формул, тем, понятий..." autocomplete="off" spellcheck="false">
+  </div>
+  <div class="settings-bar">
+    <button class="set-btn" id="theme-btn" onclick="toggleTheme()">☀️ Тема</button>
+    <button class="set-btn" onclick="changeFontSize(-1)">A−</button>
+    <button class="set-btn" onclick="changeFontSize(0)">A</button>
+    <button class="set-btn" onclick="changeFontSize(1)">A+</button>
+    <button class="set-btn" id="sr-mode-btn" onclick="toggleSRMode()" title="Умные карточки">🧠 SR-режим</button>
+  </div>
   <div id="tabs">
     <button class="tab active" data-id="algebra"><span class="ti">∑</span> Алгебра</button>
     <button class="tab" data-id="trig"><span class="ti">∿</span> Тригонометрия</button>
     <button class="tab" data-id="plan"><span class="ti">△</span> Планиметрия</button>
     <button class="tab" data-id="ster"><span class="ti">◈</span> Стереометрия</button>
     <button class="tab" data-id="prob"><span class="ti">⚅</span> Вероятность</button>
+    <button class="tab" data-id="fav"><span class="ti">⭐</span> Избранное <span class="fav-cnt" id="fav-cnt">0</span></button>
   </div>
 </div>
 
 <main id="content"></main>
 <button id="bktop" onclick="scrollTo({top:0,behavior:'smooth'})">↑</button>
 
+<!-- ══ FLASHCARD MODAL ══ -->
+<div class="modal-overlay hidden" id="flash-modal">
+  <div class="modal-hdr">
+    <div class="modal-title">📚 Карточки <span id="fc-mode-label" style="font-size:11px;color:var(--text2);font-weight:400;"></span></div>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <button class="fc-fav-filter" id="fc-fav-filter" onclick="toggleFavFilter()">⭐ Избранные</button>
+      <button class="fc-shuffle-btn" onclick="shuffleCards()" title="Перемешать">🔀</button>
+      <button class="modal-close" onclick="closeModal('flash-modal')">✕ Закрыть</button>
+    </div>
+  </div>
+  <div class="fc-modal-body">
+    <div class="fc-scene" id="fc-scene" onclick="flipCard()">
+      <div class="fc-card-inner" id="fc-inner">
+        <div class="fc-card-face fc-front" id="fc-front">
+          <span class="fc-section-badge" id="fc-badge">Алгебра</span>
+          <div class="fc-question" id="fc-question">Загрузка...</div>
+          <div class="fc-hint" id="fc-hint-text">Нажми, чтобы увидеть формулу</div>
+        </div>
+        <div class="fc-card-face fc-back" id="fc-back">
+          <span class="fc-answer-label">Формула</span>
+          <div class="fc-formula" id="fc-formula"></div>
+          <div class="fc-hint" id="fc-desc-hint" style="font-size:12px;color:var(--text2);text-align:center;max-width:360px;line-height:1.4;"></div>
+        </div>
+      </div>
+    </div>
+    <!-- SR rating buttons (shown when SR mode on and card flipped) -->
+    <div class="sr-btns" id="sr-btns" style="display:none;">
+      <button class="sr-btn sr-btn-again" onclick="srRate(0)">✗ Снова</button>
+      <button class="sr-btn sr-btn-hard" onclick="srRate(3)">~ Сложно</button>
+      <button class="sr-btn sr-btn-good" onclick="srRate(4)">✓ Знаю</button>
+      <button class="sr-btn sr-btn-easy" onclick="srRate(5)">★ Легко</button>
+    </div>
+    <div class="sr-due-badge" id="sr-due-badge"></div>
+    <!-- Normal nav (shown when SR mode off) -->
+    <div class="fc-nav" id="fc-nav">
+      <button class="fc-nav-btn" id="fc-prev" onclick="fcMove(-1)">←</button>
+      <div class="fc-counter" id="fc-counter">1 / 1</div>
+      <button class="fc-nav-btn" id="fc-next" onclick="fcMove(1)">→</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TEST MODAL ══ -->
+<div class="modal-overlay hidden" id="test-modal">
+  <div class="modal-hdr">
+    <div class="modal-title">✏️ Мини-тест</div>
+    <button class="modal-close" onclick="closeModal('test-modal')">✕ Закрыть</button>
+  </div>
+  <div class="test-body" id="test-body">
+    <!-- filled by JS -->
+  </div>
+</div>
+
+<!-- ══ STATS MODAL ══ -->
+<div class="modal-overlay hidden" id="stats-modal">
+  <div class="modal-hdr">
+    <div class="modal-title">📊 Статистика</div>
+    <button class="modal-close" onclick="closeModal('stats-modal')">✕ Закрыть</button>
+  </div>
+  <div class="stats-wrap" id="stats-wrap">
+    <!-- filled by JS -->
+  </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
 <script>
-// ─── KaTeX Helper ───────────────────────────────────────────
-function k(str, disp=false){
+// ─── KaTeX Helper ───
+function k(str,disp=false){
   if(!str) return '';
-  try { return katex.renderToString(str,{displayMode:disp,throwOnError:false,strict:false}); }
-  catch(e){ return `<span style="color:#f55">${str}</span>`; }
+  try{return katex.renderToString(str,{displayMode:disp,throwOnError:false,strict:false});}
+  catch(e){return `<span style="color:#f55">${str}</span>`;}
 }
 
-// ─── SVG Drawings ───────────────────────────────────────────
-const SVG={
-  triangle:`<svg viewBox="0 0 240 175" xmlns="http://www.w3.org/2000/svg">
-    <polygon points="120,14 18,158 222,158" fill="none" stroke="#34d08c" stroke-width="2.2"/>
-    <line x1="120" y1="14" x2="120" y2="158" stroke="#4a9eff" stroke-width="1.4" stroke-dasharray="5,3"/>
-    <rect x="120" y="146" width="12" height="12" fill="none" stroke="#4a9eff" stroke-width="1.2"/>
-    <text x="117" y="10" fill="#ffc542" font-size="14" font-family="Georgia,serif" text-anchor="middle">A</text>
-    <text x="10" y="168" fill="#ffc542" font-size="14" font-family="Georgia,serif" text-anchor="middle">B</text>
-    <text x="230" y="168" fill="#ffc542" font-size="14" font-family="Georgia,serif" text-anchor="middle">C</text>
-    <text x="58" y="92" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">c</text>
-    <text x="174" y="92" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">b</text>
-    <text x="116" y="173" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">a</text>
-    <text x="127" y="90" fill="#4a9eff" font-size="12" font-family="Georgia,serif" font-style="italic">h</text>
-    <text x="152" y="30" fill="#34d08c" font-size="11" font-family="Georgia,serif">α</text>
-  </svg>`,
-
-  rightTriangle:`<svg viewBox="0 0 240 175" xmlns="http://www.w3.org/2000/svg">
-    <polygon points="22,155 22,18 210,155" fill="none" stroke="#34d08c" stroke-width="2.2"/>
-    <rect x="22" y="135" width="20" height="20" fill="none" stroke="#34d08c" stroke-width="1.5"/>
-    <text x="14" y="12" fill="#ffc542" font-size="14" font-family="Georgia,serif">A</text>
-    <text x="10" y="168" fill="#ffc542" font-size="14" font-family="Georgia,serif">B</text>
-    <text x="212" y="168" fill="#ffc542" font-size="14" font-family="Georgia,serif">C</text>
-    <text x="10" y="90" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">b</text>
-    <text x="108" y="170" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">a</text>
-    <text x="115" y="80" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">c</text>
-    <text x="36" y="148" fill="#4a9eff" font-size="11" font-family="Georgia,serif">90°</text>
-    <text x="26" y="38" fill="#ffc542" font-size="11" font-family="Georgia,serif">α</text>
-    <text x="175" y="148" fill="#ffc542" font-size="11" font-family="Georgia,serif">β</text>
-  </svg>`,
-
-  parallelogram:`<svg viewBox="0 0 240 130" xmlns="http://www.w3.org/2000/svg">
-    <polygon points="40,110 200,110 210,20 50,20" fill="none" stroke="#34d08c" stroke-width="2.2"/>
-    <line x1="130" y1="20" x2="130" y2="110" stroke="#4a9eff" stroke-width="1.3" stroke-dasharray="4,3"/>
-    <rect x="130" y="98" width="12" height="12" fill="none" stroke="#4a9eff" stroke-width="1.2"/>
-    <text x="116" y="16" fill="#7a8aa8" font-size="12" font-family="Georgia,serif" font-style="italic">a</text>
-    <text x="27" y="70" fill="#7a8aa8" font-size="12" font-family="Georgia,serif" font-style="italic">b</text>
-    <text x="133" y="70" fill="#4a9eff" font-size="12" font-family="Georgia,serif" font-style="italic">h</text>
-    <text x="55" y="106" fill="#ffc542" font-size="11" font-family="Georgia,serif">α</text>
-  </svg>`,
-
-  trapezoid:`<svg viewBox="0 0 240 140" xmlns="http://www.w3.org/2000/svg">
-    <polygon points="60,20 180,20 220,118 20,118" fill="none" stroke="#34d08c" stroke-width="2.2"/>
-    <line x1="60" y1="20" x2="60" y2="118" stroke="#4a9eff" stroke-width="1.3" stroke-dasharray="4,3"/>
-    <rect x="60" y="106" width="12" height="12" fill="none" stroke="#4a9eff" stroke-width="1.2"/>
-    <line x1="20" y1="69" x2="220" y2="69" stroke="#b47bff" stroke-width="1" stroke-dasharray="3,3"/>
-    <text x="115" y="14" fill="#7a8aa8" font-size="12" font-family="Georgia,serif" font-style="italic">a</text>
-    <text x="115" y="132" fill="#7a8aa8" font-size="12" font-family="Georgia,serif" font-style="italic">b</text>
-    <text x="64" y="75" fill="#4a9eff" font-size="12" font-family="Georgia,serif" font-style="italic">h</text>
-    <text x="100" y="67" fill="#b47bff" font-size="11" font-family="Georgia,serif">m = (a+b)/2</text>
-  </svg>`,
-
-  rhombus:`<svg viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg">
-    <polygon points="110,12 210,80 110,148 10,80" fill="none" stroke="#34d08c" stroke-width="2.2"/>
-    <line x1="10" y1="80" x2="210" y2="80" stroke="#4a9eff" stroke-width="1.3" stroke-dasharray="4,3"/>
-    <line x1="110" y1="12" x2="110" y2="148" stroke="#ffc542" stroke-width="1.3" stroke-dasharray="4,3"/>
-    <rect x="110" y="80" width="10" height="10" fill="none" stroke="#7a8aa8" stroke-width="1.2"/>
-    <text x="108" y="6" fill="#ffc542" font-size="12" font-family="Georgia,serif">d₁</text>
-    <text x="213" y="84" fill="#4a9eff" font-size="12" font-family="Georgia,serif">d₂</text>
-    <text x="148" y="42" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">a</text>
-  </svg>`,
-
-  circle:`<svg viewBox="0 0 220 180" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="110" cy="90" r="72" fill="none" stroke="#34d08c" stroke-width="2.2"/>
-    <circle cx="110" cy="90" r="2.5" fill="#ffc542"/>
-    <line x1="110" y1="90" x2="182" y2="90" stroke="#4a9eff" stroke-width="1.6"/>
-    <line x1="110" y1="90" x2="155" y2="28" stroke="#b47bff" stroke-width="1.3" stroke-dasharray="4,3"/>
-    <line x1="44" y1="130" x2="176" y2="50" stroke="#ff6b4a" stroke-width="1.2" stroke-dasharray="4,3"/>
-    <text x="140" y="84" fill="#4a9eff" font-size="13" font-family="Georgia,serif" font-style="italic">r</text>
-    <text x="122" y="56" fill="#b47bff" font-size="13" font-family="Georgia,serif" font-style="italic">R</text>
-    <text x="86" y="156" fill="#34d08c" font-size="11" font-family="Georgia,serif">C = 2πr</text>
-    <text x="72" y="170" fill="#34d08c" font-size="11" font-family="Georgia,serif">S = πr²</text>
-    <text x="102" y="86" fill="#ffc542" font-size="10" font-family="Georgia,serif">O</text>
-  </svg>`,
-
-  cube:`<svg viewBox="0 0 220 190" xmlns="http://www.w3.org/2000/svg">
-    <polygon points="40,150 120,150 120,70 40,70" fill="none" stroke="#ff6b4a" stroke-width="2"/>
-    <polygon points="120,150 200,100 200,20 120,70" fill="none" stroke="#ff6b4a" stroke-width="2"/>
-    <polygon points="40,70 120,70 200,20 120,20 40,70" fill="none" stroke="#ff6b4a" stroke-width="2"/>
-    <line x1="40" y1="150" x2="120" y2="100" stroke="#ff6b4a" stroke-width="1" stroke-dasharray="5,3"/>
-    <line x1="120" y1="100" x2="200" y2="100" stroke="#ff6b4a" stroke-width="1" stroke-dasharray="5,3"/>
-    <line x1="120" y1="100" x2="120" y2="20" stroke="#ff6b4a" stroke-width="1" stroke-dasharray="5,3"/>
-    <line x1="40" y1="70" x2="40" y2="150" stroke="#ff6b4a" stroke-width="2"/>
-    <line x1="40" y1="150" x2="120" y2="150" stroke="#ff6b4a" stroke-width="2"/>
-    <line x1="120" y1="150" x2="200" y2="100" stroke="#ff6b4a" stroke-width="2"/>
-    <text x="72" y="120" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">a</text>
-    <line x1="40" y1="162" x2="120" y2="162" stroke="#4a9eff" stroke-width="1.2" marker-start="url(#arr)" marker-end="url(#arr)"/>
-    <text x="72" y="177" fill="#4a9eff" font-size="11" font-family="Georgia,serif" text-anchor="middle">a</text>
-    <line x1="40" y1="64" x2="40" y2="156" stroke="#ffc542" stroke-width="1" stroke-dasharray="3,2"/>
-    <text x="28" y="112" fill="#ffc542" font-size="11" font-family="Georgia,serif">a</text>
-  </svg>`,
-
-  cylinder:`<svg viewBox="0 0 220 190" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="110" cy="145" rx="78" ry="22" fill="none" stroke="#ff6b4a" stroke-width="2"/>
-    <ellipse cx="110" cy="45" rx="78" ry="22" fill="none" stroke="#ff6b4a" stroke-width="2"/>
-    <line x1="32" y1="45" x2="32" y2="145" stroke="#ff6b4a" stroke-width="2"/>
-    <line x1="188" y1="45" x2="188" y2="145" stroke="#ff6b4a" stroke-width="2"/>
-    <line x1="110" y1="45" x2="188" y2="45" stroke="#4a9eff" stroke-width="1.4"/>
-    <line x1="110" y1="45" x2="110" y2="145" stroke="#ffc542" stroke-width="1.4" stroke-dasharray="4,3"/>
-    <text x="146" y="38" fill="#4a9eff" font-size="13" font-family="Georgia,serif" font-style="italic">r</text>
-    <text x="114" y="100" fill="#ffc542" font-size="13" font-family="Georgia,serif" font-style="italic">h</text>
-    <circle cx="110" cy="45" r="2.5" fill="#4a9eff"/>
-  </svg>`,
-
-  cone:`<svg viewBox="0 0 220 190" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="110" cy="160" rx="84" ry="20" fill="none" stroke="#ff6b4a" stroke-width="2"/>
-    <line x1="26" y1="160" x2="110" y2="20" stroke="#ff6b4a" stroke-width="2"/>
-    <line x1="194" y1="160" x2="110" y2="20" stroke="#ff6b4a" stroke-width="2"/>
-    <line x1="110" y1="20" x2="110" y2="160" stroke="#ffc542" stroke-width="1.4" stroke-dasharray="4,3"/>
-    <line x1="110" y1="160" x2="194" y2="160" stroke="#4a9eff" stroke-width="1.4"/>
-    <line x1="110" y1="20" x2="194" y2="160" stroke="#b47bff" stroke-width="1.2" stroke-dasharray="4,3"/>
-    <text x="148" y="155" fill="#4a9eff" font-size="13" font-family="Georgia,serif" font-style="italic">r</text>
-    <text x="114" y="100" fill="#ffc542" font-size="13" font-family="Georgia,serif" font-style="italic">h</text>
-    <text x="158" y="90" fill="#b47bff" font-size="13" font-family="Georgia,serif" font-style="italic">l</text>
-    <circle cx="110" cy="20" r="2.5" fill="#ffc542"/>
-    <rect x="110" y="148" width="12" height="12" fill="none" stroke="#ffc542" stroke-width="1.2"/>
-  </svg>`,
-
-  sphere:`<svg viewBox="0 0 220 190" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="110" cy="95" r="80" fill="none" stroke="#ff6b4a" stroke-width="2"/>
-    <ellipse cx="110" cy="95" rx="80" ry="22" fill="none" stroke="#ff6b4a" stroke-width="1" stroke-dasharray="5,4"/>
-    <line x1="110" y1="95" x2="190" y2="95" stroke="#4a9eff" stroke-width="1.5"/>
-    <circle cx="110" cy="95" r="3" fill="#4a9eff"/>
-    <text x="147" y="88" fill="#4a9eff" font-size="13" font-family="Georgia,serif" font-style="italic">r</text>
-    <text x="72" y="178" fill="#ff6b4a" font-size="11" font-family="Georgia,serif">S = 4πr²</text>
-    <text x="60" y="12" fill="#ff6b4a" font-size="11" font-family="Georgia,serif">V = 4/3 · πr³</text>
-  </svg>`,
-
-  pyramid:`<svg viewBox="0 0 220 190" xmlns="http://www.w3.org/2000/svg">
-    <polygon points="110,15 28,160 192,160" fill="none" stroke="#ff6b4a" stroke-width="2"/>
-    <line x1="28" y1="160" x2="148" y2="160" stroke="#ff6b4a" stroke-width="1" stroke-dasharray="4,3"/>
-    <line x1="110" y1="15" x2="148" y2="160" stroke="#ff6b4a" stroke-width="2"/>
-    <line x1="110" y1="15" x2="110" y2="160" stroke="#ffc542" stroke-width="1.4" stroke-dasharray="4,3"/>
-    <rect x="110" y="148" width="12" height="12" fill="none" stroke="#ffc542" stroke-width="1.2"/>
-    <line x1="110" y1="15" x2="148" y2="160" stroke="#b47bff" stroke-width="1.2" stroke-dasharray="4,3"/>
-    <text x="114" y="90" fill="#ffc542" font-size="13" font-family="Georgia,serif" font-style="italic">h</text>
-    <text x="134" y="90" fill="#b47bff" font-size="13" font-family="Georgia,serif" font-style="italic">a</text>
-    <text x="106" y="9" fill="#ffc542" font-size="12" font-family="Georgia,serif">S</text>
-    <text x="28" y="178" fill="#7a8aa8" font-size="11" font-family="Georgia,serif">S_осн</text>
-  </svg>`
+// ─── STATE (localStorage) ───
+const STATE={
+  fav: new Set(JSON.parse(localStorage.getItem('ege_fav')||'[]')),
+  learned: new Set(JSON.parse(localStorage.getItem('ege_learned')||'[]')),
+  notes: JSON.parse(localStorage.getItem('ege_notes')||'{}'),
+  sr: JSON.parse(localStorage.getItem('ege_sr')||'{}'),       // {id:{interval,ef,due}}
+  testHistory: JSON.parse(localStorage.getItem('ege_hist')||'[]'), // [{date,score,total,wrong:[]}]
+  theme: localStorage.getItem('ege_theme')||'dark',
+  fontSize: parseFloat(localStorage.getItem('ege_fs')||'1'),
+  save(){
+    localStorage.setItem('ege_fav',JSON.stringify([...this.fav]));
+    localStorage.setItem('ege_learned',JSON.stringify([...this.learned]));
+    localStorage.setItem('ege_notes',JSON.stringify(this.notes));
+    localStorage.setItem('ege_sr',JSON.stringify(this.sr));
+    localStorage.setItem('ege_hist',JSON.stringify(this.testHistory));
+    localStorage.setItem('ege_theme',this.theme);
+    localStorage.setItem('ege_fs',String(this.fontSize));
+  }
 };
-
-// ─── FORMULA DATA ────────────────────────────────────────────
+let srMode=false;
+// ─── SVG ───
+const SVG={
+  triangle:`<svg viewBox="0 0 240 175" xmlns="http://www.w3.org/2000/svg"><polygon points="120,14 18,158 222,158" fill="none" stroke="#34d08c" stroke-width="2.2"/><line x1="120" y1="14" x2="120" y2="158" stroke="#4a9eff" stroke-width="1.4" stroke-dasharray="5,3"/><rect x="120" y="146" width="12" height="12" fill="none" stroke="#4a9eff" stroke-width="1.2"/><text x="117" y="10" fill="#ffc542" font-size="14" font-family="Georgia,serif" text-anchor="middle">A</text><text x="10" y="168" fill="#ffc542" font-size="14" font-family="Georgia,serif">B</text><text x="230" y="168" fill="#ffc542" font-size="14" font-family="Georgia,serif">C</text><text x="58" y="92" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">c</text><text x="174" y="92" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">b</text><text x="116" y="173" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">a</text><text x="127" y="90" fill="#4a9eff" font-size="12" font-family="Georgia,serif" font-style="italic">h</text></svg>`,
+  rightTriangle:`<svg viewBox="0 0 240 175" xmlns="http://www.w3.org/2000/svg"><polygon points="22,155 22,18 210,155" fill="none" stroke="#34d08c" stroke-width="2.2"/><rect x="22" y="135" width="20" height="20" fill="none" stroke="#34d08c" stroke-width="1.5"/><text x="14" y="12" fill="#ffc542" font-size="14" font-family="Georgia,serif">A</text><text x="10" y="168" fill="#ffc542" font-size="14" font-family="Georgia,serif">B</text><text x="212" y="168" fill="#ffc542" font-size="14" font-family="Georgia,serif">C</text><text x="10" y="90" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">b</text><text x="108" y="170" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">a</text><text x="115" y="80" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">c</text><text x="36" y="148" fill="#4a9eff" font-size="11" font-family="Georgia,serif">90°</text></svg>`,
+  parallelogram:`<svg viewBox="0 0 240 130" xmlns="http://www.w3.org/2000/svg"><polygon points="40,110 200,110 210,20 50,20" fill="none" stroke="#34d08c" stroke-width="2.2"/><line x1="130" y1="20" x2="130" y2="110" stroke="#4a9eff" stroke-width="1.3" stroke-dasharray="4,3"/><rect x="130" y="98" width="12" height="12" fill="none" stroke="#4a9eff" stroke-width="1.2"/><text x="116" y="16" fill="#7a8aa8" font-size="12" font-family="Georgia,serif" font-style="italic">a</text><text x="27" y="70" fill="#7a8aa8" font-size="12" font-family="Georgia,serif" font-style="italic">b</text><text x="133" y="70" fill="#4a9eff" font-size="12" font-family="Georgia,serif" font-style="italic">h</text></svg>`,
+  trapezoid:`<svg viewBox="0 0 240 140" xmlns="http://www.w3.org/2000/svg"><polygon points="60,20 180,20 220,118 20,118" fill="none" stroke="#34d08c" stroke-width="2.2"/><line x1="60" y1="20" x2="60" y2="118" stroke="#4a9eff" stroke-width="1.3" stroke-dasharray="4,3"/><rect x="60" y="106" width="12" height="12" fill="none" stroke="#4a9eff" stroke-width="1.2"/><text x="115" y="14" fill="#7a8aa8" font-size="12" font-family="Georgia,serif" font-style="italic">a</text><text x="115" y="132" fill="#7a8aa8" font-size="12" font-family="Georgia,serif" font-style="italic">b</text><text x="64" y="75" fill="#4a9eff" font-size="12" font-family="Georgia,serif" font-style="italic">h</text></svg>`,
+  rhombus:`<svg viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg"><polygon points="110,12 210,80 110,148 10,80" fill="none" stroke="#34d08c" stroke-width="2.2"/><line x1="10" y1="80" x2="210" y2="80" stroke="#4a9eff" stroke-width="1.3" stroke-dasharray="4,3"/><line x1="110" y1="12" x2="110" y2="148" stroke="#ffc542" stroke-width="1.3" stroke-dasharray="4,3"/><rect x="110" y="80" width="10" height="10" fill="none" stroke="#7a8aa8" stroke-width="1.2"/><text x="108" y="6" fill="#ffc542" font-size="12" font-family="Georgia,serif">d₁</text><text x="213" y="84" fill="#4a9eff" font-size="12" font-family="Georgia,serif">d₂</text><text x="148" y="42" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">a</text></svg>`,
+  circle:`<svg viewBox="0 0 220 180" xmlns="http://www.w3.org/2000/svg"><circle cx="110" cy="90" r="72" fill="none" stroke="#34d08c" stroke-width="2.2"/><circle cx="110" cy="90" r="2.5" fill="#ffc542"/><line x1="110" y1="90" x2="182" y2="90" stroke="#4a9eff" stroke-width="1.6"/><text x="140" y="84" fill="#4a9eff" font-size="13" font-family="Georgia,serif" font-style="italic">r</text><text x="102" y="86" fill="#ffc542" font-size="10" font-family="Georgia,serif">O</text></svg>`,
+  cube:`<svg viewBox="0 0 220 190" xmlns="http://www.w3.org/2000/svg"><polygon points="40,150 120,150 120,70 40,70" fill="none" stroke="#ff6b4a" stroke-width="2"/><polygon points="120,150 200,100 200,20 120,70" fill="none" stroke="#ff6b4a" stroke-width="2"/><polygon points="40,70 120,70 200,20 120,20 40,70" fill="none" stroke="#ff6b4a" stroke-width="2"/><line x1="40" y1="150" x2="120" y2="100" stroke="#ff6b4a" stroke-width="1" stroke-dasharray="5,3"/><line x1="120" y1="100" x2="200" y2="100" stroke="#ff6b4a" stroke-width="1" stroke-dasharray="5,3"/><line x1="120" y1="100" x2="120" y2="20" stroke="#ff6b4a" stroke-width="1" stroke-dasharray="5,3"/><line x1="40" y1="70" x2="40" y2="150" stroke="#ff6b4a" stroke-width="2"/><line x1="40" y1="150" x2="120" y2="150" stroke="#ff6b4a" stroke-width="2"/><line x1="120" y1="150" x2="200" y2="100" stroke="#ff6b4a" stroke-width="2"/><text x="72" y="120" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">a</text></svg>`,
+  cylinder:`<svg viewBox="0 0 220 190" xmlns="http://www.w3.org/2000/svg"><ellipse cx="110" cy="145" rx="78" ry="22" fill="none" stroke="#ff6b4a" stroke-width="2"/><ellipse cx="110" cy="45" rx="78" ry="22" fill="none" stroke="#ff6b4a" stroke-width="2"/><line x1="32" y1="45" x2="32" y2="145" stroke="#ff6b4a" stroke-width="2"/><line x1="188" y1="45" x2="188" y2="145" stroke="#ff6b4a" stroke-width="2"/><line x1="110" y1="45" x2="188" y2="45" stroke="#4a9eff" stroke-width="1.4"/><line x1="110" y1="45" x2="110" y2="145" stroke="#ffc542" stroke-width="1.4" stroke-dasharray="4,3"/><text x="146" y="38" fill="#4a9eff" font-size="13" font-family="Georgia,serif" font-style="italic">r</text><text x="114" y="100" fill="#ffc542" font-size="13" font-family="Georgia,serif" font-style="italic">h</text></svg>`,
+  cone:`<svg viewBox="0 0 220 190" xmlns="http://www.w3.org/2000/svg"><ellipse cx="110" cy="160" rx="84" ry="20" fill="none" stroke="#ff6b4a" stroke-width="2"/><line x1="26" y1="160" x2="110" y2="20" stroke="#ff6b4a" stroke-width="2"/><line x1="194" y1="160" x2="110" y2="20" stroke="#ff6b4a" stroke-width="2"/><line x1="110" y1="20" x2="110" y2="160" stroke="#ffc542" stroke-width="1.4" stroke-dasharray="4,3"/><line x1="110" y1="160" x2="194" y2="160" stroke="#4a9eff" stroke-width="1.4"/><line x1="110" y1="20" x2="194" y2="160" stroke="#b47bff" stroke-width="1.2" stroke-dasharray="4,3"/><text x="148" y="155" fill="#4a9eff" font-size="13" font-family="Georgia,serif" font-style="italic">r</text><text x="114" y="100" fill="#ffc542" font-size="13" font-family="Georgia,serif" font-style="italic">h</text><text x="158" y="90" fill="#b47bff" font-size="13" font-family="Georgia,serif" font-style="italic">l</text></svg>`,
+  sphere:`<svg viewBox="0 0 220 190" xmlns="http://www.w3.org/2000/svg"><circle cx="110" cy="95" r="80" fill="none" stroke="#ff6b4a" stroke-width="2"/><ellipse cx="110" cy="95" rx="80" ry="22" fill="none" stroke="#ff6b4a" stroke-width="1" stroke-dasharray="5,4"/><line x1="110" y1="95" x2="190" y2="95" stroke="#4a9eff" stroke-width="1.5"/><circle cx="110" cy="95" r="3" fill="#4a9eff"/><text x="147" y="88" fill="#4a9eff" font-size="13" font-family="Georgia,serif" font-style="italic">r</text></svg>`,
+  pyramid:`<svg viewBox="0 0 220 190" xmlns="http://www.w3.org/2000/svg"><polygon points="110,15 28,160 192,160" fill="none" stroke="#ff6b4a" stroke-width="2"/><line x1="28" y1="160" x2="148" y2="160" stroke="#ff6b4a" stroke-width="1" stroke-dasharray="4,3"/><line x1="110" y1="15" x2="148" y2="160" stroke="#ff6b4a" stroke-width="2"/><line x1="110" y1="15" x2="110" y2="160" stroke="#ffc542" stroke-width="1.4" stroke-dasharray="4,3"/><rect x="110" y="148" width="12" height="12" fill="none" stroke="#ffc542" stroke-width="1.2"/><line x1="110" y1="15" x2="148" y2="160" stroke="#b47bff" stroke-width="1.2" stroke-dasharray="4,3"/><text x="114" y="90" fill="#ffc542" font-size="13" font-family="Georgia,serif" font-style="italic">h</text><text x="134" y="90" fill="#b47bff" font-size="13" font-family="Georgia,serif" font-style="italic">a</text></svg>`
+};
+// ─── FORMULA DATA ───
 const SECTIONS=[
-{
-  id:'algebra', name:'Алгебра', icon:'∑',
-  color:'var(--alg)',
-  intro:'Базовые алгебраические формулы: степени, логарифмы, прогрессии, производные и интегралы.',
-  sub:[
-    {n:'Степени',clr:'var(--alg)', f:[
-      {t:'Произведение степеней',f:'a^m \\cdot a^n = a^{m+n}',d:'При умножении степеней с одинаковым основанием показатели складываются.',ep:'2^3 \\cdot 2^5',es:'2^3 \\cdot 2^5 = 2^{3+5} = 2^8 = 256'},
-      {t:'Частное степеней',f:'\\dfrac{a^m}{a^n} = a^{m-n}',d:'При делении степеней с одинаковым основанием показатель знаменателя вычитается из показателя числителя.',ep:'\\dfrac{3^7}{3^4}',es:'3^7 \\div 3^4 = 3^{7-4} = 3^3 = 27'},
-      {t:'Степень степени',f:'(a^m)^n = a^{m \\cdot n}',d:'При возведении степени в степень показатели перемножаются.',ep:'(2^3)^4',es:'(2^3)^4 = 2^{3\\cdot4} = 2^{12} = 4096'},
-      {t:'Степень произведения',f:'(ab)^n = a^n \\cdot b^n',d:'Степень произведения равна произведению степеней множителей.',ep:'(2 \\cdot 3)^3',es:'(2 \\cdot 3)^3 = 2^3 \\cdot 3^3 = 8 \\cdot 27 = 216'},
-      {t:'Степень дроби',f:'\\left(\\dfrac{a}{b}\\right)^n = \\dfrac{a^n}{b^n}',d:'Степень дроби равна дроби из степеней числителя и знаменателя.',ep:'\\left(\\dfrac{2}{3}\\right)^3',es:'\\dfrac{2^3}{3^3} = \\dfrac{8}{27}'},
-      {t:'Нулевая степень',f:'a^0 = 1, \\quad a \\neq 0',d:'Любое ненулевое число в нулевой степени равно 1.',ep:'\\pi^0 + 100^0',es:'\\pi^0 + 100^0 = 1 + 1 = 2'},
-      {t:'Отрицательная степень',f:'a^{-n} = \\dfrac{1}{a^n}',d:'Отрицательная степень — обратная величина соответствующей положительной степени.',ep:'2^{-3}',es:'2^{-3} = \\dfrac{1}{2^3} = \\dfrac{1}{8}'},
-      {t:'Дробная степень',f:'a^{\\frac{m}{n}} = \\sqrt[n]{a^m}',d:'Дробная степень — это корень в соответствующей степени.',ep:'8^{\\frac{2}{3}}',es:'8^{\\frac{2}{3}} = \\sqrt[3]{8^2} = \\sqrt[3]{64} = 4'},
-    ]},
-    {n:'Корни',clr:'var(--alg)', f:[
-      {t:'Корень из произведения',f:'\\sqrt[n]{a \\cdot b} = \\sqrt[n]{a} \\cdot \\sqrt[n]{b}',d:'Корень из произведения равен произведению корней.',ep:'\\sqrt{12}',es:'\\sqrt{12} = \\sqrt{4 \\cdot 3} = \\sqrt{4}\\cdot\\sqrt{3} = 2\\sqrt{3}'},
-      {t:'Корень из частного',f:'\\sqrt[n]{\\dfrac{a}{b}} = \\dfrac{\\sqrt[n]{a}}{\\sqrt[n]{b}}',d:'Корень из дроби равен дроби из корней.',ep:'\\sqrt{\\dfrac{9}{25}}',es:'\\sqrt{\\dfrac{9}{25}} = \\dfrac{\\sqrt{9}}{\\sqrt{25}} = \\dfrac{3}{5}'},
-      {t:'Вынесение из-под корня',f:'\\sqrt[n]{a^m} = a^{\\frac{m}{n}}',d:'Связь корня и дробной степени.',ep:'\\sqrt[4]{16}',es:'\\sqrt[4]{16} = 16^{\\frac{1}{4}} = (2^4)^{\\frac{1}{4}} = 2'},
-      {t:'Корень из корня',f:'\\sqrt[m]{\\sqrt[n]{a}} = \\sqrt[mn]{a}',d:'Корень из корня: показатели перемножаются.',ep:'\\sqrt{\\sqrt[3]{64}}',es:'\\sqrt{\\sqrt[3]{64}} = \\sqrt[6]{64} = 64^{\\frac{1}{6}} = 2'},
-      {t:'Чётный корень',f:'\\sqrt{a^2} = |a|',d:'Квадратный корень из квадрата равен модулю числа.',ep:'\\sqrt{(-5)^2}',es:'\\sqrt{(-5)^2} = |-5| = 5'},
-    ]},
-    {n:'Логарифмы',clr:'var(--alg)', f:[
-      {t:'Основное определение',f:'\\log_a b = c \\iff a^c = b, \\quad a>0,\\; a\\neq1,\\; b>0',d:'Логарифм — это показатель степени, в которую нужно возвести основание, чтобы получить данное число.',ep:'\\log_2 8',es:'\\log_2 8 = 3, \\text{ т.к. } 2^3 = 8'},
-      {t:'Логарифм произведения',f:'\\log_a(mn) = \\log_a m + \\log_a n',d:'Логарифм произведения равен сумме логарифмов множителей.',ep:'\\log_2(8 \\cdot 4)',es:'\\log_2(8 \\cdot 4) = \\log_2 8 + \\log_2 4 = 3 + 2 = 5'},
-      {t:'Логарифм частного',f:'\\log_a\\dfrac{m}{n} = \\log_a m - \\log_a n',d:'Логарифм дроби равен разности логарифмов числителя и знаменателя.',ep:'\\log_3 27 - \\log_3 3',es:'\\log_3 27 - \\log_3 3 = \\log_3\\dfrac{27}{3} = \\log_3 9 = 2'},
-      {t:'Логарифм степени',f:'\\log_a m^n = n \\cdot \\log_a m',d:'Показатель степени выносится за знак логарифма.',ep:'\\log_2 32',es:'\\log_2 32 = \\log_2 2^5 = 5 \\cdot \\log_2 2 = 5'},
-      {t:'Формула перехода',f:'\\log_a b = \\dfrac{\\log_c b}{\\log_c a} = \\dfrac{\\ln b}{\\ln a}',d:'Смена основания логарифма.',ep:'\\log_4 8',es:'\\log_4 8 = \\dfrac{\\ln 8}{\\ln 4} = \\dfrac{3\\ln 2}{2\\ln 2} = \\dfrac{3}{2}'},
-      {t:'Взаимообратные логарифмы',f:'\\log_a b = \\dfrac{1}{\\log_b a}',d:'Частный случай формулы перехода.',ep:'\\log_8 2',es:'\\log_8 2 = \\dfrac{1}{\\log_2 8} = \\dfrac{1}{3}'},
-      {t:'Основное свойство',f:'a^{\\log_a b} = b',d:'Основание в степени логарифма по этому же основанию равно аргументу.',ep:'5^{\\log_5 12}',es:'5^{\\log_5 12} = 12'},
-      {t:'Специальные значения',f:'\\log_a 1 = 0, \\quad \\log_a a = 1, \\quad \\ln e = 1, \\quad \\lg 10 = 1',d:'Логарифм единицы равен нулю. Логарифм основания по самому себе равен 1.',ep:'\\log_{7} 1 + \\log_{3} 3',es:'\\log_7 1 + \\log_3 3 = 0 + 1 = 1'},
-    ]},
-    {n:'Формулы сокращённого умножения',clr:'var(--alg)', f:[
-      {t:'Квадрат суммы',f:'(a+b)^2 = a^2 + 2ab + b^2',d:'Квадрат суммы двух чисел.',ep:'(x+3)^2',es:'(x+3)^2 = x^2 + 6x + 9'},
-      {t:'Квадрат разности',f:'(a-b)^2 = a^2 - 2ab + b^2',d:'Квадрат разности двух чисел.',ep:'(2x-5)^2',es:'(2x-5)^2 = 4x^2 - 20x + 25'},
-      {t:'Разность квадратов',f:'a^2 - b^2 = (a-b)(a+b)',d:'Разность квадратов — произведение суммы и разности.',ep:'x^2 - 16',es:'x^2 - 16 = (x-4)(x+4)'},
-      {t:'Куб суммы',f:'(a+b)^3 = a^3 + 3a^2b + 3ab^2 + b^3',d:'Куб суммы двух чисел.',ep:'(x+2)^3',es:'(x+2)^3 = x^3 + 6x^2 + 12x + 8'},
-      {t:'Куб разности',f:'(a-b)^3 = a^3 - 3a^2b + 3ab^2 - b^3',d:'Куб разности двух чисел.',ep:'(x-1)^3',es:'(x-1)^3 = x^3 - 3x^2 + 3x - 1'},
-      {t:'Сумма кубов',f:'a^3 + b^3 = (a+b)(a^2 - ab + b^2)',d:'Сумма кубов раскладывается на два множителя.',ep:'x^3 + 8',es:'x^3 + 8 = x^3 + 2^3 = (x+2)(x^2-2x+4)'},
-      {t:'Разность кубов',f:'a^3 - b^3 = (a-b)(a^2 + ab + b^2)',d:'Разность кубов раскладывается на два множителя.',ep:'27 - x^3',es:'27 - x^3 = 3^3 - x^3 = (3-x)(9+3x+x^2)'},
-    ]},
-    {n:'Квадратные уравнения',clr:'var(--alg)', f:[
-      {t:'Дискриминант',f:'D = b^2 - 4ac',d:'Дискриминант квадратного уравнения ax²+bx+c=0. D>0: два корня, D=0: один корень, D<0: нет действительных корней.',ep:'x^2 - 5x + 6 = 0',es:'D = (-5)^2 - 4 \\cdot 1 \\cdot 6 = 25 - 24 = 1 > 0 \\Rightarrow \\text{два корня}'},
-      {t:'Формула корней',f:'x_{1,2} = \\dfrac{-b \\pm \\sqrt{D}}{2a}',d:'Корни квадратного уравнения через дискриминант.',ep:'x^2 - 5x + 6 = 0',es:'x_{1,2} = \\dfrac{5 \\pm 1}{2};\\ x_1=3,\\ x_2=2'},
-      {t:'Теорема Виета',f:'x_1 + x_2 = -\\dfrac{b}{a}, \\quad x_1 \\cdot x_2 = \\dfrac{c}{a}',d:'Сумма и произведение корней квадратного уравнения.',ep:'x^2 - 5x + 6 = 0',es:'x_1+x_2 = 5 = -\\dfrac{-5}{1}, \\quad x_1 x_2 = 6 = \\dfrac{6}{1}. \\text{ Верно!}'},
-      {t:'Формула при чётном b',f:'x_{1,2} = \\dfrac{-b^{\\prime} \\pm \\sqrt{D^{\\prime}}}{a}, \\quad D^{\\prime} = b^{\\prime 2} - ac',d:'Упрощённая формула для ax²+2b´x+c=0, где b´= b/2.',ep:'2x^2 - 6x + 4 = 0',es:'b\'=3: D\'=9-8=1;\\ x_{1,2}=\\dfrac{3\\pm1}{2};\\ x_1=2,\\ x_2=1'},
-    ]},
-    {n:'Прогрессии',clr:'var(--alg)', f:[
-      {t:'n-й член арифм. прогрессии',f:'a_n = a_1 + (n-1)d',d:'d — разность прогрессии (a_n - a_{n-1} = d).',ep:'a_1=3,\\ d=5,\\ a_{10}=?',es:'a_{10} = 3 + (10-1)\\cdot5 = 3+45 = 48'},
-      {t:'Сумма арифм. прогрессии',f:'S_n = \\dfrac{n(a_1+a_n)}{2} = \\dfrac{n(2a_1+(n-1)d)}{2}',d:'Сумма n первых членов арифметической прогрессии.',ep:'\\sum_{k=1}^{100} k = 1+2+\\ldots+100',es:'S_{100} = \\dfrac{100(1+100)}{2} = 5050'},
-      {t:'n-й член геом. прогрессии',f:'b_n = b_1 \\cdot q^{n-1}',d:'q — знаменатель прогрессии (q = b_n/b_{n-1}).',ep:'b_1=2,\\ q=3,\\ b_5=?',es:'b_5 = 2 \\cdot 3^4 = 2 \\cdot 81 = 162'},
-      {t:'Сумма геом. прогрессии',f:'S_n = \\dfrac{b_1(q^n - 1)}{q-1}, \\quad q \\neq 1',d:'Сумма n первых членов геометрической прогрессии.',ep:'b_1=1,\\ q=2,\\ S_5=?',es:'S_5 = \\dfrac{1(2^5-1)}{2-1} = 31'},
-      {t:'Бесконечная геом. прогрессия',f:'S_{\\infty} = \\dfrac{b_1}{1-q}, \\quad |q| < 1',d:'Сумма бесконечно убывающей геометрической прогрессии.',ep:'b_1=1,\\ q=\\frac{1}{2}',es:'S_{\\infty} = \\dfrac{1}{1-\\frac{1}{2}} = 2'},
-    ]},
-    {n:'Производные',clr:'var(--alg)', f:[
-      {t:'Таблица производных', isTable:true, tableType:'deriv'},
-      {t:'Правило произведения',f:'(uv)^{\\prime} = u^{\\prime}v + uv^{\\prime}',d:'Производная произведения двух функций.',ep:'(x^2 \\cdot \\sin x)^{\\prime}',es:'= 2x \\cdot \\sin x + x^2 \\cdot \\cos x'},
-      {t:'Правило частного',f:'\\left(\\dfrac{u}{v}\\right)^{\\prime} = \\dfrac{u^{\\prime}v - uv^{\\prime}}{v^2}',d:'Производная дроби двух функций.',ep:'\\left(\\dfrac{x^2}{\\sin x}\\right)^{\\prime}',es:'= \\dfrac{2x\\sin x - x^2\\cos x}{\\sin^2 x}'},
-      {t:'Правило цепочки (сложная ф-ция)',f:'[f(g(x))]^{\\prime} = f^{\\prime}(g(x)) \\cdot g^{\\prime}(x)',d:'Производная сложной функции: внешняя производная, умноженная на внутреннюю.',ep:'(\\sin(3x^2))^{\\prime}',es:'= \\cos(3x^2) \\cdot 6x = 6x\\cos(3x^2)'},
-      {t:'Уравнение касательной',f:'y = f(x_0) + f^{\\prime}(x_0)(x - x_0)',d:'Уравнение касательной к кривой y=f(x) в точке x₀.',ep:'y=x^2,\\ x_0=2',es:'f(2)=4,\\ f\'(2)=4;\\ y=4+4(x-2)=4x-4'},
-    ]},
-    {n:'Первообразная и интеграл',clr:'var(--alg)', f:[
-      {t:'Таблица первообразных', isTable:true, tableType:'prim'},
-      {t:'Формула Ньютона–Лейбница',f:'\\int_a^b f(x)\\,dx = F(b) - F(a)',d:'F(x) — любая первообразная функции f(x).',ep:'\\int_0^3 x^2\\,dx',es:'= \\left[\\dfrac{x^3}{3}\\right]_0^3 = \\dfrac{27}{3} - 0 = 9'},
-      {t:'Геометрический смысл интеграла',f:'S = \\int_a^b f(x)\\,dx',d:'Определённый интеграл равен площади криволинейной трапеции под графиком f(x) от a до b (если f(x) ≥ 0).',ep:'S \\text{ под } y=\\sin x,\\ [0,\\pi]',es:'S = \\int_0^\\pi \\sin x\\,dx = [-\\cos x]_0^\\pi = 1+1 = 2'},
-    ]},
-  ]
-},
-{
-  id:'trig', name:'Тригонометрия', icon:'∿',
-  color:'var(--trig)',
-  intro:'Полный набор тригонометрических формул: тождества, сложение, двойной угол, таблица значений, свойства функций и решение уравнений.',
-  sub:[
-    {n:'Основные тождества',clr:'var(--trig)', f:[
-      {t:'Основное тригонометрическое тождество',f:'\\sin^2 x + \\cos^2 x = 1',d:'Фундаментальное соотношение — сумма квадратов синуса и косинуса всегда равна 1.',ep:'\\sin x = 0{,}6,\\ \\cos x = ?',es:'\\cos^2 x = 1 - 0{,}36 = 0{,}64;\\ |\\cos x| = 0{,}8'},
-      {t:'Тангенс и котангенс',f:'\\tan x = \\dfrac{\\sin x}{\\cos x}, \\quad \\cot x = \\dfrac{\\cos x}{\\sin x}',d:'Определения тангенса и котангенса через синус и косинус.',ep:'\\sin x = \\frac{3}{5},\\ \\cos x = \\frac{4}{5},\\ \\tan x=?',es:'\\tan x = \\dfrac{3/5}{4/5} = \\dfrac{3}{4}'},
-      {t:'Произведение тангенса и котангенса',f:'\\tan x \\cdot \\cot x = 1',d:'Тангенс и котангенс одного угла — взаимно обратные числа.',ep:'\\tan 30° \\cdot \\cot 30°',es:'= 1'},
-      {t:'Связь 1/cos² с tg',f:'1 + \\tan^2 x = \\dfrac{1}{\\cos^2 x}',d:'Важное тождество, связывающее тангенс и косинус.',ep:'1 + \\tan^2 x = ?',es:'= \\sec^2 x = \\dfrac{1}{\\cos^2 x}'},
-      {t:'Связь 1/sin² с ctg',f:'1 + \\cot^2 x = \\dfrac{1}{\\sin^2 x}',d:'Важное тождество, связывающее котангенс и синус.',ep:'1 + \\cot^2 45° = ?',es:'1 + 1 = 2 = \\dfrac{1}{\\sin^2 45°} = \\dfrac{1}{1/2} = 2'},
-    ]},
-    {n:'Таблица значений',clr:'var(--trig)', f:[
-      {t:'Таблица значений sin, cos, tan, cot', isTable:true, tableType:'trig'},
-    ]},
-    {n:'Формулы приведения',clr:'var(--trig)', f:[
-      {t:'Сдвиг на π',f:'\\sin(\\pi \\pm x) = \\mp \\sin x \\\\[4pt] \\cos(\\pi \\pm x) = -\\cos x',d:'Правило «пи плюс/минус»: синус меняет знак, косинус меняет знак.',ep:'\\sin(\\pi - x)',es:'\\sin(\\pi - x) = \\sin x'},
-      {t:'Сдвиг на π/2',f:'\\sin\\!\\left(\\dfrac{\\pi}{2} \\pm x\\right) = \\cos x \\\\[4pt] \\cos\\!\\left(\\dfrac{\\pi}{2} \\pm x\\right) = \\mp \\sin x',d:'Правило «пи/2 плюс/минус»: sin и cos меняются местами.',ep:'\\sin\\left(\\dfrac{\\pi}{2} - x\\right)',es:'= \\cos x \\quad\\text{(косинус дополнения)}'},
-      {t:'Нечётность sin, tg, ctg',f:'\\sin(-x) = -\\sin x \\\\[4pt] \\tan(-x) = -\\tan x \\\\[4pt] \\cot(-x) = -\\cot x',d:'Синус, тангенс и котангенс — нечётные функции.',ep:'\\sin(-30°)',es:'\\sin(-30°) = -\\sin 30° = -\\tfrac{1}{2}'},
-      {t:'Чётность cos',f:'\\cos(-x) = \\cos x',d:'Косинус — чётная функция.',ep:'\\cos(-60°)',es:'\\cos(-60°) = \\cos 60° = \\tfrac{1}{2}'},
-    ]},
-    {n:'Формулы сложения',clr:'var(--trig)', f:[
-      {t:'Синус суммы и разности',f:'\\sin(\\alpha \\pm \\beta) = \\sin\\alpha\\cos\\beta \\pm \\cos\\alpha\\sin\\beta',d:'Синус суммы/разности двух углов.',ep:'\\sin 75°',es:'\\sin(45°+30°) = \\frac{\\sqrt{2}}{2}\\cdot\\frac{\\sqrt{3}}{2}+\\frac{\\sqrt{2}}{2}\\cdot\\frac{1}{2} = \\frac{\\sqrt{6}+\\sqrt{2}}{4}'},
-      {t:'Косинус суммы и разности',f:'\\cos(\\alpha \\pm \\beta) = \\cos\\alpha\\cos\\beta \\mp \\sin\\alpha\\sin\\beta',d:'Косинус суммы/разности двух углов.',ep:'\\cos 75°',es:'\\cos(45°+30°) = \\frac{\\sqrt{2}}{2}\\cdot\\frac{\\sqrt{3}}{2}-\\frac{\\sqrt{2}}{2}\\cdot\\frac{1}{2} = \\frac{\\sqrt{6}-\\sqrt{2}}{4}'},
-      {t:'Тангенс суммы и разности',f:'\\tan(\\alpha \\pm \\beta) = \\dfrac{\\tan\\alpha \\pm \\tan\\beta}{1 \\mp \\tan\\alpha\\tan\\beta}',d:'Тангенс суммы/разности двух углов.',ep:'\\tan 75°',es:'\\tan(45°+30°) = \\dfrac{1+\\frac{1}{\\sqrt{3}}}{1-\\frac{1}{\\sqrt{3}}} = 2+\\sqrt{3}'},
-    ]},
-    {n:'Формулы двойного угла',clr:'var(--trig)', f:[
-      {t:'Синус двойного угла',f:'\\sin 2\\alpha = 2\\sin\\alpha\\cos\\alpha',d:'Удвоение угла в синусе.',ep:'\\sin 60° = 2\\sin 30°\\cos 30°',es:'= 2\\cdot\\frac{1}{2}\\cdot\\frac{\\sqrt{3}}{2} = \\frac{\\sqrt{3}}{2}'},
-      {t:'Косинус двойного угла',f:'\\cos 2\\alpha = \\cos^2\\!\\alpha - \\sin^2\\!\\alpha = 1 - 2\\sin^2\\!\\alpha = 2\\cos^2\\!\\alpha - 1',d:'Три эквивалентные формы косинуса двойного угла. Выбирай удобную!',ep:'\\cos 2\\alpha,\\text{ если }\\sin\\alpha=0{,}6',es:'\\cos 2\\alpha = 1 - 2\\cdot 0{,}36 = 0{,}28'},
-      {t:'Тангенс двойного угла',f:'\\tan 2\\alpha = \\dfrac{2\\tan\\alpha}{1-\\tan^2\\!\\alpha}',d:'Удвоение угла в тангенсе.',ep:'\\tan 2\\alpha,\\text{ если }\\tan\\alpha=2',es:'\\tan 2\\alpha = \\dfrac{4}{1-4} = -\\dfrac{4}{3}'},
-    ]},
-    {n:'Формулы понижения степени',clr:'var(--trig)', f:[
-      {t:'Понижение степени sin²',f:'\\sin^2\\!\\alpha = \\dfrac{1 - \\cos 2\\alpha}{2}',d:'Используется для вычисления интегралов и упрощения.',ep:'\\sin^2 30°',es:'= \\dfrac{1-\\cos 60°}{2} = \\dfrac{1-\\frac{1}{2}}{2} = \\dfrac{1}{4}'},
-      {t:'Понижение степени cos²',f:'\\cos^2\\!\\alpha = \\dfrac{1 + \\cos 2\\alpha}{2}',d:'Используется для вычисления интегралов и упрощения.',ep:'\\cos^2 45°',es:'= \\dfrac{1+\\cos 90°}{2} = \\dfrac{1+0}{2} = \\dfrac{1}{2}'},
-    ]},
-    {n:'Суммы и произведения',clr:'var(--trig)', f:[
-      {t:'Сумма синусов',f:'\\sin\\alpha + \\sin\\beta = 2\\sin\\dfrac{\\alpha+\\beta}{2}\\cos\\dfrac{\\alpha-\\beta}{2}',d:'Сумма синусов — в произведение.',ep:'\\sin 50° + \\sin 10°',es:'= 2\\sin 30°\\cos 20° = 2\\cdot\\tfrac{1}{2}\\cdot\\cos 20° = \\cos 20°'},
-      {t:'Разность синусов',f:'\\sin\\alpha - \\sin\\beta = 2\\cos\\dfrac{\\alpha+\\beta}{2}\\sin\\dfrac{\\alpha-\\beta}{2}',d:'Разность синусов — в произведение.',ep:'\\sin 70° - \\sin 30°',es:'= 2\\cos 50°\\sin 20°'},
-      {t:'Сумма косинусов',f:'\\cos\\alpha + \\cos\\beta = 2\\cos\\dfrac{\\alpha+\\beta}{2}\\cos\\dfrac{\\alpha-\\beta}{2}',d:'Сумма косинусов — в произведение.',ep:'\\cos 20° + \\cos 80°',es:'= 2\\cos 50°\\cos 30° = \\sqrt{3}\\cos 50°'},
-      {t:'Разность косинусов',f:'\\cos\\alpha - \\cos\\beta = -2\\sin\\dfrac{\\alpha+\\beta}{2}\\sin\\dfrac{\\alpha-\\beta}{2}',d:'Разность косинусов — в произведение.',ep:'\\cos 60° - \\cos 0°',es:'= -2\\sin 30°\\sin(-30°) = 2\\sin^2 30° = \\tfrac{1}{2}'},
-      {t:'Произведение sin·cos',f:'\\sin\\alpha\\cos\\beta = \\dfrac{1}{2}[\\sin(\\alpha+\\beta)+\\sin(\\alpha-\\beta)]',d:'Произведение — в сумму синусов.',ep:'2\\sin 50°\\cos 10°',es:'= \\sin 60° + \\sin 40° = \\frac{\\sqrt{3}}{2}+\\sin 40°'},
-      {t:'Произведение sin·sin',f:'\\sin\\alpha\\sin\\beta = \\dfrac{1}{2}[\\cos(\\alpha-\\beta)-\\cos(\\alpha+\\beta)]',d:'Произведение синусов — в разность косинусов.',ep:'2\\sin 40°\\sin 20°',es:'= \\cos 20° - \\cos 60° = \\cos 20° - \\dfrac{1}{2}'},
-      {t:'Произведение cos·cos',f:'\\cos\\alpha\\cos\\beta = \\dfrac{1}{2}[\\cos(\\alpha+\\beta)+\\cos(\\alpha-\\beta)]',d:'Произведение косинусов — в сумму косинусов.',ep:'2\\cos 70°\\cos 20°',es:'= \\cos 90°+\\cos 50° = \\cos 50°'},
-    ]},
-    {n:'Свойства функций',clr:'var(--trig)', f:[
-      {t:'Свойства триг. функций', isTable:true, tableType:'props'},
-    ]},
-    {n:'Решение уравнений',clr:'var(--trig)', f:[
-      {t:'sin x = a',f:'x = (-1)^n \\arcsin a + \\pi n, \\quad n \\in \\mathbb{Z}',d:'|a| ≤ 1. При a=1: x=π/2+2πn. При a=-1: x=-π/2+2πn. При a=0: x=πn.',ep:'\\sin x = \\dfrac{1}{2}',es:'x = (-1)^n\\dfrac{\\pi}{6} + \\pi n,\\ n\\in\\mathbb{Z}'},
-      {t:'cos x = a',f:'x = \\pm\\arccos a + 2\\pi n, \\quad n \\in \\mathbb{Z}',d:'|a| ≤ 1. При a=1: x=2πn. При a=-1: x=π+2πn. При a=0: x=π/2+πn.',ep:'\\cos x = \\dfrac{\\sqrt{2}}{2}',es:'x = \\pm\\dfrac{\\pi}{4} + 2\\pi n,\\ n\\in\\mathbb{Z}'},
-      {t:'tan x = a',f:'x = \\arctan a + \\pi n, \\quad n \\in \\mathbb{Z}',d:'Тангенс определён при x ≠ π/2 + πn.',ep:'\\tan x = 1',es:'x = \\dfrac{\\pi}{4} + \\pi n,\\ n\\in\\mathbb{Z}'},
-      {t:'cot x = a',f:'x = \\text{arccot}\\, a + \\pi n, \\quad n \\in \\mathbb{Z}',d:'Котангенс определён при x ≠ πn.',ep:'\\cot x = \\sqrt{3}',es:'x = \\dfrac{\\pi}{6} + \\pi n,\\ n\\in\\mathbb{Z}'},
-    ]},
-  ]
-},
-{
-  id:'plan', name:'Планиметрия', icon:'△',
-  color:'var(--plan)',
-  intro:'Формулы для фигур на плоскости: треугольники, четырёхугольники, правильные многоугольники, окружность. Включены SVG-рисунки.',
-  sub:[
-    {n:'Треугольник — основное',clr:'var(--plan)', f:[
-      {t:'Периметр',f:'P = a + b + c',d:'Сумма всех трёх сторон.',svg:'triangle',ep:'a=3,\\ b=4,\\ c=5',es:'P = 3+4+5 = 12'},
-      {t:'Площадь через высоту',f:'S = \\dfrac{1}{2} \\cdot a \\cdot h_a',d:'Половина произведения основания на высоту, проведённую к нему.',svg:'triangle',ep:'a=6,\\ h=4',es:'S = \\dfrac{1}{2}\\cdot 6 \\cdot 4 = 12'},
-      {t:'Площадь через две стороны и угол',f:'S = \\dfrac{1}{2} \\cdot a \\cdot b \\cdot \\sin C',d:'C — угол между сторонами a и b.',svg:'triangle',ep:'a=5,\\ b=8,\\ C=30°',es:'S = \\dfrac{1}{2}\\cdot 5\\cdot 8\\cdot\\sin 30° = 10'},
-      {t:'Формула Герона',f:'S = \\sqrt{p(p-a)(p-b)(p-c)}, \\quad p = \\dfrac{a+b+c}{2}',d:'p — полупериметр. Применяется, когда известны все три стороны.',svg:'triangle',ep:'a=3,\\ b=4,\\ c=5',es:'p=6;\\ S=\\sqrt{6\\cdot3\\cdot2\\cdot1}=\\sqrt{36}=6'},
-      {t:'Площадь через описанную окружность',f:'S = \\dfrac{abc}{4R}',d:'R — радиус описанной окружности.',ep:'a=3,\\ b=4,\\ c=5,\\ R=2{,}5',es:'S = \\dfrac{60}{10} = 6'},
-      {t:'Площадь через вписанную окружность',f:'S = p \\cdot r',d:'p — полупериметр, r — радиус вписанной окружности.',ep:'p=6,\\ r=1',es:'S = 6 \\cdot 1 = 6'},
-    ]},
-    {n:'Теоремы треугольника',clr:'var(--plan)', f:[
-      {t:'Теорема косинусов',f:'c^2 = a^2 + b^2 - 2ab\\cos C',d:'Обобщение теоремы Пифагора. Связывает три стороны и один угол.',svg:'triangle',ep:'a=5,\\ b=7,\\ C=60°',es:'c^2 = 25+49-2\\cdot35\\cdot\\frac{1}{2} = 39;\\ c=\\sqrt{39}'},
-      {t:'Теорема синусов',f:'\\dfrac{a}{\\sin A} = \\dfrac{b}{\\sin B} = \\dfrac{c}{\\sin C} = 2R',d:'Отношение стороны к синусу противолежащего угла постоянно и равно диаметру описанной окружности.',svg:'triangle',ep:'a=6,\\ A=30°,\\ B=45°,\\ b=?',es:'\\dfrac{b}{\\sin 45°} = \\dfrac{6}{\\sin 30°} = 12;\\ b=6\\sqrt{2}'},
-      {t:'Теорема Пифагора',f:'a^2 + b^2 = c^2',d:'Для прямоугольного треугольника: сумма квадратов катетов равна квадрату гипотенузы.',svg:'rightTriangle',ep:'a=3,\\ b=4,\\ c=?',es:'c^2 = 9+16 = 25;\\ c=5'},
-    ]},
-    {n:'Прямоугольный треугольник',clr:'var(--plan)', f:[
-      {t:'Тригонометрические отношения',f:'\\sin A = \\dfrac{a}{c},\\; \\cos A = \\dfrac{b}{c},\\; \\tan A = \\dfrac{a}{b}',d:'a — противолежащий катет, b — прилежащий катет, c — гипотенуза.',svg:'rightTriangle',ep:'c=10,\\ A=30°,\\ a=?',es:'a = c\\sin A = 10\\cdot 0{,}5 = 5'},
-      {t:'Высота к гипотенузе',f:'h^2 = a_1 \\cdot a_2',d:'h — высота, опущенная на гипотенузу; a₁, a₂ — отрезки гипотенузы.',svg:'rightTriangle',ep:'a_1=4,\\ a_2=9',es:'h = \\sqrt{4\\cdot9} = 6'},
-      {t:'Катет через проекцию',f:'a^2 = c \\cdot a_1, \\quad b^2 = c \\cdot a_2',d:'Квадрат катета равен произведению гипотенузы на проекцию этого катета.',svg:'rightTriangle',ep:'c=13,\\ a_1=9',es:'a^2 = 13\\cdot9=117;\\ a=\\sqrt{117}=3\\sqrt{13}'},
-      {t:'Медиана к гипотенузе',f:'m_c = \\dfrac{c}{2} = R',d:'Медиана, проведённая к гипотенузе, равна её половине — радиусу описанной окружности.',svg:'rightTriangle',ep:'c=10',es:'m_c = 5 = R'},
-    ]},
-    {n:'Медианы, биссектрисы, высоты',clr:'var(--plan)', f:[
-      {t:'Длина медианы',f:'m_a = \\dfrac{1}{2}\\sqrt{2b^2 + 2c^2 - a^2}',d:'Медиана из вершины A к стороне a.',svg:'triangle',ep:'a=6,\\ b=5,\\ c=5',es:'m_a = \\tfrac{1}{2}\\sqrt{50+50-36} = \\tfrac{1}{2}\\sqrt{64} = 4'},
-      {t:'Медианы пересекаются в точке 2:1',f:'AG:GM = 2:1',d:'Точка пересечения медиан (центроид G) делит каждую медиану в отношении 2:1 от вершины.',ep:'m_a=9',es:'AG = 6,\\ GM = 3'},
-      {t:'Длина биссектрисы',f:'l_a = \\dfrac{2bc\\cos\\!\\dfrac{A}{2}}{b+c}',d:'Длина биссектрисы из угла A.',ep:'b=4,\\ c=3,\\ A=60°',es:'l_a = \\dfrac{2\\cdot4\\cdot3\\cdot\\cos30°}{4+3} = \\dfrac{24\\cdot\\frac{\\sqrt{3}}{2}}{7} = \\dfrac{12\\sqrt{3}}{7}'},
-    ]},
-    {n:'Вписанная и описанная окружность',clr:'var(--plan)', f:[
-      {t:'Радиус вписанной окружности',f:'r = \\dfrac{S}{p}',d:'S — площадь, p — полупериметр треугольника.',svg:'triangle',ep:'S=12,\\ p=6',es:'r = \\dfrac{12}{6} = 2'},
-      {t:'Радиус описанной окружности',f:'R = \\dfrac{abc}{4S} = \\dfrac{a}{2\\sin A}',d:'Теорема синусов: 2R = a/sinA.',svg:'circle',ep:'a=5,\\ A=30°',es:'R = \\dfrac{5}{2\\cdot0{,}5} = 5'},
-      {t:'Вписанный угол',f:'\\alpha_{\\text{вп}} = \\dfrac{1}{2}\\,\\alpha_{\\text{цент}}',d:'Вписанный угол вдвое меньше центрального, опирающегося на ту же дугу.',svg:'circle',ep:'\\text{Центральный угол } 80°',es:'\\text{Вписанный угол} = 40°'},
-    ]},
-    {n:'Параллелограмм',clr:'var(--plan)', f:[
-      {t:'Площадь через высоту',f:'S = a \\cdot h',d:'a — основание, h — высота (расстояние между основаниями).',svg:'parallelogram',ep:'a=8,\\ h=5',es:'S = 40'},
-      {t:'Площадь через стороны и угол',f:'S = a \\cdot b \\cdot \\sin\\alpha',d:'α — угол между сторонами a и b.',svg:'parallelogram',ep:'a=6,\\ b=4,\\ \\alpha=30°',es:'S = 6\\cdot4\\cdot\\frac{1}{2} = 12'},
-      {t:'Диагонали параллелограмма',f:'d_1^2 + d_2^2 = 2(a^2+b^2)',d:'Сумма квадратов диагоналей равна удвоенной сумме квадратов сторон.',svg:'parallelogram',ep:'a=3,\\ b=5,\\ d_1=6',es:'d_2^2 = 2(9+25)-36 = 32;\\ d_2=4\\sqrt{2}'},
-      {t:'Периметр',f:'P = 2(a+b)',d:'Периметр — удвоенная сумма соседних сторон.',ep:'a=4,\\ b=7',es:'P = 2(4+7) = 22'},
-    ]},
-    {n:'Трапеция',clr:'var(--plan)', f:[
-      {t:'Площадь трапеции',f:'S = \\dfrac{(a+b)}{2} \\cdot h = m \\cdot h',d:'a и b — основания (параллельные стороны), h — высота, m — средняя линия.',svg:'trapezoid',ep:'a=5,\\ b=9,\\ h=4',es:'S = \\dfrac{14}{2}\\cdot4 = 28'},
-      {t:'Средняя линия трапеции',f:'m = \\dfrac{a+b}{2}',d:'Средняя линия соединяет середины боковых сторон и параллельна основаниям.',svg:'trapezoid',ep:'a=4,\\ b=10',es:'m = \\dfrac{4+10}{2} = 7'},
-      {t:'Периметр',f:'P = a + b + c + d',d:'Сумма всех четырёх сторон.',ep:'a=5,\\ b=9,\\ c=4,\\ d=4',es:'P = 22'},
-    ]},
-    {n:'Ромб',clr:'var(--plan)', f:[
-      {t:'Площадь через диагонали',f:'S = \\dfrac{d_1 \\cdot d_2}{2}',d:'d₁ и d₂ — диагонали ромба. Диагонали взаимно перпендикулярны!',svg:'rhombus',ep:'d_1=6,\\ d_2=8',es:'S = \\dfrac{48}{2} = 24'},
-      {t:'Площадь через сторону и угол',f:'S = a^2 \\sin\\alpha',d:'α — любой угол ромба (острый или тупой).',svg:'rhombus',ep:'a=5,\\ \\alpha=30°',es:'S = 25\\cdot0{,}5 = 12{,}5'},
-      {t:'Соотношение диагоналей и стороны',f:'\\left(\\dfrac{d_1}{2}\\right)^2 + \\left(\\dfrac{d_2}{2}\\right)^2 = a^2',d:'Диагонали перпендикулярны и делятся пополам.',svg:'rhombus',ep:'a=5,\\ d_1=6,\\ d_2=?',es:'9+d_2^2/4=25;\\ d_2=8'},
-      {t:'Периметр',f:'P = 4a',d:'Все стороны ромба равны.',ep:'a=7',es:'P = 28'},
-    ]},
-    {n:'Прямоугольник и квадрат',clr:'var(--plan)', f:[
-      {t:'Площадь прямоугольника',f:'S = ab',d:'Произведение смежных сторон.',ep:'a=7,\\ b=4',es:'S = 28'},
-      {t:'Диагональ прямоугольника',f:'d = \\sqrt{a^2 + b^2}',d:'Диагональ прямоугольника — гипотенуза прямоугольного треугольника.',ep:'a=3,\\ b=4',es:'d = \\sqrt{9+16} = 5'},
-      {t:'Площадь квадрата',f:'S = a^2 = \\dfrac{d^2}{2}',d:'Квадрат стороны или половина квадрата диагонали.',ep:'a=5',es:'S = 25'},
-      {t:'Диагональ квадрата',f:'d = a\\sqrt{2}',d:'Диагональ квадрата больше стороны в √2 раз.',ep:'a=4',es:'d = 4\\sqrt{2}'},
-    ]},
-    {n:'Правильный многоугольник (n сторон, сторона a)',clr:'var(--plan)', f:[
-      {t:'Площадь правильного n-угольника',f:'S = \\dfrac{na^2}{4}\\cot\\dfrac{\\pi}{n}',d:'n — число сторон, a — длина стороны.',ep:'n=6,\\ a=2 \\text{ (правильный шестиугольник)}',es:'S = \\dfrac{6\\cdot4}{4}\\cdot\\cot 30° = 6\\sqrt{3} \\approx 10{,}39'},
-      {t:'Радиус описанной окружности',f:'R = \\dfrac{a}{2\\sin(\\pi/n)}',d:'Расстояние от центра до вершины.',ep:'n=6,\\ a=2',es:'R = \\dfrac{2}{2\\sin 30°} = \\dfrac{2}{1} = 2'},
-      {t:'Радиус вписанной окружности',f:'r = \\dfrac{a}{2\\tan(\\pi/n)}',d:'Расстояние от центра до середины стороны (апофема).',ep:'n=6,\\ a=2',es:'r = \\dfrac{2}{2\\tan 30°} = \\dfrac{1}{1/\\sqrt{3}} = \\sqrt{3}'},
-      {t:'Сумма углов n-угольника',f:'\\sum\\angle = 180°(n-2)',d:'Сумма внутренних углов n-угольника.',ep:'n=6',es:'\\sum\\angle = 180°\\cdot4 = 720°'},
-      {t:'Угол правильного n-угольника',f:'\\angle = \\dfrac{180°(n-2)}{n}',d:'Каждый внутренний угол правильного многоугольника.',ep:'n=6',es:'\\angle = \\dfrac{180°\\cdot4}{6} = 120°'},
-    ]},
-    {n:'Окружность и круг',clr:'var(--plan)', f:[
-      {t:'Длина окружности',f:'C = 2\\pi r = \\pi d',d:'r — радиус, d — диаметр.',svg:'circle',ep:'r=7',es:'C = 14\\pi \\approx 43{,}98'},
-      {t:'Площадь круга',f:'S = \\pi r^2',d:'Площадь фигуры, ограниченной окружностью.',svg:'circle',ep:'r=3',es:'S = 9\\pi \\approx 28{,}27'},
-      {t:'Длина дуги',f:'l = r \\varphi',d:'φ — центральный угол в радианах. (φ = α°·π/180)',svg:'circle',ep:'r=6,\\ \\varphi=\\pi/3',es:'l = 6\\cdot\\dfrac{\\pi}{3} = 2\\pi'},
-      {t:'Площадь сектора',f:'S_{\\text{сект}} = \\dfrac{r^2\\varphi}{2} = \\dfrac{lr}{2}',d:'φ — центральный угол в радианах.',svg:'circle',ep:'r=6,\\ \\varphi=\\pi/3',es:'S = \\dfrac{36\\cdot\\pi/3}{2} = 6\\pi'},
-      {t:'Площадь сегмента',f:'S_{\\text{сег}} = \\dfrac{r^2}{2}(\\varphi - \\sin\\varphi)',d:'Сегмент — часть круга, отсечённая хордой.',ep:'r=6,\\ \\varphi=\\pi/3',es:'S = \\dfrac{36}{2}\\!\\left(\\dfrac{\\pi}{3}-\\dfrac{\\sqrt{3}}{2}\\right) = 18\\left(\\dfrac{\\pi}{3}-\\dfrac{\\sqrt{3}}{2}\\right)'},
-    ]},
-  ]
-},
-{
-  id:'ster', name:'Стереометрия', icon:'◈',
-  color:'var(--ster)',
-  intro:'Объёмы и площади поверхностей всех основных пространственных фигур. Для каждой фигуры — полная, боковая поверхности и объём.',
-  sub:[
-    {n:'Куб',clr:'var(--ster)', f:[
-      {t:'Объём куба',f:'V = a^3',d:'a — длина ребра.',svg:'cube',ep:'a=3',es:'V = 27'},
-      {t:'Площадь полной поверхности',f:'S_{\\text{полн}} = 6a^2',d:'6 одинаковых квадратных граней.',svg:'cube',ep:'a=3',es:'S = 54'},
-      {t:'Площадь одной грани',f:'S_{\\text{гр}} = a^2',d:'Каждая грань — квадрат.',ep:'a=4',es:'S_{\\text{гр}} = 16'},
-      {t:'Диагональ куба',f:'d = a\\sqrt{3}',d:'Пространственная диагональ куба.',svg:'cube',ep:'a=2',es:'d = 2\\sqrt{3}'},
-      {t:'Диагональ грани',f:'d_{\\text{гр}} = a\\sqrt{2}',d:'Диагональ каждой квадратной грани.',ep:'a=5',es:'d_{\\text{гр}} = 5\\sqrt{2}'},
-    ]},
-    {n:'Прямоугольный параллелепипед',clr:'var(--ster)', f:[
-      {t:'Объём',f:'V = abc',d:'Произведение трёх измерений.',ep:'a=2,\\ b=3,\\ c=5',es:'V = 30'},
-      {t:'Площадь полной поверхности',f:'S_{\\text{полн}} = 2(ab+bc+ac)',d:'Три пары прямоугольных граней.',ep:'a=2,\\ b=3,\\ c=5',es:'S = 2(6+15+10) = 62'},
-      {t:'Пространственная диагональ',f:'d = \\sqrt{a^2+b^2+c^2}',d:'Длина главной диагонали параллелепипеда.',ep:'a=2,\\ b=3,\\ c=6',es:'d = \\sqrt{4+9+36} = 7'},
-    ]},
-    {n:'Призма',clr:'var(--ster)', f:[
-      {t:'Объём прямой призмы',f:'V = S_{\\text{осн}} \\cdot h',d:'Площадь основания, умноженная на высоту.',ep:'S_{\\text{осн}}=12,\\ h=5',es:'V = 60'},
-      {t:'Площадь боковой поверхности (прямая призма)',f:'S_{\\text{бок}} = P_{\\text{осн}} \\cdot h',d:'Периметр основания, умноженный на высоту.',ep:'P_{\\text{осн}}=18,\\ h=5',es:'S_{\\text{бок}} = 90'},
-      {t:'Площадь полной поверхности',f:'S_{\\text{полн}} = S_{\\text{бок}} + 2S_{\\text{осн}}',d:'Боковая поверхность плюс два основания.',ep:'S_{\\text{бок}}=90,\\ S_{\\text{осн}}=12',es:'S_{\\text{полн}} = 90+24 = 114'},
-    ]},
-    {n:'Пирамида',clr:'var(--ster)', f:[
-      {t:'Объём пирамиды',f:'V = \\dfrac{1}{3} \\cdot S_{\\text{осн}} \\cdot h',d:'Одна треть объёма «охватывающей» призмы.',svg:'pyramid',ep:'S_{\\text{осн}}=36,\\ h=5',es:'V = \\dfrac{1}{3}\\cdot36\\cdot5 = 60'},
-      {t:'Площадь боковой поверхности (правильная пирамида)',f:'S_{\\text{бок}} = \\dfrac{1}{2} \\cdot P_{\\text{осн}} \\cdot a',d:'a — апофема (высота боковой грани), P — периметр основания.',svg:'pyramid',ep:'P_{\\text{осн}}=20,\\ a=6',es:'S_{\\text{бок}} = \\dfrac{1}{2}\\cdot20\\cdot6 = 60'},
-      {t:'Апофема правильной пирамиды',f:'a = \\sqrt{h^2 + r^2}',d:'r — радиус вписанной окружности основания, h — высота пирамиды.',svg:'pyramid',ep:'h=4,\\ r=3',es:'a = \\sqrt{16+9} = 5'},
-      {t:'Площадь полной поверхности',f:'S_{\\text{полн}} = S_{\\text{бок}} + S_{\\text{осн}}',d:'Боковая поверхность плюс одно основание.',ep:'S_{\\text{бок}}=60,\\ S_{\\text{осн}}=36',es:'S_{\\text{полн}} = 96'},
-    ]},
-    {n:'Усечённая пирамида',clr:'var(--ster)', f:[
-      {t:'Объём усечённой пирамиды',f:'V = \\dfrac{h}{3}\\left(S_1 + S_2 + \\sqrt{S_1 S_2}\\right)',d:'S₁ и S₂ — площади оснований, h — высота.',ep:'S_1=9,\\ S_2=4,\\ h=6',es:'V = 2(9+4+6) = 38'},
-    ]},
-    {n:'Конус',clr:'var(--ster)', f:[
-      {t:'Объём конуса',f:'V = \\dfrac{1}{3}\\pi r^2 h',d:'r — радиус основания, h — высота конуса.',svg:'cone',ep:'r=3,\\ h=4',es:'V = \\dfrac{1}{3}\\pi\\cdot9\\cdot4 = 12\\pi'},
-      {t:'Образующая конуса',f:'l = \\sqrt{r^2 + h^2}',d:'Длина боковой образующей — гипотенуза прямоугольного треугольника (r, h, l).',svg:'cone',ep:'r=3,\\ h=4',es:'l = \\sqrt{9+16} = 5'},
-      {t:'Площадь боковой поверхности',f:'S_{\\text{бок}} = \\pi r l',d:'l — образующая конуса.',svg:'cone',ep:'r=3,\\ l=5',es:'S_{\\text{бок}} = 15\\pi'},
-      {t:'Площадь полной поверхности',f:'S_{\\text{полн}} = \\pi r l + \\pi r^2 = \\pi r(l+r)',d:'Боковая поверхность плюс площадь круглого основания.',svg:'cone',ep:'r=3,\\ l=5',es:'S_{\\text{полн}} = \\pi\\cdot3\\cdot(5+3) = 24\\pi'},
-    ]},
-    {n:'Усечённый конус',clr:'var(--ster)', f:[
-      {t:'Объём усечённого конуса',f:'V = \\dfrac{\\pi h}{3}(r_1^2+r_2^2+r_1 r_2)',d:'r₁, r₂ — радиусы оснований, h — высота.',ep:'r_1=3,\\ r_2=1,\\ h=4',es:'V = \\dfrac{4\\pi}{3}(9+1+3) = \\dfrac{52\\pi}{3}'},
-      {t:'Образующая усечённого конуса',f:'l = \\sqrt{h^2+(r_1-r_2)^2}',d:'l — боковая образующая.',ep:'r_1=5,\\ r_2=2,\\ h=4',es:'l = \\sqrt{16+9} = 5'},
-      {t:'Площадь боковой поверхности',f:'S_{\\text{бок}} = \\pi(r_1+r_2)l',d:'l — образующая усечённого конуса.',ep:'r_1=5,\\ r_2=2,\\ l=5',es:'S_{\\text{бок}} = 35\\pi'},
-    ]},
-    {n:'Цилиндр',clr:'var(--ster)', f:[
-      {t:'Объём цилиндра',f:'V = \\pi r^2 h',d:'r — радиус основания, h — высота.',svg:'cylinder',ep:'r=5,\\ h=8',es:'V = 200\\pi'},
-      {t:'Площадь боковой поверхности',f:'S_{\\text{бок}} = 2\\pi r h',d:'Развёрнутая боковая поверхность — прямоугольник с высотой h и шириной 2πr.',svg:'cylinder',ep:'r=3,\\ h=10',es:'S_{\\text{бок}} = 60\\pi'},
-      {t:'Площадь полной поверхности',f:'S_{\\text{полн}} = 2\\pi r h + 2\\pi r^2 = 2\\pi r(h+r)',d:'Боковая поверхность плюс два круглых основания.',svg:'cylinder',ep:'r=3,\\ h=10',es:'S_{\\text{полн}} = 2\\pi\\cdot3\\cdot13 = 78\\pi'},
-    ]},
-    {n:'Шар и сфера',clr:'var(--ster)', f:[
-      {t:'Объём шара',f:'V = \\dfrac{4}{3}\\pi r^3',d:'r — радиус шара.',svg:'sphere',ep:'r=3',es:'V = \\dfrac{4}{3}\\pi\\cdot27 = 36\\pi'},
-      {t:'Площадь поверхности сферы',f:'S = 4\\pi r^2',d:'Площадь поверхности шара (сферы).',svg:'sphere',ep:'r=3',es:'S = 36\\pi'},
-      {t:'Объём шарового сегмента',f:'V_{\\text{сег}} = \\dfrac{\\pi h^2}{3}(3r-h)',d:'h — высота сегмента, r — радиус шара.',svg:'sphere',ep:'r=5,\\ h=2',es:'V = \\dfrac{\\pi\\cdot4}{3}\\cdot13 = \\dfrac{52\\pi}{3}'},
-      {t:'Шар вписан в цилиндр',f:'R_{\\text{шара}} = r_{\\text{цил}} = \\dfrac{h_{\\text{цил}}}{2}',d:'Если шар вписан в цилиндр: радиус шара = радиус цилиндра = половина высоты.',ep:'r_{цил}=5,\\ h_{цил}=?',es:'h_{цил} = 2r = 10; \\quad V_{шара} = \\frac{4}{3}\\pi\\cdot125'},
-      {t:'Шар вписан в конус',f:'r = \\dfrac{S_{\\text{осн}}}{P_{\\text{попер}}}',d:'Радиус вписанного шара находится через осевое сечение (вписанная в равнобедренный треугольник окружность).',ep:'\\text{Осевое сечение: } h=4, r_{кон}=3',es:'r_{шара} = \\dfrac{S}{p} = \\dfrac{6}{5} \\text{ (полупериметр осев. сечения)}'},
-    ]},
-  ]
-},
-{
-  id:'prob', name:'Вероятность', icon:'⚅',
-  color:'var(--prob)',
-  intro:'Комбинаторика, теория вероятностей, условная вероятность, случайные величины и биномиальное распределение для ЕГЭ профиль.',
-  sub:[
-    {n:'Комбинаторика',clr:'var(--prob)', f:[
-      {t:'Факториал',f:'n! = 1 \\cdot 2 \\cdot 3 \\cdots n, \\quad 0! = 1',d:'Произведение первых n натуральных чисел.',ep:'5!',es:'5! = 1\\cdot2\\cdot3\\cdot4\\cdot5 = 120'},
-      {t:'Перестановки',f:'P_n = n!',d:'Число способов расставить n различных элементов в ряд.',ep:'Сколько порядков у 4 книг?',es:'P_4 = 4! = 24'},
-      {t:'Размещения',f:'A_n^k = \\dfrac{n!}{(n-k)!}',d:'Число способов выбрать k элементов из n и упорядочить их.',ep:'5 мест, 3 призёра',es:'A_5^3 = \\dfrac{5!}{2!} = 60'},
-      {t:'Сочетания',f:'C_n^k = \\dbinom{n}{k} = \\dfrac{n!}{k!\\,(n-k)!}',d:'Число способов выбрать k элементов из n (порядок не важен).',ep:'Из 10 команд выбрать 3 для финала',es:'C_{10}^3 = \\dfrac{10!}{3!\\cdot7!} = 120'},
-      {t:'Свойства сочетаний',f:'C_n^k = C_n^{n-k}, \\quad C_n^0 = C_n^n = 1',d:'Симметрия: выбрать k то же, что оставить n-k.',ep:'C_{10}^7',es:'C_{10}^7 = C_{10}^3 = 120 \\quad (\\text{быстрее считать!})'},
-      {t:'Формула Паскаля',f:'C_n^k = C_{n-1}^{k-1} + C_{n-1}^k',d:'Сочетание n по k выражается через сочетания предыдущего уровня.',ep:'C_5^2',es:'C_5^2 = C_4^1 + C_4^2 = 4+6 = 10'},
-      {t:'Бином Ньютона',f:'(a+b)^n = \\sum_{k=0}^{n} C_n^k\\, a^k\\, b^{n-k}',d:'Раскрытие n-й степени двучлена.',ep:'(a+b)^3',es:'= a^3 + 3a^2b + 3ab^2 + b^3'},
-    ]},
-    {n:'Классическая вероятность',clr:'var(--prob)', f:[
-      {t:'Формула классической вероятности',f:'P(A) = \\dfrac{m}{n}',d:'m — число благоприятных исходов, n — число всех равновозможных исходов.',ep:'Бросить кубик, выпадет чётное число',es:'m=3,\\ n=6;\\ P = \\dfrac{3}{6} = 0{,}5'},
-      {t:'Свойства вероятности',f:'0 \\leq P(A) \\leq 1, \\quad P(\\Omega) = 1, \\quad P(\\varnothing) = 0',d:'Вероятность всегда от 0 до 1. Достоверное событие имеет вероятность 1.',ep:'P(A) = 1{,}5',es:'Такого быть не может! Ошибка в условии.'},
-      {t:'Противоположное событие',f:'P(\\bar{A}) = 1 - P(A)',d:'Вероятность противоположного события.',ep:'P(A) = 0{,}3',es:'P(\\bar{A}) = 1 - 0{,}3 = 0{,}7'},
-    ]},
-    {n:'Теоремы сложения и умножения',clr:'var(--prob)', f:[
-      {t:'Теорема сложения (общий случай)',f:'P(A \\cup B) = P(A) + P(B) - P(A \\cap B)',d:'Вероятность суммы двух событий. Вычитаем, чтобы не считать пересечение дважды.',ep:'P(A)=0{,}4,\\ P(B)=0{,}5,\\ P(AB)=0{,}2',es:'P(A\\cup B) = 0{,}4+0{,}5-0{,}2 = 0{,}7'},
-      {t:'Теорема сложения (несовместные)',f:'P(A + B) = P(A) + P(B), \\quad A \\cap B = \\varnothing',d:'Для несовместных событий (не могут произойти одновременно) вероятности просто складываются.',ep:'P(A)=0{,}3,\\ P(B)=0{,}4, A\\cap B=\\varnothing',es:'P(A+B) = 0{,}7'},
-      {t:'Теорема умножения (общий случай)',f:'P(A \\cap B) = P(A) \\cdot P(B|A)',d:'P(B|A) — условная вероятность B при условии A.',ep:'P(A)=0{,}5,\\ P(B|A)=0{,}4',es:'P(AB) = 0{,}5\\cdot0{,}4 = 0{,}2'},
-      {t:'Теорема умножения (независимые)',f:'P(A \\cap B) = P(A) \\cdot P(B)',d:'Для независимых событий (одно не влияет на другое).',ep:'Два броска монеты: оба орла',es:'P = \\dfrac{1}{2}\\cdot\\dfrac{1}{2} = \\dfrac{1}{4}'},
-    ]},
-    {n:'Условная вероятность',clr:'var(--prob)', f:[
-      {t:'Условная вероятность',f:'P(B|A) = \\dfrac{P(A \\cap B)}{P(A)}',d:'Вероятность события B при условии, что событие A уже произошло.',ep:'P(AB)=0{,}12,\\ P(A)=0{,}3',es:'P(B|A) = \\dfrac{0{,}12}{0{,}3} = 0{,}4'},
-    ]},
-    {n:'Полная вероятность и формула Байеса',clr:'var(--prob)', f:[
-      {t:'Формула полной вероятности',f:'P(B) = \\sum_{i=1}^{n} P(A_i) \\cdot P(B|A_i)',d:'A₁, A₂, ..., Aₙ — полная группа несовместных гипотез (их вероятности в сумме дают 1).',ep:'P(A_1)=0{,}6,\\ P(B|A_1)=0{,}2;\\ P(A_2)=0{,}4,\\ P(B|A_2)=0{,}5',es:'P(B) = 0{,}6\\cdot0{,}2+0{,}4\\cdot0{,}5 = 0{,}12+0{,}20 = 0{,}32'},
-      {t:'Формула Байеса',f:'P(A_k|B) = \\dfrac{P(A_k)\\cdot P(B|A_k)}{P(B)}',d:'Обновление вероятности гипотезы A_k после наблюдения события B.',ep:'P(A_1)=0{,}6,\\ P(B|A_1)=0{,}2,\\ P(B)=0{,}32',es:'P(A_1|B) = \\dfrac{0{,}6\\cdot0{,}2}{0{,}32} = \\dfrac{0{,}12}{0{,}32} = 0{,}375'},
-    ]},
-    {n:'Случайная величина',clr:'var(--prob)', f:[
-      {t:'Математическое ожидание (дискретное)',f:'M(X) = \\sum_{i} x_i \\cdot p_i',d:'Среднее взвешенное значений случайной величины по их вероятностям.',ep:'X: 1 с p=0{,}2;\\ 3 с p=0{,}5;\\ 5 с p=0{,}3',es:'M(X) = 1\\cdot0{,}2+3\\cdot0{,}5+5\\cdot0{,}3 = 3{,}2'},
-      {t:'Дисперсия',f:'D(X) = M(X^2) - [M(X)]^2 = \\sum_i (x_i - M)^2 p_i',d:'Мера разброса значений вокруг среднего.',ep:'X: 1 с p=0{,}5;\\ 3 с p=0{,}5',es:'M=2,\\ D = (1-2)^2\\cdot0{,}5+(3-2)^2\\cdot0{,}5 = 1'},
-      {t:'Среднеквадратическое отклонение',f:'\\sigma(X) = \\sqrt{D(X)}',d:'Корень из дисперсии. Имеет те же единицы, что и X.',ep:'D(X) = 9',es:'\\sigma = 3'},
-      {t:'Свойства математического ожидания',f:'M(aX+b) = a\\,M(X)+b \\\\[4pt] M(X+Y) = M(X)+M(Y)',d:'Линейность математического ожидания.',ep:'M(X)=3,\\ M(2X+1)=?',es:'M(2X+1) = 2\\cdot3+1 = 7'},
-      {t:'Свойства дисперсии',f:'D(aX+b) = a^2 D(X) \\\\[4pt] D(X+Y) = D(X)+D(Y) \\text{ (независимые)}',d:'При умножении на константу дисперсия умножается на квадрат этой константы.',ep:'D(X)=4,\\ D(3X-2)=?',es:'D(3X-2) = 9\\cdot4 = 36'},
-    ]},
-    {n:'Биномиальное распределение',clr:'var(--prob)', f:[
-      {t:'Формула Бернулли',f:'P(X=k) = C_n^k \\cdot p^k \\cdot q^{n-k}, \\quad q = 1-p',d:'Вероятность ровно k успехов в n независимых испытаниях с вероятностью успеха p.',ep:'10 бросков монеты,\\ ровно 3 орла',es:'P(X=3) = C_{10}^3 \\cdot (\\tfrac{1}{2})^3 \\cdot (\\tfrac{1}{2})^7 = 120\\cdot\\tfrac{1}{1024} = \\dfrac{15}{128}'},
-      {t:'Математическое ожидание (Бернулли)',f:'M(X) = np',d:'Среднее число успехов в n испытаниях.',ep:'n=100,\\ p=0{,}4',es:'M(X) = 40'},
-      {t:'Дисперсия (Бернулли)',f:'D(X) = npq, \\quad q=1-p',d:'Дисперсия биномиального распределения.',ep:'n=100,\\ p=0{,}4',es:'D(X) = 100\\cdot0{,}4\\cdot0{,}6 = 24'},
-      {t:'СКО биномиального распределения',f:'\\sigma(X) = \\sqrt{npq}',d:'Стандартное отклонение.',ep:'n=100,\\ p=0{,}4',es:'\\sigma = \\sqrt{24} = 2\\sqrt{6} \\approx 4{,}9'},
-    ]},
-  ]
-}
+{id:'algebra',name:'Алгебра',icon:'∑',color:'var(--alg)',
+intro:'Базовые алгебраические формулы: степени, логарифмы, прогрессии, производные и интегралы.',
+sub:[
+{n:'Степени',clr:'var(--alg)',f:[
+{t:'Произведение степеней',f:'a^m \\cdot a^n = a^{m+n}',d:'При умножении степеней с одинаковым основанием показатели складываются.',ep:'2^3 \\cdot 2^5',es:'2^3 \\cdot 2^5 = 2^{3+5} = 2^8 = 256'},
+{t:'Частное степеней',f:'\\dfrac{a^m}{a^n} = a^{m-n}',d:'При делении степеней показатель знаменателя вычитается.',ep:'\\dfrac{3^7}{3^4}',es:'3^{7-4} = 3^3 = 27'},
+{t:'Степень степени',f:'(a^m)^n = a^{m \\cdot n}',d:'При возведении степени в степень показатели перемножаются.',ep:'(2^3)^4',es:'2^{12} = 4096'},
+{t:'Степень произведения',f:'(ab)^n = a^n \\cdot b^n',d:'Степень произведения равна произведению степеней.',ep:'(2\\cdot3)^3',es:'8\\cdot27=216'},
+{t:'Степень дроби',f:'\\left(\\dfrac{a}{b}\\right)^n = \\dfrac{a^n}{b^n}',d:'Степень дроби — дробь степеней.',ep:'\\left(\\dfrac{2}{3}\\right)^3',es:'\\dfrac{8}{27}'},
+{t:'Нулевая степень',f:'a^0 = 1,\\quad a\\neq 0',d:'Любое ненулевое число в нулевой степени равно 1.',ep:'\\pi^0+100^0',es:'1+1=2'},
+{t:'Отрицательная степень',f:'a^{-n}=\\dfrac{1}{a^n}',d:'Отрицательная степень — обратная величина.',ep:'2^{-3}',es:'\\dfrac{1}{8}'},
+{t:'Дробная степень',f:'a^{\\frac{m}{n}}=\\sqrt[n]{a^m}',d:'Дробная степень — это корень.',ep:'8^{\\frac{2}{3}}',es:'\\sqrt[3]{64}=4'},
+]},
+{n:'Корни',clr:'var(--alg)',f:[
+{t:'Корень из произведения',f:'\\sqrt[n]{a\\cdot b}=\\sqrt[n]{a}\\cdot\\sqrt[n]{b}',d:'Корень из произведения равен произведению корней.',ep:'\\sqrt{12}',es:'2\\sqrt{3}'},
+{t:'Корень из частного',f:'\\sqrt[n]{\\dfrac{a}{b}}=\\dfrac{\\sqrt[n]{a}}{\\sqrt[n]{b}}',d:'Корень из дроби равен дроби корней.',ep:'\\sqrt{\\dfrac{9}{25}}',es:'\\dfrac{3}{5}'},
+{t:'Вынесение из-под корня',f:'\\sqrt[n]{a^m}=a^{\\frac{m}{n}}',d:'Связь корня и дробной степени.',ep:'\\sqrt[4]{16}',es:'2'},
+{t:'Корень из корня',f:'\\sqrt[m]{\\sqrt[n]{a}}=\\sqrt[mn]{a}',d:'Показатели перемножаются.',ep:'\\sqrt{\\sqrt[3]{64}}',es:'\\sqrt[6]{64}=2'},
+{t:'Чётный корень',f:'\\sqrt{a^2}=|a|',d:'Квадратный корень из квадрата равен модулю.',ep:'\\sqrt{(-5)^2}',es:'|-5|=5'},
+]},
+{n:'Логарифмы',clr:'var(--alg)',f:[
+{t:'Определение логарифма',f:'\\log_a b=c\\iff a^c=b,\\quad a>0,\\;a\\neq1,\\;b>0',d:'Логарифм — показатель степени, в которую нужно возвести основание.',ep:'\\log_2 8',es:'3,\\text{ т.к. }2^3=8'},
+{t:'Логарифм произведения',f:'\\log_a(mn)=\\log_a m+\\log_a n',d:'Логарифм произведения = сумма логарифмов.',ep:'\\log_2(8\\cdot4)',es:'3+2=5'},
+{t:'Логарифм частного',f:'\\log_a\\dfrac{m}{n}=\\log_a m-\\log_a n',d:'Логарифм дроби = разность логарифмов.',ep:'\\log_3 27-\\log_3 3',es:'\\log_3 9=2'},
+{t:'Логарифм степени',f:'\\log_a m^n=n\\cdot\\log_a m',d:'Показатель степени выносится за знак логарифма.',ep:'\\log_2 32',es:'5\\cdot\\log_2 2=5'},
+{t:'Формула перехода',f:'\\log_a b=\\dfrac{\\ln b}{\\ln a}=\\dfrac{\\log_c b}{\\log_c a}',d:'Смена основания логарифма.',ep:'\\log_4 8',es:'\\dfrac{3\\ln2}{2\\ln2}=\\dfrac{3}{2}'},
+{t:'Взаимообратные логарифмы',f:'\\log_a b=\\dfrac{1}{\\log_b a}',d:'Частный случай формулы перехода.',ep:'\\log_8 2',es:'\\dfrac{1}{3}'},
+{t:'Основное свойство',f:'a^{\\log_a b}=b',d:'Основание в степени логарифма равно аргументу.',ep:'5^{\\log_5 12}',es:'12'},
+{t:'Специальные значения',f:'\\log_a 1=0,\\quad\\log_a a=1,\\quad\\ln e=1,\\quad\\lg10=1',d:'Логарифм единицы = 0. Логарифм основания по себе = 1.',ep:'\\log_7 1+\\log_3 3',es:'0+1=1'},
+]},
+{n:'Формулы сокращённого умножения',clr:'var(--alg)',f:[
+{t:'Квадрат суммы',f:'(a+b)^2=a^2+2ab+b^2',d:'Квадрат суммы двух чисел.',ep:'(x+3)^2',es:'x^2+6x+9'},
+{t:'Квадрат разности',f:'(a-b)^2=a^2-2ab+b^2',d:'Квадрат разности двух чисел.',ep:'(2x-5)^2',es:'4x^2-20x+25'},
+{t:'Разность квадратов',f:'a^2-b^2=(a-b)(a+b)',d:'Разность квадратов — произведение суммы и разности.',ep:'x^2-16',es:'(x-4)(x+4)'},
+{t:'Куб суммы',f:'(a+b)^3=a^3+3a^2b+3ab^2+b^3',d:'Куб суммы двух чисел.',ep:'(x+2)^3',es:'x^3+6x^2+12x+8'},
+{t:'Куб разности',f:'(a-b)^3=a^3-3a^2b+3ab^2-b^3',d:'Куб разности двух чисел.',ep:'(x-1)^3',es:'x^3-3x^2+3x-1'},
+{t:'Сумма кубов',f:'a^3+b^3=(a+b)(a^2-ab+b^2)',d:'Сумма кубов раскладывается на два множителя.',ep:'x^3+8',es:'(x+2)(x^2-2x+4)'},
+{t:'Разность кубов',f:'a^3-b^3=(a-b)(a^2+ab+b^2)',d:'Разность кубов раскладывается на два множителя.',ep:'27-x^3',es:'(3-x)(9+3x+x^2)'},
+]},
+{n:'Квадратные уравнения',clr:'var(--alg)',f:[
+{t:'Дискриминант',f:'D=b^2-4ac',d:'D>0: два корня, D=0: один корень, D<0: нет действительных корней.',ep:'x^2-5x+6=0',es:'D=25-24=1>0\\Rightarrow\\text{два корня}'},
+{t:'Формула корней',f:'x_{1,2}=\\dfrac{-b\\pm\\sqrt{D}}{2a}',d:'Корни квадратного уравнения через дискриминант.',ep:'x^2-5x+6=0',es:'x_{1,2}=\\dfrac{5\\pm1}{2};\\;x_1=3,\\;x_2=2'},
+{t:'Теорема Виета',f:'x_1+x_2=-\\dfrac{b}{a},\\quad x_1\\cdot x_2=\\dfrac{c}{a}',d:'Сумма и произведение корней.',ep:'x^2-5x+6=0',es:'x_1+x_2=5,\\;x_1x_2=6'},
+{t:'Формула при чётном b',f:'x_{1,2}=\\dfrac{-b^{\\prime}\\pm\\sqrt{D^{\\prime}}}{a},\\quad D^{\\prime}=b^{\\prime2}-ac',d:'Упрощённая формула для ax²+2b′x+c=0.',ep:'2x^2-6x+4=0',es:"b'=3:\\;D'=1;\\;x_1=2,\\;x_2=1"},
+]},
+{n:'Прогрессии',clr:'var(--alg)',f:[
+{t:'n-й член арифм. прогрессии',f:'a_n=a_1+(n-1)d',d:'d — разность прогрессии.',ep:'a_1=3,\\;d=5,\\;a_{10}=?',es:'3+9\\cdot5=48'},
+{t:'Сумма арифм. прогрессии',f:'S_n=\\dfrac{n(a_1+a_n)}{2}=\\dfrac{n(2a_1+(n-1)d)}{2}',d:'Сумма n первых членов.',ep:'1+2+\\ldots+100',es:'\\dfrac{100\\cdot101}{2}=5050'},
+{t:'n-й член геом. прогрессии',f:'b_n=b_1\\cdot q^{n-1}',d:'q — знаменатель прогрессии.',ep:'b_1=2,\\;q=3,\\;b_5=?',es:'2\\cdot81=162'},
+{t:'Сумма геом. прогрессии',f:'S_n=\\dfrac{b_1(q^n-1)}{q-1},\\quad q\\neq1',d:'Сумма n первых членов.',ep:'b_1=1,\\;q=2,\\;S_5=?',es:'\\dfrac{2^5-1}{1}=31'},
+{t:'Бесконечная геом. прогрессия',f:'S_{\\infty}=\\dfrac{b_1}{1-q},\\quad|q|<1',d:'Сумма бесконечно убывающей прогрессии.',ep:'b_1=1,\\;q=\\tfrac{1}{2}',es:'\\dfrac{1}{1/2}=2'},
+]},
+{n:'Производные',clr:'var(--alg)',f:[
+{t:'Таблица производных',isTable:true,tableType:'deriv'},
+{t:'Правило произведения',f:'(uv)^{\\prime}=u^{\\prime}v+uv^{\\prime}',d:'Производная произведения двух функций.',ep:'(x^2\\sin x)^{\\prime}',es:'2x\\sin x+x^2\\cos x'},
+{t:'Правило частного',f:'\\left(\\dfrac{u}{v}\\right)^{\\prime}=\\dfrac{u^{\\prime}v-uv^{\\prime}}{v^2}',d:'Производная дроби.',ep:'\\left(\\dfrac{x^2}{\\sin x}\\right)^{\\prime}',es:'\\dfrac{2x\\sin x-x^2\\cos x}{\\sin^2 x}'},
+{t:'Правило цепочки (сложная ф-ция)',f:'[f(g(x))]^{\\prime}=f^{\\prime}(g(x))\\cdot g^{\\prime}(x)',d:'Производная сложной функции.',ep:'(\\sin(3x^2))^{\\prime}',es:'\\cos(3x^2)\\cdot6x'},
+{t:'Уравнение касательной',f:'y=f(x_0)+f^{\\prime}(x_0)(x-x_0)',d:'Уравнение касательной в точке x₀.',ep:'y=x^2,\\;x_0=2',es:"f(2)=4,\\;f'(2)=4;\\;y=4x-4"},
+]},
+{n:'Первообразная и интеграл',clr:'var(--alg)',f:[
+{t:'Таблица первообразных',isTable:true,tableType:'prim'},
+{t:'Формула Ньютона–Лейбница',f:'\\int_a^b f(x)\\,dx=F(b)-F(a)',d:'F(x) — любая первообразная f(x).',ep:'\\int_0^3 x^2\\,dx',es:'\\left[\\dfrac{x^3}{3}\\right]_0^3=9'},
+{t:'Геометрический смысл интеграла',f:'S=\\int_a^b f(x)\\,dx',d:'Площадь под графиком f(x) от a до b (если f(x)≥0).',ep:'S\\text{ под }y=\\sin x,\\;[0,\\pi]',es:'[-\\cos x]_0^\\pi=2'},
+]},
+]},
+{id:'trig',name:'Тригонометрия',icon:'∿',color:'var(--trig)',
+intro:'Полный набор тригонометрических формул: тождества, сложение, двойной угол, таблица значений, свойства функций и решение уравнений.',
+sub:[
+{n:'Основные тождества',clr:'var(--trig)',f:[
+{t:'Основное тождество',f:'\\sin^2x+\\cos^2x=1',d:'Сумма квадратов синуса и косинуса всегда равна 1.',ep:'\\sin x=0{,}6,\\;\\cos x=?',es:'|\\cos x|=0{,}8'},
+{t:'Тангенс и котангенс',f:'\\tan x=\\dfrac{\\sin x}{\\cos x},\\quad\\cot x=\\dfrac{\\cos x}{\\sin x}',d:'Определения через синус и косинус.',ep:'\\sin x=\\tfrac{3}{5},\\;\\cos x=\\tfrac{4}{5}',es:'\\tan x=\\dfrac{3}{4}'},
+{t:'Произведение tg и ctg',f:'\\tan x\\cdot\\cot x=1',d:'Тангенс и котангенс — взаимно обратные.',ep:'\\tan30°\\cdot\\cot30°',es:'=1'},
+{t:'Связь 1/cos² с tg',f:'1+\\tan^2x=\\dfrac{1}{\\cos^2x}',d:'Связывает тангенс и косинус.',ep:'1+\\tan^2x=?',es:'\\dfrac{1}{\\cos^2x}'},
+{t:'Связь 1/sin² с ctg',f:'1+\\cot^2x=\\dfrac{1}{\\sin^2x}',d:'Связывает котангенс и синус.',ep:'1+\\cot^245°=?',es:'1+1=2=\\dfrac{1}{1/2}=2'},
+]},
+{n:'Таблица значений',clr:'var(--trig)',f:[
+{t:'Таблица значений sin, cos, tan, cot',isTable:true,tableType:'trig'},
+]},
+{n:'Формулы приведения',clr:'var(--trig)',f:[
+{t:'Сдвиг на π',f:'\\sin(\\pi\\pm x)=\\mp\\sin x\\\\[4pt]\\cos(\\pi\\pm x)=-\\cos x',d:'Синус меняет знак, косинус меняет знак.',ep:'\\sin(\\pi-x)',es:'\\sin x'},
+{t:'Сдвиг на π/2',f:'\\sin\\!\\left(\\dfrac{\\pi}{2}\\pm x\\right)=\\cos x\\\\[4pt]\\cos\\!\\left(\\dfrac{\\pi}{2}\\pm x\\right)=\\mp\\sin x',d:'sin и cos меняются местами.',ep:'\\sin\\left(\\dfrac{\\pi}{2}-x\\right)',es:'\\cos x'},
+{t:'Нечётность sin, tg, ctg',f:'\\sin(-x)=-\\sin x\\\\[4pt]\\tan(-x)=-\\tan x\\\\[4pt]\\cot(-x)=-\\cot x',d:'Синус, тангенс и котангенс — нечётные функции.',ep:'\\sin(-30°)',es:'-\\tfrac{1}{2}'},
+{t:'Чётность cos',f:'\\cos(-x)=\\cos x',d:'Косинус — чётная функция.',ep:'\\cos(-60°)',es:'\\tfrac{1}{2}'},
+]},
+{n:'Формулы сложения',clr:'var(--trig)',f:[
+{t:'Синус суммы и разности',f:'\\sin(\\alpha\\pm\\beta)=\\sin\\alpha\\cos\\beta\\pm\\cos\\alpha\\sin\\beta',d:'Синус суммы/разности двух углов.',ep:'\\sin75°',es:'\\dfrac{\\sqrt{6}+\\sqrt{2}}{4}'},
+{t:'Косинус суммы и разности',f:'\\cos(\\alpha\\pm\\beta)=\\cos\\alpha\\cos\\beta\\mp\\sin\\alpha\\sin\\beta',d:'Косинус суммы/разности двух углов.',ep:'\\cos75°',es:'\\dfrac{\\sqrt{6}-\\sqrt{2}}{4}'},
+{t:'Тангенс суммы и разности',f:'\\tan(\\alpha\\pm\\beta)=\\dfrac{\\tan\\alpha\\pm\\tan\\beta}{1\\mp\\tan\\alpha\\tan\\beta}',d:'Тангенс суммы/разности.',ep:'\\tan75°',es:'2+\\sqrt{3}'},
+]},
+{n:'Формулы двойного угла',clr:'var(--trig)',f:[
+{t:'Синус двойного угла',f:'\\sin2\\alpha=2\\sin\\alpha\\cos\\alpha',d:'Удвоение угла в синусе.',ep:'\\sin60°=2\\sin30°\\cos30°',es:'\\dfrac{\\sqrt{3}}{2}'},
+{t:'Косинус двойного угла',f:'\\cos2\\alpha=\\cos^2\\!\\alpha-\\sin^2\\!\\alpha=1-2\\sin^2\\!\\alpha=2\\cos^2\\!\\alpha-1',d:'Три эквивалентные формы.',ep:'\\cos2\\alpha,\\text{ если }\\sin\\alpha=0{,}6',es:'1-2\\cdot0{,}36=0{,}28'},
+{t:'Тангенс двойного угла',f:'\\tan2\\alpha=\\dfrac{2\\tan\\alpha}{1-\\tan^2\\!\\alpha}',d:'Удвоение угла в тангенсе.',ep:'\\tan2\\alpha,\\text{ если }\\tan\\alpha=2',es:'-\\dfrac{4}{3}'},
+]},
+{n:'Понижение степени',clr:'var(--trig)',f:[
+{t:'Понижение степени sin²',f:'\\sin^2\\!\\alpha=\\dfrac{1-\\cos2\\alpha}{2}',d:'Используется в интегралах и упрощениях.',ep:'\\sin^230°',es:'\\dfrac{1}{4}'},
+{t:'Понижение степени cos²',f:'\\cos^2\\!\\alpha=\\dfrac{1+\\cos2\\alpha}{2}',d:'Используется в интегралах и упрощениях.',ep:'\\cos^245°',es:'\\dfrac{1}{2}'},
+]},
+{n:'Суммы и произведения',clr:'var(--trig)',f:[
+{t:'Сумма синусов',f:'\\sin\\alpha+\\sin\\beta=2\\sin\\dfrac{\\alpha+\\beta}{2}\\cos\\dfrac{\\alpha-\\beta}{2}',d:'Сумма синусов — в произведение.',ep:'\\sin50°+\\sin10°',es:'\\cos20°'},
+{t:'Разность синусов',f:'\\sin\\alpha-\\sin\\beta=2\\cos\\dfrac{\\alpha+\\beta}{2}\\sin\\dfrac{\\alpha-\\beta}{2}',d:'Разность синусов — в произведение.',ep:'\\sin70°-\\sin30°',es:'2\\cos50°\\sin20°'},
+{t:'Сумма косинусов',f:'\\cos\\alpha+\\cos\\beta=2\\cos\\dfrac{\\alpha+\\beta}{2}\\cos\\dfrac{\\alpha-\\beta}{2}',d:'Сумма косинусов — в произведение.',ep:'\\cos20°+\\cos80°',es:'\\sqrt{3}\\cos50°'},
+{t:'Разность косинусов',f:'\\cos\\alpha-\\cos\\beta=-2\\sin\\dfrac{\\alpha+\\beta}{2}\\sin\\dfrac{\\alpha-\\beta}{2}',d:'Разность косинусов — в произведение.',ep:'\\cos60°-\\cos0°',es:'-\\dfrac{1}{2}\\quad(\\tfrac{1}{2}-1)'},
+{t:'Произведение sin·cos',f:'\\sin\\alpha\\cos\\beta=\\dfrac{1}{2}[\\sin(\\alpha+\\beta)+\\sin(\\alpha-\\beta)]',d:'Произведение — в сумму синусов.',ep:'2\\sin50°\\cos10°',es:'\\sin60°+\\sin40°'},
+{t:'Произведение sin·sin',f:'\\sin\\alpha\\sin\\beta=\\dfrac{1}{2}[\\cos(\\alpha-\\beta)-\\cos(\\alpha+\\beta)]',d:'Произведение синусов — в разность косинусов.',ep:'2\\sin40°\\sin20°',es:'\\cos20°-\\dfrac{1}{2}'},
+{t:'Произведение cos·cos',f:'\\cos\\alpha\\cos\\beta=\\dfrac{1}{2}[\\cos(\\alpha+\\beta)+\\cos(\\alpha-\\beta)]',d:'Произведение косинусов — в сумму косинусов.',ep:'2\\cos70°\\cos20°',es:'\\cos50°'},
+]},
+{n:'Свойства функций',clr:'var(--trig)',f:[
+{t:'Свойства тригонометрических функций',isTable:true,tableType:'props'},
+]},
+{n:'Решение уравнений',clr:'var(--trig)',f:[
+{t:'sin x = a',f:'x=(-1)^n\\arcsin a+\\pi n,\\quad n\\in\\mathbb{Z}',d:'|a|≤1.',ep:'\\sin x=\\dfrac{1}{2}',es:'x=(-1)^n\\dfrac{\\pi}{6}+\\pi n'},
+{t:'cos x = a',f:'x=\\pm\\arccos a+2\\pi n,\\quad n\\in\\mathbb{Z}',d:'|a|≤1.',ep:'\\cos x=\\dfrac{\\sqrt{2}}{2}',es:'x=\\pm\\dfrac{\\pi}{4}+2\\pi n'},
+{t:'tan x = a',f:'x=\\arctan a+\\pi n,\\quad n\\in\\mathbb{Z}',d:'Определён при x≠π/2+πn.',ep:'\\tan x=1',es:'x=\\dfrac{\\pi}{4}+\\pi n'},
+{t:'cot x = a',f:'x=\\operatorname{arccot}a+\\pi n,\\quad n\\in\\mathbb{Z}',d:'Определён при x≠πn.',ep:'\\cot x=\\sqrt{3}',es:'x=\\dfrac{\\pi}{6}+\\pi n'},
+]},
+]},
+{id:'plan',name:'Планиметрия',icon:'△',color:'var(--plan)',
+intro:'Формулы для плоских фигур: треугольники, четырёхугольники, правильные многоугольники, окружность. Рисунки SVG.',
+sub:[
+{n:'Треугольник — основное',clr:'var(--plan)',f:[
+{t:'Периметр',f:'P=a+b+c',d:'Сумма всех трёх сторон.',svg:'triangle',ep:'a=3,\\;b=4,\\;c=5',es:'P=12'},
+{t:'Площадь через высоту',f:'S=\\dfrac{1}{2}\\cdot a\\cdot h_a',d:'Половина произведения основания на высоту.',svg:'triangle',ep:'a=6,\\;h=4',es:'S=12'},
+{t:'Площадь через стороны и угол',f:'S=\\dfrac{1}{2}\\cdot a\\cdot b\\cdot\\sin C',d:'C — угол между сторонами a и b.',svg:'triangle',ep:'a=5,\\;b=8,\\;C=30°',es:'S=10'},
+{t:'Формула Герона',f:'S=\\sqrt{p(p-a)(p-b)(p-c)},\\quad p=\\dfrac{a+b+c}{2}',d:'p — полупериметр. Когда известны все три стороны.',svg:'triangle',ep:'a=3,\\;b=4,\\;c=5',es:'p=6;\\;S=\\sqrt{36}=6'},
+{t:'Площадь через описанную окружность',f:'S=\\dfrac{abc}{4R}',d:'R — радиус описанной окружности.',ep:'a=3,\\;b=4,\\;c=5,\\;R=2{,}5',es:'S=6'},
+{t:'Площадь через вписанную окружность',f:'S=p\\cdot r',d:'p — полупериметр, r — радиус вписанной окружности.',ep:'p=6,\\;r=1',es:'S=6'},
+]},
+{n:'Теоремы треугольника',clr:'var(--plan)',f:[
+{t:'Теорема косинусов',f:'c^2=a^2+b^2-2ab\\cos C',d:'Обобщение теоремы Пифагора.',svg:'triangle',ep:'a=5,\\;b=7,\\;C=60°',es:'c=\\sqrt{39}'},
+{t:'Теорема синусов',f:'\\dfrac{a}{\\sin A}=\\dfrac{b}{\\sin B}=\\dfrac{c}{\\sin C}=2R',d:'Сторона / синус противолежащего угла = диаметр описанной окружности.',svg:'triangle',ep:'a=6,\\;A=30°,\\;B=45°',es:'b=6\\sqrt{2}'},
+{t:'Теорема Пифагора',f:'a^2+b^2=c^2',d:'Для прямоугольного треугольника.',svg:'rightTriangle',ep:'a=3,\\;b=4',es:'c=5'},
+]},
+{n:'Прямоугольный треугольник',clr:'var(--plan)',f:[
+{t:'Тригонометрические отношения',f:'\\sin A=\\dfrac{a}{c},\\;\\cos A=\\dfrac{b}{c},\\;\\tan A=\\dfrac{a}{b}',d:'a — противолежащий катет, b — прилежащий, c — гипотенуза.',svg:'rightTriangle',ep:'c=10,\\;A=30°',es:'a=5'},
+{t:'Высота к гипотенузе',f:'h^2=a_1\\cdot a_2',d:'h — высота на гипотенузу; a₁,a₂ — отрезки гипотенузы.',svg:'rightTriangle',ep:'a_1=4,\\;a_2=9',es:'h=6'},
+{t:'Катет через проекцию',f:'a^2=c\\cdot a_1,\\quad b^2=c\\cdot a_2',d:'Квадрат катета = гипотенуза × проекция катета.',svg:'rightTriangle',ep:'c=13,\\;a_1=9',es:'a=3\\sqrt{13}'},
+{t:'Медиана к гипотенузе',f:'m_c=\\dfrac{c}{2}=R',d:'Медиана к гипотенузе = радиус описанной окружности.',svg:'rightTriangle',ep:'c=10',es:'m_c=5=R'},
+]},
+{n:'Медианы, биссектрисы, высоты',clr:'var(--plan)',f:[
+{t:'Длина медианы',f:'m_a=\\dfrac{1}{2}\\sqrt{2b^2+2c^2-a^2}',d:'Медиана из вершины A к стороне a.',svg:'triangle',ep:'a=6,\\;b=5,\\;c=5',es:'m_a=4'},
+{t:'Медианы: точка 2:1',f:'AG:GM=2:1',d:'Центроид делит каждую медиану в отношении 2:1 от вершины.',ep:'m_a=9',es:'AG=6,\\;GM=3'},
+{t:'Длина биссектрисы',f:'l_a=\\dfrac{2bc\\cos\\dfrac{A}{2}}{b+c}',d:'Длина биссектрисы из угла A.',ep:'b=4,\\;c=3,\\;A=60°',es:'\\dfrac{12\\sqrt{3}}{7}'},
+]},
+{n:'Вписанная и описанная окружность',clr:'var(--plan)',f:[
+{t:'Радиус вписанной окружности',f:'r=\\dfrac{S}{p}',d:'S — площадь, p — полупериметр.',svg:'triangle',ep:'S=12,\\;p=6',es:'r=2'},
+{t:'Радиус описанной окружности',f:'R=\\dfrac{abc}{4S}=\\dfrac{a}{2\\sin A}',d:'Из теоремы синусов: 2R = a/sinA.',svg:'circle',ep:'a=5,\\;A=30°',es:'R=5'},
+{t:'Вписанный угол',f:'\\alpha_{\\text{вп}}=\\dfrac{1}{2}\\,\\alpha_{\\text{цент}}',d:'Вписанный угол вдвое меньше центрального на той же дуге.',svg:'circle',ep:'\\text{Центральный }80°',es:'\\text{Вписанный }40°'},
+]},
+{n:'Параллелограмм',clr:'var(--plan)',f:[
+{t:'Площадь через высоту',f:'S=a\\cdot h',d:'a — основание, h — высота.',svg:'parallelogram',ep:'a=8,\\;h=5',es:'S=40'},
+{t:'Площадь через стороны и угол',f:'S=a\\cdot b\\cdot\\sin\\alpha',d:'α — угол между сторонами.',svg:'parallelogram',ep:'a=6,\\;b=4,\\;\\alpha=30°',es:'S=12'},
+{t:'Диагонали параллелограмма',f:'d_1^2+d_2^2=2(a^2+b^2)',d:'Сумма квадратов диагоналей = удвоенная сумма квадратов сторон.',svg:'parallelogram',ep:'a=3,\\;b=5,\\;d_1=6',es:'d_2=4\\sqrt{2}'},
+{t:'Периметр',f:'P=2(a+b)',d:'Удвоенная сумма соседних сторон.',ep:'a=4,\\;b=7',es:'P=22'},
+]},
+{n:'Трапеция',clr:'var(--plan)',f:[
+{t:'Площадь трапеции',f:'S=\\dfrac{(a+b)}{2}\\cdot h=m\\cdot h',d:'a,b — основания, h — высота, m — средняя линия.',svg:'trapezoid',ep:'a=5,\\;b=9,\\;h=4',es:'S=28'},
+{t:'Средняя линия трапеции',f:'m=\\dfrac{a+b}{2}',d:'Соединяет середины боковых сторон, параллельна основаниям.',svg:'trapezoid',ep:'a=4,\\;b=10',es:'m=7'},
+{t:'Периметр',f:'P=a+b+c+d',d:'Сумма всех четырёх сторон.',ep:'a=5,\\;b=9,\\;c=d=4',es:'P=22'},
+]},
+{n:'Ромб',clr:'var(--plan)',f:[
+{t:'Площадь через диагонали',f:'S=\\dfrac{d_1\\cdot d_2}{2}',d:'Диагонали взаимно перпендикулярны!',svg:'rhombus',ep:'d_1=6,\\;d_2=8',es:'S=24'},
+{t:'Площадь через сторону и угол',f:'S=a^2\\sin\\alpha',d:'α — угол ромба.',svg:'rhombus',ep:'a=5,\\;\\alpha=30°',es:'S=12{,}5'},
+{t:'Диагонали и сторона',f:'\\left(\\dfrac{d_1}{2}\\right)^2+\\left(\\dfrac{d_2}{2}\\right)^2=a^2',d:'Диагонали делятся пополам под прямым углом.',svg:'rhombus',ep:'a=5,\\;d_1=6',es:'d_2=8'},
+{t:'Периметр',f:'P=4a',d:'Все стороны ромба равны.',ep:'a=7',es:'P=28'},
+]},
+{n:'Прямоугольник и квадрат',clr:'var(--plan)',f:[
+{t:'Площадь прямоугольника',f:'S=ab',d:'Произведение смежных сторон.',ep:'a=7,\\;b=4',es:'S=28'},
+{t:'Диагональ прямоугольника',f:'d=\\sqrt{a^2+b^2}',d:'Диагональ — гипотенуза прямоугольного треугольника.',ep:'a=3,\\;b=4',es:'d=5'},
+{t:'Площадь квадрата',f:'S=a^2=\\dfrac{d^2}{2}',d:'Квадрат стороны или половина квадрата диагонали.',ep:'a=5',es:'S=25'},
+{t:'Диагональ квадрата',f:'d=a\\sqrt{2}',d:'Диагональ квадрата больше стороны в √2 раз.',ep:'a=4',es:'d=4\\sqrt{2}'},
+]},
+{n:'Правильный многоугольник',clr:'var(--plan)',f:[
+{t:'Площадь правильного n-угольника',f:'S=\\dfrac{na^2}{4}\\cot\\dfrac{\\pi}{n}',d:'n — число сторон, a — сторона.',ep:'n=6,\\;a=2',es:'6\\sqrt{3}\\approx10{,}39'},
+{t:'Радиус описанной окружности',f:'R=\\dfrac{a}{2\\sin(\\pi/n)}',d:'Расстояние от центра до вершины.',ep:'n=6,\\;a=2',es:'R=2'},
+{t:'Радиус вписанной окружности',f:'r=\\dfrac{a}{2\\tan(\\pi/n)}',d:'Расстояние от центра до середины стороны.',ep:'n=6,\\;a=2',es:'r=\\sqrt{3}'},
+{t:'Сумма углов n-угольника',f:'\\sum\\angle=180°(n-2)',d:'Сумма внутренних углов.',ep:'n=6',es:'720°'},
+{t:'Угол правильного n-угольника',f:'\\angle=\\dfrac{180°(n-2)}{n}',d:'Каждый внутренний угол.',ep:'n=6',es:'120°'},
+]},
+{n:'Окружность и круг',clr:'var(--plan)',f:[
+{t:'Длина окружности',f:'C=2\\pi r=\\pi d',d:'r — радиус, d — диаметр.',svg:'circle',ep:'r=7',es:'14\\pi'},
+{t:'Площадь круга',f:'S=\\pi r^2',svg:'circle',ep:'r=3',es:'9\\pi'},
+{t:'Длина дуги',f:'l=r\\varphi',d:'φ — центральный угол в радианах.',svg:'circle',ep:'r=6,\\;\\varphi=\\pi/3',es:'2\\pi'},
+{t:'Площадь сектора',f:'S_{\\text{сект}}=\\dfrac{r^2\\varphi}{2}=\\dfrac{lr}{2}',d:'φ — центральный угол в радианах.',svg:'circle',ep:'r=6,\\;\\varphi=\\pi/3',es:'6\\pi'},
+{t:'Площадь сегмента',f:'S_{\\text{сег}}=\\dfrac{r^2}{2}(\\varphi-\\sin\\varphi)',d:'Сегмент — часть круга, отсечённая хордой.',ep:'r=6,\\;\\varphi=\\pi/3',es:'18\\left(\\dfrac{\\pi}{3}-\\dfrac{\\sqrt{3}}{2}\\right)'},
+]},
+]},
+{id:'ster',name:'Стереометрия',icon:'◈',color:'var(--ster)',
+intro:'Объёмы и площади поверхностей пространственных фигур: куб, призма, пирамида, конус, цилиндр, шар.',
+sub:[
+{n:'Куб',clr:'var(--ster)',f:[
+{t:'Объём куба',f:'V=a^3',d:'a — ребро.',svg:'cube',ep:'a=3',es:'V=27'},
+{t:'Площадь полной поверхности',f:'S_{\\text{полн}}=6a^2',d:'6 квадратных граней.',svg:'cube',ep:'a=3',es:'S=54'},
+{t:'Площадь грани',f:'S_{\\text{гр}}=a^2',d:'Каждая грань — квадрат.',ep:'a=4',es:'S=16'},
+{t:'Диагональ куба',f:'d=a\\sqrt{3}',d:'Пространственная диагональ.',svg:'cube',ep:'a=2',es:'2\\sqrt{3}'},
+{t:'Диагональ грани',f:'d_{\\text{гр}}=a\\sqrt{2}',d:'Диагональ квадратной грани.',ep:'a=5',es:'5\\sqrt{2}'},
+]},
+{n:'Прямоугольный параллелепипед',clr:'var(--ster)',f:[
+{t:'Объём',f:'V=abc',d:'Произведение трёх измерений.',ep:'a=2,\\;b=3,\\;c=5',es:'V=30'},
+{t:'Площадь полной поверхности',f:'S_{\\text{полн}}=2(ab+bc+ac)',d:'Три пары прямоугольных граней.',ep:'a=2,\\;b=3,\\;c=5',es:'S=62'},
+{t:'Пространственная диагональ',f:'d=\\sqrt{a^2+b^2+c^2}',d:'Главная диагональ.',ep:'a=2,\\;b=3,\\;c=6',es:'d=7'},
+]},
+{n:'Призма',clr:'var(--ster)',f:[
+{t:'Объём прямой призмы',f:'V=S_{\\text{осн}}\\cdot h',d:'Площадь основания × высота.',ep:'S_{\\text{осн}}=12,\\;h=5',es:'V=60'},
+{t:'Площадь боковой поверхности',f:'S_{\\text{бок}}=P_{\\text{осн}}\\cdot h',d:'Периметр основания × высота.',ep:'P_{\\text{осн}}=18,\\;h=5',es:'S=90'},
+{t:'Площадь полной поверхности',f:'S_{\\text{полн}}=S_{\\text{бок}}+2S_{\\text{осн}}',d:'Боковая + два основания.',ep:'S_{\\text{бок}}=90,\\;S_{\\text{осн}}=12',es:'S=114'},
+]},
+{n:'Пирамида',clr:'var(--ster)',f:[
+{t:'Объём пирамиды',f:'V=\\dfrac{1}{3}\\cdot S_{\\text{осн}}\\cdot h',d:'Треть объёма охватывающей призмы.',svg:'pyramid',ep:'S_{\\text{осн}}=36,\\;h=5',es:'V=60'},
+{t:'Площадь боковой поверхности (правильная)',f:'S_{\\text{бок}}=\\dfrac{1}{2}\\cdot P_{\\text{осн}}\\cdot a',d:'a — апофема (высота боковой грани).',svg:'pyramid',ep:'P_{\\text{осн}}=20,\\;a=6',es:'S=60'},
+{t:'Апофема правильной пирамиды',f:'a=\\sqrt{h^2+r^2}',d:'r — радиус вписанной окружности основания.',svg:'pyramid',ep:'h=4,\\;r=3',es:'a=5'},
+{t:'Площадь полной поверхности',f:'S_{\\text{полн}}=S_{\\text{бок}}+S_{\\text{осн}}',d:'Боковая + одно основание.',ep:'S_{\\text{бок}}=60,\\;S_{\\text{осн}}=36',es:'S=96'},
+]},
+{n:'Усечённая пирамида',clr:'var(--ster)',f:[
+{t:'Объём усечённой пирамиды',f:'V=\\dfrac{h}{3}\\left(S_1+S_2+\\sqrt{S_1S_2}\\right)',d:'S₁,S₂ — площади оснований, h — высота.',ep:'S_1=9,\\;S_2=4,\\;h=6',es:'V=2(9+4+6)=38'},
+]},
+{n:'Конус',clr:'var(--ster)',f:[
+{t:'Объём конуса',f:'V=\\dfrac{1}{3}\\pi r^2h',d:'r — радиус основания, h — высота.',svg:'cone',ep:'r=3,\\;h=4',es:'V=12\\pi'},
+{t:'Образующая конуса',f:'l=\\sqrt{r^2+h^2}',d:'Боковая образующая — гипотенуза (r,h,l).',svg:'cone',ep:'r=3,\\;h=4',es:'l=5'},
+{t:'Площадь боковой поверхности',f:'S_{\\text{бок}}=\\pi rl',d:'l — образующая.',svg:'cone',ep:'r=3,\\;l=5',es:'15\\pi'},
+{t:'Площадь полной поверхности',f:'S_{\\text{полн}}=\\pi r(l+r)',d:'Боковая + основание.',svg:'cone',ep:'r=3,\\;l=5',es:'24\\pi'},
+]},
+{n:'Усечённый конус',clr:'var(--ster)',f:[
+{t:'Объём усечённого конуса',f:'V=\\dfrac{\\pi h}{3}(r_1^2+r_2^2+r_1r_2)',d:'r₁,r₂ — радиусы оснований.',ep:'r_1=3,\\;r_2=1,\\;h=4',es:'\\dfrac{52\\pi}{3}'},
+{t:'Образующая усечённого конуса',f:'l=\\sqrt{h^2+(r_1-r_2)^2}',d:'Боковая образующая.',ep:'r_1=5,\\;r_2=2,\\;h=4',es:'l=5'},
+{t:'Площадь боковой поверхности',f:'S_{\\text{бок}}=\\pi(r_1+r_2)l',d:'l — образующая.',ep:'r_1=5,\\;r_2=2,\\;l=5',es:'35\\pi'},
+]},
+{n:'Цилиндр',clr:'var(--ster)',f:[
+{t:'Объём цилиндра',f:'V=\\pi r^2h',d:'r — радиус, h — высота.',svg:'cylinder',ep:'r=5,\\;h=8',es:'200\\pi'},
+{t:'Площадь боковой поверхности',f:'S_{\\text{бок}}=2\\pi rh',d:'Развёртка — прямоугольник 2πr × h.',svg:'cylinder',ep:'r=3,\\;h=10',es:'60\\pi'},
+{t:'Площадь полной поверхности',f:'S_{\\text{полн}}=2\\pi r(h+r)',d:'Боковая + два основания.',svg:'cylinder',ep:'r=3,\\;h=10',es:'78\\pi'},
+]},
+{n:'Шар и сфера',clr:'var(--ster)',f:[
+{t:'Объём шара',f:'V=\\dfrac{4}{3}\\pi r^3',d:'r — радиус шара.',svg:'sphere',ep:'r=3',es:'36\\pi'},
+{t:'Площадь поверхности сферы',f:'S=4\\pi r^2',svg:'sphere',ep:'r=3',es:'36\\pi'},
+{t:'Объём шарового сегмента',f:'V_{\\text{сег}}=\\dfrac{\\pi h^2}{3}(3r-h)',d:'h — высота сегмента.',svg:'sphere',ep:'r=5,\\;h=2',es:'\\dfrac{52\\pi}{3}'},
+{t:'Шар вписан в цилиндр',f:'R_{\\text{шара}}=r_{\\text{цил}}=\\dfrac{h_{\\text{цил}}}{2}',d:'Радиус шара = радиус цилиндра = половина высоты.',ep:'r_{цил}=5',es:'h_{цил}=10;\\;V=\\tfrac{4}{3}\\pi\\cdot125'},
+{t:'Шар вписан в конус',f:'r_{шара}=\\dfrac{S_{\\text{осн}}}{P_{\\text{попер}}}',d:'Через осевое сечение: r вписанной в равнобедренный треугольник окружности.',ep:'\\text{Осевое сечение: }h=4,\\;r_{кон}=3',es:'r=\\dfrac{12}{8}=1{,}5'},
+]},
+]},
+{id:'prob',name:'Вероятность',icon:'⚅',color:'var(--prob)',
+intro:'Комбинаторика, теория вероятностей, случайные величины и биномиальное распределение.',
+sub:[
+{n:'Комбинаторика',clr:'var(--prob)',f:[
+{t:'Факториал',f:'n!=1\\cdot2\\cdot3\\cdots n,\\quad0!=1',d:'Произведение первых n натуральных чисел.',ep:'5!',es:'120'},
+{t:'Перестановки',f:'P_n=n!',d:'Число способов расставить n элементов в ряд.',ep:'4 книги',es:'P_4=24'},
+{t:'Размещения',f:'A_n^k=\\dfrac{n!}{(n-k)!}',d:'Выбрать k из n и упорядочить.',ep:'A_5^3',es:'60'},
+{t:'Сочетания',f:'C_n^k=\\dbinom{n}{k}=\\dfrac{n!}{k!(n-k)!}',d:'Выбрать k из n (порядок не важен).',ep:'C_{10}^3',es:'120'},
+{t:'Симметрия сочетаний',f:'C_n^k=C_n^{n-k},\\quad C_n^0=C_n^n=1',ep:'C_{10}^7',es:'C_{10}^3=120'},
+{t:'Формула Паскаля',f:'C_n^k=C_{n-1}^{k-1}+C_{n-1}^k',d:'Рекуррентное соотношение.',ep:'C_5^2',es:'4+6=10'},
+{t:'Бином Ньютона',f:'(a+b)^n=\\sum_{k=0}^{n}C_n^k\\,a^k\\,b^{n-k}',d:'Раскрытие n-й степени двучлена.',ep:'(a+b)^3',es:'a^3+3a^2b+3ab^2+b^3'},
+]},
+{n:'Классическая вероятность',clr:'var(--prob)',f:[
+{t:'Классическая вероятность',f:'P(A)=\\dfrac{m}{n}',d:'m — число благоприятных, n — число всех равновозможных исходов.',ep:'Чётное на кубике',es:'P=\\dfrac{3}{6}=0{,}5'},
+{t:'Свойства вероятности',f:'0\\leq P(A)\\leq1,\\quad P(\\Omega)=1,\\quad P(\\varnothing)=0',d:'Вероятность от 0 до 1.',ep:'P(A)=1{,}5',es:'Ошибка в условии!'},
+{t:'Противоположное событие',f:'P(\\bar{A})=1-P(A)',d:'Вероятность противоположного события.',ep:'P(A)=0{,}3',es:'P(\\bar{A})=0{,}7'},
+]},
+{n:'Теоремы сложения и умножения',clr:'var(--prob)',f:[
+{t:'Теорема сложения (общий случай)',f:'P(A\\cup B)=P(A)+P(B)-P(A\\cap B)',d:'Вычитаем пересечение, чтобы не считать дважды.',ep:'P(A)=0{,}4,\\;P(B)=0{,}5,\\;P(AB)=0{,}2',es:'P=0{,}7'},
+{t:'Теорема сложения (несовместные)',f:'P(A+B)=P(A)+P(B),\\quad A\\cap B=\\varnothing',d:'Несовместные события.',ep:'P(A)=0{,}3,\\;P(B)=0{,}4',es:'P=0{,}7'},
+{t:'Теорема умножения (общий случай)',f:'P(A\\cap B)=P(A)\\cdot P(B|A)',d:'P(B|A) — условная вероятность.',ep:'P(A)=0{,}5,\\;P(B|A)=0{,}4',es:'P(AB)=0{,}2'},
+{t:'Теорема умножения (независимые)',f:'P(A\\cap B)=P(A)\\cdot P(B)',d:'Независимые события.',ep:'Два броска монеты',es:'P=\\dfrac{1}{4}'},
+]},
+{n:'Условная вероятность',clr:'var(--prob)',f:[
+{t:'Условная вероятность',f:'P(B|A)=\\dfrac{P(A\\cap B)}{P(A)}',d:'Вероятность B при условии, что A произошло.',ep:'P(AB)=0{,}12,\\;P(A)=0{,}3',es:'P(B|A)=0{,}4'},
+]},
+{n:'Полная вероятность и Байес',clr:'var(--prob)',f:[
+{t:'Формула полной вероятности',f:'P(B)=\\sum_{i=1}^{n}P(A_i)\\cdot P(B|A_i)',d:'A₁…Aₙ — полная группа гипотез.',ep:'P(A_1)=0{,}6,\\;P(B|A_1)=0{,}2;\\;P(A_2)=0{,}4,\\;P(B|A_2)=0{,}5',es:'P(B)=0{,}32'},
+{t:'Формула Байеса',f:'P(A_k|B)=\\dfrac{P(A_k)\\cdot P(B|A_k)}{P(B)}',d:'Обновление вероятности гипотезы после наблюдения.',ep:'P(A_1)=0{,}6,\\;P(B|A_1)=0{,}2,\\;P(B)=0{,}32',es:'P(A_1|B)=0{,}375'},
+]},
+{n:'Случайная величина',clr:'var(--prob)',f:[
+{t:'Математическое ожидание',f:'M(X)=\\sum_{i}x_i\\cdot p_i',d:'Среднее взвешенное значений.',ep:'X:\\;1(p=0{,}2),\\;3(p=0{,}5),\\;5(p=0{,}3)',es:'M=3{,}2'},
+{t:'Дисперсия',f:'D(X)=M(X^2)-[M(X)]^2=\\sum_i(x_i-M)^2p_i',d:'Мера разброса вокруг среднего.',ep:'X:\\;1(p=0{,}5),\\;3(p=0{,}5)',es:'D=1'},
+{t:'СКО',f:'\\sigma(X)=\\sqrt{D(X)}',d:'Корень дисперсии — в тех же единицах, что X.',ep:'D(X)=9',es:'\\sigma=3'},
+{t:'Свойства M(X)',f:'M(aX+b)=a\\,M(X)+b\\\\[4pt]M(X+Y)=M(X)+M(Y)',d:'Линейность математического ожидания.',ep:'M(X)=3,\\;M(2X+1)=?',es:'7'},
+{t:'Свойства D(X)',f:'D(aX+b)=a^2D(X)\\\\[4pt]D(X+Y)=D(X)+D(Y)\\text{ (незав.)}',d:'При умножении на константу — умножается на квадрат.',ep:'D(X)=4,\\;D(3X-2)=?',es:'36'},
+]},
+{n:'Биномиальное распределение',clr:'var(--prob)',f:[
+{t:'Формула Бернулли',f:'P(X=k)=C_n^k\\cdot p^k\\cdot q^{n-k},\\quad q=1-p',d:'k успехов в n независимых испытаниях.',ep:'10 монет, 3 орла',es:'\\dfrac{15}{128}'},
+{t:'Математическое ожидание (Бернулли)',f:'M(X)=np',d:'Среднее число успехов.',ep:'n=100,\\;p=0{,}4',es:'M=40'},
+{t:'Дисперсия (Бернулли)',f:'D(X)=npq',d:'Дисперсия биномиального распределения.',ep:'n=100,\\;p=0{,}4',es:'D=24'},
+{t:'СКО биномиального',f:'\\sigma(X)=\\sqrt{npq}',ep:'n=100,\\;p=0{,}4',es:'\\sigma=2\\sqrt{6}\\approx4{,}9'},
+]},
+]},
 ];
-
-// ─── TABLE DATA ──────────────────────────────────────────────
-const TRIG_TABLE = [
-  {a:'0°', s:'0', c:'1', t:'0', ct:'–'},
-  {a:'30° (π/6)', s:'1/2', c:'√3/2', t:'1/√3=√3/3', ct:'√3'},
-  {a:'45° (π/4)', s:'√2/2', c:'√2/2', t:'1', ct:'1'},
-  {a:'60° (π/3)', s:'√3/2', c:'1/2', t:'√3', ct:'1/√3=√3/3'},
-  {a:'90° (π/2)', s:'1', c:'0', t:'–', ct:'0'},
-  {a:'120° (2π/3)', s:'√3/2', c:'-1/2', t:'-√3', ct:'-√3/3'},
-  {a:'135° (3π/4)', s:'√2/2', c:'-√2/2', t:'-1', ct:'-1'},
-  {a:'150° (5π/6)', s:'1/2', c:'-√3/2', t:'-√3/3', ct:'-√3'},
-  {a:'180° (π)', s:'0', c:'-1', t:'0', ct:'–'},
-  {a:'270° (3π/2)', s:'-1', c:'0', t:'–', ct:'0'},
-  {a:'360° (2π)', s:'0', c:'1', t:'0', ct:'–'},
+// ─── TABLE DATA ───
+const TRIG_TABLE=[
+  {a:'0°',s:'0',c:'1',t:'0',ct:'–'},
+  {a:'30° (π/6)',s:'1/2',c:'√3/2',t:'1/√3=√3/3',ct:'√3'},
+  {a:'45° (π/4)',s:'√2/2',c:'√2/2',t:'1',ct:'1'},
+  {a:'60° (π/3)',s:'√3/2',c:'1/2',t:'√3',ct:'1/√3=√3/3'},
+  {a:'90° (π/2)',s:'1',c:'0',t:'–',ct:'0'},
+  {a:'120° (2π/3)',s:'√3/2',c:'-1/2',t:'-√3',ct:'-√3/3'},
+  {a:'135° (3π/4)',s:'√2/2',c:'-√2/2',t:'-1',ct:'-1'},
+  {a:'150° (5π/6)',s:'1/2',c:'-√3/2',t:'-√3/3',ct:'-√3'},
+  {a:'180° (π)',s:'0',c:'-1',t:'0',ct:'–'},
+  {a:'270° (3π/2)',s:'-1',c:'0',t:'–',ct:'0'},
+  {a:'360° (2π)',s:'0',c:'1',t:'0',ct:'–'},
 ];
-
-const DERIV_TABLE = [
-  {f:'C',d:'0'},
-  {f:'x^n',d:'nx^{n-1}'},
+const DERIV_TABLE=[
+  {f:'C',d:'0'},{f:'x^n',d:'nx^{n-1}'},
   {f:'\\sqrt{x}',d:'\\dfrac{1}{2\\sqrt{x}}'},
   {f:'\\dfrac{1}{x}',d:'-\\dfrac{1}{x^2}'},
-  {f:'e^x',d:'e^x'},
-  {f:'a^x',d:'a^x \\ln a'},
-  {f:'\\ln x',d:'\\dfrac{1}{x}'},
-  {f:'\\log_a x',d:'\\dfrac{1}{x\\ln a}'},
-  {f:'\\sin x',d:'\\cos x'},
-  {f:'\\cos x',d:'-\\sin x'},
-  {f:'\\tan x',d:'\\dfrac{1}{\\cos^2 x}'},
-  {f:'\\cot x',d:'-\\dfrac{1}{\\sin^2 x}'},
+  {f:'e^x',d:'e^x'},{f:'a^x',d:'a^x\\ln a'},
+  {f:'\\ln x',d:'\\dfrac{1}{x}'},{f:'\\log_a x',d:'\\dfrac{1}{x\\ln a}'},
+  {f:'\\sin x',d:'\\cos x'},{f:'\\cos x',d:'-\\sin x'},
+  {f:'\\tan x',d:'\\dfrac{1}{\\cos^2x}'},{f:'\\cot x',d:'-\\dfrac{1}{\\sin^2x}'},
   {f:'\\arcsin x',d:'\\dfrac{1}{\\sqrt{1-x^2}}'},
   {f:'\\arccos x',d:'-\\dfrac{1}{\\sqrt{1-x^2}}'},
   {f:'\\arctan x',d:'\\dfrac{1}{1+x^2}'},
 ];
-
-const PRIM_TABLE = [
-  {f:'C',p:'Cx + C_0'},
-  {f:'x^n \\;(n\\neq -1)',p:'\\dfrac{x^{n+1}}{n+1}+C'},
-  {f:'\\dfrac{1}{x}',p:'\\ln|x|+C'},
-  {f:'e^x',p:'e^x+C'},
+const PRIM_TABLE=[
+  {f:'C',p:'Cx+C_0'},{f:'x^n\\;(n\\neq-1)',p:'\\dfrac{x^{n+1}}{n+1}+C'},
+  {f:'\\dfrac{1}{x}',p:'\\ln|x|+C'},{f:'e^x',p:'e^x+C'},
   {f:'a^x',p:'\\dfrac{a^x}{\\ln a}+C'},
-  {f:'\\sin x',p:'-\\cos x+C'},
-  {f:'\\cos x',p:'\\sin x+C'},
-  {f:'\\dfrac{1}{\\cos^2 x}',p:'\\tan x+C'},
-  {f:'\\dfrac{1}{\\sin^2 x}',p:'-\\cot x+C'},
+  {f:'\\sin x',p:'-\\cos x+C'},{f:'\\cos x',p:'\\sin x+C'},
+  {f:'\\dfrac{1}{\\cos^2x}',p:'\\tan x+C'},
+  {f:'\\dfrac{1}{\\sin^2x}',p:'-\\cot x+C'},
   {f:'\\dfrac{1}{\\sqrt{1-x^2}}',p:'\\arcsin x+C'},
   {f:'\\dfrac{1}{1+x^2}',p:'\\arctan x+C'},
 ];
-
-const PROPS_TABLE = [
-  {fn:'sin x', d:'вся ос. 𝕉',rng:'[-1;1]',per:'2π',par:'нечётная',zeros:'πn'},
-  {fn:'cos x', d:'вся ос. 𝕉',rng:'[-1;1]',per:'2π',par:'чётная',zeros:'π/2+πn'},
-  {fn:'tan x', d:'x≠π/2+πn',rng:'вся 𝕉',per:'π',par:'нечётная',zeros:'πn'},
-  {fn:'cot x', d:'x≠πn',rng:'вся 𝕉',per:'π',par:'нечётная',zeros:'π/2+πn'},
+const PROPS_TABLE=[
+  {fn:'sin x',d:'вся ℝ',rng:'[-1;1]',per:'2π',par:'нечётная',zeros:'πn'},
+  {fn:'cos x',d:'вся ℝ',rng:'[-1;1]',per:'2π',par:'чётная',zeros:'π/2+πn'},
+  {fn:'tan x',d:'x≠π/2+πn',rng:'вся ℝ',per:'π',par:'нечётная',zeros:'πn'},
+  {fn:'cot x',d:'x≠πn',rng:'вся ℝ',per:'π',par:'нечётная',zeros:'π/2+πn'},
 ];
 
-// ─── RENDER FUNCTIONS ────────────────────────────────────────
+// ─── FLAT FORMULA LIST (for flashcards & tests) ───
+const ALL_FM=[];
+SECTIONS.forEach(sec=>{
+  sec.sub.forEach(sub=>{
+    sub.f.forEach((fm,i)=>{
+      if(!fm.isTable&&fm.f){
+        const id=`${sec.id}_${i}_${sub.n}`.replace(/\W/g,'_');
+        ALL_FM.push({id,fm,sec,sub});
+      }
+    });
+  });
+});
 
+// ─── RENDER TABLES ───
 function makeTable(type){
   if(type==='trig'){
-    let rows = TRIG_TABLE.map(r=>`
-      <tr>
-        <td class="ang">${r.a}</td>
-        <td>${r.s}</td><td>${r.c}</td>
-        <td class="${r.t==='–'?'undef':''}">${r.t}</td>
-        <td class="${r.ct==='–'?'undef':''}">${r.ct}</td>
-      </tr>`).join('');
-    return `<div class="tbl-wrap"><table class="trig-tbl"><thead><tr>
-      <th>Угол α</th><th>sin α</th><th>cos α</th><th>tg α</th><th>ctg α</th>
-    </tr></thead><tbody>${rows}</tbody></table></div>`;
+    const rows=TRIG_TABLE.map(r=>`<tr><td class="ang">${r.a}</td><td>${r.s}</td><td>${r.c}</td><td class="${r.t==='–'?'undef':''}">${r.t}</td><td class="${r.ct==='–'?'undef':''}">${r.ct}</td></tr>`).join('');
+    return `<div class="tbl-wrap"><table class="trig-tbl"><thead><tr><th>Угол α</th><th>sin α</th><th>cos α</th><th>tg α</th><th>ctg α</th></tr></thead><tbody>${rows}</tbody></table></div>`;
   }
   if(type==='deriv'){
-    let rows = DERIV_TABLE.map(r=>`<tr>
-      <td>${k(r.f)}</td><td>${k(r.d)}</td>
-    </tr>`).join('');
-    return `<div class="tbl-wrap"><table class="deriv-tbl"><thead><tr>
-      <th>f(x)</th><th>f′(x)</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+    const rows=DERIV_TABLE.map(r=>`<tr><td>${k(r.f)}</td><td>${k(r.d)}</td></tr>`).join('');
+    return `<div class="tbl-wrap"><table class="deriv-tbl"><thead><tr><th>f(x)</th><th>f′(x)</th></tr></thead><tbody>${rows}</tbody></table></div>`;
   }
   if(type==='prim'){
-    let rows = PRIM_TABLE.map(r=>`<tr>
-      <td>${k(r.f)}</td><td>${k(r.p)}</td>
-    </tr>`).join('');
-    return `<div class="tbl-wrap"><table class="deriv-tbl"><thead><tr>
-      <th>f(x)</th><th>∫f(x)dx</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+    const rows=PRIM_TABLE.map(r=>`<tr><td>${k(r.f)}</td><td>${k(r.p)}</td></tr>`).join('');
+    return `<div class="tbl-wrap"><table class="deriv-tbl"><thead><tr><th>f(x)</th><th>∫f(x)dx</th></tr></thead><tbody>${rows}</tbody></table></div>`;
   }
   if(type==='props'){
-    let rows = PROPS_TABLE.map(r=>`<tr>
-      <td style="font-family:'Crimson Pro',Georgia;font-weight:600;color:var(--trig)">${r.fn}</td>
-      <td>${r.d}</td><td>${r.rng}</td><td>${r.per}</td><td>${r.par}</td><td>${r.zeros}</td>
-    </tr>`).join('');
-    return `<div class="tbl-wrap"><table class="props-tbl"><thead><tr>
-      <th>Функция</th><th>Область</th><th>Область значений</th>
-      <th>Период</th><th>Чётность</th><th>Нули</th>
-    </tr></thead><tbody>${rows}</tbody></table></div>`;
+    const rows=PROPS_TABLE.map(r=>`<tr><td style="font-family:'Crimson Pro',Georgia;font-weight:600;color:var(--trig)">${r.fn}</td><td>${r.d}</td><td>${r.rng}</td><td>${r.per}</td><td>${r.par}</td><td>${r.zeros}</td></tr>`).join('');
+    return `<div class="tbl-wrap"><table class="props-tbl"><thead><tr><th>Функция</th><th>Область</th><th>Значения</th><th>Период</th><th>Чётность</th><th>Нули</th></tr></thead><tbody>${rows}</tbody></table></div>`;
   }
   return '';
 }
 
-function makeCard(fm, sid, idx){
+// ─── MAKE CARD ───
+function makeCard(fm,sid,idx){
   if(fm.isTable){
-    const colorVar = sid==='algebra'?'var(--alg)':sid==='trig'?'var(--trig)':sid==='plan'?'var(--plan)':sid==='ster'?'var(--ster)':'var(--prob)';
-    return `<div class="tbl-card" data-s="${sid}" style="border-left-color:${colorVar}">
-      <div class="tbl-head" style="color:${colorVar}">${fm.t}</div>
-      ${makeTable(fm.tableType)}
-    </div>`;
+    const clr=secColor(sid);
+    return `<div class="tbl-card" data-s="${sid}" style="border-left-color:${clr}"><div class="tbl-head" style="color:${clr}">${fm.t}</div>${makeTable(fm.tableType)}</div>`;
   }
   const id=`ex-${sid}-${idx}`;
-  const hasEx = fm.ep && fm.es;
-  const colorVar = sid==='algebra'?'var(--alg)':sid==='trig'?'var(--trig)':sid==='plan'?'var(--plan)':sid==='ster'?'var(--ster)':'var(--prob)';
-  return `<div class="fc" data-s="${sid}" data-title="${fm.t.toLowerCase()}" data-desc="${(fm.d||'').toLowerCase()}">
+  const fid=`${sid}_${idx}`.replace(/\W/g,'_');
+  const nid=`note-${fid}`;
+  const clr=secColor(sid);
+  const isFav=STATE.fav.has(fid);
+  const isLearned=STATE.learned.has(fid);
+  const hasNote=!!STATE.notes[fid];
+  const noteVal=(STATE.notes[fid]||'').replace(/"/g,'&quot;');
+  return `<div class="fc${isLearned?' is-learned':''}" data-s="${sid}" data-fid="${fid}" data-title="${fm.t.toLowerCase()}" data-desc="${(fm.d||'').toLowerCase()}">
     <div class="fc-head">
-      <div class="fc-title" style="color:${colorVar}">${fm.t}</div>
+      <div class="fc-title" style="color:${clr}">${fm.t}</div>
+      <div class="fc-actions">
+        <button class="note-btn${hasNote?' has-note':''}" onclick="toggleNote('${nid}','${fid}',this)" title="Заметка">📝</button>
+        <button class="fc-btn fav-btn${isFav?' active':''}" onclick="toggleFav('${fid}',this)" title="Избранное">${isFav?'⭐':'☆'}</button>
+        <button class="fc-btn learn-btn${isLearned?' active':''}" onclick="toggleLearn('${fid}',this)" title="Выучил">✓</button>
+      </div>
     </div>
     <div class="fc-math">${k(fm.f,true)}</div>
     ${fm.d?`<div class="fc-desc">${fm.d}</div>`:''}
     ${fm.svg&&SVG[fm.svg]?`<div class="fc-svg">${SVG[fm.svg]}</div>`:''}
-    ${hasEx?`
-      <button class="ex-btn" onclick="toggleEx('${id}',this)" id="btn-${id}">
-        <span class="arr">▶</span> Пример задачи
-      </button>
-      <div class="ex-body" id="${id}">
-        <div class="ex-lbl">📝 Задача</div>
-        <div class="ex-p">${k(fm.ep)}</div>
-        <div class="ex-sep"></div>
-        <div class="ex-lbl2">✅ Решение</div>
-        <div class="ex-s">${k(fm.es)}</div>
-      </div>`:''}
+    ${fm.ep&&fm.es?`<button class="ex-btn" onclick="toggleEx('${id}',this)"><span class="arr">▶</span> Пример задачи</button>
+    <div class="ex-body" id="${id}"><div class="ex-lbl">📝 Задача</div><div class="ex-p">${k(fm.ep)}</div><div class="ex-sep"></div><div class="ex-lbl2">✅ Решение</div><div class="ex-s">${k(fm.es)}</div></div>`:''}
+    <div class="note-area${hasNote?' open':''}" id="${nid}">
+      ${hasNote?`<div style="font-size:11px;color:var(--prob);font-weight:600;margin-bottom:4px;">📝 Заметка</div>`:''}
+      <textarea placeholder="Напиши свою заметку, подсказку или ассоциацию..." oninput="autoResize(this)">${noteVal}</textarea>
+      <button class="note-save-btn" onclick="saveNote('${fid}','${nid}',this.previousElementSibling.value, this.closest('.fc').querySelector('.note-btn'))">Сохранить</button>
+    </div>
   </div>`;
 }
-
+function secColor(sid){return {algebra:'var(--alg)',trig:'var(--trig)',plan:'var(--plan)',ster:'var(--ster)',prob:'var(--prob)'}[sid]||'var(--text2)';}
 function toggleEx(id,btn){
-  const body=document.getElementById(id);
-  body.classList.toggle('open');
+  document.getElementById(id).classList.toggle('open');
   btn.classList.toggle('open');
 }
 
-function buildSectionHTML(sec){
-  let subColor = sec.id==='algebra'?'var(--alg)':sec.id==='trig'?'var(--trig)':sec.id==='plan'?'var(--plan)':sec.id==='ster'?'var(--ster)':'var(--prob)';
-  let html=`<div class="s-intro">
-    <div class="s-intro-icon">${sec.icon}</div>
-    <div class="s-intro-text">${sec.intro}</div>
-  </div>`;
+// ─── FAVORITES & LEARNED ───
+function toggleFav(fid,btn){
+  if(STATE.fav.has(fid)){STATE.fav.delete(fid);btn.textContent='☆';btn.classList.remove('active');}
+  else{STATE.fav.add(fid);btn.textContent='⭐';btn.classList.add('active');}
+  STATE.save(); updateFavCount();
+  const card=btn.closest('.fc');
+  if(card) card.dataset.fav=STATE.fav.has(fid)?'1':'0';
+  if(curSec==='fav') render('fav');
+}
+function toggleLearn(fid,btn){
+  const card=btn.closest('.fc');
+  if(STATE.learned.has(fid)){STATE.learned.delete(fid);btn.classList.remove('active');card&&card.classList.remove('is-learned');}
+  else{STATE.learned.add(fid);btn.classList.add('active');card&&card.classList.add('is-learned');}
+  STATE.save(); updateProgBars();
+}
+function updateFavCount(){
+  const cnt=STATE.fav.size;
+  const el=document.getElementById('fav-cnt');
+  if(el){el.textContent=cnt;el.classList.toggle('has',cnt>0);}
+}
+function updateProgBars(){
+  document.querySelectorAll('.prog-bar').forEach(bar=>{
+    const secId=bar.dataset.sec;
+    if(!secId) return;
+    const sec=SECTIONS.find(s=>s.id===secId);
+    if(!sec) return;
+    let total=0,done=0;
+    sec.sub.forEach(sub=>sub.f.forEach((fm,i)=>{
+      if(!fm.isTable&&fm.f){
+        total++;
+        const fid=`${secId}_${sub.n}_${i}`.replace(/\W/g,'_');
+        if(STATE.learned.has(fid)) done++;
+      }
+    }));
+    const pct=total?Math.round(done/total*100):0;
+    bar.style.width=pct+'%';
+    const lbl=bar.parentElement&&bar.parentElement.nextElementSibling;
+    if(lbl&&lbl.classList.contains('prog-label')) lbl.textContent=`Выучено: ${done} / ${total}`;
+  });
+}
 
+// ─── NOTES ───
+function toggleNote(nid,fid,btn){
+  const area=document.getElementById(nid);
+  if(!area) return;
+  area.classList.toggle('open');
+}
+function saveNote(fid,nid,val,noteBtn){
+  STATE.notes[fid]=val.trim();
+  STATE.save();
+  const area=document.getElementById(nid);
+  if(area){
+    if(!val.trim()){
+      area.classList.remove('open');
+      delete STATE.notes[fid];
+      STATE.save();
+    }
+  }
+  if(noteBtn){noteBtn.classList.toggle('has-note',!!val.trim());}
+  // Toast
+  showToast(val.trim()?'Заметка сохранена ✓':'Заметка удалена');
+}
+function autoResize(ta){ta.style.height='auto';ta.style.height=ta.scrollHeight+'px';}
+
+// ─── THEME ───
+function applyTheme(t){
+  document.body.classList.toggle('light',t==='light');
+  const btn=document.getElementById('theme-btn');
+  if(btn) btn.textContent=t==='light'?'🌙 Тема':'☀️ Тема';
+}
+function toggleTheme(){
+  STATE.theme=STATE.theme==='light'?'dark':'light';
+  STATE.save(); applyTheme(STATE.theme);
+}
+
+// ─── FONT SIZE ───
+function applyFontSize(v){
+  document.documentElement.style.setProperty('--fs-mul',String(v));
+}
+function changeFontSize(dir){
+  if(dir===0){STATE.fontSize=1;}
+  else STATE.fontSize=Math.max(0.7,Math.min(1.6,STATE.fontSize+dir*0.15));
+  STATE.save(); applyFontSize(STATE.fontSize);
+}
+
+// ─── TOAST ───
+function showToast(msg){
+  let t=document.getElementById('toast');
+  if(!t){t=document.createElement('div');t.id='toast';
+    t.style.cssText='position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:rgba(30,40,70,0.95);color:#dde4f8;padding:8px 18px;border-radius:20px;font-size:13px;z-index:999;transition:opacity 0.3s;pointer-events:none;white-space:nowrap;border:1px solid rgba(255,255,255,0.1)';
+    document.body.appendChild(t);}
+  t.textContent=msg;t.style.opacity='1';
+  clearTimeout(t._tm);t._tm=setTimeout(()=>{t.style.opacity='0';},1800);
+}
+
+// ─── COUNTDOWN TIMER ───
+function updateCountdown(){
+  const ege=new Date('2026-06-02T09:00:00');
+  const now=new Date();
+  const diff=ege-now;
+  const wrap=document.getElementById('countdown-blocks');
+  if(!wrap) return;
+  if(diff<=0){wrap.closest('.countdown-wrap').innerHTML='<div style="font-size:13px;color:var(--plan);font-weight:600;">🎉 ЕГЭ уже прошёл! Удачи с результатами!</div>';return;}
+  const days=Math.floor(diff/(1000*60*60*24));
+  const hrs=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+  const mins=Math.floor((diff%(1000*60*60))/(1000*60));
+  wrap.innerHTML=`
+    <div class="countdown-block"><div class="countdown-num">${days}</div><div class="countdown-unit">дней</div></div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-block"><div class="countdown-num">${String(hrs).padStart(2,'0')}</div><div class="countdown-unit">часов</div></div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-block"><div class="countdown-num">${String(mins).padStart(2,'0')}</div><div class="countdown-unit">минут</div></div>
+  `;
+}
+updateCountdown();
+setInterval(updateCountdown,60000);
+
+// ─── BUILD SECTION HTML ───
+function buildSectionHTML(sec){
+  const clr=secColor(sec.id);
+  let html=`<div class="s-intro">
+    <div class="s-intro-top">
+      <div class="s-intro-icon">${sec.icon}</div>
+      <div class="s-intro-text"><b>${sec.name}</b> — ${sec.intro}</div>
+    </div>
+    <div class="prog-bar-wrap"><div class="prog-bar" data-sec="${sec.id}" style="background:${clr};width:0%"></div></div>
+    <div class="prog-label" style="font-size:11px;color:var(--text3);margin-top:4px;text-align:right;">Считаю...</div>
+  </div>`;
   sec.sub.forEach(sub=>{
-    const cnt = sub.f.filter(f=>!f.isTable).length + sub.f.filter(f=>f.isTable).length;
+    const cnt=sub.f.filter(f=>!f.isTable).length+sub.f.filter(f=>f.isTable).length;
     html+=`<div class="sub-hdr">
       <div class="sub-title" style="color:${sub.clr};background:${sub.clr}22">${sub.n}</div>
       <div class="sub-line"></div>
-      <div class="sub-count">${cnt} ${cnt===1?'формула':'формул'}</div>
+      <div class="sub-count">${cnt} формул</div>
     </div>`;
-    sub.f.forEach((fm,i)=>{
-      html+=makeCard(fm,sec.id,`${sub.n}-${i}`);
+    sub.f.forEach((fm,i)=>{html+=makeCard(fm,sec.id,`${sub.n}-${i}`);});
+  });
+  return html;
+}
+
+function buildFavHTML(){
+  if(STATE.fav.size===0){
+    return `<div class="empty"><div class="em">⭐</div><p>Нет избранных формул.<br>Нажми ☆ на любой карточке — и она появится здесь.</p></div>`;
+  }
+  let html=`<div style="font-size:12px;color:var(--text2);margin-bottom:16px;">⭐ ${STATE.fav.size} избранных формул</div>`;
+  SECTIONS.forEach(sec=>{
+    sec.sub.forEach(sub=>{
+      sub.f.forEach((fm,i)=>{
+        const fid=`${sec.id}_${sub.n}_${i}`.replace(/\W/g,'_');
+        if(STATE.fav.has(fid)&&!fm.isTable){
+          html+=`<div style="font-size:11px;color:${secColor(sec.id)};padding:4px 2px 1px;font-weight:600;text-transform:uppercase;letter-spacing:0.7px;">${sec.name} → ${sub.n}</div>`;
+          html+=makeCard(fm,sec.id,`fav_${sec.id}_${sub.n}_${i}`);
+        }
+      });
     });
   });
   return html;
 }
 
-let curSec='algebra';
-
-function render(secId){
-  const sec=SECTIONS.find(s=>s.id===secId);
-  if(!sec) return;
-  document.getElementById('content').innerHTML=buildSectionHTML(sec);
-  document.getElementById('srch-info') && document.getElementById('srch-info').remove();
-}
-
+// ─── SEARCH ───
 function doSearch(q){
   const ql=q.toLowerCase().trim();
   let results=[];
@@ -954,27 +1297,32 @@ function doSearch(q){
     sec.sub.forEach(sub=>{
       sub.f.forEach((fm,i)=>{
         if(!fm.isTable){
-          const haystack=(fm.t+' '+(fm.d||'')+' '+(fm.ep||'')+' '+(fm.es||'')+' '+sub.n+' '+sec.name).toLowerCase();
-          if(haystack.includes(ql)) results.push({fm,secId:sec.id,idx:`${sub.n}-${i}`,secName:sec.name,subName:sub.n});
+          const hay=(fm.t+' '+(fm.d||'')+' '+sub.n+' '+sec.name).toLowerCase();
+          if(hay.includes(ql)) results.push({fm,secId:sec.id,idx:`${sub.n}-${i}`,secName:sec.name,subName:sub.n});
         }
       });
     });
   });
-
-  let html=`<div id="srch-info">Найдено формул: <b>${results.length}</b> по запросу «${q}»</div>`;
-  if(results.length===0){
-    html+=`<div class="empty"><div class="em">🔍</div><p>Ничего не найдено.<br>Попробуй другой запрос.</p></div>`;
-  } else {
-    results.forEach(r=>{
-      const colorVar=r.secId==='algebra'?'var(--alg)':r.secId==='trig'?'var(--trig)':r.secId==='plan'?'var(--plan)':r.secId==='ster'?'var(--ster)':'var(--prob)';
-      html+=`<div style="font-size:11px;color:${colorVar};padding:4px 2px 1px;font-weight:600;text-transform:uppercase;letter-spacing:0.7px">${r.secName} → ${r.subName}</div>`;
-      html+=makeCard(r.fm,r.secId,`srch-${r.idx}`);
-    });
-  }
+  let html=`<div id="srch-info">Найдено: <b>${results.length}</b> по запросу «${q}»</div>`;
+  if(!results.length){html+=`<div class="empty"><div class="em">🔍</div><p>Ничего не найдено.</p></div>`;}
+  else results.forEach(r=>{
+    html+=`<div style="font-size:11px;color:${secColor(r.secId)};padding:4px 2px 1px;font-weight:600;text-transform:uppercase;letter-spacing:0.7px;">${r.secName} → ${r.subName}</div>`;
+    html+=makeCard(r.fm,r.secId,`srch-${r.idx}`);
+  });
   document.getElementById('content').innerHTML=html;
 }
 
-// ─── EVENTS ──────────────────────────────────────────────────
+// ─── RENDER ───
+let curSec='algebra';
+function render(secId){
+  if(secId==='fav'){document.getElementById('content').innerHTML=buildFavHTML();return;}
+  const sec=SECTIONS.find(s=>s.id===secId);
+  if(!sec) return;
+  document.getElementById('content').innerHTML=buildSectionHTML(sec);
+  requestAnimationFrame(()=>{updateProgBars();});
+}
+
+// ─── TABS ───
 document.querySelectorAll('.tab').forEach(tab=>{
   tab.addEventListener('click',()=>{
     curSec=tab.dataset.id;
@@ -987,22 +1335,296 @@ document.querySelectorAll('.tab').forEach(tab=>{
 });
 
 const srch=document.getElementById('srch');
-let searchTimer;
+let st;
 srch.addEventListener('input',e=>{
-  clearTimeout(searchTimer);
+  clearTimeout(st);
   const q=e.target.value.trim();
-  if(q.length>1){
-    searchTimer=setTimeout(()=>doSearch(q),300);
-  } else {
-    render(curSec);
-  }
+  if(q.length>1) st=setTimeout(()=>doSearch(q),300);
+  else render(curSec);
 });
 
 window.addEventListener('scroll',()=>{
   document.getElementById('bktop').classList.toggle('vis',window.scrollY>350);
 });
 
-// ─── INIT ────────────────────────────────────────────────────
+// ══════════════════════════════════════════
+// SPACED REPETITION (SM-2 simplified)
+// ══════════════════════════════════════════
+function srGetCard(id){
+  return STATE.sr[id]||{interval:1,ef:2.5,due:0};
+}
+function srUpdate(id,q){
+  // q: 0=again, 3=hard, 4=good, 5=easy
+  const c=srGetCard(id);
+  let{interval,ef}=c;
+  if(q<3){interval=1;} // again
+  else{
+    if(interval===1) interval=6;
+    else if(interval===6) interval=Math.round(interval*ef);
+    else interval=Math.round(interval*ef);
+    ef=Math.max(1.3,ef+(0.1-(5-q)*(0.08+(5-q)*0.02)));
+    if(q===5) interval=Math.round(interval*1.3);
+  }
+  const due=Date.now()+interval*24*60*60*1000;
+  STATE.sr[id]={interval,ef,due};
+  STATE.save();
+  return interval;
+}
+function srDueCount(){
+  const now=Date.now();
+  return ALL_FM.filter(e=>STATE.sr[e.id]&&STATE.sr[e.id].due<=now).length;
+}
+function getSRDueList(){
+  const now=Date.now();
+  return ALL_FM.filter(e=>{
+    const c=srGetCard(e.id);
+    return c.due<=now;
+  });
+}
+function toggleSRMode(){
+  srMode=!srMode;
+  const btn=document.getElementById('sr-mode-btn');
+  if(btn) btn.classList.toggle('active',srMode);
+  showToast(srMode?`🧠 SR-режим включён (${srDueCount()} к повторению)`:'SR-режим выключен');
+}
+
+// ══════════════════════════════════════════
+// FLASHCARD MODE
+// ══════════════════════════════════════════
+let fcList=[],fcIdx=0,fcFavOnly=false,fcFlipped=false;
+function getFcList(){
+  if(srMode){
+    const due=getSRDueList();
+    return due.length?due:ALL_FM;
+  }
+  return fcFavOnly?ALL_FM.filter(e=>STATE.fav.has(e.id)):ALL_FM;
+}
+function openFlash(){
+  fcList=getFcList();
+  if(!fcList.length){showToast('Нет формул! Добавь в избранное или выключи фильтр.');return;}
+  fcIdx=0;fcFlipped=false;
+  const lbl=document.getElementById('fc-mode-label');
+  if(lbl) lbl.textContent=srMode?`• SR-режим (${fcList.length} карточек)`:'';
+  document.getElementById('flash-modal').classList.remove('hidden');
+  document.getElementById('fc-scene').classList.remove('flipped');
+  updateSRControls(false);
+  showFcCard();
+}
+function closeModal(id){document.getElementById(id).classList.add('hidden');}
+function flipCard(){
+  fcFlipped=!fcFlipped;
+  document.getElementById('fc-scene').classList.toggle('flipped',fcFlipped);
+  if(srMode) updateSRControls(fcFlipped);
+}
+function updateSRControls(flipped){
+  const srBtns=document.getElementById('sr-btns');
+  const fcNav=document.getElementById('fc-nav');
+  const hint=document.getElementById('fc-hint-text');
+  if(srMode){
+    if(srBtns) srBtns.style.display=flipped?'flex':'none';
+    if(fcNav) fcNav.style.display='none';
+    if(hint) hint.textContent=flipped?'Оцени насколько знаешь':'Нажми, чтобы увидеть формулу';
+  } else {
+    if(srBtns) srBtns.style.display='none';
+    if(fcNav) fcNav.style.display='flex';
+    if(hint) hint.textContent='Нажми, чтобы увидеть формулу';
+  }
+}
+function srRate(q){
+  const e=fcList[fcIdx];
+  const days=srUpdate(e.id,q);
+  const msg=q===0?'Повторим скоро!':`Следующее повторение через ${days} дн.`;
+  showToast(msg);
+  // Move to next
+  fcIdx++;
+  if(fcIdx>=fcList.length){
+    if(srMode){
+      document.getElementById('flash-modal').classList.add('hidden');
+      showToast('🎉 Все карточки на сегодня пройдены!');
+    } else {fcIdx=fcList.length-1;}
+    return;
+  }
+  fcFlipped=false;
+  document.getElementById('fc-scene').classList.remove('flipped');
+  updateSRControls(false);
+  showFcCard();
+}
+function showFcCard(){
+  const e=fcList[fcIdx];
+  const srData=srGetCard(e.id);
+  const daysLeft=srData.due?Math.ceil((srData.due-Date.now())/(1000*60*60*24)):0;
+  document.getElementById('fc-badge').textContent=e.sec.name+' · '+e.sub.n;
+  document.getElementById('fc-badge').style.color=secColor(e.sec.id);
+  document.getElementById('fc-question').textContent=e.fm.t;
+  document.getElementById('fc-formula').innerHTML=k(e.fm.f,true);
+  document.getElementById('fc-desc-hint').textContent=e.fm.d||'';
+  document.getElementById('fc-counter').textContent=`${fcIdx+1} / ${fcList.length}`;
+  document.getElementById('fc-prev').disabled=fcIdx===0;
+  document.getElementById('fc-next').disabled=fcIdx===fcList.length-1;
+  const dueBadge=document.getElementById('sr-due-badge');
+  if(dueBadge) dueBadge.textContent=srMode&&srData.interval>1?`Интервал: ${srData.interval} дн. · Следующее: через ${Math.max(0,daysLeft)} дн.`:'';
+}
+function fcMove(dir){
+  fcFlipped=false;
+  document.getElementById('fc-scene').classList.remove('flipped');
+  fcIdx=Math.max(0,Math.min(fcList.length-1,fcIdx+dir));
+  updateSRControls(false);
+  showFcCard();
+}
+function shuffleCards(){
+  fcList=[...getFcList()].sort(()=>Math.random()-0.5);
+  fcIdx=0;fcFlipped=false;
+  document.getElementById('fc-scene').classList.remove('flipped');
+  updateSRControls(false);
+  showFcCard();
+}
+function toggleFavFilter(){
+  fcFavOnly=!fcFavOnly;
+  document.getElementById('fc-fav-filter').classList.toggle('active',fcFavOnly);
+  fcList=getFcList(); fcIdx=0;
+  if(!fcList.length){showToast('Нет избранных!');fcFavOnly=false;document.getElementById('fc-fav-filter').classList.remove('active');fcList=getFcList();}
+  showFcCard();
+}
+// Swipe support
+let touchStartX=0;
+document.getElementById('flash-modal').addEventListener('touchstart',e=>{touchStartX=e.touches[0].clientX;},{passive:true});
+document.getElementById('flash-modal').addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].clientX-touchStartX;
+  if(Math.abs(dx)>60){
+    if(srMode&&fcFlipped){srRate(dx>0?4:0);}
+    else{dx<0?fcMove(1):fcMove(-1);}
+  }
+},{passive:true});
+
+// ══════════════════════════════════════════
+// TEST MODE (with history)
+// ══════════════════════════════════════════
+let testQs=[],testIdx=0,testScore=0,testAnswered=false,testWrong=[];
+function openTest(){
+  const pool=[...ALL_FM].sort(()=>Math.random()-0.5).slice(0,10);
+  testQs=pool;testIdx=0;testScore=0;testWrong=[];
+  document.getElementById('test-modal').classList.remove('hidden');
+  renderTestQ();
+}
+function renderTestQ(){
+  const body=document.getElementById('test-body');
+  if(testIdx>=testQs.length){showTestScore();return;}
+  const cur=testQs[testIdx];
+  const sameSection=ALL_FM.filter(e=>e.sec.id===cur.sec.id&&e.id!==cur.id);
+  const wrong=[...sameSection,...ALL_FM.filter(e=>e.id!==cur.id)].sort(()=>Math.random()-0.5).slice(0,3);
+  const opts=[cur,...wrong].sort(()=>Math.random()-0.5);
+  const pct=Math.round(testIdx/testQs.length*100);
+  body.innerHTML=`
+    <div class="test-progress-bar"><div class="test-progress-fill" style="width:${pct}%"></div></div>
+    <div class="test-q-num">Вопрос ${testIdx+1} из ${testQs.length}</div>
+    <div class="test-section-hint" style="color:${secColor(cur.sec.id)}">${cur.sec.name} — ${cur.sub.n}</div>
+    <div class="test-formula-wrap">${k(cur.fm.f,true)}</div>
+    <div class="test-options">
+      ${opts.map(o=>`<button class="test-opt" onclick="answerTest(this,'${o.id}','${cur.id}','${cur.fm.t.replace(/'/g,"\\'")}','${cur.sec.name}')">${o.fm.t}</button>`).join('')}
+    </div>
+    <button class="test-next-btn hidden" id="test-next" onclick="nextTestQ()">Следующий →</button>
+  `;
+}
+function answerTest(btn,chosen,correct,title,secName){
+  if(testAnswered) return;
+  testAnswered=true;
+  document.querySelectorAll('.test-opt').forEach(b=>{b.disabled=true;});
+  if(chosen===correct){btn.classList.add('correct');testScore++;}
+  else{
+    btn.classList.add('wrong');
+    testWrong.push({title,secName});
+    document.querySelectorAll('.test-opt').forEach(b=>{
+      const t=b.getAttribute('onclick')||'';
+      if(t.includes(`'${correct}'`)) b.classList.add('correct');
+    });
+  }
+  document.getElementById('test-next').classList.remove('hidden');
+}
+function nextTestQ(){testIdx++;testAnswered=false;renderTestQ();}
+function showTestScore(){
+  const pct=Math.round(testScore/testQs.length*100);
+  const msg=pct>=90?'Превосходно! 🏆':pct>=70?'Отличный результат! 🎉':pct>=50?'Хорошо, продолжай! 💪':'Нужно повторить 📚';
+  // Save to history
+  STATE.testHistory.unshift({
+    date:new Date().toLocaleDateString('ru',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}),
+    score:testScore,total:testQs.length,
+    wrong:testWrong.slice()
+  });
+  if(STATE.testHistory.length>50) STATE.testHistory=STATE.testHistory.slice(0,50);
+  STATE.save();
+  const wrongHTML=testWrong.length?`<div style="margin-top:12px;font-size:13px;color:var(--text2);font-weight:600;">Ошибки:</div><div style="margin-top:6px;">${testWrong.map(w=>`<span class="wrong-tag">${w.title}</span>`).join('')}</div>`:'<div style="color:var(--plan);font-size:13px;margin-top:8px;">Ни одной ошибки! 🎯</div>';
+  document.getElementById('test-body').innerHTML=`
+    <div class="test-score-wrap">
+      <div class="test-score-circle">
+        <div class="test-score-num">${testScore}/${testQs.length}</div>
+        <div class="test-score-label">${pct}%</div>
+      </div>
+      <div class="test-score-msg">${msg}</div>
+      ${wrongHTML}
+      <button class="test-restart-btn" onclick="openTest()">🔄 Ещё раз</button>
+      <button class="test-restart-btn" onclick="closeModal('test-modal');openStats()">📊 Статистика</button>
+      <button class="test-restart-btn" onclick="closeModal('test-modal')">Закрыть</button>
+    </div>
+  `;
+}
+
+// ══════════════════════════════════════════
+// STATS
+// ══════════════════════════════════════════
+function openStats(){
+  document.getElementById('stats-modal').classList.remove('hidden');
+  renderStats();
+}
+function renderStats(){
+  const wrap=document.getElementById('stats-wrap');
+  const hist=STATE.testHistory;
+  if(!hist.length){
+    wrap.innerHTML=`<div class="no-history"><div style="font-size:40px;margin-bottom:12px">📊</div><div style="font-size:15px;font-weight:600;margin-bottom:8px">Нет данных</div><div style="font-size:13px">Пройди хотя бы один тест!</div></div>`;
+    return;
+  }
+  const total=hist.length;
+  const avgScore=Math.round(hist.reduce((a,h)=>a+h.score/h.total*100,0)/total);
+  const best=Math.max(...hist.map(h=>Math.round(h.score/h.total*100)));
+  const learned=STATE.learned.size;
+  // Wrong freq map
+  const wrongMap={};
+  hist.forEach(h=>h.wrong.forEach(w=>{wrongMap[w.title]=(wrongMap[w.title]||0)+1;}));
+  const topWrong=Object.entries(wrongMap).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  const srCount=Object.keys(STATE.sr).length;
+  const dueNow=srDueCount();
+  wrap.innerHTML=`
+    <div class="stats-header">
+      <div class="stat-card"><div class="stat-card-num" style="color:var(--alg)">${total}</div><div class="stat-card-lbl">Тестов</div></div>
+      <div class="stat-card"><div class="stat-card-num" style="color:var(--plan)">${avgScore}%</div><div class="stat-card-lbl">Средний балл</div></div>
+      <div class="stat-card"><div class="stat-card-num" style="color:var(--prob)">${best}%</div><div class="stat-card-lbl">Лучший</div></div>
+      <div class="stat-card"><div class="stat-card-num" style="color:var(--trig)">${learned}</div><div class="stat-card-lbl">Выучено</div></div>
+    </div>
+    ${dueNow>0?`<div style="background:rgba(74,158,255,0.1);border:1px solid rgba(74,158,255,0.25);border-radius:10px;padding:12px 14px;margin-bottom:16px;font-size:13px;"><b style="color:var(--alg)">🧠 SR-режим:</b> ${dueNow} карточек к повторению сегодня · всего изучено ${srCount}<br><button class="note-save-btn" style="margin-top:8px;" onclick="closeModal('stats-modal');openFlash()">Начать повторение →</button></div>`:''}
+    ${topWrong.length?`<div style="font-size:13px;font-weight:700;color:var(--text2);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.7px;">Частые ошибки</div><div style="margin-bottom:18px;">${topWrong.map(([t,c])=>`<span class="wrong-tag">${t} ×${c}</span>`).join('')}</div>`:''}
+    <div style="font-size:13px;font-weight:700;color:var(--text2);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.7px;">История тестов</div>
+    ${hist.map(h=>{
+      const p=Math.round(h.score/h.total*100);
+      const clr=p>=80?'var(--plan)':p>=60?'var(--prob)':'var(--ster)';
+      return `<div class="history-item">
+        <div class="history-top">
+          <div class="history-score" style="color:${clr}">${h.score}/${h.total} — ${p}%</div>
+          <div class="history-date">${h.date}</div>
+        </div>
+        ${h.wrong.length?`<div class="history-wrong">Ошибки: ${h.wrong.map(w=>`<span class="wrong-tag">${w.title}</span>`).join(' ')}</div>`:'<div style="font-size:12px;color:var(--plan)">Без ошибок ✓</div>'}
+      </div>`;
+    }).join('')}
+    <button style="width:100%;margin-top:12px;background:rgba(255,107,74,0.12);border:1px solid rgba(255,107,74,0.25);color:var(--ster);border-radius:10px;padding:11px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;" onclick="clearHistory()">🗑 Очистить историю</button>
+  `;
+}
+function clearHistory(){
+  if(!confirm('Очистить всю историю тестов?')) return;
+  STATE.testHistory=[];STATE.save();renderStats();
+}
+
+// ─── INIT ───
+updateFavCount();
+applyTheme(STATE.theme);
+applyFontSize(STATE.fontSize);
 render('algebra');
 </script>
 </body>
