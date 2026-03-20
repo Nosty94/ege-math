@@ -37,29 +37,56 @@ body{
   background:rgba(7,12,26,0.97);
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   border-bottom:1px solid var(--border);
-  padding:10px 14px 0;
-  padding-top:calc(10px + env(safe-area-inset-top,0px));
+  padding:8px 12px 0;
+  padding-top:calc(8px + env(safe-area-inset-top,0px));
 }
 .hdr-top{
-  display:flex;align-items:center;gap:8px;
-  margin-bottom:10px;
+  display:flex;align-items:center;gap:6px;
+  margin-bottom:8px;flex-wrap:nowrap;overflow:hidden;
 }
-.app-name{font-size:16px;font-weight:800;letter-spacing:0.2px;flex:1;background:linear-gradient(90deg,var(--alg),var(--trig));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.app-badge{
-  font-size:10px;background:rgba(74,158,255,0.15);
-  color:var(--alg);border:1px solid rgba(74,158,255,0.3);
-  border-radius:20px;padding:2px 8px;letter-spacing:0.5px;white-space:nowrap;
+.app-name{
+  font-size:15px;font-weight:800;letter-spacing:0.2px;
+  flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  background:linear-gradient(90deg,var(--alg),var(--trig));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
+/* Action row — scrollable strip on mobile */
+.hdr-actions{
+  display:flex;align-items:center;gap:5px;
+  padding:0 14px 8px;
+  overflow-x:auto;scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+}
+.hdr-actions::-webkit-scrollbar{display:none;}
+/* Tooltip wrapper */
+.btn-tip{position:relative;display:flex;}
+.btn-tip .tip{
+  position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);
+  background:rgba(20,28,50,0.96);color:var(--text);
+  font-size:11px;font-weight:600;white-space:nowrap;
+  border-radius:7px;padding:5px 10px;pointer-events:none;
+  opacity:0;transition:opacity 0.15s;z-index:400;
+  border:1px solid var(--border2);
+  box-shadow:0 4px 16px rgba(0,0,0,.4);
+}
+.btn-tip:hover .tip{opacity:1;}
 .mode-btn{
   background:var(--bg3);border:1px solid var(--border2);
-  color:var(--text2);border-radius:8px;
-  padding:6px 10px;font-size:13px;cursor:pointer;
-  display:flex;align-items:center;gap:4px;
-  white-space:nowrap;transition:all 0.18s;
+  color:var(--text2);border-radius:9px;
+  padding:7px 10px;font-size:20px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  transition:all 0.16s;
   font-family:'Outfit',sans-serif;font-weight:500;
-  min-height:34px;min-width:44px;justify-content:center;
+  min-height:52px;min-width:52px;justify-content:center;
+  flex-shrink:0;
+}
+.mode-btn .btn-lbl{
+  font-size:9px;font-weight:700;letter-spacing:0.4px;
+  color:var(--text3);line-height:1;text-transform:uppercase;
 }
 .mode-btn:hover,.mode-btn:active{background:var(--bg4);color:var(--text);}
+.mode-btn:hover .btn-lbl{color:var(--text2);}
 
 .srch-row{position:relative;margin-bottom:10px;}
 #srch{
@@ -618,20 +645,20 @@ body.oge-mode .ege-only{display:none;}
 
 /* ── MOBILE TWEAKS ── */
 @media(max-width:480px){
-  .fc-math{font-size:0.95em;}
   .app-name{font-size:14px;}
-  .mode-btn span.label{display:none;}
+  .fc-math{font-size:1.3em;}
   .fc-question{font-size:16px;}
   .test-formula-wrap{font-size:1.05em;padding:16px 12px;}
   .test-opt{font-size:13px;padding:12px 14px;}
   #content{padding-left:10px;padding-right:10px;}
-  .fc-card-face{padding:16px 14px;}
-  .fc-formula{font-size:1.1em;}
+  .mode-btn{min-width:46px;min-height:46px;font-size:18px;}
+  .mode-btn .btn-lbl{font-size:8px;}
 }
 @media(max-width:360px){
-  .app-name{font-size:13px;}
-  .tab{font-size:11px;padding:9px 9px 11px;}
+  .app-name{font-size:12px;}
+  .tab{font-size:10.5px;padding:9px 8px 11px;}
   .fc-question{font-size:14px;}
+  .mode-btn{min-width:42px;min-height:42px;padding:6px 8px;}
 }
 @media(prefers-reduced-motion:reduce){
   .fc-card-inner{transition:none;}
@@ -861,7 +888,7 @@ body.light .test-opt:hover{background:var(--bg4);}
   background:var(--bg2);border:1px solid var(--border2);
   border-radius:14px;padding:10px;
   box-shadow:0 12px 40px rgba(0,0,0,.5);
-  z-index:300;min-width:240px;
+  z-index:400;width:min(280px,calc(100vw - 28px));
   display:none;
   animation:fadeInDown 0.18s ease;
 }
@@ -890,19 +917,13 @@ body.light .test-opt:hover{background:var(--bg4);}
 <body>
 <!-- ══ HEADER ══ -->
 <div id="hdr">
+  <!-- ROW 1: name + exam mode + settings -->
   <div class="hdr-top">
     <div class="app-name">📐 ЕГЭ Мат 2026</div>
-    <!-- Exam mode switcher -->
-    <button class="exam-mode-btn active-ege" id="btn-ege" onclick="setExamMode('ege')" style="flex:none;padding:6px 12px;font-size:12px;">📘 ЕГЭ</button>
-    <button class="exam-mode-btn" id="btn-oge" onclick="setExamMode('oge')" style="flex:none;padding:6px 12px;font-size:12px;">📗 ОГЭ</button>
-    <!-- Action buttons -->
-    <button class="mode-btn" onclick="openFlash()" title="Карточки">📚</button>
-    <button class="mode-btn" onclick="openTest()" title="Тест">✏️</button>
-    <button class="mode-btn" onclick="openGenerator()" title="Задачи" style="background:rgba(74,158,255,0.12);border-color:rgba(74,158,255,0.3);color:var(--alg);">⚡</button>
-    <button class="mode-btn" onclick="openStats()" title="Статистика">📊</button>
-    <!-- Settings menu -->
+    <button class="exam-mode-btn active-ege" id="btn-ege" onclick="setExamMode('ege')" style="flex:none;padding:5px 10px;font-size:11px;">📘 ЕГЭ</button>
+    <button class="exam-mode-btn" id="btn-oge" onclick="setExamMode('oge')" style="flex:none;padding:5px 10px;font-size:11px;">📗 ОГЭ</button>
     <div class="settings-wrap">
-      <button class="settings-btn" id="settings-toggle" onclick="toggleSettingsMenu()" title="Настройки">⚙️</button>
+      <button class="settings-btn" id="settings-toggle" onclick="toggleSettingsMenu()" style="padding:6px 10px;min-height:32px;">⚙️</button>
       <div class="settings-popup" id="settings-popup">
         <div class="set-row">
           <span class="set-row-label">🌙 Тема</span>
@@ -916,18 +937,45 @@ body.light .test-opt:hover{background:var(--bg4);}
           <span class="set-row-label">🔤 Размер формул</span>
           <div class="set-row-controls">
             <button class="set-ctrl" onclick="changeFontSize(-1)">A−</button>
-            <button class="set-ctrl" onclick="changeFontSize(0)" title="Сбросить">A</button>
+            <button class="set-ctrl" onclick="changeFontSize(0)">A</button>
             <button class="set-ctrl" onclick="changeFontSize(1)">A+</button>
           </div>
         </div>
         <div class="set-sep"></div>
-        <div class="set-row">
-          <span class="set-row-label">🧠 Умная учёба (SR)</span>
-          <div class="set-row-controls">
+        <div class="set-row" style="flex-direction:column;align-items:flex-start;gap:6px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;width:100%;">
+            <span class="set-row-label">🧠 Умная учёба (SR)</span>
             <button class="set-ctrl" id="sr-mode-btn" onclick="toggleSRMode()">Выкл</button>
+          </div>
+          <div style="font-size:11px;color:var(--text3);line-height:1.5;padding:0 2px;">
+            <b style="color:var(--text2)">Spaced Repetition</b> — алгоритм как в Anki.<br>
+            Показывает карточки именно в тот момент, когда ты вот-вот забудешь. После переворота карточки оцени себя: <b style="color:var(--ster)">Снова</b> / <b style="color:var(--prob)">Сложно</b> / <b style="color:var(--plan)">Знаю</b> / <b style="color:var(--alg)">Легко</b>. Система сама решит когда показать снова — через 1, 6, 14 дней.
           </div>
         </div>
       </div>
+    </div>
+  </div>
+  <!-- ROW 2: action buttons (scrollable) -->
+  <div class="hdr-actions">
+    <div class="btn-tip">
+      <button class="mode-btn" onclick="openFlash()">📚<span class="btn-lbl">Карточки</span></button>
+      <span class="tip">Флэшкарды — листай формулы и запоминай</span>
+    </div>
+    <div class="btn-tip">
+      <button class="mode-btn" onclick="openTest()">✏️<span class="btn-lbl">Тест</span></button>
+      <span class="tip">Мини-тест — 10 вопросов по формулам</span>
+    </div>
+    <div class="btn-tip">
+      <button class="mode-btn" onclick="openGenerator()" style="background:rgba(74,158,255,0.12);border-color:rgba(74,158,255,0.3);color:var(--alg);">⚡<span class="btn-lbl" style="color:var(--alg)">Задачи</span></button>
+      <span class="tip">Генератор задач в стиле ФИПИ с решением</span>
+    </div>
+    <div class="btn-tip">
+      <button class="mode-btn" onclick="openStats()">📊<span class="btn-lbl">Статистика</span></button>
+      <span class="tip">История тестов, ошибки, прогресс SR</span>
+    </div>
+    <div class="btn-tip">
+      <button class="mode-btn" onclick="openFlash();toggleFavFilter()" style="color:var(--fav);border-color:rgba(255,215,0,0.25);">⭐<span class="btn-lbl" style="color:var(--fav)">Избранное</span></button>
+      <span class="tip">Карточки только из избранных формул</span>
     </div>
   </div>
   <!-- COUNTDOWN -->
