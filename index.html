@@ -85,14 +85,27 @@ body{
 #tabs::-webkit-scrollbar{display:none;}
 .tabs-fade-right{
   position:absolute;right:0;top:0;bottom:0;
-  width:52px;
+  width:64px;
   background:linear-gradient(to right,transparent,rgba(7,12,26,0.97));
   pointer-events:none;
   transition:opacity 0.2s;
+  display:flex;align-items:center;justify-content:flex-end;
+  padding-right:6px;
+}
+.tabs-fade-right::after{
+  content:'›';
+  font-size:22px;font-weight:700;
+  color:rgba(180,180,255,0.7);
+  animation:pulse-arr 1.4s ease-in-out infinite;
+}
+@keyframes pulse-arr{
+  0%,100%{opacity:0.3;transform:translateX(0);}
+  50%{opacity:1;transform:translateX(5px);}
 }
 body.light .tabs-fade-right{
   background:linear-gradient(to right,transparent,rgba(240,244,255,0.97));
 }
+body.light .tabs-fade-right::after{color:rgba(60,80,180,0.6);}
 .tab{
   flex-shrink:0;padding:9px 12px 11px;
   font-size:12.5px;font-weight:500;font-family:'Outfit',sans-serif;
@@ -249,15 +262,18 @@ body.light .tabs-fade-right{
 
 /* ── BACK TOP ── */
 #bktop{
-  position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));right:16px;
-  width:40px;height:40px;border-radius:50%;
-  background:var(--bg3);border:1px solid var(--border2);
-  color:var(--text);font-size:16px;cursor:pointer;
+  position:fixed;bottom:calc(24px + env(safe-area-inset-bottom,0px));right:16px;
+  width:48px;height:48px;border-radius:50%;
+  background:var(--alg);border:none;
+  color:#fff;font-size:20px;font-weight:700;cursor:pointer;
   display:flex;align-items:center;justify-content:center;
-  opacity:0;pointer-events:none;
-  transform:translateY(8px);transition:all 0.25s;z-index:100;
+  opacity:0;pointer-events:none;box-shadow:0 4px 20px rgba(74,158,255,0.45);
+  transform:translateY(16px) scale(0.85);
+  transition:opacity 0.25s,transform 0.25s;z-index:300;
+  -webkit-tap-highlight-color:transparent;
 }
-#bktop.vis{opacity:1;pointer-events:all;transform:translateY(0);}
+#bktop.vis{opacity:1;pointer-events:all;transform:translateY(0) scale(1);}
+#bktop:hover{background:#3a8ef0;}
 
 /* ── KATEX ── */
 .katex{color:var(--text) !important;}
@@ -691,7 +707,7 @@ body.light .test-opt:hover{background:var(--bg4);}
 </div>
 
 <main id="content"></main>
-<button id="bktop" onclick="scrollTo({top:0,behavior:'smooth'})">↑</button>
+<button id="bktop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <!-- ══ FLASHCARD MODAL ══ -->
 <div class="modal-overlay hidden" id="flash-modal">
