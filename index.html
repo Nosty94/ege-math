@@ -193,6 +193,23 @@ body.light .tabs-fade-right::after{color:rgba(60,80,180,0.6);}
   .fc-math{font-size:2.2em;}
   body{font-size:17px;}
 }
+@media(max-width:479px){
+  .fc-math{font-size:1.25em;padding:14px 12px 8px;}
+  .fc-head{padding:11px 12px 0;}
+  .fc-desc{padding:4px 12px 10px;font-size:13px;}
+  .fc-svg{padding:4px 10px 10px;}
+  .fc-svg svg{max-height:148px;}
+  .ex-body{padding:10px 12px;}
+  .ex-p,.ex-s{font-size:13px;}
+  .ex-step{font-size:12px;}
+  .katex-display{font-size:0.9em;}
+  #content{padding:12px 10px 80px;}
+  .sub-hdr{padding:11px 12px;margin:22px 0 10px;}
+  .fc-btn{min-width:30px;min-height:30px;font-size:15px;}
+  .note-btn{min-width:30px;min-height:30px;font-size:14px;}
+  .dl-btn{min-height:24px;font-size:10px;}
+  .s-intro{padding:12px 14px;font-size:12px;}
+}
 
 /* ── EXAM MODE BADGE ── */
 .exam-mode-wrap{
@@ -226,6 +243,39 @@ body.oge-mode .ege-only{display:none;}
 .ex-formula-step{
   font-family:'Crimson Pro',Georgia,serif;font-size:1.05em;
   overflow-x:auto;-webkit-overflow-scrolling:touch;
+}
+
+/* ── SOLUTION STEP TYPES ── */
+.sol-tip{
+  background:rgba(255,197,66,0.07);
+  border:1px solid rgba(255,197,66,0.22);
+  border-left:3px solid var(--prob);
+  border-radius:8px;padding:8px 11px;
+  font-size:12.5px;color:var(--text);
+  margin-bottom:7px;line-height:1.55;
+}
+.sol-tip b{color:var(--prob);}
+.sol-def{
+  display:flex;gap:0;align-items:baseline;
+  padding:5px 0 5px 2px;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+  font-size:13px;margin-bottom:2px;line-height:1.5;flex-wrap:wrap;
+}
+.sol-def-k{
+  color:var(--alg);font-family:'Crimson Pro',Georgia,serif;
+  font-style:italic;font-size:1.1em;white-space:nowrap;margin-right:2px;
+}
+.sol-def-sep{color:var(--text3);margin-right:4px;}
+.sol-def-v{color:var(--text2);}
+.ex-step-calc .ex-formula-step{
+  font-family:'Crimson Pro',Georgia,serif;font-size:1.1em;
+  background:rgba(52,208,140,0.05);
+  border:1px solid rgba(52,208,140,0.13);
+  border-radius:6px;padding:4px 10px;line-height:1.65;
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+}
+.ex-step-calc .ex-step-num{
+  background:rgba(52,208,140,0.22);color:var(--plan);
 }
 
 /* ── AI GENERATOR MODAL ── */
@@ -1284,26 +1334,35 @@ const SVG={
 <line x1="130" y1="12" x2="130" y2="168" stroke="#4a9eff" stroke-width="1.5" stroke-dasharray="5,3"/>
 <rect x="130" y="154" width="14" height="14" fill="none" stroke="#4a9eff" stroke-width="1.3"/>
 <text x="130" y="8" fill="#ffc542" font-size="14" font-family="Georgia,serif" text-anchor="middle" font-weight="bold">A</text>
-<text x="6" y="178" fill="#ffc542" font-size="14" font-family="Georgia,serif" font-weight="bold">B</text>
+<text x="4" y="178" fill="#ffc542" font-size="14" font-family="Georgia,serif" font-weight="bold">B</text>
 <text x="244" y="178" fill="#ffc542" font-size="14" font-family="Georgia,serif" font-weight="bold">C</text>
-<text x="62" y="96" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">c</text>
-<text x="182" y="96" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">b</text>
-<text x="124" y="183" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">a</text>
-<text x="136" y="95" fill="#4a9eff" font-size="12" font-family="Georgia,serif" font-style="italic">h</text>
+<!-- c: снаружи левой стороны AB -->
+<text x="56" y="96" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">c</text>
+<!-- b: снаружи правой стороны AC (x > линии стороны) -->
+<text x="202" y="90" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">b</text>
+<!-- a: под основанием BC, снаружи -->
+<text x="126" y="183" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">a</text>
+<!-- h: справа от высоты, не на линии -->
+<text x="136" y="99" fill="#4a9eff" font-size="12" font-family="Georgia,serif" font-style="italic">h</text>
 </svg>`,
 
   /* ── Прямоугольный треугольник ── */
   rightTriangle:`<svg viewBox="0 0 240 185" xmlns="http://www.w3.org/2000/svg">
 <polygon points="24,162 24,16 216,162" fill="rgba(52,208,140,0.06)" stroke="#34d08c" stroke-width="2.2" stroke-linejoin="round"/>
 <rect x="24" y="140" width="22" height="22" fill="none" stroke="#34d08c" stroke-width="1.6"/>
+<!-- гипотенуза (для визуализации диагонали) -->
 <line x1="24" y1="16" x2="216" y2="162" stroke="#b47bff" stroke-width="1.2" stroke-dasharray="4,3"/>
 <text x="14" y="12" fill="#ffc542" font-size="14" font-family="Georgia,serif" font-weight="bold">A</text>
 <text x="8" y="178" fill="#ffc542" font-size="14" font-family="Georgia,serif" font-weight="bold">B</text>
 <text x="218" y="178" fill="#ffc542" font-size="14" font-family="Georgia,serif" font-weight="bold">C</text>
-<text x="6" y="94" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">b</text>
-<text x="110" y="178" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">a</text>
-<text x="118" y="80" fill="#b47bff" font-size="13" font-family="Georgia,serif" font-style="italic">c</text>
-<text x="40" y="155" fill="#4a9eff" font-size="11" font-family="Georgia,serif">90°</text>
+<!-- b: снаружи вертикальной стороны AB (слева от x=24) -->
+<text x="4" y="96" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">b</text>
+<!-- a: под горизонтальной стороной BC, снаружи -->
+<text x="112" y="178" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">a</text>
+<!-- c: снаружи гипотенузы (справа-сверху от линии) -->
+<text x="134" y="72" fill="#b47bff" font-size="13" font-family="Georgia,serif" font-style="italic">c</text>
+<!-- 90°: внутри угла B, не на линиях -->
+<text x="50" y="153" fill="#4a9eff" font-size="11" font-family="Georgia,serif">90°</text>
 </svg>`,
 
   /* ── Параллелограмм ── */
@@ -1311,9 +1370,12 @@ const SVG={
 <polygon points="44,118 214,118 218,22 48,22" fill="rgba(52,208,140,0.06)" stroke="#34d08c" stroke-width="2.2" stroke-linejoin="round"/>
 <line x1="140" y1="22" x2="140" y2="118" stroke="#4a9eff" stroke-width="1.4" stroke-dasharray="4,3"/>
 <rect x="140" y="104" width="14" height="14" fill="none" stroke="#4a9eff" stroke-width="1.2"/>
-<text x="125" y="17" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">a</text>
-<text x="29" y="74" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">b</text>
-<text x="146" y="74" fill="#4a9eff" font-size="13" font-family="Georgia,serif" font-style="italic">h</text>
+<!-- a: над верхней стороной, снаружи фигуры -->
+<text x="126" y="14" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">a</text>
+<!-- b: слева от фигуры, снаружи левой стороны -->
+<text x="22" y="76" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">b</text>
+<!-- h: справа от высоты, не на линии -->
+<text x="156" y="76" fill="#4a9eff" font-size="13" font-family="Georgia,serif" font-style="italic">h</text>
 </svg>`,
 
   /* ── Трапеция ── */
@@ -1321,11 +1383,16 @@ const SVG={
 <polygon points="62,22 198,22 240,128 20,128" fill="rgba(52,208,140,0.06)" stroke="#34d08c" stroke-width="2.2" stroke-linejoin="round"/>
 <line x1="62" y1="22" x2="62" y2="128" stroke="#4a9eff" stroke-width="1.4" stroke-dasharray="4,3"/>
 <rect x="62" y="114" width="14" height="14" fill="none" stroke="#4a9eff" stroke-width="1.2"/>
-<text x="124" y="16" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">a</text>
+<!-- a: над верхним основанием, снаружи -->
+<text x="122" y="14" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">a</text>
+<!-- b: под нижним основанием, снаружи -->
 <text x="118" y="143" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">b</text>
-<text x="68" y="80" fill="#4a9eff" font-size="13" font-family="Georgia,serif" font-style="italic">h</text>
-<text x="18" y="80" fill="#7a8aa8" font-size="11" font-family="Georgia,serif" font-style="italic">c</text>
-<text x="228" y="80" fill="#7a8aa8" font-size="11" font-family="Georgia,serif" font-style="italic">d</text>
+<!-- h: справа от высоты, снаружи фигуры -->
+<text x="74" y="80" fill="#4a9eff" font-size="13" font-family="Georgia,serif" font-style="italic">h</text>
+<!-- c: снаружи левой боковой стороны -->
+<text x="6" y="82" fill="#7a8aa8" font-size="11" font-family="Georgia,serif" font-style="italic">c</text>
+<!-- d: снаружи правой боковой стороны -->
+<text x="244" y="82" fill="#7a8aa8" font-size="11" font-family="Georgia,serif" font-style="italic">d</text>
 </svg>`,
 
   /* ── Ромб с диагоналями ── */
@@ -1334,9 +1401,12 @@ const SVG={
 <line x1="16" y1="85" x2="224" y2="85" stroke="#4a9eff" stroke-width="1.4" stroke-dasharray="4,3"/>
 <line x1="120" y1="10" x2="120" y2="160" stroke="#ffc542" stroke-width="1.4" stroke-dasharray="4,3"/>
 <rect x="120" y="85" width="11" height="11" fill="none" stroke="#7a8aa8" stroke-width="1.2"/>
-<text x="118" y="6" fill="#ffc542" font-size="12" font-family="Georgia,serif" text-anchor="middle">d₁</text>
-<text x="226" y="89" fill="#4a9eff" font-size="12" font-family="Georgia,serif">d₂</text>
-<text x="162" y="44" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">a</text>
+<!-- d₁: над верхней вершиной -->
+<text x="116" y="5" fill="#ffc542" font-size="12" font-family="Georgia,serif" text-anchor="middle">d₁</text>
+<!-- d₂: правее правой вершины -->
+<text x="228" y="90" fill="#4a9eff" font-size="12" font-family="Georgia,serif">d₂</text>
+<!-- a: снаружи верхней правой стороны (правее/выше линии) -->
+<text x="183" y="34" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">a</text>
 </svg>`,
 
   /* ── Окружность с радиусом и хордой ── */
@@ -1345,9 +1415,12 @@ const SVG={
 <circle cx="110" cy="96" r="3" fill="#ffc542"/>
 <line x1="110" y1="96" x2="188" y2="96" stroke="#4a9eff" stroke-width="1.6"/>
 <line x1="110" y1="96" x2="148" y2="30" stroke="#b47bff" stroke-width="1.3" stroke-dasharray="4,3"/>
-<text x="143" y="90" fill="#4a9eff" font-size="13" font-family="Georgia,serif" font-style="italic">r</text>
-<text x="102" y="92" fill="#ffc542" font-size="11" font-family="Georgia,serif">O</text>
-<text x="149" y="56" fill="#b47bff" font-size="11" font-family="Georgia,serif" font-style="italic">R</text>
+<!-- r: над радиусом, не на линии -->
+<text x="143" y="84" fill="#4a9eff" font-size="13" font-family="Georgia,serif" font-style="italic">r</text>
+<!-- O: рядом с центром, чуть левее -->
+<text x="96" y="91" fill="#ffc542" font-size="11" font-family="Georgia,serif">O</text>
+<!-- R: снаружи от наклонного радиуса, правее -->
+<text x="155" y="52" fill="#b47bff" font-size="11" font-family="Georgia,serif" font-style="italic">R</text>
 </svg>`,
 
   /* ── Куб — правильная изометрическая проекция ── */
@@ -1362,10 +1435,13 @@ const SVG={
 <polygon points="36,52 110,90 110,166 36,128" fill="rgba(255,107,74,0.06)" stroke="#ff6b4a" stroke-width="2" stroke-linejoin="round"/>
 <!-- Правая боковая грань -->
 <polygon points="110,90 184,52 184,128 110,166" fill="rgba(255,107,74,0.04)" stroke="#ff6b4a" stroke-width="2" stroke-linejoin="round"/>
-<!-- Метка a -->
-<text x="60" y="98" fill="#ffc542" font-size="13" font-family="Georgia,serif" font-style="italic">a</text>
-<text x="147" y="52" fill="#ffc542" font-size="13" font-family="Georgia,serif" font-style="italic">a</text>
-<text x="185" y="92" fill="#ffc542" font-size="13" font-family="Georgia,serif" font-style="italic">a</text>
+<!-- Метка a — каждая на своём ребре, снаружи фигуры -->
+<!-- Левое ребро: снаружи (левее x=36) -->
+<text x="20" y="92" fill="#ffc542" font-size="13" font-family="Georgia,serif" font-style="italic">a</text>
+<!-- Верхнее ребро (110,14)→(184,52): над линией, снаружи грани -->
+<text x="155" y="26" fill="#ffc542" font-size="13" font-family="Georgia,serif" font-style="italic">a</text>
+<!-- Правое ребро: правее x=184 -->
+<text x="190" y="92" fill="#ffc542" font-size="13" font-family="Georgia,serif" font-style="italic">a</text>
 </svg>`,
 
   /* ── Цилиндр ── */
@@ -1389,8 +1465,8 @@ const SVG={
 <line x1="115" y1="46" x2="197" y2="46" stroke="#4a9eff" stroke-width="1.6"/>
 <line x1="115" y1="46" x2="115" y2="162" stroke="#ffc542" stroke-width="1.4" stroke-dasharray="4,3"/>
 <circle cx="115" cy="46" r="2.5" fill="#4a9eff"/>
-<text x="150" y="39" fill="#4a9eff" font-size="13" font-family="Georgia,serif" font-style="italic">r</text>
-<text x="119" y="110" fill="#ffc542" font-size="13" font-family="Georgia,serif" font-style="italic">h</text>
+<text x="152" y="39" fill="#4a9eff" font-size="13" font-family="Georgia,serif" font-style="italic">r</text>
+<text x="121" y="110" fill="#ffc542" font-size="13" font-family="Georgia,serif" font-style="italic">h</text>
 </svg>`,
 
   /* ── Конус ── */
@@ -1411,9 +1487,9 @@ const SVG={
 <!-- Образующая l (пунктир) -->
 <line x1="115" y1="18" x2="203" y2="168" stroke="#b47bff" stroke-width="1.3" stroke-dasharray="4,3"/>
 <circle cx="115" cy="168" r="2.5" fill="#4a9eff"/>
-<text x="154" y="162" fill="#4a9eff" font-size="13" font-family="Georgia,serif" font-style="italic">r</text>
-<text x="119" y="100" fill="#ffc542" font-size="13" font-family="Georgia,serif" font-style="italic">h</text>
-<text x="166" y="90" fill="#b47bff" font-size="13" font-family="Georgia,serif" font-style="italic">l</text>
+<text x="154" y="158" fill="#4a9eff" font-size="13" font-family="Georgia,serif" font-style="italic">r</text>
+<text x="121" y="100" fill="#ffc542" font-size="13" font-family="Georgia,serif" font-style="italic">h</text>
+<text x="172" y="82" fill="#b47bff" font-size="13" font-family="Georgia,serif" font-style="italic">l</text>
 </svg>`,
 
   /* ── Шар ── */
@@ -1425,39 +1501,54 @@ const SVG={
 <path d="M 31 100 A 84 23 0 0 0 199 100" fill="none" stroke="#ff6b4a" stroke-width="1.8"/>
 <line x1="115" y1="100" x2="199" y2="100" stroke="#4a9eff" stroke-width="1.6"/>
 <circle cx="115" cy="100" r="3.5" fill="#ffc542"/>
-<text x="152" y="94" fill="#4a9eff" font-size="13" font-family="Georgia,serif" font-style="italic">r</text>
-<text x="108" y="96" fill="#ffc542" font-size="11" font-family="Georgia,serif">O</text>
+<!-- r: над радиусом, снаружи линии -->
+<text x="152" y="91" fill="#4a9eff" font-size="13" font-family="Georgia,serif" font-style="italic">r</text>
+<!-- O: ниже и левее центра, не перекрывает точку -->
+<text x="99" y="114" fill="#ffc542" font-size="11" font-family="Georgia,serif">O</text>
 </svg>`,
 
   /* ── Правильная пирамида (четырёхугольная, изометрия) ── */
   pyramid:`<svg viewBox="0 0 230 210" xmlns="http://www.w3.org/2000/svg">
-<!-- основание — заливка без обводки -->
-<polygon points="115,170 186,138 115,106 44,138" fill="rgba(255,107,74,0.06)" stroke="none" stroke-linejoin="round"/>
-<!-- скрытые рёбра основания (пунктир) -->
-<line x1="44" y1="138" x2="115" y2="106" stroke="#ff6b4a" stroke-width="1.2" stroke-dasharray="4,3"/>
-<!-- скрытое боковое ребро (к левому углу) -->
-<line x1="115" y1="20" x2="44" y2="138" stroke="#ff6b4a" stroke-width="1.4" stroke-dasharray="5,3"/>
-<!-- видимые рёбра основания (сплошные) -->
-<line x1="115" y1="170" x2="186" y2="138" stroke="#ff6b4a" stroke-width="2"/>
-<line x1="186" y1="138" x2="115" y2="106" stroke="#ff6b4a" stroke-width="2"/>
-<line x1="115" y1="170" x2="44" y2="138" stroke="#ff6b4a" stroke-width="2"/>
-<!-- видимые боковые рёбра (сплошные) -->
-<line x1="115" y1="20" x2="186" y2="138" stroke="#ff6b4a" stroke-width="2"/>
-<line x1="115" y1="20" x2="115" y2="170" stroke="#ff6b4a" stroke-width="2"/>
-<!-- высота -->
-<line x1="115" y1="20" x2="115" y2="138" stroke="#ffc542" stroke-width="1.4" stroke-dasharray="4,3"/>
-<rect x="115" y="126" width="12" height="12" fill="none" stroke="#ffc542" stroke-width="1.2"/>
-<text x="119" y="86" fill="#ffc542" font-size="13" font-family="Georgia,serif" font-style="italic">h</text>
-<text x="150" y="120" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">a</text>
+<!-- Основание: лево(38,148) право(192,148) перед(115,182) зад(115,114) -->
+<polygon points="115,182 192,148 115,114 38,148" fill="rgba(255,107,74,0.07)" stroke="none"/>
+<!-- Скрытые рёбра основания -->
+<line x1="38" y1="148" x2="115" y2="114" stroke="#ff6b4a" stroke-width="1.2" stroke-dasharray="4,3"/>
+<line x1="115" y1="28" x2="38" y2="148" stroke="#ff6b4a" stroke-width="1.4" stroke-dasharray="5,3"/>
+<!-- Видимые рёбра основания -->
+<line x1="115" y1="182" x2="192" y2="148" stroke="#ff6b4a" stroke-width="2"/>
+<line x1="192" y1="148" x2="115" y2="114" stroke="#ff6b4a" stroke-width="2"/>
+<line x1="115" y1="182" x2="38" y2="148" stroke="#ff6b4a" stroke-width="2"/>
+<!-- Видимые боковые рёбра -->
+<line x1="115" y1="28" x2="192" y2="148" stroke="#ff6b4a" stroke-width="2"/>
+<line x1="115" y1="28" x2="115" y2="182" stroke="#ff6b4a" stroke-width="2"/>
+<!-- Диагональ основания (38,148)→(192,148): горизонталь через центр.
+     Она проходит ровно через точку (115,148) — ногу высоты. -->
+<line x1="38" y1="148" x2="192" y2="148" stroke="#ff6b4a" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.7"/>
+<!-- Высота h: вертикально вниз от вершины до точки (115,148) на диагонали -->
+<line x1="115" y1="28" x2="115" y2="148" stroke="#ffc542" stroke-width="1.5" stroke-dasharray="5,3"/>
+<!-- ЗНАК ПРЯМОГО УГЛА:
+     Точка A (115,136): лежит НА высоте h (x=115)
+     Точка B (127,136): угол квадрата (в воздухе — так и должно быть)
+     Точка C (127,148): лежит НА диагонали основания (y=148)
+     Концы плеч касаются реальных линий, угол смотрит внутрь (вниз-влево к пересечению) -->
+<path d="M115,136 L127,136 L127,148" fill="none" stroke="#ffc542" stroke-width="1.8" stroke-linejoin="miter"/>
+<!-- Точка в ноге высоты -->
+<circle cx="115" cy="148" r="2.5" fill="#ffc542"/>
+<!-- Метки -->
+<text x="97" y="92" fill="#ffc542" font-size="13" font-family="Georgia,serif" font-style="italic">h</text>
+<text x="163" y="176" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">a</text>
 </svg>`,
 
   /* ── Прямоугольник с диагональю ── */
   rectangle:`<svg viewBox="0 0 260 160" xmlns="http://www.w3.org/2000/svg">
 <rect x="30" y="22" width="200" height="116" fill="rgba(52,208,140,0.06)" stroke="#34d08c" stroke-width="2.2" rx="2"/>
 <line x1="30" y1="22" x2="230" y2="138" stroke="#4a9eff" stroke-width="1.4" stroke-dasharray="5,3"/>
-<text x="124" y="16" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">a</text>
+<!-- a: над верхней стороной, снаружи -->
+<text x="122" y="15" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">a</text>
+<!-- b: левее фигуры, снаружи -->
 <text x="14" y="84" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">b</text>
-<text x="135" y="86" fill="#4a9eff" font-size="13" font-family="Georgia,serif" font-style="italic">d</text>
+<!-- d: рядом с диагональю, сбоку от линии (диагональ идёт 30,22→230,138, около середины x=130 y=80) -->
+<text x="148" y="72" fill="#4a9eff" font-size="13" font-family="Georgia,serif" font-style="italic">d</text>
 <rect x="30" y="22" width="14" height="14" fill="none" stroke="#34d08c" stroke-width="1.2"/>
 </svg>`
 };
@@ -1505,7 +1596,7 @@ sub:[
 {n:'Квадратные уравнения',clr:'var(--alg)',f:[
 {t:'Дискриминант',f:'D=b^2-4ac',d:'D>0: два корня, D=0: один корень, D<0: нет действительных корней.',ep:'x^2-5x+6=0',es:'D=25-24=1>0\\Rightarrow\\text{два корня}',sol:['Приведи уравнение к виду: ax² + bx + c = 0','Выдели коэффициенты: a — перед x², b — перед x, c — свободный член','Пример: x² − 5x + 6 = 0 → a=1, b=−5, c=6','D = b² − 4ac = (−5)² − 4·1·6 = 25 − 24 = 1','D=1 > 0 → два различных вещественных корня. D=0 → один. D<0 → нет корней.']},
 {t:'Формула корней',f:'x_{1,2}=\\dfrac{-b\\pm\\sqrt{D}}{2a}',d:'Корни квадратного уравнения через дискриминант.',ep:'x^2-5x+6=0',es:'x_{1,2}=\\dfrac{5\\pm1}{2};\\;x_1=3,\\;x_2=2',sol:['Шаг 1 — найди D = b² − 4ac. Для x²−5x+6=0: a=1, b=−5, c=6 → D=1','Шаг 2 — если D < 0: корней нет. Если D = 0: один корень x = −b/(2a)','Шаг 3 — если D > 0: x₁ = (−b + √D)/(2a), x₂ = (−b − √D)/(2a)','Пример: x₁ = (5 + 1)/2 = 3, x₂ = (5 − 1)/2 = 2','Проверка (Виета): x₁+x₂ = 5 = −b/a ✓, x₁·x₂ = 6 = c/a ✓']},
-{t:'Теорема Виета',f:'x_1+x_2=-\\dfrac{b}{a},\\quad x_1\\cdot x_2=\\dfrac{c}{a}',d:'Сумма и произведение корней.',ep:'x^2-5x+6=0',es:'x_1+x_2=5,\\;x_1x_2=6'},
+{t:'Теорема Виета',f:'x_1+x_2=-\\dfrac{b}{a},\\quad x_1\\cdot x_2=\\dfrac{c}{a}',d:'Сумма и произведение корней.',ep:'x^2-5x+6=0',es:'x_1+x_2=5,\\;x_1x_2=6',sol:['Теорема Виета работает для уравнения ax²+bx+c=0','x₁+x₂ = −b/a, x₁·x₂ = c/a','x²−5x+6=0: a=1, b=−5, c=6','Сумма: −(−5)/1 = 5','Произведение: 6/1 = 6','Запомни: корни этого уравнения 2 и 3, потому что 2+3=5 и 2·3=6 ✓']},
 {t:'Формула при чётном b',f:'x_{1,2}=\\dfrac{-b^{\\prime}\\pm\\sqrt{D^{\\prime}}}{a},\\quad D^{\\prime}=b^{\\prime2}-ac',d:'Упрощённая формула для ax²+2b′x+c=0.',ep:'2x^2-6x+4=0',es:"b'=3:\\;D'=1;\\;x_1=2,\\;x_2=1"},
 ]},
 {n:'Прогрессии',clr:'var(--alg)',f:[
@@ -1598,8 +1689,8 @@ sub:[
 ]},
 {n:'Прямоугольный треугольник',clr:'var(--plan)',f:[
 {t:'Тригонометрические отношения',f:'\\sin A=\\dfrac{a}{c},\\;\\cos A=\\dfrac{b}{c},\\;\\tan A=\\dfrac{a}{b}',d:'a — противолежащий катет, b — прилежащий, c — гипотенуза.',svg:'rightTriangle',ep:'c=10,\\;A=30°',es:'a=5',sol:['sinA=a/c (против./гип.), cosA=b/c (прилеж./гип.), tgA=a/b','c=10, A=30°: a=10·sin30°=5','Проверь: a²+b²=c² → 25+75=100 ✓','Мнемоника: SOH-CAH-TOA (SinOpposite/Hyp, CosAdjacent/Hyp)','Для нахождения угла: A=arcsin(a/c)']},
-{t:'Высота к гипотенузе',f:'h^2=a_1\\cdot a_2',d:'h — высота на гипотенузу; a₁,a₂ — отрезки гипотенузы.',svg:'rightTriangle',ep:'a_1=4,\\;a_2=9',es:'h=6',sol:['h²=a₁·a₂, a₁ и a₂ — отрезки гипотенузы','a₁=4, a₂=9: h²=36, h=6','a²=c·a₁, b²=c·a₂ (катет через проекцию)','Проверь: a₁+a₂=c=13; a²=52, b²=117? Нет: a²=13·4=52','Применяется в задачах ЕГЭ на нахождение высоты']},
-{t:'Катет через проекцию',f:'a^2=c\\cdot a_1,\\quad b^2=c\\cdot a_2',d:'Квадрат катета = гипотенуза × проекция катета.',svg:'rightTriangle',ep:'c=13,\\;a_1=9',es:'a=3\\sqrt{13}',sol:['a²=c·a₁ — квадрат катета = гипотенуза × проекция','c=13, a₁=9: a²=117, a=√117=3√13','a₂=c−a₁=4; b²=13·4=52; b=2√13','Проверь: a²+b²=117+52=169=13² ✓','Используется в стереометрии и планиметрии ЕГЭ']},
+{t:'Высота к гипотенузе',f:'h^2=a_1\\cdot a_2',d:'h — высота на гипотенузу; a₁,a₂ — отрезки гипотенузы.',svg:'rightTriangle',ep:'a_1=4,\\;a_2=9',es:'h=6',sol:['h²=a₁·a₂ (среднее геометрическое отрезков гипотенузы)','a₁=4, a₂=9: h²=36, h=6','Гипотенуза: c=a₁+a₂=13','Катеты: a²=c·a₁=13·4=52 → a=2√13; b²=c·a₂=13·9=117 → b=3√13','Проверь: a²+b²=52+117=169=13²=c² ✓']},
+{t:'Катет через проекцию',f:'a^2=c\\cdot a_1,\\quad b^2=c\\cdot a_2',d:'Квадрат катета = гипотенуза × проекция катета.',svg:'rightTriangle',ep:'c=13,\\;a_1=9',es:'a=3\\sqrt{13}',sol:['a²=c·a₁ — квадрат катета = гипотенуза × проекция этого катета','c=13, a₁=9: a²=13·9=117, a=√117=3√13','a₂=c−a₁=4; b²=13·4=52; b=2√13','Проверь: a²+b²=117+52=169=13² ✓','Применяется в стереометрии и планиметрии ЕГЭ']},
 {t:'Медиана к гипотенузе',f:'m_c=\\dfrac{c}{2}=R',d:'Медиана к гипотенузе = радиус описанной окружности.',svg:'rightTriangle',ep:'c=10',es:'m_c=5=R',sol:['m_c=c/2=R (радиус описанной окружности)','c=10: m_c=5=R','Центр описанной окружности = середина гипотенузы','Диаметр описанной = гипотенуза','Угол при вершине = 90° если он опирается на диаметр']},
 ]},
 {n:'Медианы, биссектрисы, высоты',clr:'var(--plan)',f:[
@@ -1667,14 +1758,14 @@ sub:[
 ]},
 {n:'Призма',clr:'var(--ster)',f:[
 {t:'Объём прямой призмы',f:'V=S_{\\text{осн}}\\cdot h',d:'Площадь основания × высота.',ep:'S_{\\text{осн}}=12,\\;h=5',es:'V=60',sol:['V=S_осн·h','S_осн=12, h=5: V=60','h — высота (⊥ основаниям)','Для цилиндра: S_осн=πr²','V(призмы)=3·V(пирамиды) с тем же основанием']},
-{t:'Площадь боковой поверхности',f:'S_{\\text{бок}}=P_{\\text{осн}}\\cdot h',d:'Периметр основания × высота.',ep:'P_{\\text{осн}}=18,\\;h=5',es:'S=90'},
-{t:'Площадь полной поверхности',f:'S_{\\text{полн}}=S_{\\text{бок}}+2S_{\\text{осн}}',d:'Боковая + два основания.',ep:'S_{\\text{бок}}=90,\\;S_{\\text{осн}}=12',es:'S=114'},
+{t:'Площадь боковой поверхности',f:'S_{\\text{бок}}=P_{\\text{осн}}\\cdot h',d:'Периметр основания × высота.',ep:'P_{\\text{осн}}=18,\\;h=5',es:'S=90',sol:['S_бок = P_осн · h — каждая боковая грань = прямоугольник (сторона × h)','P_осн — полный периметр основания, h — высота призмы','P=18, h=5: S = 18·5 = 90','Ключевой факт: боковая поверхность разворачивается в прямоугольник P×h','Для треугольной призмы: P = a+b+c']},
+{t:'Площадь полной поверхности',f:'S_{\\text{полн}}=S_{\\text{бок}}+2S_{\\text{осн}}',d:'Боковая + два основания.',ep:'S_{\\text{бок}}=90,\\;S_{\\text{осн}}=12',es:'S=114',sol:['S_полн = S_бок + 2·S_осн (два основания — верхнее и нижнее!)','Сравни с пирамидой: там +1·S_осн','S_бок=90, S_осн=12: S = 90 + 2·12 = 114','S_осн зависит от формы основания: квадрат, треугольник, шестиугольник...','Запомни: 2S_осн — только у призмы и цилиндра']},
 ]},
 {n:'Пирамида',clr:'var(--ster)',f:[
 {t:'Объём пирамиды',f:'V=\\dfrac{1}{3}\\cdot S_{\\text{осн}}\\cdot h',d:'Треть объёма охватывающей призмы.',svg:'pyramid',ep:'S_{\\text{осн}}=36,\\;h=5',es:'V=60',sol:['S_осн — площадь основания (квадрат, треугольник и т.п.)','h — перпендикуляр из вершины до плоскости основания','Ключевой факт: V(пирамида) = 1/3 · V(призмы). Три пирамиды = одна призма!','Пример: S_осн = 6×6 = 36, h = 5','V = 1/3 · 36 · 5 = 60']},
-{t:'Площадь боковой поверхности (правильная)',f:'S_{\\text{бок}}=\\dfrac{1}{2}\\cdot P_{\\text{осн}}\\cdot a',d:'a — апофема (высота боковой грани).',svg:'pyramid',ep:'P_{\\text{осн}}=20,\\;a=6',es:'S=60'},
+{t:'Площадь боковой поверхности (правильная)',f:'S_{\\text{бок}}=\\dfrac{1}{2}\\cdot P_{\\text{осн}}\\cdot a',d:'a — апофема (высота боковой грани).',svg:'pyramid',ep:'P_{\\text{осн}}=20,\\;a=6',es:'S=60',sol:['S_бок = ½ · P_осн · a','P_осн — периметр основания, a — апофема (высота треугольной грани, не ребро!)','P=20, a=6: S = ½·20·6 = 60','Запомни: формула похожа на площадь треугольника (½·основание·высота)','a = √(h²+r²) где r — радиус вписанной окружности основания']},
 {t:'Апофема правильной пирамиды',f:'a=\\sqrt{h^2+r^2}',d:'r — радиус вписанной окружности основания.',svg:'pyramid',ep:'h=4,\\;r=3',es:'a=5',sol:['a=√(h²+r²), r — радиус вписанной окружности основания','h=4, r=3: a=√(16+9)=5','Тройка 3-4-5!','a — высота боковой грани','S_бок=P_осн·a/2']},
-{t:'Площадь полной поверхности',f:'S_{\\text{полн}}=S_{\\text{бок}}+S_{\\text{осн}}',d:'Боковая + одно основание.',ep:'S_{\\text{бок}}=60,\\;S_{\\text{осн}}=36',es:'S=96'},
+{t:'Площадь полной поверхности',f:'S_{\\text{полн}}=S_{\\text{бок}}+S_{\\text{осн}}',d:'Боковая + одно основание.',ep:'S_{\\text{бок}}=60,\\;S_{\\text{осн}}=36',es:'S=96',sol:['S_полн = S_бок + S_осн (только одно основание у пирамиды!)','S_бок=60, S_осн=36: S_полн=96','Для квадратного основания: S_осн = a²','Не путай с цилиндром (там 2 основания!) и призмой (2 основания!)','S_осн определяется геометрией основания отдельно']},
 ]},
 {n:'Усечённая пирамида',clr:'var(--ster)',f:[
 {t:'Объём усечённой пирамиды',f:'V=\\dfrac{h}{3}\\left(S_1+S_2+\\sqrt{S_1S_2}\\right)',d:'S₁,S₂ — площади оснований, h — высота.',ep:'S_1=9,\\;S_2=4,\\;h=6',es:'V=2(9+4+6)=38',sol:['V=(h/3)·(S₁+S₂+√(S₁S₂))','S₁=9, S₂=4, h=6: V=2·(9+4+6)=38','√(S₁·S₂)=√36=6','При S₂→0: V=(h/3)·S₁ (обычная пирамида)','Запомни: три слагаемых в скобках']},
@@ -1682,8 +1773,8 @@ sub:[
 {n:'Конус',clr:'var(--ster)',f:[
 {t:'Объём конуса',f:'V=\\dfrac{1}{3}\\pi r^2h',d:'r — радиус основания, h — высота.',svg:'cone',ep:'r=3,\\;h=4',es:'V=12\\pi',sol:['r — радиус основания, h — высота от вершины до основания','Запомни: V(конус) = 1/3 · V(цилиндра) с теми же r и h','Шаг 1: S = πr² = 9π','Шаг 2: V = 1/3 · 9π · 4 = 12π','Образующая l = √(r²+h²) = √(9+16) = 5']},
 {t:'Образующая конуса',f:'l=\\sqrt{r^2+h^2}',d:'Боковая образующая — гипотенуза (r,h,l).',svg:'cone',ep:'r=3,\\;h=4',es:'l=5',sol:['l=√(r²+h²)','r=3, h=4: l=√(9+16)=5 (тройка 3-4-5!)','l — от вершины до края основания','h=√(l²−r²) — если нужна высота','r=√(l²−h²) — если нужен радиус']},
-{t:'Площадь боковой поверхности',f:'S_{\\text{бок}}=\\pi rl',d:'l — образующая.',svg:'cone',ep:'r=3,\\;l=5',es:'15\\pi'},
-{t:'Площадь полной поверхности',f:'S_{\\text{полн}}=\\pi r(l+r)',d:'Боковая + основание.',svg:'cone',ep:'r=3,\\;l=5',es:'24\\pi'},
+{t:'Площадь боковой поверхности',f:'S_{\\text{бок}}=\\pi rl',d:'l — образующая.',svg:'cone',ep:'r=3,\\;l=5',es:'15\\pi',sol:['S_бок = π·r·l — боковая поверхность разворачивается в сектор','r — радиус основания, l — образующая (от вершины до края)','Шаг 1: S = π·3·5 = 15π','Запомни: l = √(r²+h²) если дана высота, а не l','Применение: покрасить боковую поверхность конуса']},
+{t:'Площадь полной поверхности',f:'S_{\\text{полн}}=\\pi r(l+r)',d:'Боковая + основание.',svg:'cone',ep:'r=3,\\;l=5',es:'24\\pi',sol:['S_полн = πrl + πr² = πr(l+r)','Боковая: πrl = 15π, Основание: πr² = 9π','Шаг 1: S = π·3·(5+3) = 3π·8 = 24π','Ключевой факт: в скобках (l+r), не (l+2r)! Одно основание у конуса','Для сферы: S = 4πr² (без слагаемого l)']},
 ]},
 {n:'Усечённый конус',clr:'var(--ster)',f:[
 {t:'Объём усечённого конуса',f:'V=\\dfrac{\\pi h}{3}(r_1^2+r_2^2+r_1r_2)',d:'r₁,r₂ — радиусы оснований.',ep:'r_1=3,\\;r_2=1,\\;h=4',es:'\\dfrac{52\\pi}{3}',sol:['V=πh(r₁²+r₂²+r₁r₂)/3','r₁=3, r₂=1, h=4: V=4π·13/3=52π/3','Три слагаемых: r₁², r₂², r₁r₂','При r₂=0: V=πr₁²h/3 (обычный конус) ✓','r₁ — большее основание']},
@@ -1692,15 +1783,15 @@ sub:[
 ]},
 {n:'Цилиндр',clr:'var(--ster)',f:[
 {t:'Объём цилиндра',f:'V=\\pi r^2h',d:'r — радиус, h — высота.',svg:'cylinder',ep:'r=5,\\;h=8',es:'200\\pi',sol:['V=πr²h','r=5, h=8: V=200π','Из V: r=√(V/(πh))','V(конуса)=V(цилиндра)/3 при тех же r,h','S_бок=2πrh, S_полн=2πr(h+r)']},
-{t:'Площадь боковой поверхности',f:'S_{\\text{бок}}=2\\pi rh',d:'Развёртка — прямоугольник 2πr × h.',svg:'cylinder',ep:'r=3,\\;h=10',es:'60\\pi'},
-{t:'Площадь полной поверхности',f:'S_{\\text{полн}}=2\\pi r(h+r)',d:'Боковая + два основания.',svg:'cylinder',ep:'r=3,\\;h=10',es:'78\\pi'},
+{t:'Площадь боковой поверхности',f:'S_{\\text{бок}}=2\\pi rh',d:'Развёртка — прямоугольник 2πr × h.',svg:'cylinder',ep:'r=3,\\;h=10',es:'60\\pi',sol:['S_бок = 2πrh — боковая поверхность разворачивается в прямоугольник','Ширина прямоугольника = длина окружности = 2πr','r=3, h=10: S = 2π·3·10 = 60π','Запомни: 2πr — это длина окружности основания','Сравни с S_полн = 2πr(h+r) — там добавляются два круга']},
+{t:'Площадь полной поверхности',f:'S_{\\text{полн}}=2\\pi r(h+r)',d:'Боковая + два основания.',svg:'cylinder',ep:'r=3,\\;h=10',es:'78\\pi',sol:['S_полн = S_бок + 2·S_осн = 2πrh + 2πr²','Выносим 2πr: S = 2πr(h + r)','r=3, h=10: S = 2π·3·(10+3) = 6π·13 = 78π','Ключевой факт: в скобках (h+r), не (h+2r)','Два основания — поэтому 2πr², а не πr²']},
 ]},
 {n:'Шар и сфера',clr:'var(--ster)',f:[
 {t:'Объём шара',f:'V=\\dfrac{4}{3}\\pi r^3',d:'r — радиус шара.',svg:'sphere',ep:'r=3',es:'36\\pi',sol:['Запомни коэффициент 4/3!','r³ = 3³ = 27','V = 4/3 · π · 27 = 36π ≈ 113','Сравни с цилиндром той же высоты 2r: V_цил = 2πr³. Шар = 2/3 цилиндра!']},
 {t:'Площадь поверхности сферы',f:'S=4\\pi r^2',svg:'sphere',ep:'r=3',es:'36\\pi',sol:['S=4πr²','r=3: S=36π','Из S: r=√(S/(4π))','S=4·πr² (4 больших круга)','Сравни: V=4πr³/3']},
 {t:'Объём шарового сегмента',f:'V_{\\text{сег}}=\\dfrac{\\pi h^2}{3}(3r-h)',d:'h — высота сегмента.',svg:'sphere',ep:'r=5,\\;h=2',es:'\\dfrac{52\\pi}{3}',sol:['V=πh²(3r−h)/3','r=5, h=2: V=π·4·13/3=52π/3','h — высота сегмента (h≤2r)','При h=2r: V=4πr³/3 (вся сфера) ✓','Сегмент — "шапка" шара']},
 {t:'Шар вписан в цилиндр',f:'R_{\\text{шара}}=r_{\\text{цил}}=\\dfrac{h_{\\text{цил}}}{2}',d:'Радиус шара = радиус цилиндра = половина высоты.',ep:'r_{цил}=5',es:'h_{цил}=10',sol:['R_шара=r_цил=h_цил/2','r=5: h=10; V_шара=500π/3','S_шара=100π=S_бок_цил (равны!)','V_шара/V_цил=2/3','Шар касается основания и боковой поверхности']},
-{t:'Шар вписан в конус',f:'r_{шара}=\\dfrac{S_{\\text{осн}}}{P_{\\text{попер}}}',d:'Через осевое сечение: r вписанной в равнобедренный треугольник окружности.',ep:'\\text{Осевое сечение: }h=4,\\;r_{кон}=3',es:'r=\\dfrac{12}{8}=1{,}5',sol:['Через осевое сечение: r_шара=S_осев/p_осев','h=4, r_кон=3, l=5','S_осев=(1/2)·6·4=12; p=(6+5+5)/2=8','r_шара=12/8=1,5','Применяется в задачах ЕГЭ на вписанные тела']},
+{t:'Шар вписан в конус',f:'r_{\\text{шара}}=\\dfrac{S_{\\text{осев}}}{p_{\\text{осев}}}=\\dfrac{r_{\\text{кон}}\\cdot h}{r_{\\text{кон}}+l}',d:'Радиус вписанной сферы через осевое сечение конуса.',ep:'\\text{Осевое сечение: }h=4,\\;r_{\\text{кон}}=3',es:'r=\\dfrac{12}{8}=1{,}5',sol:['Осевое сечение конуса — равнобедренный треугольник. Сфера вписана в него.','h=4, r_кон=3, l=√(r²+h²)=√(9+16)=5','S_осев=(1/2)·основание·высота=(1/2)·(2·3)·4=12','p_осев=(основание+2·бок.сторона)/2=(6+5+5)/2=8','r_шара=S/p=12/8=1,5. Или: r=r·h/(r+l)=3·4/(3+5)=1,5 ✓']},
 ]},
 ]},
 {id:'prob',name:'Вероятность',icon:'⚅',color:'var(--prob)',
@@ -1713,7 +1804,7 @@ sub:[
 {t:'Сочетания',f:'C_n^k=\\dbinom{n}{k}=\\dfrac{n!}{k!(n-k)!}',d:'Выбрать k из n (порядок не важен).',ep:'C_{10}^3',es:'120',sol:['C_n^k = n!/(k!(n−k)!) — выбрать k из n (порядок не важен)','C₁₀³ = 10!/(3!7!) = (10·9·8)/(3·2·1) = 120','Выбрать 3 из 10 команд в финал','C₁₀³ ≠ A₁₀³: сочетание не учитывает порядок','C_n^k = C_n^(n−k): C₁₀³ = C₁₀⁷ = 120']},
 {t:'Симметрия сочетаний',f:'C_n^k=C_n^{n-k},\\quad C_n^0=C_n^n=1',ep:'C_{10}^7',es:'C_{10}^3=120',sol:['C_n^k=C_n^(n−k)','C₁₀⁷=C₁₀³=120 (быстрее!)','Смысл: выбрать 7 = оставить 3','C_n^0=C_n^n=1','C_n^1=n']},
 {t:'Формула Паскаля',f:'C_n^k=C_{n-1}^{k-1}+C_{n-1}^k',d:'Рекуррентное соотношение.',ep:'C_5^2',es:'4+6=10',sol:['C_n^k=C_(n-1)^(k-1)+C_(n-1)^k','C₅²=C₄¹+C₄²=4+6=10','Треугольник Паскаля','Строки: коэффициенты бинома (a+b)ⁿ','Применяется для быстрого вычисления']},
-{t:'Бином Ньютона',f:'(a+b)^n=\\sum_{k=0}^{n}C_n^k\\,a^k\\,b^{n-k}',d:'Раскрытие n-й степени двучлена.',ep:'(a+b)^3',es:'a^3+3a^2b+3ab^2+b^3',sol:['(a+b)ⁿ=∑C_n^k·a^k·b^(n−k), k=0..n','(a+b)³=a³+3a²b+3ab²+b³','Коэффициенты 1,3,3,1','k-й член: C_n^(k−1)·a^(n−k+1)·b^(k−1)','Применяется для нахождения конкретного члена']},
+{t:'Бином Ньютона',f:'(a+b)^n=\\sum_{k=0}^{n}C_n^k\\,a^{n-k}\\,b^{k}',d:'Раскрытие n-й степени двучлена.',ep:'(a+b)^3',es:'a^3+3a^2b+3ab^2+b^3',sol:['(a+b)ⁿ=∑C_n^k·aⁿ⁻ᵏ·bᵏ, k=0..n','(a+b)³: k=0: a³; k=1: 3a²b; k=2: 3ab²; k=3: b³','Коэффициенты 1,3,3,1 — строка треугольника Паскаля','(k+1)-й член: C_n^k·aⁿ⁻ᵏ·bᵏ (нумерация с k=0)','Применяется для нахождения конкретного члена разложения']},
 ]},
 {n:'Классическая вероятность',clr:'var(--prob)',f:[
 {t:'Классическая вероятность',f:'P(A)=\\dfrac{m}{n}',d:'m — число благоприятных, n — число всех равновозможных исходов.',ep:'Чётное на кубике',es:'P=\\dfrac{3}{6}=0{,}5',sol:['P(A)=m/n — благоприятных/всего','Чётное на кубике: m=3(2,4,6), n=6','P=3/6=0,5=50%','Все исходы РАВНОВОЗМОЖНЫ!','0≤P(A)≤1']},
@@ -1848,18 +1939,42 @@ function makeCard(fm,sid,idx){
   const isLearned=STATE.learned.has(fid);
   const hasNote=!!STATE.notes[fid];
   const noteVal=(STATE.notes[fid]||'').replace(/"/g,'&quot;');
-  // Step-by-step solution
-  const stepsHTML=fm.sol&&fm.sol.length?fm.sol.map((s,i)=>`<div class="ex-step"><div class="ex-step-num">${i+1}</div><div class="ex-formula-step">${s}</div></div>`).join(''):'';
+  // Step-by-step solution — smart renderer
+  function renderSolStep(s,i){
+    // 💡 Tip / key fact
+    if(/^(Запомни|Ключевой факт|Важно|Факт|Сравни|Из формулы|Вывод)/i.test(s)){
+      const m=s.match(/^([^:]+):\s*(.*)/s);
+      if(m) return `<div class="sol-tip">💡 <b>${m[1]}:</b> ${m[2]}</div>`;
+      return `<div class="sol-tip">💡 ${s}</div>`;
+    }
+    // ❌ Common mistake
+    if(/^(Ошибка|Не путай|Не перепутай|Осторожно)/i.test(s)){
+      const m=s.match(/^([^:!]+)[:!]\s*(.*)/s);
+      if(m) return `<div class="sol-tip" style="border-left-color:#ff6b4a;background:rgba(255,107,74,0.07);">❌ <b>${m[1]}:</b> ${m[2]}</div>`;
+      return `<div class="sol-tip" style="border-left-color:#ff6b4a;background:rgba(255,107,74,0.07);">❌ ${s}</div>`;
+    }
+    // 📌 Definition: "x — описание" without = before the dash
+    if(/ — /.test(s)&&!/=/.test(s.split(' — ')[0])&&!s.startsWith('Шаг')){
+      const idx=s.indexOf(' — ');
+      const key=s.slice(0,idx), val=s.slice(idx+3);
+      return `<div class="sol-def"><span class="sol-def-k">${key}</span><span class="sol-def-sep"> — </span><span class="sol-def-v">${val}</span></div>`;
+    }
+    // 🔢 Calculation / formula step
+    const label=s.match(/^Шаг\s*(\d+):\s*/i);
+    const num=label?label[1]:(i+1);
+    const content=label?s.replace(/^Шаг\s*\d+:\s*/i,''):s;
+    const isCalc=/=/.test(content)||/√/.test(content)||/·/.test(content)||/\d/.test(content);
+    return `<div class="ex-step${isCalc?' ex-step-calc':''}"><div class="ex-step-num">${num}</div><div class="ex-formula-step">${content}</div></div>`;
+  }
+  const stepsHTML=fm.sol&&fm.sol.length?fm.sol.map((s,i)=>renderSolStep(s,i)).join(''):'';
   // Combined example panel (task + steps + answer)
   const exPanel=fm.ep?`
-    <button class="ex-btn" onclick="toggleEx('${id}',this)"><span class="arr">▶</span> Пример с пошаговым решением</button>
+    <button class="ex-btn" onclick="toggleEx('${id}',this)"><span class="arr">▶</span> Разобрать пример пошагово</button>
     <div class="ex-body" id="${id}">
       <div class="ex-lbl">📝 Задача</div>
       <div class="ex-p">${k(fm.ep)}</div>
-      <div class="ex-sep"></div>
-      <div class="ex-lbl2">📖 Решение</div>
-      ${stepsHTML?`<div style="margin:6px 0 8px">${stepsHTML}</div>`:''}
-      ${fm.es?`<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--plan);margin-bottom:4px;">✅ Ответ</div><div class="ex-s">${k(fm.es)}</div>`:''}
+      ${stepsHTML?`<div class="ex-sep"></div><div class="ex-lbl2">🔢 Решение по шагам</div><div style="margin:8px 0 6px">${stepsHTML}</div>`:''}
+      ${fm.es?`<div style="display:flex;align-items:center;gap:8px;margin-top:4px;padding:8px 12px;background:rgba(52,208,140,0.08);border:1px solid rgba(52,208,140,0.2);border-radius:8px;"><span style="font-size:13px;font-weight:700;color:var(--plan);">✅ Ответ:</span><div class="ex-s" style="margin:0">${k(fm.es)}</div></div>`:''}
     </div>`:'';
   return `<div class="fc${isLearned?' is-learned':''}" data-s="${sid}" data-fid="${fid}" data-title="${fm.t.toLowerCase()}" data-desc="${(fm.d||'').toLowerCase()}">
     <div class="fc-head">
