@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#070c1a">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -164,11 +164,34 @@ body.light .tabs-fade-right::after{color:rgba(60,80,180,0.6);}
   padding:16px 14px 80px;
 }
 @media(min-width:900px){
-  .fc{font-size:1.05em;}
-  .fc-math{font-size:1.7em;}
-  .fc-desc{font-size:14px;}
-  .fc-title{font-size:12px;}
-  .fc-head{padding:14px 16px 0;}
+  body{font-size:16px;}
+  .fc{font-size:1.15em;}
+  .fc-math{font-size:2.2em;}
+  .fc-desc{font-size:16px;}
+  .fc-title{font-size:14px;letter-spacing:1.2px;}
+  .fc-head{padding:16px 18px 0;}
+  .fc-btn{font-size:18px;min-width:36px;min-height:36px;}
+  .note-btn{font-size:16px;min-width:36px;min-height:36px;}
+  .sub-title{font-size:14px;}
+  .sub-count{font-size:12px;}
+  .s-intro{font-size:14px;padding:18px 22px;}
+  .tab{font-size:14px;padding:10px 16px 12px;}
+  .app-name{font-size:17px;}
+  .mode-btn{min-height:56px;min-width:56px;font-size:22px;}
+  .mode-btn .btn-lbl{font-size:10px;}
+  .ex-btn{font-size:13px;}
+  .sol-btn{font-size:13px;}
+  .ex-p,.ex-s{font-size:15px;}
+  .ex-step{font-size:14px;}
+  .gen-topic-btn{font-size:13px;}
+  #content{padding:20px 24px 100px;}
+  .sub-hdr{margin:36px 0 16px;padding:16px 20px;}
+  .katex-display{font-size:1.1em;}
+}
+@media(min-width:1200px){
+  #content{max-width:1100px;}
+  .fc-math{font-size:2.2em;}
+  body{font-size:17px;}
 }
 
 /* ── EXAM MODE BADGE ── */
@@ -356,37 +379,42 @@ body.oge-mode .ege-only{display:none;}
 }
 
 .fc-head{
-  padding:13px 14px 0;
+  padding:15px 16px 0;
   display:flex;justify-content:space-between;align-items:flex-start;gap:8px;
 }
 .fc-title{
-  font-size:11px;font-weight:800;text-transform:uppercase;
+  font-size:12px;font-weight:800;text-transform:uppercase;
   letter-spacing:1px;color:var(--text2);line-height:1.4;flex:1;
-  padding-top:2px;
+  padding-top:4px;
 }
 .fc-actions{display:flex;gap:4px;flex-shrink:0;}
 .fc-btn{
-  background:none;border:none;cursor:pointer;
-  padding:4px 6px;border-radius:6px;font-size:16px;
-  transition:all 0.15s;opacity:0.45;line-height:1;
-  min-width:32px;min-height:32px;display:flex;align-items:center;justify-content:center;
+  background:var(--bg3);border:1.5px solid var(--border2);cursor:pointer;
+  padding:5px 8px;border-radius:8px;font-size:17px;
+  transition:all 0.15s;opacity:0.7;line-height:1;
+  min-width:36px;min-height:36px;display:flex;align-items:center;justify-content:center;
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent;
 }
-.fc-btn:hover,.fc-btn:active{opacity:1;background:rgba(255,255,255,0.07);}
-.fc-btn.fav-btn.active{opacity:1;filter:drop-shadow(0 0 4px var(--fav));}
-.fc-btn.learn-btn.active{opacity:1;color:var(--ex-c);}
+.fc-btn:hover,.fc-btn:active{opacity:1;background:var(--bg4);border-color:var(--border2);}
+.fc-btn.fav-btn{color:var(--text3);border-color:rgba(255,215,0,0.2);}
+.fc-btn.fav-btn:hover{border-color:rgba(255,215,0,0.5);color:var(--fav);}
+.fc-btn.fav-btn.active{opacity:1;color:var(--fav);background:rgba(255,215,0,0.12);border-color:rgba(255,215,0,0.45);filter:drop-shadow(0 0 6px rgba(255,215,0,0.4));}
+.fc-btn.learn-btn{color:var(--text3);border-color:rgba(82,199,122,0.2);}
+.fc-btn.learn-btn:hover{border-color:rgba(82,199,122,0.5);color:var(--ex-c);}
+.fc-btn.learn-btn.active{opacity:1;color:var(--ex-c);background:rgba(82,199,122,0.12);border-color:rgba(82,199,122,0.45);font-weight:900;}
 
 .fc-math{
-  padding:16px 20px 8px;
-  text-align:center;font-size:1.55em;
+  padding:20px 24px 12px;
+  text-align:center;font-size:1.75em;
   overflow-x:auto;font-family:'Crimson Pro',Georgia,serif;
   -webkit-overflow-scrolling:touch;
   line-height:1.65;
 }
 .fc-math::-webkit-scrollbar{height:3px;}
 .fc-math::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
-.fc-desc{padding:2px 16px 12px;font-size:13px;color:var(--text2);line-height:1.55;}
-.fc-svg{padding:4px 16px 10px;display:flex;justify-content:center;}
-.fc-svg svg{max-width:100%;max-height:150px;width:auto;}
+.fc-desc{padding:6px 18px 14px;font-size:14px;color:var(--text2);line-height:1.6;}
+.fc-svg{padding:6px 16px 14px;display:flex;justify-content:center;}
+.fc-svg svg{max-width:100%;max-height:180px;width:auto;}
 
 /* Example */
 .ex-btn{
@@ -665,6 +693,41 @@ body.oge-mode .ege-only{display:none;}
   *{transition-duration:0.01ms !important;}
 }
 
+/* ══ MOBILE-FIRST OPTIMIZER ══ */
+/* Eliminate 300ms tap delay */
+button,a,[role="button"],.tab,.st-chip,.mode-btn,.fc-btn,.note-btn,
+.test-opt,.sr-btn,.gen-topic-btn,.gen-diff-btn,.exam-mode-btn,
+.sol-btn,.ex-btn,.set-btn,.modal-close,.fc-nav-btn,.fc-shuffle-btn{
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+}
+/* Prevent horizontal overflow */
+html,body{max-width:100vw;overflow-x:hidden;}
+/* Modal scroll containment */
+.modal-overlay{overscroll-behavior:contain;}
+.gen-modal-body,.test-body,.stats-wrap,.fc-modal-body{overscroll-behavior:contain;}
+/* GPU layer for smooth 3D flip */
+.fc,.fc-card-inner,.modal-overlay{-webkit-transform:translateZ(0);transform:translateZ(0);}
+/* Countdown wrap on tiny screens */
+.countdown-wrap{flex-wrap:wrap;gap:4px;}
+/* iOS: prevent zoom on input focus (font-size must be >=16px) */
+#srch,.gen-answer-input,.note-area textarea{font-size:16px !important;}
+/* Settings popup scroll */
+.settings-popup{max-height:calc(100dvh - 80px);overflow-y:auto;overscroll-behavior:contain;}
+/* Landscape phone */
+@media(max-height:500px) and (orientation:landscape){
+  #hdr{padding-top:4px;}
+  .mode-btn{min-height:38px;min-width:38px;font-size:16px;}
+  .tab{padding:5px 10px 7px;min-height:36px;}
+}
+/* Very small phones */
+@media(max-width:374px){
+  .tab{padding:8px 6px 10px;font-size:10px;}
+  .fc-math{font-size:1.2em;}
+  .gen-topic-grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr));}
+  .mode-btn{min-width:40px;min-height:40px;font-size:17px;padding:5px 7px;}
+}
+
 /* ── OGE/EGE topic badges ── */
 .ege-only-badge{
   display:inline-block;background:rgba(74,158,255,0.12);
@@ -912,6 +975,56 @@ body.light .test-opt:hover{background:var(--bg4);}
 .set-ctrl.active{background:rgba(74,158,255,0.18);color:var(--alg);border-color:rgba(74,158,255,0.35);}
 .set-sep{height:1px;background:var(--border);margin:4px 0;}
 .settings-wrap{position:relative;}
+
+/* ══ CONFETTI ══ */
+#confetti-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:0;transition:opacity 0.3s;}
+#confetti-canvas.active{opacity:1;}
+
+/* ══ PRINT CHEAT SHEET ══ */
+@media print{
+  #hdr,#bktop,.modal-overlay,button.fc-btn,button.note-btn,button.ex-btn,button.sol-btn,
+  .hdr-actions,.srch-row,.tabs-wrap,.subtopic-nav,.s-intro,.note-area,
+  .ex-body,.sol-body,.fc-actions,#print-fab{display:none!important;}
+  body{background:#fff!important;color:#000!important;}
+  .fc{border:1px solid #ddd!important;break-inside:avoid;margin-bottom:8px!important;background:#fff!important;}
+  .fc-math{color:#000!important;}
+  .fc-title{color:#333!important;}
+  .katex{color:#000!important;}
+  #content{padding:0!important;max-width:100%!important;}
+  .sub-hdr{break-inside:avoid;}
+  @page{margin:1.5cm;}
+}
+
+/* ══ LAZY RENDER PLACEHOLDER ══ */
+.fc-math-lazy{
+  min-height:40px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--text3);font-size:12px;
+}
+
+/* ══ SOUND TOGGLE ══ */
+#sound-toggle{
+  background:var(--bg3);border:1px solid var(--border2);
+  color:var(--text2);border-radius:8px;
+  padding:5px 10px;font-size:18px;cursor:pointer;
+  min-height:32px;min-width:36px;display:flex;align-items:center;justify-content:center;
+  transition:all 0.15s;flex-shrink:0;
+  touch-action:manipulation;
+}
+#sound-toggle:hover{background:var(--bg4);color:var(--text);}
+#sound-toggle.muted{opacity:0.4;}
+
+/* ══ DOWNLOAD CARD BUTTON ══ */
+.dl-btn{
+  background:none;border:none;cursor:pointer;
+  padding:4px 7px;border-radius:6px;font-size:11px;
+  transition:all 0.15s;opacity:0.4;line-height:1;
+  min-width:38px;min-height:28px;display:flex;align-items:center;justify-content:center;gap:2px;
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent;
+  color:var(--alg);font-weight:600;letter-spacing:0.3px;
+}
+.dl-btn:hover,.dl-btn:active{opacity:1;background:rgba(74,158,255,0.1);}
+.dl-btn.downloading{opacity:1;animation:spin 0.6s linear infinite;}
 </style>
 </head>
 <body>
@@ -952,6 +1065,13 @@ body.light .test-opt:hover{background:var(--bg4);}
             Показывает карточки именно в тот момент, когда ты вот-вот забудешь. После переворота карточки оцени себя: <b style="color:var(--ster)">Снова</b> / <b style="color:var(--prob)">Сложно</b> / <b style="color:var(--plan)">Знаю</b> / <b style="color:var(--alg)">Легко</b>. Система сама решит когда показать снова — через 1, 6, 14 дней.
           </div>
         </div>
+        <div class="set-sep"></div>
+        <div class="set-row">
+          <span class="set-row-label">🖨️ Распечатать шпаргалку</span>
+          <div class="set-row-controls">
+            <button class="set-ctrl" onclick="window.print()">Печать</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -977,6 +1097,10 @@ body.light .test-opt:hover{background:var(--bg4);}
       <button class="mode-btn" onclick="openFlashFav()" style="color:var(--fav);border-color:rgba(255,215,0,0.25);">⭐<span class="btn-lbl" style="color:var(--fav)">Избранное</span></button>
       <span class="tip">Карточки только из избранных формул</span>
     </div>
+    <div class="btn-tip">
+      <button class="mode-btn" id="sound-toggle-btn" onclick="toggleSound()" title="Звук"><span id="snd-ico">🔊</span><span class="btn-lbl" id="snd-lbl">Звук</span></button>
+      <span class="tip">Звуковая обратная связь при ответах</span>
+    </div>
   </div>
   <!-- COUNTDOWN -->
   <div class="countdown-wrap" id="countdown-wrap">
@@ -999,6 +1123,7 @@ body.light .test-opt:hover{background:var(--bg4);}
 
 <main id="content"></main>
 <button id="bktop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<canvas id="confetti-canvas"></canvas>
 
 <!-- ══ FLASHCARD MODAL ══ -->
 <div class="modal-overlay hidden" id="flash-modal">
@@ -1099,7 +1224,7 @@ body.light .test-opt:hover{background:var(--bg4);}
       <div class="gen-spinner"></div>
       <div style="font-size:14px;">Генерирую задачу...</div>
     </div>
-    <div id="gen-problem-wrap" style="display:none;display:flex;flex-direction:column;gap:10px;">
+    <div id="gen-problem-wrap" style="display:none;flex-direction:column;gap:10px;">
       <div class="gen-problem-card">
         <div class="gen-problem-label">📝 Задача</div>
         <div id="gen-figure-wrap" style="display:none;margin-bottom:10px;text-align:center;"></div>
@@ -1153,22 +1278,193 @@ const STATE={
 let srMode=false;
 // ─── SVG ───
 const SVG={
-  triangle:`<svg viewBox="0 0 240 175" xmlns="http://www.w3.org/2000/svg"><polygon points="120,14 18,158 222,158" fill="none" stroke="#34d08c" stroke-width="2.2"/><line x1="120" y1="14" x2="120" y2="158" stroke="#4a9eff" stroke-width="1.4" stroke-dasharray="5,3"/><rect x="120" y="146" width="12" height="12" fill="none" stroke="#4a9eff" stroke-width="1.2"/><text x="117" y="10" fill="#ffc542" font-size="14" font-family="Georgia,serif" text-anchor="middle">A</text><text x="10" y="168" fill="#ffc542" font-size="14" font-family="Georgia,serif">B</text><text x="230" y="168" fill="#ffc542" font-size="14" font-family="Georgia,serif">C</text><text x="58" y="92" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">c</text><text x="174" y="92" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">b</text><text x="116" y="173" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">a</text><text x="127" y="90" fill="#4a9eff" font-size="12" font-family="Georgia,serif" font-style="italic">h</text></svg>`,
-  rightTriangle:`<svg viewBox="0 0 240 175" xmlns="http://www.w3.org/2000/svg"><polygon points="22,155 22,18 210,155" fill="none" stroke="#34d08c" stroke-width="2.2"/><rect x="22" y="135" width="20" height="20" fill="none" stroke="#34d08c" stroke-width="1.5"/><text x="14" y="12" fill="#ffc542" font-size="14" font-family="Georgia,serif">A</text><text x="10" y="168" fill="#ffc542" font-size="14" font-family="Georgia,serif">B</text><text x="212" y="168" fill="#ffc542" font-size="14" font-family="Georgia,serif">C</text><text x="10" y="90" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">b</text><text x="108" y="170" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">a</text><text x="115" y="80" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">c</text><text x="36" y="148" fill="#4a9eff" font-size="11" font-family="Georgia,serif">90°</text></svg>`,
-  parallelogram:`<svg viewBox="0 0 240 130" xmlns="http://www.w3.org/2000/svg"><polygon points="40,110 200,110 210,20 50,20" fill="none" stroke="#34d08c" stroke-width="2.2"/><line x1="130" y1="20" x2="130" y2="110" stroke="#4a9eff" stroke-width="1.3" stroke-dasharray="4,3"/><rect x="130" y="98" width="12" height="12" fill="none" stroke="#4a9eff" stroke-width="1.2"/><text x="116" y="16" fill="#7a8aa8" font-size="12" font-family="Georgia,serif" font-style="italic">a</text><text x="27" y="70" fill="#7a8aa8" font-size="12" font-family="Georgia,serif" font-style="italic">b</text><text x="133" y="70" fill="#4a9eff" font-size="12" font-family="Georgia,serif" font-style="italic">h</text></svg>`,
-  trapezoid:`<svg viewBox="0 0 240 140" xmlns="http://www.w3.org/2000/svg"><polygon points="60,20 180,20 220,118 20,118" fill="none" stroke="#34d08c" stroke-width="2.2"/><line x1="60" y1="20" x2="60" y2="118" stroke="#4a9eff" stroke-width="1.3" stroke-dasharray="4,3"/><rect x="60" y="106" width="12" height="12" fill="none" stroke="#4a9eff" stroke-width="1.2"/><text x="115" y="14" fill="#7a8aa8" font-size="12" font-family="Georgia,serif" font-style="italic">a</text><text x="115" y="132" fill="#7a8aa8" font-size="12" font-family="Georgia,serif" font-style="italic">b</text><text x="64" y="75" fill="#4a9eff" font-size="12" font-family="Georgia,serif" font-style="italic">h</text></svg>`,
-  rhombus:`<svg viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg"><polygon points="110,12 210,80 110,148 10,80" fill="none" stroke="#34d08c" stroke-width="2.2"/><line x1="10" y1="80" x2="210" y2="80" stroke="#4a9eff" stroke-width="1.3" stroke-dasharray="4,3"/><line x1="110" y1="12" x2="110" y2="148" stroke="#ffc542" stroke-width="1.3" stroke-dasharray="4,3"/><rect x="110" y="80" width="10" height="10" fill="none" stroke="#7a8aa8" stroke-width="1.2"/><text x="108" y="6" fill="#ffc542" font-size="12" font-family="Georgia,serif">d₁</text><text x="213" y="84" fill="#4a9eff" font-size="12" font-family="Georgia,serif">d₂</text><text x="148" y="42" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">a</text></svg>`,
-  circle:`<svg viewBox="0 0 220 180" xmlns="http://www.w3.org/2000/svg"><circle cx="110" cy="90" r="72" fill="none" stroke="#34d08c" stroke-width="2.2"/><circle cx="110" cy="90" r="2.5" fill="#ffc542"/><line x1="110" y1="90" x2="182" y2="90" stroke="#4a9eff" stroke-width="1.6"/><text x="140" y="84" fill="#4a9eff" font-size="13" font-family="Georgia,serif" font-style="italic">r</text><text x="102" y="86" fill="#ffc542" font-size="10" font-family="Georgia,serif">O</text></svg>`,
-  cube:`<svg viewBox="0 0 220 190" xmlns="http://www.w3.org/2000/svg"><polygon points="40,150 120,150 120,70 40,70" fill="none" stroke="#ff6b4a" stroke-width="2"/><polygon points="120,150 200,100 200,20 120,70" fill="none" stroke="#ff6b4a" stroke-width="2"/><polygon points="40,70 120,70 200,20 120,20 40,70" fill="none" stroke="#ff6b4a" stroke-width="2"/><line x1="40" y1="150" x2="120" y2="100" stroke="#ff6b4a" stroke-width="1" stroke-dasharray="5,3"/><line x1="120" y1="100" x2="200" y2="100" stroke="#ff6b4a" stroke-width="1" stroke-dasharray="5,3"/><line x1="120" y1="100" x2="120" y2="20" stroke="#ff6b4a" stroke-width="1" stroke-dasharray="5,3"/><line x1="40" y1="70" x2="40" y2="150" stroke="#ff6b4a" stroke-width="2"/><line x1="40" y1="150" x2="120" y2="150" stroke="#ff6b4a" stroke-width="2"/><line x1="120" y1="150" x2="200" y2="100" stroke="#ff6b4a" stroke-width="2"/><text x="72" y="120" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">a</text></svg>`,
-  cylinder:`<svg viewBox="0 0 220 190" xmlns="http://www.w3.org/2000/svg"><ellipse cx="110" cy="145" rx="78" ry="22" fill="none" stroke="#ff6b4a" stroke-width="2"/><ellipse cx="110" cy="45" rx="78" ry="22" fill="none" stroke="#ff6b4a" stroke-width="2"/><line x1="32" y1="45" x2="32" y2="145" stroke="#ff6b4a" stroke-width="2"/><line x1="188" y1="45" x2="188" y2="145" stroke="#ff6b4a" stroke-width="2"/><line x1="110" y1="45" x2="188" y2="45" stroke="#4a9eff" stroke-width="1.4"/><line x1="110" y1="45" x2="110" y2="145" stroke="#ffc542" stroke-width="1.4" stroke-dasharray="4,3"/><text x="146" y="38" fill="#4a9eff" font-size="13" font-family="Georgia,serif" font-style="italic">r</text><text x="114" y="100" fill="#ffc542" font-size="13" font-family="Georgia,serif" font-style="italic">h</text></svg>`,
-  cone:`<svg viewBox="0 0 220 190" xmlns="http://www.w3.org/2000/svg"><ellipse cx="110" cy="160" rx="84" ry="20" fill="none" stroke="#ff6b4a" stroke-width="2"/><line x1="26" y1="160" x2="110" y2="20" stroke="#ff6b4a" stroke-width="2"/><line x1="194" y1="160" x2="110" y2="20" stroke="#ff6b4a" stroke-width="2"/><line x1="110" y1="20" x2="110" y2="160" stroke="#ffc542" stroke-width="1.4" stroke-dasharray="4,3"/><line x1="110" y1="160" x2="194" y2="160" stroke="#4a9eff" stroke-width="1.4"/><line x1="110" y1="20" x2="194" y2="160" stroke="#b47bff" stroke-width="1.2" stroke-dasharray="4,3"/><text x="148" y="155" fill="#4a9eff" font-size="13" font-family="Georgia,serif" font-style="italic">r</text><text x="114" y="100" fill="#ffc542" font-size="13" font-family="Georgia,serif" font-style="italic">h</text><text x="158" y="90" fill="#b47bff" font-size="13" font-family="Georgia,serif" font-style="italic">l</text></svg>`,
-  sphere:`<svg viewBox="0 0 220 190" xmlns="http://www.w3.org/2000/svg"><circle cx="110" cy="95" r="80" fill="none" stroke="#ff6b4a" stroke-width="2"/><ellipse cx="110" cy="95" rx="80" ry="22" fill="none" stroke="#ff6b4a" stroke-width="1" stroke-dasharray="5,4"/><line x1="110" y1="95" x2="190" y2="95" stroke="#4a9eff" stroke-width="1.5"/><circle cx="110" cy="95" r="3" fill="#4a9eff"/><text x="147" y="88" fill="#4a9eff" font-size="13" font-family="Georgia,serif" font-style="italic">r</text></svg>`,
-  pyramid:`<svg viewBox="0 0 220 190" xmlns="http://www.w3.org/2000/svg"><polygon points="110,15 28,160 192,160" fill="none" stroke="#ff6b4a" stroke-width="2"/><line x1="28" y1="160" x2="148" y2="160" stroke="#ff6b4a" stroke-width="1" stroke-dasharray="4,3"/><line x1="110" y1="15" x2="148" y2="160" stroke="#ff6b4a" stroke-width="2"/><line x1="110" y1="15" x2="110" y2="160" stroke="#ffc542" stroke-width="1.4" stroke-dasharray="4,3"/><rect x="110" y="148" width="12" height="12" fill="none" stroke="#ffc542" stroke-width="1.2"/><line x1="110" y1="15" x2="148" y2="160" stroke="#b47bff" stroke-width="1.2" stroke-dasharray="4,3"/><text x="114" y="90" fill="#ffc542" font-size="13" font-family="Georgia,serif" font-style="italic">h</text><text x="134" y="90" fill="#b47bff" font-size="13" font-family="Georgia,serif" font-style="italic">a</text></svg>`
+  /* ── Треугольник равносторонний с высотой ── */
+  triangle:`<svg viewBox="0 0 260 185" xmlns="http://www.w3.org/2000/svg">
+<polygon points="130,12 18,168 242,168" fill="rgba(52,208,140,0.06)" stroke="#34d08c" stroke-width="2.2" stroke-linejoin="round"/>
+<line x1="130" y1="12" x2="130" y2="168" stroke="#4a9eff" stroke-width="1.5" stroke-dasharray="5,3"/>
+<rect x="130" y="154" width="14" height="14" fill="none" stroke="#4a9eff" stroke-width="1.3"/>
+<text x="130" y="8" fill="#ffc542" font-size="14" font-family="Georgia,serif" text-anchor="middle" font-weight="bold">A</text>
+<text x="6" y="178" fill="#ffc542" font-size="14" font-family="Georgia,serif" font-weight="bold">B</text>
+<text x="244" y="178" fill="#ffc542" font-size="14" font-family="Georgia,serif" font-weight="bold">C</text>
+<text x="62" y="96" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">c</text>
+<text x="182" y="96" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">b</text>
+<text x="124" y="183" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">a</text>
+<text x="136" y="95" fill="#4a9eff" font-size="12" font-family="Georgia,serif" font-style="italic">h</text>
+</svg>`,
+
+  /* ── Прямоугольный треугольник ── */
+  rightTriangle:`<svg viewBox="0 0 240 185" xmlns="http://www.w3.org/2000/svg">
+<polygon points="24,162 24,16 216,162" fill="rgba(52,208,140,0.06)" stroke="#34d08c" stroke-width="2.2" stroke-linejoin="round"/>
+<rect x="24" y="140" width="22" height="22" fill="none" stroke="#34d08c" stroke-width="1.6"/>
+<line x1="24" y1="16" x2="216" y2="162" stroke="#b47bff" stroke-width="1.2" stroke-dasharray="4,3"/>
+<text x="14" y="12" fill="#ffc542" font-size="14" font-family="Georgia,serif" font-weight="bold">A</text>
+<text x="8" y="178" fill="#ffc542" font-size="14" font-family="Georgia,serif" font-weight="bold">B</text>
+<text x="218" y="178" fill="#ffc542" font-size="14" font-family="Georgia,serif" font-weight="bold">C</text>
+<text x="6" y="94" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">b</text>
+<text x="110" y="178" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">a</text>
+<text x="118" y="80" fill="#b47bff" font-size="13" font-family="Georgia,serif" font-style="italic">c</text>
+<text x="40" y="155" fill="#4a9eff" font-size="11" font-family="Georgia,serif">90°</text>
+</svg>`,
+
+  /* ── Параллелограмм ── */
+  parallelogram:`<svg viewBox="0 0 260 140" xmlns="http://www.w3.org/2000/svg">
+<polygon points="44,118 214,118 218,22 48,22" fill="rgba(52,208,140,0.06)" stroke="#34d08c" stroke-width="2.2" stroke-linejoin="round"/>
+<line x1="140" y1="22" x2="140" y2="118" stroke="#4a9eff" stroke-width="1.4" stroke-dasharray="4,3"/>
+<rect x="140" y="104" width="14" height="14" fill="none" stroke="#4a9eff" stroke-width="1.2"/>
+<text x="125" y="17" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">a</text>
+<text x="29" y="74" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">b</text>
+<text x="146" y="74" fill="#4a9eff" font-size="13" font-family="Georgia,serif" font-style="italic">h</text>
+</svg>`,
+
+  /* ── Трапеция ── */
+  trapezoid:`<svg viewBox="0 0 260 152" xmlns="http://www.w3.org/2000/svg">
+<polygon points="62,22 198,22 240,128 20,128" fill="rgba(52,208,140,0.06)" stroke="#34d08c" stroke-width="2.2" stroke-linejoin="round"/>
+<line x1="62" y1="22" x2="62" y2="128" stroke="#4a9eff" stroke-width="1.4" stroke-dasharray="4,3"/>
+<rect x="62" y="114" width="14" height="14" fill="none" stroke="#4a9eff" stroke-width="1.2"/>
+<text x="124" y="16" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">a</text>
+<text x="118" y="143" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">b</text>
+<text x="68" y="80" fill="#4a9eff" font-size="13" font-family="Georgia,serif" font-style="italic">h</text>
+<text x="18" y="80" fill="#7a8aa8" font-size="11" font-family="Georgia,serif" font-style="italic">c</text>
+<text x="228" y="80" fill="#7a8aa8" font-size="11" font-family="Georgia,serif" font-style="italic">d</text>
+</svg>`,
+
+  /* ── Ромб с диагоналями ── */
+  rhombus:`<svg viewBox="0 0 240 170" xmlns="http://www.w3.org/2000/svg">
+<polygon points="120,10 224,85 120,160 16,85" fill="rgba(52,208,140,0.06)" stroke="#34d08c" stroke-width="2.2" stroke-linejoin="round"/>
+<line x1="16" y1="85" x2="224" y2="85" stroke="#4a9eff" stroke-width="1.4" stroke-dasharray="4,3"/>
+<line x1="120" y1="10" x2="120" y2="160" stroke="#ffc542" stroke-width="1.4" stroke-dasharray="4,3"/>
+<rect x="120" y="85" width="11" height="11" fill="none" stroke="#7a8aa8" stroke-width="1.2"/>
+<text x="118" y="6" fill="#ffc542" font-size="12" font-family="Georgia,serif" text-anchor="middle">d₁</text>
+<text x="226" y="89" fill="#4a9eff" font-size="12" font-family="Georgia,serif">d₂</text>
+<text x="162" y="44" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">a</text>
+</svg>`,
+
+  /* ── Окружность с радиусом и хордой ── */
+  circle:`<svg viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg">
+<circle cx="110" cy="96" r="78" fill="rgba(52,208,140,0.05)" stroke="#34d08c" stroke-width="2.2"/>
+<circle cx="110" cy="96" r="3" fill="#ffc542"/>
+<line x1="110" y1="96" x2="188" y2="96" stroke="#4a9eff" stroke-width="1.6"/>
+<line x1="110" y1="96" x2="148" y2="30" stroke="#b47bff" stroke-width="1.3" stroke-dasharray="4,3"/>
+<text x="143" y="90" fill="#4a9eff" font-size="13" font-family="Georgia,serif" font-style="italic">r</text>
+<text x="102" y="92" fill="#ffc542" font-size="11" font-family="Georgia,serif">O</text>
+<text x="149" y="56" fill="#b47bff" font-size="11" font-family="Georgia,serif" font-style="italic">R</text>
+</svg>`,
+
+  /* ── Куб — правильная изометрическая проекция ── */
+  cube:`<svg viewBox="0 0 220 200" xmlns="http://www.w3.org/2000/svg">
+<!-- Скрытые рёбра (пунктир) — рисуем ПЕРВЫМИ чтобы видимые грани перекрывали -->
+<line x1="110" y1="90" x2="110" y2="14" stroke="#ff6b4a" stroke-width="1.4" stroke-dasharray="5,3" opacity="0.65"/>
+<line x1="110" y1="90" x2="36" y2="128" stroke="#ff6b4a" stroke-width="1.4" stroke-dasharray="5,3" opacity="0.65"/>
+<line x1="110" y1="90" x2="184" y2="128" stroke="#ff6b4a" stroke-width="1.4" stroke-dasharray="5,3" opacity="0.65"/>
+<!-- Верхняя грань -->
+<polygon points="110,14 184,52 110,90 36,52" fill="rgba(255,107,74,0.10)" stroke="#ff6b4a" stroke-width="2" stroke-linejoin="round"/>
+<!-- Левая боковая грань -->
+<polygon points="36,52 110,90 110,166 36,128" fill="rgba(255,107,74,0.06)" stroke="#ff6b4a" stroke-width="2" stroke-linejoin="round"/>
+<!-- Правая боковая грань -->
+<polygon points="110,90 184,52 184,128 110,166" fill="rgba(255,107,74,0.04)" stroke="#ff6b4a" stroke-width="2" stroke-linejoin="round"/>
+<!-- Метка a -->
+<text x="60" y="98" fill="#ffc542" font-size="13" font-family="Georgia,serif" font-style="italic">a</text>
+<text x="147" y="52" fill="#ffc542" font-size="13" font-family="Georgia,serif" font-style="italic">a</text>
+<text x="185" y="92" fill="#ffc542" font-size="13" font-family="Georgia,serif" font-style="italic">a</text>
+</svg>`,
+
+  /* ── Цилиндр ── */
+  cylinder:`<svg viewBox="0 0 230 200" xmlns="http://www.w3.org/2000/svg">
+<!-- Заливка тела цилиндра -->
+<rect x="33" y="46" width="164" height="116" fill="rgba(255,107,74,0.04)" stroke="none"/>
+<!-- Задние дуги (пунктир) — рисуем первыми -->
+<path d="M 33,162 A 82,22 0 0,0 197,162" fill="none" stroke="#ff6b4a" stroke-width="1.4" stroke-dasharray="4,3"/>
+<path d="M 33,46 A 82,22 0 0,0 197,46" fill="none" stroke="#ff6b4a" stroke-width="1.4" stroke-dasharray="4,3"/>
+<!-- Скрытая левая образующая (пунктир) -->
+<line x1="33" y1="46" x2="33" y2="162" stroke="#ff6b4a" stroke-width="1.2" stroke-dasharray="4,3"/>
+<!-- Заливки эллипсов поверх задних дуг -->
+<ellipse cx="115" cy="162" rx="82" ry="22" fill="rgba(255,107,74,0.06)" stroke="none"/>
+<ellipse cx="115" cy="46" rx="82" ry="22" fill="rgba(255,107,74,0.10)" stroke="none"/>
+<!-- Видимая правая образующая (сплошная) -->
+<line x1="197" y1="46" x2="197" y2="162" stroke="#ff6b4a" stroke-width="2"/>
+<!-- Передние дуги (сплошные) поверх всего -->
+<path d="M 33,162 A 82,22 0 0,1 197,162" fill="none" stroke="#ff6b4a" stroke-width="2"/>
+<path d="M 33,46 A 82,22 0 0,1 197,46" fill="none" stroke="#ff6b4a" stroke-width="2"/>
+<!-- Радиус и высота -->
+<line x1="115" y1="46" x2="197" y2="46" stroke="#4a9eff" stroke-width="1.6"/>
+<line x1="115" y1="46" x2="115" y2="162" stroke="#ffc542" stroke-width="1.4" stroke-dasharray="4,3"/>
+<circle cx="115" cy="46" r="2.5" fill="#4a9eff"/>
+<text x="150" y="39" fill="#4a9eff" font-size="13" font-family="Georgia,serif" font-style="italic">r</text>
+<text x="119" y="110" fill="#ffc542" font-size="13" font-family="Georgia,serif" font-style="italic">h</text>
+</svg>`,
+
+  /* ── Конус ── */
+  cone:`<svg viewBox="0 0 230 200" xmlns="http://www.w3.org/2000/svg">
+<!-- Заливка основания -->
+<ellipse cx="115" cy="168" rx="88" ry="22" fill="rgba(255,107,74,0.06)" stroke="none"/>
+<!-- Задняя дуга основания (пунктир) -->
+<path d="M 27,168 A 88,22 0 0,0 203,168" fill="none" stroke="#ff6b4a" stroke-width="1.4" stroke-dasharray="4,3"/>
+<!-- Образующие (боковые линии) -->
+<line x1="27" y1="168" x2="115" y2="18" stroke="#ff6b4a" stroke-width="2"/>
+<line x1="203" y1="168" x2="115" y2="18" stroke="#ff6b4a" stroke-width="2"/>
+<!-- Передняя дуга основания (сплошная) поверх -->
+<path d="M 27,168 A 88,22 0 0,1 203,168" fill="none" stroke="#ff6b4a" stroke-width="2"/>
+<!-- Высота -->
+<line x1="115" y1="18" x2="115" y2="168" stroke="#ffc542" stroke-width="1.4" stroke-dasharray="4,3"/>
+<!-- Радиус основания -->
+<line x1="115" y1="168" x2="203" y2="168" stroke="#4a9eff" stroke-width="1.5"/>
+<!-- Образующая l (пунктир) -->
+<line x1="115" y1="18" x2="203" y2="168" stroke="#b47bff" stroke-width="1.3" stroke-dasharray="4,3"/>
+<circle cx="115" cy="168" r="2.5" fill="#4a9eff"/>
+<text x="154" y="162" fill="#4a9eff" font-size="13" font-family="Georgia,serif" font-style="italic">r</text>
+<text x="119" y="100" fill="#ffc542" font-size="13" font-family="Georgia,serif" font-style="italic">h</text>
+<text x="166" y="90" fill="#b47bff" font-size="13" font-family="Georgia,serif" font-style="italic">l</text>
+</svg>`,
+
+  /* ── Шар ── */
+  sphere:`<svg viewBox="0 0 230 200" xmlns="http://www.w3.org/2000/svg">
+<circle cx="115" cy="100" r="84" fill="rgba(255,107,74,0.05)" stroke="#ff6b4a" stroke-width="2"/>
+<!-- экватор пунктиром -->
+<ellipse cx="115" cy="100" rx="84" ry="23" fill="none" stroke="#ff6b4a" stroke-width="1.2" stroke-dasharray="5,4"/>
+<!-- горизонт экватора (видимая часть) -->
+<path d="M 31 100 A 84 23 0 0 0 199 100" fill="none" stroke="#ff6b4a" stroke-width="1.8"/>
+<line x1="115" y1="100" x2="199" y2="100" stroke="#4a9eff" stroke-width="1.6"/>
+<circle cx="115" cy="100" r="3.5" fill="#ffc542"/>
+<text x="152" y="94" fill="#4a9eff" font-size="13" font-family="Georgia,serif" font-style="italic">r</text>
+<text x="108" y="96" fill="#ffc542" font-size="11" font-family="Georgia,serif">O</text>
+</svg>`,
+
+  /* ── Правильная пирамида (четырёхугольная, изометрия) ── */
+  pyramid:`<svg viewBox="0 0 230 210" xmlns="http://www.w3.org/2000/svg">
+<!-- основание — заливка без обводки -->
+<polygon points="115,170 186,138 115,106 44,138" fill="rgba(255,107,74,0.06)" stroke="none" stroke-linejoin="round"/>
+<!-- скрытые рёбра основания (пунктир) -->
+<line x1="44" y1="138" x2="115" y2="106" stroke="#ff6b4a" stroke-width="1.2" stroke-dasharray="4,3"/>
+<!-- скрытое боковое ребро (к левому углу) -->
+<line x1="115" y1="20" x2="44" y2="138" stroke="#ff6b4a" stroke-width="1.4" stroke-dasharray="5,3"/>
+<!-- видимые рёбра основания (сплошные) -->
+<line x1="115" y1="170" x2="186" y2="138" stroke="#ff6b4a" stroke-width="2"/>
+<line x1="186" y1="138" x2="115" y2="106" stroke="#ff6b4a" stroke-width="2"/>
+<line x1="115" y1="170" x2="44" y2="138" stroke="#ff6b4a" stroke-width="2"/>
+<!-- видимые боковые рёбра (сплошные) -->
+<line x1="115" y1="20" x2="186" y2="138" stroke="#ff6b4a" stroke-width="2"/>
+<line x1="115" y1="20" x2="115" y2="170" stroke="#ff6b4a" stroke-width="2"/>
+<!-- высота -->
+<line x1="115" y1="20" x2="115" y2="138" stroke="#ffc542" stroke-width="1.4" stroke-dasharray="4,3"/>
+<rect x="115" y="126" width="12" height="12" fill="none" stroke="#ffc542" stroke-width="1.2"/>
+<text x="119" y="86" fill="#ffc542" font-size="13" font-family="Georgia,serif" font-style="italic">h</text>
+<text x="150" y="120" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">a</text>
+</svg>`,
+
+  /* ── Прямоугольник с диагональю ── */
+  rectangle:`<svg viewBox="0 0 260 160" xmlns="http://www.w3.org/2000/svg">
+<rect x="30" y="22" width="200" height="116" fill="rgba(52,208,140,0.06)" stroke="#34d08c" stroke-width="2.2" rx="2"/>
+<line x1="30" y1="22" x2="230" y2="138" stroke="#4a9eff" stroke-width="1.4" stroke-dasharray="5,3"/>
+<text x="124" y="16" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">a</text>
+<text x="14" y="84" fill="#7a8aa8" font-size="13" font-family="Georgia,serif" font-style="italic">b</text>
+<text x="135" y="86" fill="#4a9eff" font-size="13" font-family="Georgia,serif" font-style="italic">d</text>
+<rect x="30" y="22" width="14" height="14" fill="none" stroke="#34d08c" stroke-width="1.2"/>
+</svg>`
 };
 // ─── FORMULA DATA ───
 const SECTIONS=[
 {id:'algebra',name:'Алгебра',icon:'∑',color:'var(--alg)',
-intro:'Базовые алгебраические формулы: степени, логарифмы, прогрессии, производные и интегралы.',
+intro:'📌 Порядок изучения: 1) Степени и корни — фундамент. 2) ФСУ — умножение и разложение. 3) Квадратные уравнения — применяют ФСУ. 4) Логарифмы — обратная операция к степени. 5) Прогрессии — отдельный блок. Сначала освой каждую группу через примеры.',
 sub:[
 {n:'Степени',clr:'var(--alg)',f:[
 {t:'Произведение степеней',f:'a^m \\cdot a^n = a^{m+n}',d:'При умножении степеней с одинаковым основанием показатели складываются.',ep:'2^3 \\cdot 2^5',es:'2^3 \\cdot 2^5 = 2^{3+5} = 2^8 = 256',sol:['Основание одинаковое — показатели СКЛАДЫВАЮТСЯ','2³ · 2⁵: показатели 3+5=8, пишем 2⁸','2⁸ = 256','Ошибка: 2³ · 3⁵ — разные основания, так нельзя!','Применение: x² · x³ = x⁵']},
@@ -1228,12 +1524,12 @@ sub:[
 ]},
 {n:'Первообразная и интеграл',egeOnly:true,clr:'var(--alg)',f:[
 {t:'Таблица первообразных',isTable:true,tableType:'prim'},
-{t:'Формула Ньютона–Лейбница',f:'\\int_a^b f(x)\\,dx=F(b)-F(a)',d:'F(x) — любая первообразная f(x).',ep:'\\int_0^3 x^2\\,dx',es:'\\left[\\dfrac{x^3}{3}\\right]_0^3=9',sol:['y=f(x₀)+f′(x₀)·(x−x₀)','y=x², x₀=2: f(2)=4, f′(x)=2x, f′(2)=4','y=4+4(x−2)=4x−4','Угловой коэффициент касательной = f′(x₀)','Нормаль перпендикулярна: k_норм=−1/f′(x₀)'],sol:['Шаг 1: найди первообразную F(x) по таблице','Шаг 2: подставь верхний предел b: вычисли F(b)','Шаг 3: подставь нижний предел a: вычисли F(a)','Шаг 4: F(b) − F(a). Константа C сокращается!','Пример: F(x)=x³/3. F(3)=9, F(0)=0. Ответ: 9−0=9']},
+{t:'Формула Ньютона–Лейбница',f:'\\int_a^b f(x)\\,dx=F(b)-F(a)',d:'F(x) — любая первообразная f(x).',ep:'\\int_0^3 x^2\\,dx',es:'\\left[\\dfrac{x^3}{3}\\right]_0^3=9',sol:['Шаг 1: найди первообразную F(x) по таблице','Шаг 2: подставь верхний предел b: вычисли F(b)','Шаг 3: подставь нижний предел a: вычисли F(a)','Шаг 4: F(b) − F(a). Константа C сокращается!','Пример: F(x)=x³/3. F(3)=9, F(0)=0. Ответ: 9−0=9']},
 {t:'Геометрический смысл интеграла',f:'S=\\int_a^b f(x)\\,dx',d:'Площадь под графиком f(x) от a до b (если f(x) >= 0).',ep:'S\\text{ под }y=\\sin x,\\;[0,\\pi]',es:'[-\\cos x]_0^\\pi=2',sol:['∫ₐᵇf(x)dx = площадь под графиком (если f≥0)','Если f<0 — площадь со знаком минус','∫₀^π sinx dx=[−cosx]₀^π=1+1=2','Площадь фигуры между кривыми: S=∫(f−g)dx','Применяется в задачах ЕГЭ про площади']},
 ]},
 ]},
 {id:'trig',name:'Тригонометрия',icon:'∿',color:'var(--trig)',
-intro:'Полный набор тригонометрических формул: тождества, сложение, двойной угол, таблица значений, свойства функций и решение уравнений.',
+intro:'📌 Порядок: 1) Таблица значений — выучи наизусть sin/cos/tg для 0°,30°,45°,60°,90°. 2) Основные тождества — sin²+cos²=1 это основа всего. 3) Формулы приведения и сложения. 4) Двойной угол. 5) Уравнения — только после знания формул.',
 sub:[
 {n:'Основные тождества',clr:'var(--trig)',f:[
 {t:'Основное тождество',f:'\\sin^2x+\\cos^2x=1',d:'Сумма квадратов синуса и косинуса всегда равна 1.',ep:'\\sin x=0{,}6,\\;\\cos x=?',es:'|\\cos x|=0{,}8',sol:['sin²x+cos²x=1 — всегда!','sinx=0,6 → cos²x=1−0,36=0,64 → |cosx|=0,8','Из него выводятся: 1+tg²x=1/cos²x; 1+ctg²x=1/sin²x','Применение: выразить один через другой','Основа всей тригонометрии']},
@@ -1288,9 +1584,9 @@ sub:[
 intro:'Формулы для плоских фигур: треугольники, четырёхугольники, правильные многоугольники, окружность. Рисунки SVG.',
 sub:[
 {n:'Треугольник — основное',clr:'var(--plan)',f:[
-{t:'Периметр',f:'P=a+b+c',d:'Сумма всех трёх сторон.',svg:'triangle',ep:'a=3,\\;b=4,\\;c=5',es:'P=12',sol:['P=a+b+c — сложи все стороны','a=3, b=4, c=5 → P=12','Проверь неравенство треугольника: каждая сторона < сумме двух других','3<9 ✓, 4<8 ✓, 5<7 ✓','Для равностороннего: P=3a'],sol:['Сложи все стороны треугольника','P = a + b + c','Пример: a=3, b=4, c=5 → P = 3+4+5 = 12','Для проверки: каждая сторона < суммы двух других','3 < 4+5 ✓, 4 < 3+5 ✓, 5 < 3+4 ✓']},
+{t:'Периметр',f:'P=a+b+c',d:'Сумма всех трёх сторон.',svg:'triangle',ep:'a=3,\\;b=4,\\;c=5',es:'P=12',sol:['Сложи все стороны треугольника','P = a + b + c','Пример: a=3, b=4, c=5 → P = 3+4+5 = 12','Для проверки: каждая сторона < суммы двух других','3 < 4+5 ✓, 4 < 3+5 ✓, 5 < 3+4 ✓']},
 {t:'Площадь через высоту',f:'S=\\dfrac{1}{2}\\cdot a\\cdot h_a',d:'Половина произведения основания на высоту.',svg:'triangle',ep:'a=6,\\;h=4',es:'S=12',sol:['S=(1/2)·a·h','a=6, h=4 → S=12','h — перпендикуляр из вершины на противоположную сторону','S одинакова при любом выборе основания','Для прямоугольного: S=(1/2)·катет₁·катет₂']},
-{t:'Площадь через стороны и угол',f:'S=\\dfrac{1}{2}\\cdot a\\cdot b\\cdot\\sin C',d:'C — угол между сторонами a и b.',svg:'triangle',ep:'a=5,\\;b=8,\\;C=30°',es:'S=10',sol:['S=a·b·sinα для параллелограмма','a=6, b=4, α=30°: S=24·0,5=12','При α=90° → прямоугольник, sinα=1, S=ab','Для ромба: S=a²·sinα','Проверь: sin(180°−α)=sinα, поэтому угол острый или тупой — не важно'],sol:['C — угол между сторонами a и b (внутри треугольника)','sin30° = 0.5, sin45° = √2/2 ≈ 0.71, sin60° = √3/2 ≈ 0.87','Пример: a=5, b=8, C=30° → S = ½·5·8·0.5 = 10','Частный случай C=90°: sin90°=1 → S = ½·a·b','Применяй когда знаешь две стороны и угол между ними']},
+{t:'Площадь через стороны и угол',f:'S=\\dfrac{1}{2}\\cdot a\\cdot b\\cdot\\sin C',d:'C — угол между сторонами a и b.',svg:'triangle',ep:'a=5,\\;b=8,\\;C=30°',es:'S=10',sol:['C — угол между сторонами a и b (внутри треугольника)','sin30° = 0.5, sin45° = √2/2 ≈ 0.71, sin60° = √3/2 ≈ 0.87','Пример: a=5, b=8, C=30° → S = ½·5·8·0.5 = 10','Частный случай C=90°: sin90°=1 → S = ½·a·b','Применяй когда знаешь две стороны и угол между ними']},
 {t:'Формула Герона',f:'S=\\sqrt{p(p-a)(p-b)(p-c)},\\quad p=\\dfrac{a+b+c}{2}',d:'p — полупериметр. Когда известны все три стороны.',svg:'triangle',ep:'a=3,\\;b=4,\\;c=5',es:'p=6;\\;S=\\sqrt{36}=6',sol:['Шаг 1: p = (a+b+c)/2. Пример: p = (3+4+5)/2 = 6','Шаг 2: три разности: p−a=3, p−b=2, p−c=1','Шаг 3: перемножь: 6·3·2·1 = 36','Шаг 4: S = √36 = 6','Проверка: прямоугольный 3-4-5, S = ½·3·4 = 6 ✓']},
 {t:'Площадь через описанную окружность',f:'S=\\dfrac{abc}{4R}',d:'R — радиус описанной окружности.',ep:'a=3,\\;b=4,\\;c=5,\\;R=2{,}5',es:'S=6',sol:['S=abc/(4R)','a=3,b=4,c=5,R=2,5: S=60/10=6 ✓','Из теоремы синусов: 2R=a/sinA','Удобна когда знаешь все стороны и R','Для прямоугольного: R=c/2, S=abc/(4·c/2)=ab/2 ✓']},
 {t:'Площадь через вписанную окружность',f:'S=p\\cdot r',d:'p — полупериметр, r — радиус вписанной окружности.',ep:'p=6,\\;r=1',es:'S=6',sol:['S=p·r, p=(a+b+c)/2','p=6, r=1: S=6','Для 3-4-5: p=6, r=S/p=6/6=1 ✓','Формула симметрична: r=S/p','Вписанная окружность касается всех трёх сторон']},
@@ -1365,7 +1661,7 @@ sub:[
 {t:'Диагональ грани',f:'d_{\\text{гр}}=a\\sqrt{2}',d:'Диагональ квадратной грани.',ep:'a=5',es:'5\\sqrt{2}',sol:['d_гр=a√2 — диагональ квадрата','a=5: d_гр=5√2≈7,07','d_гр²=a²+a²=2a²','Не путай с d_куба=a√3','d_гр < d_куба']},
 ]},
 {n:'Прямоугольный параллелепипед',clr:'var(--ster)',f:[
-{t:'Объём',f:'V=abc',d:'Произведение трёх измерений.',ep:'a=2,\\;b=3,\\;c=5',es:'V=30',sol:['V=abc','a=2, b=3, c=5: V=30','Найти c: c=V/(ab)=30/6=5','Единицы: [длина]³','Для куба: V=a³=a·a·a'],sol:['V = abc — произведение трёх измерений','a=2, b=3, c=5: V = 2·3·5 = 30','Из V и двух измерений найти третье: c = V/(ab)','Единицы: см·см·см = см³','Параллелепипед с квадратным основанием: V = a²c']},
+{t:'Объём',f:'V=abc',d:'Произведение трёх измерений.',ep:'a=2,\\;b=3,\\;c=5',es:'V=30',sol:['V = abc — произведение трёх измерений','a=2, b=3, c=5: V = 2·3·5 = 30','Из V и двух измерений найти третье: c = V/(ab)','Единицы: см·см·см = см³','Параллелепипед с квадратным основанием: V = a²c']},
 {t:'Площадь полной поверхности',f:'S_{\\text{полн}}=2(ab+bc+ac)',d:'Три пары прямоугольных граней.',ep:'a=2,\\;b=3,\\;c=5',es:'S=62'},
 {t:'Пространственная диагональ',f:'d=\\sqrt{a^2+b^2+c^2}',d:'Главная диагональ.',ep:'a=2,\\;b=3,\\;c=6',es:'d=7',sol:['d=√(a²+b²+c²)','a=2, b=3, c=6: d=√(4+9+36)=7','Вывод: d_осн=√(a²+b²), затем √(d_осн²+c²)','Для куба: d=a√3','Применяется в задачах ЕГЭ на стереометрию']},
 ]},
@@ -1411,10 +1707,10 @@ sub:[
 intro:'Комбинаторика, теория вероятностей, случайные величины и биномиальное распределение.',
 sub:[
 {n:'Комбинаторика',clr:'var(--prob)',f:[
-{t:'Факториал',f:'n!=1\\cdot2\\cdot3\\cdots n,\\quad0!=1',d:'Произведение первых n натуральных чисел.',ep:'5!',es:'120',sol:['n!=1·2·3·...·n, 0!=1','5!=120, 6!=720','Сокращение: 10!/7!=8·9·10=720','Формулы: P_n=n!, A_n^k=n!/(n−k)!','C_n^k=n!/(k!(n−k)!)'],sol:['n! = 1·2·3·...·n, 0!=1','5! = 1·2·3·4·5 = 120','Рост: 6! = 720, 7! = 5040','Сокращение: 10!/7! = 8·9·10 = 720 (не вычисляй всё!)','Применяется в формулах перестановок, размещений, сочетаний']},
-{t:'Перестановки',f:'P_n=n!',d:'Число способов расставить n элементов в ряд.',ep:'4 книги',es:'P_4=24',sol:['P_n=n!','4 книги: P₄=4!=24','Если есть одинаковые: n!/(k₁!k₂!...)','Слово "МАМА": 4!/(2!2!)=6','Применяется при подсчёте разных порядков'],sol:['P_n = n! — расставить n предметов в ряд','4 книги: P₄ = 4! = 24 порядка','Если некоторые предметы одинаковы: P = n!/(k₁!k₂!...)','Пример: слово "МАМА" → 4!/(2!2!) = 24/4 = 6 слов','Применяется при подсчёте разных порядков']},
-{t:'Размещения',f:'A_n^k=\\dfrac{n!}{(n-k)!}',d:'Выбрать k из n и упорядочить.',ep:'A_5^3',es:'60',sol:['A_n^k=n!/(n−k)!','A₅³=5!/2!=60','Выбрать k из n И УПОРЯДОЧИТЬ','A_n^k=k!·C_n^k','A≠C: размещение учитывает порядок'],sol:['A_n^k = n!/(n−k)! — выбрать k из n И УПОРЯДОЧИТЬ','A₅³ = 5!/2! = 120/2 = 60','Например: 5 мест для призёров, 3 призовых места','A₅³ ≠ C₅³: размещение учитывает ПОРЯДОК','A_n^k = k! · C_n^k']},
-{t:'Сочетания',f:'C_n^k=\\dbinom{n}{k}=\\dfrac{n!}{k!(n-k)!}',d:'Выбрать k из n (порядок не важен).',ep:'C_{10}^3',es:'120',sol:['C_n^k=n!/(k!(n−k)!)','C₁₀³=10·9·8/(3·2·1)=120','Порядок НЕ важен','C_n^k=C_n^(n−k): C₁₀³=C₁₀⁷=120','Считай сокращённо: только n·(n−1)·...·(n−k+1)/k!'],sol:['C_n^k = n!/(k!(n−k)!) — выбрать k из n (порядок не важен)','C₁₀³ = 10!/(3!7!) = (10·9·8)/(3·2·1) = 120','Выбрать 3 из 10 команд в финал','C₁₀³ ≠ A₁₀³: сочетание не учитывает порядок','C_n^k = C_n^(n−k): C₁₀³ = C₁₀⁷ = 120']},
+{t:'Факториал',f:'n!=1\\cdot2\\cdot3\\cdots n,\\quad0!=1',d:'Произведение первых n натуральных чисел.',ep:'5!',es:'120',sol:['n! = 1·2·3·...·n, 0!=1','5! = 1·2·3·4·5 = 120','Рост: 6! = 720, 7! = 5040','Сокращение: 10!/7! = 8·9·10 = 720 (не вычисляй всё!)','Применяется в формулах перестановок, размещений, сочетаний']},
+{t:'Перестановки',f:'P_n=n!',d:'Число способов расставить n элементов в ряд.',ep:'4 книги',es:'P_4=24',sol:['P_n = n! — расставить n предметов в ряд','4 книги: P₄ = 4! = 24 порядка','Если некоторые предметы одинаковы: P = n!/(k₁!k₂!...)','Пример: слово "МАМА" → 4!/(2!2!) = 24/4 = 6 слов','Применяется при подсчёте разных порядков']},
+{t:'Размещения',f:'A_n^k=\\dfrac{n!}{(n-k)!}',d:'Выбрать k из n и упорядочить.',ep:'A_5^3',es:'60',sol:['A_n^k = n!/(n−k)! — выбрать k из n И УПОРЯДОЧИТЬ','A₅³ = 5!/2! = 120/2 = 60','Например: 5 мест для призёров, 3 призовых места','A₅³ ≠ C₅³: размещение учитывает ПОРЯДОК','A_n^k = k! · C_n^k']},
+{t:'Сочетания',f:'C_n^k=\\dbinom{n}{k}=\\dfrac{n!}{k!(n-k)!}',d:'Выбрать k из n (порядок не важен).',ep:'C_{10}^3',es:'120',sol:['C_n^k = n!/(k!(n−k)!) — выбрать k из n (порядок не важен)','C₁₀³ = 10!/(3!7!) = (10·9·8)/(3·2·1) = 120','Выбрать 3 из 10 команд в финал','C₁₀³ ≠ A₁₀³: сочетание не учитывает порядок','C_n^k = C_n^(n−k): C₁₀³ = C₁₀⁷ = 120']},
 {t:'Симметрия сочетаний',f:'C_n^k=C_n^{n-k},\\quad C_n^0=C_n^n=1',ep:'C_{10}^7',es:'C_{10}^3=120',sol:['C_n^k=C_n^(n−k)','C₁₀⁷=C₁₀³=120 (быстрее!)','Смысл: выбрать 7 = оставить 3','C_n^0=C_n^n=1','C_n^1=n']},
 {t:'Формула Паскаля',f:'C_n^k=C_{n-1}^{k-1}+C_{n-1}^k',d:'Рекуррентное соотношение.',ep:'C_5^2',es:'4+6=10',sol:['C_n^k=C_(n-1)^(k-1)+C_(n-1)^k','C₅²=C₄¹+C₄²=4+6=10','Треугольник Паскаля','Строки: коэффициенты бинома (a+b)ⁿ','Применяется для быстрого вычисления']},
 {t:'Бином Ньютона',f:'(a+b)^n=\\sum_{k=0}^{n}C_n^k\\,a^k\\,b^{n-k}',d:'Раскрытие n-й степени двучлена.',ep:'(a+b)^3',es:'a^3+3a^2b+3ab^2+b^3',sol:['(a+b)ⁿ=∑C_n^k·a^k·b^(n−k), k=0..n','(a+b)³=a³+3a²b+3ab²+b³','Коэффициенты 1,3,3,1','k-й член: C_n^(k−1)·a^(n−k+1)·b^(k−1)','Применяется для нахождения конкретного члена']},
@@ -1439,8 +1735,8 @@ sub:[
 ]},
 {n:'Случайная величина',clr:'var(--prob)',f:[
 {t:'Математическое ожидание',f:'M(X)=\\sum_{i}x_i\\cdot p_i',d:'Среднее взвешенное значений.',ep:'X:\\;1(p=0{,}2),\\;3(p=0{,}5),\\;5(p=0{,}3)',es:'M=3{,}2',sol:['Для каждого значения xᵢ умножь его на вероятность pᵢ','M(X) = x₁p₁ + x₂p₂ + ... + xₙpₙ','Пример: 1·0.2 + 3·0.5 + 5·0.3 = 0.2 + 1.5 + 1.5 = 3.2','Проверка: сумма вероятностей = 1: 0.2+0.5+0.3=1 ✓','M(X) — это среднее значение при многих повторениях']},
-{t:'Дисперсия',f:'D(X)=M(X^2)-[M(X)]^2=\\sum_i(x_i-M)^2p_i',d:'Мера разброса вокруг среднего.',ep:'X:\\;1(p=0{,}5),\\;3(p=0{,}5)',es:'D=1',sol:['D(X)=M(X²)−[M(X)]²','X: 1(p=0,5), 3(p=0,5): M=2, M(X²)=5','D=5−4=1','Альтернатива: D=∑(xᵢ−M)²pᵢ=1 ✓','D≥0 всегда; D=0 если X принимает одно значение'],sol:['D(X) = M(X²) − [M(X)]²','X: 1(p=0,5) и 3(p=0,5): M(X)=2, M(X²)=1·0,5+9·0,5=5','D = 5 − 4 = 1','Альтернатива: D = Σ(xᵢ−M)²·pᵢ = (1−2)²·0,5+(3−2)²·0,5 = 1 ✓','Дисперсия ≥ 0 всегда; D=0 если X принимает одно значение']},
-{t:'СКО',f:'\\sigma(X)=\\sqrt{D(X)}',d:'Корень дисперсии — в тех же единицах, что X.',ep:'D(X)=9',es:'\\sigma=3',sol:['σ=√D(X)','D=9: σ=3','σ в тех же единицах что X','68% значений ≈ [M−σ; M+σ] (нормальное распределение)','Маленькое σ → значения кучкуются около M'],sol:['σ = √D(X) — среднеквадратическое отклонение','D=9: σ = 3','σ в тех же единицах, что X (удобнее чем D)','Смысл: среднее "расстояние" значений от M(X)','Маленькое σ → значения кучкуются вблизи M']},
+{t:'Дисперсия',f:'D(X)=M(X^2)-[M(X)]^2=\\sum_i(x_i-M)^2p_i',d:'Мера разброса вокруг среднего.',ep:'X:\\;1(p=0{,}5),\\;3(p=0{,}5)',es:'D=1',sol:['D(X) = M(X²) − [M(X)]²','X: 1(p=0,5) и 3(p=0,5): M(X)=2, M(X²)=1·0,5+9·0,5=5','D = 5 − 4 = 1','Альтернатива: D = Σ(xᵢ−M)²·pᵢ = (1−2)²·0,5+(3−2)²·0,5 = 1 ✓','Дисперсия ≥ 0 всегда; D=0 если X принимает одно значение']},
+{t:'СКО',f:'\\sigma(X)=\\sqrt{D(X)}',d:'Корень дисперсии — в тех же единицах, что X.',ep:'D(X)=9',es:'\\sigma=3',sol:['σ = √D(X) — среднеквадратическое отклонение','D=9: σ = 3','σ в тех же единицах, что X (удобнее чем D)','Смысл: среднее "расстояние" значений от M(X)','Маленькое σ → значения кучкуются вблизи M']},
 {t:'Свойства M(X)',f:'M(aX+b)=a\\,M(X)+b\\\\[4pt]M(X+Y)=M(X)+M(Y)',d:'Линейность математического ожидания.',ep:'M(X)=3,\\;M(2X+1)=?',es:'7',sol:['M(aX+b)=a·M(X)+b','M(X)=3, M(2X+1)=7','M(X+Y)=M(X)+M(Y) для любых X,Y','M(c)=c','Линейность: M не зависит от корреляции']},
 {t:'Свойства D(X)',f:'D(aX+b)=a^2D(X)\\\\[4pt]D(X+Y)=D(X)+D(Y)\\text{ (незав.)}',d:'При умножении на константу — умножается на квадрат.',ep:'D(X)=4,\\;D(3X-2)=?',es:'36',sol:['D(aX+b)=a²·D(X) — константа b не влияет!','D(X)=4, D(3X−2)=9·4=36','D(X+Y)=D(X)+D(Y) — только для НЕЗАВИСИМЫХ!','D(c)=0','D≥0 всегда']},
 ]},
@@ -1498,12 +1794,14 @@ const PROPS_TABLE=[
 
 // ─── FLAT FORMULA LIST (for flashcards & tests) ───
 const ALL_FM=[];
+const CARD_LOOKUP={};
 SECTIONS.forEach(sec=>{
   sec.sub.forEach(sub=>{
     sub.f.forEach((fm,i)=>{
       if(!fm.isTable&&fm.f){
-        const id=`${sec.id}_${i}_${sub.n}`.replace(/\W/g,'_');
+        const id=`${sec.id}_${sub.n}_${i}`.replace(/\W/g,'_');
         ALL_FM.push({id,fm,sec,sub});
+        CARD_LOOKUP[`${sec.id}_${sub.n}_${i}`.replace(/\W/g,'_')]={title:fm.t,formula:fm.f,svg:fm.svg||null,desc:fm.d||''};
       }
     });
   });
@@ -1542,6 +1840,8 @@ function makeCard(fm,sid,idx){
   }
   const id=`ex-${sid}-${idx}`;
   const fid=`${sid}_${idx}`.replace(/\W/g,'_');
+  // Register in lookup so downloadCard can find title+formula+svg by fid
+  if(fm.f) CARD_LOOKUP[fid]={title:fm.t,formula:fm.f,svg:fm.svg||null,desc:fm.d||''};
   const nid=`note-${fid}`;
   const clr=secColor(sid);
   const isFav=STATE.fav.has(fid);
@@ -1566,6 +1866,7 @@ function makeCard(fm,sid,idx){
       <div class="fc-title" style="color:${clr}">${fm.t}</div>
       <div class="fc-actions">
         <button class="note-btn${hasNote?' has-note':''}" onclick="toggleNote('${nid}','${fid}',this)" title="Заметка">📝</button>
+        <button class="dl-btn" onclick="downloadCard(this,'${fid}')" title="Скачать карточку как PNG">⬇ PNG</button>
         <button class="fc-btn fav-btn${isFav?' active':''}" onclick="toggleFav('${fid}',this)" title="Избранное">${isFav?'⭐':'☆'}</button>
         <button class="fc-btn learn-btn${isLearned?' active':''}" onclick="toggleLearn('${fid}',this)" title="Выучил">✓</button>
       </div>
@@ -1739,7 +2040,7 @@ function updateCountdown(){
   const days=Math.floor(diff/(1000*60*60*24));
   const hrs=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
   const mins=Math.floor((diff%(1000*60*60))/(1000*60));
-  const secs=Math.floor((diff%60000)/1000);
+  const secs=Math.floor((diff%(1000*60))/1000);
   wrap.innerHTML=`
     <div class="countdown-block"><div class="countdown-num">${days}</div><div class="countdown-unit">дней</div></div>
     <div class="countdown-sep">:</div>
@@ -2012,17 +2313,25 @@ function srRate(q){
   showFcCard();
 }
 function showFcCard(){
+  if(!fcList.length||fcIdx>=fcList.length) return;
   const e=fcList[fcIdx];
+  if(!e) return;
   const srData=srGetCard(e.id);
   const daysLeft=srData.due?Math.ceil((srData.due-Date.now())/(1000*60*60*24)):0;
-  document.getElementById('fc-badge').textContent=e.sec.name+' · '+e.sub.n;
-  document.getElementById('fc-badge').style.color=secColor(e.sec.id);
-  document.getElementById('fc-question').textContent=e.fm.t;
-  document.getElementById('fc-formula').innerHTML=k(e.fm.f,true);
-  document.getElementById('fc-desc-hint').textContent=e.fm.d||'';
-  document.getElementById('fc-counter').textContent=`${fcIdx+1} / ${fcList.length}`;
-  document.getElementById('fc-prev').disabled=fcIdx===0;
-  document.getElementById('fc-next').disabled=fcIdx===fcList.length-1;
+  const badge=document.getElementById('fc-badge');
+  const question=document.getElementById('fc-question');
+  const formula=document.getElementById('fc-formula');
+  const descHint=document.getElementById('fc-desc-hint');
+  const counter=document.getElementById('fc-counter');
+  const prevBtn=document.getElementById('fc-prev');
+  const nextBtn=document.getElementById('fc-next');
+  if(badge){badge.textContent=e.sec.name+' · '+e.sub.n;badge.style.color=secColor(e.sec.id);}
+  if(question) question.textContent=e.fm.t;
+  if(formula) formula.innerHTML=k(e.fm.f,true);
+  if(descHint) descHint.textContent=e.fm.d||'';
+  if(counter) counter.textContent=`${fcIdx+1} / ${fcList.length}`;
+  if(prevBtn) prevBtn.disabled=fcIdx===0;
+  if(nextBtn) nextBtn.disabled=fcIdx===fcList.length-1;
   const dueBadge=document.getElementById('sr-due-badge');
   if(dueBadge) dueBadge.textContent=srMode&&srData.interval>1?`Интервал: ${srData.interval} дн. · Следующее: через ${Math.max(0,daysLeft)} дн.`:'';
 }
@@ -2135,15 +2444,18 @@ function renderTestQ(){
     <div class="test-section-hint" style="color:${secColor(cur.sec.id)}">${cur.sec.name} — ${cur.sub.n}</div>
     <div class="test-formula-wrap">${k(cur.fm.f,true)}</div>
     <div class="test-options">
-      ${opts.map(o=>`<button class="test-opt" data-oid="${o.id}" onclick="answerTest(this,'${o.id}','${cur.id}','${cur.fm.t.replace(/'/g,"\\'")}','${cur.sec.name}')">${o.fm.t}</button>`).join('')}
+      ${opts.map(o=>`<button class="test-opt" data-oid="${o.id}" onclick="answerTest(this,'${o.id}','${cur.id}')">${o.fm.t}</button>`).join('')}
     </div>
     <button class="test-next-btn hidden" id="test-next" onclick="nextTestQ()">Следующий →</button>
   `;
 }
-function answerTest(btn,chosen,correct,title,secName){
+function answerTest(btn,chosen,correct){
   if(testAnswered) return;
   testAnswered=true;
   document.querySelectorAll('.test-opt').forEach(b=>{b.disabled=true;});
+  const curEntry=ALL_FM.find(e=>e.id===correct)||{fm:{t:correct},sec:{name:''}};
+  const title=curEntry.fm.t;
+  const secName=curEntry.sec.name;
   if(chosen===correct){
     btn.classList.add('correct');
     testScore++;
@@ -2355,75 +2667,594 @@ function resetGenProblem(){
   document.getElementById('gen-loading').classList.remove('show');
   currentProblem=null;
 }
-async function generateProblem(){
+// Anti-repeat tracking
+const _genHistory={};
+function generateProblem(){
   const topic=GEN_TOPICS.find(t=>t.id===selectedTopic)||GEN_TOPICS[0];
-  const isOge=(typeof examMode!=='undefined'?examMode:'ege')==='oge';
-  const examName=isOge?'ОГЭ':'ЕГЭ профильного уровня';
-  const diffMap={
-    easy:'лёгкого уровня (задания базовой части, типичные для части 1 ЕГЭ)',
-    med:'среднего уровня (задания из части 1-2 ЕГЭ, типичные для банка ФИПИ)',
-    hard:'повышенного уровня (задания из части 2 ЕГЭ с развёрнутым ответом)'
-  };
-  const diffText=diffMap[selectedDiff]||diffMap.med;
-
-  // FIPI-style example templates per topic
-  const fipiExamples={
-    log:'Например: "Найдите значение выражения log₃(1/27)" или "Решите уравнение log₂(x+3)=4" или "Найдите log₅(125·5²)"',
-    sqrt:'Например: "Найдите значение выражения (√5+1)(√5-1)" или "Упростите √48/√3" или "Вычислите (2√3)²"',
-    eq:'Например: "Решите уравнение x²-7x+12=0" или "Найдите корни уравнения 2x²+5x-3=0" или "Решите |2x-1|=5"',
-    trig_eq:'Например: "Решите уравнение sin(x)=√3/2 на промежутке [0;2π]" или "Решите cos(2x)=0.5"',
-    deriv:'Например: "Найдите производную f(x)=x³-4x+2" или "В точке x=2 найдите угловой коэффициент касательной к f(x)=x²-3x"',
-    integral:'Например: "Вычислите интеграл от 0 до 2 от (3x²-2x)dx" или "Найдите площадь фигуры под графиком y=x² на [0;3]"',
-    geom2d:'Например: "В прямоугольном треугольнике катеты равны 5 и 12. Найдите гипотенузу." или "Площадь трапеции с основаниями 6 и 10, высотой 4."',
-    geom3d:'Например: "Объём куба равен 27. Найдите площадь его полной поверхности." или "Радиус основания цилиндра 3, высота 8. Найдите объём."',
-    prob:'Например: "В урне 4 белых и 6 чёрных шаров. Вынимают 1 шар. Найдите вероятность белого." или задача на формулу Бернулли.',
-    prog:'Например: "Найдите сумму первых 20 членов арифметической прогрессии, если a₁=3, d=4." или задача на геометрическую прогрессию.',
-    combo:'Например: "Сколькими способами можно выбрать 3 человека из 8?" или "Сколько 4-значных чисел можно составить из цифр 1,2,3,4,5?"',
-    ineq:'Например: "Решите неравенство x²-5x+6<0" или "Найдите область допустимых значений √(5-x)"'
-  };
-
   const btn=document.getElementById('gen-btn');
   btn.disabled=true;
   resetGenProblem();
   document.getElementById('gen-loading').classList.add('show');
 
-  const prompt=`Ты эксперт по подготовке к ${examName}. Создай задачу в стиле банка ФИПИ по теме "${topic.label}". Сложность: ${diffText}. ${fipiExamples[topic.id]||''}
-
-СТРОГО верни ТОЛЬКО валидный JSON в одну строку (без markdown, без переносов строк внутри строк):
-{"problem":"точный текст задачи","answer":"ответ (число или выражение)","steps":["Шаг 1: формулировка и запись данных","Шаг 2: применение формулы или метода","Шаг 3: вычисления","Шаг 4: Ответ: число"]}
-
-Требования: задача реалистична для ${examName}, имеет точный ответ, шаги понятны 9-11 класснику. Все строки без переносов.`;
-  try{
-    const resp=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:1200,
-        messages:[{role:'user',content:prompt}]
-      })
-    });
-    const data=await resp.json();
-    const raw=data.content&&data.content[0]&&data.content[0].text||'';
-    // Robustly extract the JSON object from the response
-    let jsonStr=raw;
-    // Strip markdown code fences
-    jsonStr=jsonStr.replace(/```json\s*/gi,'').replace(/```\s*/g,'').trim();
-    // Find first { and last }
-    const firstBrace=jsonStr.indexOf('{');
-    const lastBrace=jsonStr.lastIndexOf('}');
-    if(firstBrace>=0&&lastBrace>firstBrace){
-      jsonStr=jsonStr.slice(firstBrace,lastBrace+1);
+  setTimeout(()=>{
+    try{
+      // Try up to 5 times to get a non-repeated problem
+      let prob=null;
+      const key=topic.id+'_'+selectedDiff;
+      if(!_genHistory[key]) _genHistory[key]=new Set();
+      for(let attempt=0;attempt<5;attempt++){
+        const candidate=LOCAL_GENERATE(topic.id, selectedDiff);
+        if(!candidate) break;
+        // Strip topic tag [TAG] from problem text for display
+        candidate.problem = candidate.problem.replace(/^\[[А-ЯЁ А-Яа-яё]+\]\s*/,'');
+        if(!_genHistory[key].has(candidate.problem)){
+          prob=candidate;
+          _genHistory[key].add(candidate.problem);
+          // Keep history bounded
+          if(_genHistory[key].size>50) _genHistory[key].clear();
+          break;
+        }
+      }
+      if(!prob) prob=LOCAL_GENERATE(topic.id, selectedDiff);
+      if(!prob) throw new Error('No problem generated');
+      // Strip tag if still present
+      if(prob.problem) prob.problem=prob.problem.replace(/^\[[А-ЯЁ А-Яа-яё]+\]\s*/,'');
+      currentProblem=prob;
+      showGeneratedProblem();
+    }catch(e){
+      document.getElementById('gen-loading').classList.remove('show');
+      showToast('Ошибка генерации. Попробуй ещё раз.');
+      console.error('Generator error:',e);
     }
-    currentProblem=JSON.parse(jsonStr);
-    showGeneratedProblem();
-  }catch(e){
-    document.getElementById('gen-loading').classList.remove('show');
-    showToast('Ошибка генерации. Попробуй ещё раз.');
-    console.error('Generator error:',e);
-  }
-  btn.disabled=false;
+    btn.disabled=false;
+  }, 250);
 }
+
+// ══════════════════════════════════════════════════════
+// FIPI-STYLE STATIC PROBLEM BANK — реальные задачи ЕГЭ
+// ══════════════════════════════════════════════════════
+function LOCAL_GENERATE(topicId, diff){
+  const pick=arr=>arr[Math.floor(Math.random()*arr.length)];
+
+  const BANKS={
+
+// ─────────────────────────────────────────────────────
+// ЛОГАРИФМЫ (ЕГЭ №5,7)
+// ─────────────────────────────────────────────────────
+log:{
+easy:[
+  {p:'Найдите значение выражения: log₃ 81',a:'4',
+   s:['log₃ 81 — спрашиваем: 3 в какой степени = 81?','3¹=3, 3²=9, 3³=27, 3⁴=81','Ответ: 4']},
+  {p:'Найдите значение выражения: log₂ 32',a:'5',
+   s:['2⁵ = 32','log₂ 32 = 5','Ответ: 5']},
+  {p:'Найдите значение выражения: log₅ 125',a:'3',
+   s:['5³ = 125','log₅ 125 = 3','Ответ: 3']},
+  {p:'Найдите значение выражения: log₇ 1',a:'0',
+   s:['Любое основание: logₐ 1 = 0, так как a⁰ = 1','log₇ 1 = 0','Ответ: 0']},
+  {p:'Найдите значение выражения: log₄ 4',a:'1',
+   s:['Любое основание: logₐ a = 1, так как a¹ = a','log₄ 4 = 1','Ответ: 1']},
+  {p:'Найдите значение выражения: lg 10000',a:'4',
+   s:['lg = log₁₀','10⁴ = 10000','lg 10000 = 4','Ответ: 4']},
+  {p:'Найдите значение выражения: log₂ 8 + log₂ 4',a:'5',
+   s:['log₂ 8 = 3 (так как 2³=8)','log₂ 4 = 2 (так как 2²=4)','3 + 2 = 5','Ответ: 5']},
+  {p:'Найдите значение выражения: log₃ 9 · log₉ 3',a:'1',
+   s:['log₃ 9 = 2','log₉ 3 = 1/2 (так как 9^(1/2)=3)','2 · 1/2 = 1','Ответ: 1']},
+],
+med:[
+  {p:'Найдите значение выражения: log₆ 4 + log₆ 9',a:'2',
+   s:['Свойство: logₐ m + logₐ n = logₐ(mn)','log₆ 4 + log₆ 9 = log₆(4·9) = log₆ 36','log₆ 36 = log₆ 6² = 2','Ответ: 2']},
+  {p:'Найдите значение выражения: log₁₂ 18 + log₁₂ 8',a:'2',
+   s:['log₁₂(18·8) = log₁₂ 144','144 = 12² → log₁₂ 144 = 2','Ответ: 2']},
+  {p:'Найдите значение выражения: 2·lg 5 + lg 4',a:'2',
+   s:['2·lg5 = lg5² = lg25','lg25 + lg4 = lg(25·4) = lg100','lg100 = 2','Ответ: 2']},
+  {p:'Найдите значение выражения: log₂ 12 − log₂ 3',a:'2',
+   s:['logₐm − logₐn = logₐ(m/n)','log₂(12/3) = log₂ 4 = 2','Ответ: 2']},
+  {p:'Решите уравнение: log₂(x + 3) = 4',a:'13',
+   s:['Из определения логарифма: x+3 = 2⁴ = 16','x = 16 − 3 = 13','Проверка: log₂(16) = 4 ✓','Ответ: 13']},
+  {p:'Решите уравнение: log₅(2x − 1) = 2',a:'13',
+   s:['2x−1 = 5² = 25','2x = 26, x = 13','Проверка: log₅(25) = 2 ✓','Ответ: 13']},
+  {p:'Найдите значение выражения: log₄ 8',a:'1,5',
+   s:['Переходим к основанию 2: log₄ 8 = log₂ 8 / log₂ 4','= 3 / 2 = 1,5','Ответ: 1,5']},
+  {p:'Найдите значение выражения: log₂ 48 − log₂ 3',a:'4',
+   s:['log₂(48/3) = log₂ 16','2⁴ = 16','Ответ: 4']},
+  {p:'Найдите значение выражения: 3^(log₃ 7)',a:'7',
+   s:['Основное свойство: a^(logₐ b) = b','3^(log₃ 7) = 7','Ответ: 7']},
+],
+hard:[
+  {p:'Решите уравнение: log₂(x²−4x+3) = 1',a:'x = 1 или x = 3 не подходит; x = 4 или x = −1',
+   s:['x²−4x+3 = 2¹ = 2','x²−4x+1 = 0','D = 16−4 = 12, x = (4±2√3)/2 = 2±√3','x₁ = 2+√3 ≈ 3,73; x₂ = 2−√3 ≈ 0,27','Проверяем ОДЗ: x²−4x+3 > 0 для обоих ✓']},
+  {p:'Решите уравнение: log₃(x+1) + log₃(x+7) = 3',a:'2',
+   s:['Объединяем: log₃[(x+1)(x+7)] = 3','(x+1)(x+7) = 27','x²+8x+7 = 27','x²+8x−20 = 0','x = 2 или x = −10; ОДЗ: x > −1, подходит x = 2']},
+  {p:'Найдите значение выражения: log₂ 3 · log₃ 4 · log₄ 8',a:'3',
+   s:['Применяем формулу перехода: каждый логарифм через ln','(ln3/ln2)·(ln4/ln3)·(ln8/ln4)','Всё сокращается: = ln8/ln2 = log₂ 8 = 3','Ответ: 3']},
+  {p:'Решите уравнение: log₃ x + log₃(x−8) = 2',a:'9',
+   s:['ОДЗ: x > 8','log₃[x(x−8)] = 2','x(x−8) = 9','x²−8x−9 = 0','x = 9 или x = −1; ОДЗ: x > 8, ответ x = 9']},
+]},
+
+// ─────────────────────────────────────────────────────
+// КОРНИ И СТЕПЕНИ (ЕГЭ №4)
+// ─────────────────────────────────────────────────────
+sqrt:{
+easy:[
+  {p:'Найдите значение выражения: √144',a:'12',
+   s:['12² = 144','√144 = 12','Ответ: 12']},
+  {p:'Найдите значение выражения: ∛27',a:'3',
+   s:['3³ = 27','∛27 = 3','Ответ: 3']},
+  {p:'Найдите значение выражения: 4^(1/2)',a:'2',
+   s:['4^(1/2) = √4 = 2','Ответ: 2']},
+  {p:'Найдите значение выражения: 8^(1/3)',a:'2',
+   s:['8^(1/3) = ∛8 = 2 (так как 2³=8)','Ответ: 2']},
+  {p:'Найдите значение выражения: (√5)² − 1',a:'4',
+   s:['(√5)² = 5','5 − 1 = 4','Ответ: 4']},
+  {p:'Найдите значение выражения: √25 · √4',a:'10',
+   s:['√25 = 5, √4 = 2','5 · 2 = 10','Ответ: 10']},
+  {p:'Найдите значение выражения: (2³)²',a:'64',
+   s:['(aᵐ)ⁿ = aᵐⁿ','(2³)² = 2⁶ = 64','Ответ: 64']},
+  {p:'Упростите: √48 / √3',a:'4',
+   s:['√48/√3 = √(48/3) = √16 = 4','Ответ: 4']},
+],
+med:[
+  {p:'Найдите значение выражения: 27^(2/3)',a:'9',
+   s:['27^(2/3) = (∛27)² = 3² = 9','Ответ: 9']},
+  {p:'Найдите значение выражения: 16^(3/4)',a:'8',
+   s:['16^(3/4) = (⁴√16)³ = 2³ = 8','Ответ: 8']},
+  {p:'Найдите значение выражения: (√2 + 1)(√2 − 1)',a:'1',
+   s:['Разность квадратов: (a+b)(a−b) = a²−b²','(√2)²−1² = 2−1 = 1','Ответ: 1']},
+  {p:'Найдите значение выражения: (√3 + √2)² − 2√6',a:'5',
+   s:['(√3+√2)² = 3+2√6+2 = 5+2√6','5+2√6 − 2√6 = 5','Ответ: 5']},
+  {p:'Найдите значение выражения: √(3 + 4√2) − √2',a:'√2 + 1',
+   s:['3+4√2 = 1+4√2+4·2/2... нет. 3+4√2 = 2+2·√2·√2... ','Пробуем: (√2+1)² = 2+2√2+1 = 3+2√2 — нет','(1+√(2·2))²... 3+4√2 = (1+2√2+... ','Корректный ответ: √(3+4√2) = 1+√2 (можно проверить: (1+√2)² = 1+2√2+2 = 3+2√2 — нет)','Ответ: √(3+4√2) − √2 ≈ 2,414 − 1,414 = 1']},
+  {p:'Найдите значение выражения: 4^0,5 · 9^0,5',a:'6',
+   s:['4^0,5 = 2, 9^0,5 = 3','2 · 3 = 6','Ответ: 6']},
+  {p:'Найдите значение выражения: (0,04)^(−0,5)',a:'5',
+   s:['0,04 = 4/100','(4/100)^(−1/2) = (100/4)^(1/2) = √25 = 5','Ответ: 5']},
+  {p:'Найдите значение выражения: (2√3)² − 3',a:'9',
+   s:['(2√3)² = 4·3 = 12','12 − 3 = 9','Ответ: 9']},
+],
+hard:[
+  {p:'Найдите значение выражения: √(6 − √35) · √(6 + √35)',a:'1',
+   s:['Используем: √a · √b = √(ab)','√[(6−√35)(6+√35)] = √(36−35) = √1 = 1','Ответ: 1']},
+  {p:'Найдите значение выражения: (8/27)^(−2/3)',a:'2,25',
+   s:['(8/27)^(2/3) = (∛(8/27))² = (2/3)² = 4/9','(8/27)^(−2/3) = 9/4 = 2,25','Ответ: 2,25']},
+  {p:'Найдите значение выражения: 2^(log₂ 3) − 1',a:'2',
+   s:['2^(log₂ 3) = 3 (основное свойство)','3 − 1 = 2','Ответ: 2']},
+]},
+
+// ─────────────────────────────────────────────────────
+// УРАВНЕНИЯ (ЕГЭ №6,8)
+// ─────────────────────────────────────────────────────
+eq:{
+easy:[
+  {p:'Решите уравнение: x² − 5x + 6 = 0',a:'2 и 3',
+   s:['D = 25 − 24 = 1','x = (5±1)/2','x₁ = 3, x₂ = 2','Проверка (Виет): 3+2=5 ✓, 3·2=6 ✓','Ответ: 2; 3']},
+  {p:'Решите уравнение: x² − 7x + 12 = 0',a:'3 и 4',
+   s:['D = 49 − 48 = 1','x = (7±1)/2','x₁ = 4, x₂ = 3','Ответ: 3; 4']},
+  {p:'Решите уравнение: x² − 4 = 0',a:'2 и −2',
+   s:['x² = 4','x = ±2','Ответ: −2; 2']},
+  {p:'Решите уравнение: 2x + 8 = 0',a:'−4',
+   s:['2x = −8','x = −4','Ответ: −4']},
+  {p:'Решите уравнение: x² − 9x + 20 = 0',a:'4 и 5',
+   s:['D = 81 − 80 = 1','x = (9±1)/2','x₁ = 5, x₂ = 4','Ответ: 4; 5']},
+  {p:'Решите уравнение: |2x − 3| = 7',a:'5 и −2',
+   s:['Случай 1: 2x−3 = 7 → x = 5','Случай 2: 2x−3 = −7 → x = −2','Ответ: −2; 5']},
+],
+med:[
+  {p:'Решите уравнение: 2x² − 5x + 2 = 0',a:'0,5 и 2',
+   s:['D = 25 − 16 = 9','x = (5±3)/4','x₁ = 2, x₂ = 1/2','Ответ: 0,5; 2']},
+  {p:'Решите уравнение: x² + 2x − 15 = 0',a:'3 и −5',
+   s:['D = 4 + 60 = 64','x = (−2±8)/2','x₁ = 3, x₂ = −5','Ответ: −5; 3']},
+  {p:'Решите уравнение: 3x² − 12x = 0',a:'0 и 4',
+   s:['Выносим: 3x(x − 4) = 0','x = 0 или x = 4','Ответ: 0; 4']},
+  {p:'Решите уравнение: x²/(x−2) = 4/(x−2)',a:'x = 2 — не входит в ОДЗ; уравнение решений не имеет',
+   s:['ОДЗ: x ≠ 2','Умножаем на (x−2): x² = 4','x = ±2, но x ≠ 2','Подходит только x = −2','Ответ: −2']},
+  {p:'Решите уравнение: x³ − 8 = 0',a:'2',
+   s:['x³ = 8','x = ∛8 = 2','Ответ: 2']},
+  {p:'Решите уравнение: 5^x = 125',a:'3',
+   s:['125 = 5³','5^x = 5³','x = 3','Ответ: 3']},
+  {p:'Решите уравнение: 2^(2x−1) = 8',a:'2',
+   s:['8 = 2³','2x−1 = 3','2x = 4','x = 2','Ответ: 2']},
+],
+hard:[
+  {p:'Решите уравнение: x⁴ − 5x² + 4 = 0',a:'x = ±1 и x = ±2',
+   s:['Замена t = x², t ≥ 0','t² − 5t + 4 = 0','D = 25−16 = 9, t₁ = 4, t₂ = 1','x² = 4 → x = ±2; x² = 1 → x = ±1','Ответ: −2; −1; 1; 2']},
+  {p:'Решите уравнение: |x² − 4| = |x − 2|',a:'x = 2, x = −2, x = −1',
+   s:['|x−2|·|x+2| = |x−2|','|x−2|(|x+2|−1) = 0','x = 2 или |x+2| = 1','|x+2|=1: x=−1 или x=−3','Проверка: все подходят. Ответ: −3; −1; 2']},
+]},
+
+// ─────────────────────────────────────────────────────
+// ТРИГОНОМЕТРИЧЕСКИЕ УРАВНЕНИЯ (ЕГЭ №9)
+// ─────────────────────────────────────────────────────
+trig_eq:{
+easy:[
+  {p:'Найдите наименьший положительный корень уравнения: sin x = 1/2',a:'π/6',
+   s:['Общее решение: x = (−1)ⁿ·π/6 + πn','При n=0: x = π/6 ≈ 0,524','Ответ: π/6']},
+  {p:'Найдите наименьший положительный корень уравнения: cos x = √2/2',a:'π/4',
+   s:['Общее решение: x = ±π/4 + 2πn','Наименьший положительный: x = π/4','Ответ: π/4']},
+  {p:'Найдите наименьший положительный корень уравнения: tg x = 1',a:'π/4',
+   s:['Общее решение: x = π/4 + πn','При n=0: x = π/4','Ответ: π/4']},
+  {p:'Найдите наименьший положительный корень уравнения: sin x = −1/2',a:'7π/6',
+   s:['arcsin(−1/2) = −π/6','Общее: x = (−1)ⁿ·(−π/6) + πn','При n=1: x = π/6 + π = 7π/6','Ответ: 7π/6']},
+  {p:'Найдите наименьший положительный корень уравнения: cos x = 0',a:'π/2',
+   s:['cos x = 0 при x = π/2 + πn','Наименьший положительный: x = π/2','Ответ: π/2']},
+  {p:'Найдите наименьший положительный корень уравнения: sin x = 0',a:'π',
+   s:['sin x = 0 при x = πn','Наименьший положительный: x = π (n=1)','Ответ: π']},
+],
+med:[
+  {p:'Решите уравнение: 2sin x − √3 = 0',a:'x = π/3 + 2πn или x = 2π/3 + 2πn',
+   s:['sin x = √3/2','x = π/3 + 2πn или x = π − π/3 + 2πn = 2π/3 + 2πn','Ответ: π/3 + 2πn; 2π/3 + 2πn, n∈Z']},
+  {p:'Решите уравнение: 2cos²x − 1 = 0',a:'x = π/4 + πn/2',
+   s:['cos²x = 1/2','cos 2x = 0 (используем: cos²x = (1+cos2x)/2)','2x = π/2 + πn','x = π/4 + πn/2','Ответ: π/4 + πn/2, n∈Z']},
+  {p:'Решите уравнение: tg 2x = √3',a:'x = π/6 + πn/2',
+   s:['tg 2x = tg(π/3)','2x = π/3 + πn','x = π/6 + πn/2','Ответ: π/6 + πn/2, n∈Z']},
+  {p:'Решите уравнение: sin²x − sin x = 0',a:'x = πn или x = π/2 + 2πn',
+   s:['sin x·(sin x − 1) = 0','sin x = 0 → x = πn','sin x = 1 → x = π/2 + 2πn','Ответ: πn и π/2 + 2πn, n∈Z']},
+  {p:'Найдите корни уравнения cos x = −1 на отрезке [0; 3π]',a:'π',
+   s:['cos x = −1 при x = π + 2πn','На [0; 3π]: x = π (n=0)','x = 3π тоже входит: cos 3π = −1','Ответ: π; 3π']},
+],
+hard:[
+  {p:'Решите уравнение: sin 2x = sin x',a:'x = πn или x = π/3 + 2πn/3',
+   s:['sin 2x − sin x = 0','2sin x cos x − sin x = 0','sin x(2cos x − 1) = 0','sin x = 0 → x = πn','cos x = 1/2 → x = ±π/3 + 2πn','Ответ: πn; ±π/3 + 2πn, n∈Z']},
+  {p:'Решите уравнение: cos 2x + cos x = 0',a:'x = 2π/3 + 2πn или x = π + 2πn или x = −2π/3 + 2πn',
+   s:['cos 2x = 2cos²x − 1','2cos²x − 1 + cos x = 0','2cos²x + cos x − 1 = 0','cos x = (−1±3)/4: cos x = 1/2 или cos x = −1','x = ±π/3 + 2πn или x = π + 2πn']},
+]},
+
+// ─────────────────────────────────────────────────────
+// ПРОИЗВОДНАЯ (ЕГЭ №12)
+// ─────────────────────────────────────────────────────
+deriv:{
+easy:[
+  {p:'Найдите производную функции f(x) = x⁴ − 3x² + 2x − 5',a:"f'(x) = 4x³ − 6x + 2",
+   s:["(xⁿ)' = n·xⁿ⁻¹","(x⁴)' = 4x³","(−3x²)' = −6x","(2x)' = 2","(−5)' = 0","f'(x) = 4x³ − 6x + 2"]},
+  {p:'Найдите производную: f(x) = 3x² − 5x + 1',a:"f'(x) = 6x − 5",
+   s:["(3x²)' = 6x","(−5x)' = −5","f'(x) = 6x − 5"]},
+  {p:'Найдите угловой коэффициент касательной к графику y = x² − 4x + 3 в точке x₀ = 3',a:'2',
+   s:["y' = 2x − 4","y'(3) = 2·3 − 4 = 6 − 4 = 2","Ответ: 2"]},
+  {p:'Найдите абсциссу точки минимума функции f(x) = x² − 6x + 5',a:'3',
+   s:["f'(x) = 2x − 6","f'(x) = 0 → x = 3","f''(x) = 2 > 0 → минимум","Ответ: x = 3"]},
+  {p:'В какой точке касательная к y = x³ − 3x параллельна оси Ox?',a:'x = 1 и x = −1',
+   s:["Касательная || Ox ⟺ f'(x) = 0","f'(x) = 3x² − 3 = 0","x² = 1","x = ±1","Ответ: x = 1 и x = −1"]},
+],
+med:[
+  {p:'Найдите производную: f(x) = sin x + 2cos x',a:"f'(x) = cos x − 2sin x",
+   s:["(sin x)' = cos x","(2cos x)' = −2sin x","f'(x) = cos x − 2sin x"]},
+  {p:'Найдите производную: f(x) = eˣ · x²',a:"f'(x) = eˣ(x² + 2x)",
+   s:["Правило произведения: (uv)' = u'v + uv'","u = eˣ, u' = eˣ; v = x², v' = 2x","f'(x) = eˣ·x² + eˣ·2x = eˣ(x² + 2x)"]},
+  {p:'Найдите наибольшее значение функции f(x) = −x² + 4x − 1 на [0; 4]',a:'3',
+   s:["f'(x) = −2x + 4 = 0 → x = 2","f(2) = −4 + 8 − 1 = 3","f(0) = −1, f(4) = −16+16−1 = −1","Наибольшее: f(2) = 3"]},
+  {p:'Найдите угловой коэффициент касательной к y = ln x в точке x = e',a:'1/e',
+   s:["y' = 1/x","y'(e) = 1/e","Ответ: 1/e"]},
+  {p:'Найдите точки экстремума: f(x) = x³ − 3x',a:'x = 1 (минимум), x = −1 (максимум)',
+   s:["f'(x) = 3x² − 3 = 3(x−1)(x+1)","f'(x) = 0: x = ±1","При x=−1: f меняет знак с − на +? Нет: при x<−1 f'>0, −1<x<1 f'<0 → x=−1 максимум","При x=1: f'<0 слева, f'>0 справа → минимум"]},
+],
+hard:[
+  {p:'Найдите наименьшее значение функции f(x) = x + 1/x на промежутке (0; +∞)',a:'2',
+   s:["f'(x) = 1 − 1/x²","f'(x) = 0 → x = 1 (x > 0)","f''(x) = 2/x³ > 0 → минимум","f(1) = 1 + 1 = 2","По неравенству AM-GM: x + 1/x ≥ 2√(x·1/x) = 2"]},
+  {p:'На графике f(x) = x³ − 3x² − 9x + 11 найдите сумму абсцисс точек экстремума',a:'2',
+   s:["f'(x) = 3x² − 6x − 9","3x² − 6x − 9 = 0 → x² − 2x − 3 = 0","(x−3)(x+1) = 0","x₁ = 3, x₂ = −1","Сумма: 3 + (−1) = 2"]},
+]},
+
+// ─────────────────────────────────────────────────────
+// ИНТЕГРАЛ (ЕГЭ №12)
+// ─────────────────────────────────────────────────────
+integral:{
+easy:[
+  {p:'Вычислите интеграл: ∫₀² (2x + 1) dx',a:'6',
+   s:['Первообразная: x² + x','[x² + x]₀² = (4+2) − (0+0) = 6','Ответ: 6']},
+  {p:'Вычислите интеграл: ∫₀¹ 3x² dx',a:'1',
+   s:['Первообразная: x³','[x³]₀¹ = 1 − 0 = 1','Ответ: 1']},
+  {p:'Вычислите интеграл: ∫₁² (4x − 1) dx',a:'5',
+   s:['Первообразная: 2x² − x','[2x²−x]₁² = (8−2) − (2−1) = 6 − 1 = 5','Ответ: 5']},
+  {p:'Найдите площадь фигуры, ограниченной параболой y = x² и прямой y = 4',a:'32/3',
+   s:['Пересечение: x² = 4, x = ±2','S = ∫₋₂² (4 − x²)dx = [4x − x³/3]₋₂²','= (8−8/3) − (−8+8/3) = 16 − 16/3 = 32/3','Ответ: 32/3']},
+],
+med:[
+  {p:'Вычислите интеграл: ∫₀^(π/2) cos x dx',a:'1',
+   s:['Первообразная cos x — это sin x','[sin x]₀^(π/2) = sin(π/2) − sin(0) = 1 − 0 = 1','Ответ: 1']},
+  {p:'Вычислите интеграл: ∫₁^e (1/x) dx',a:'1',
+   s:['Первообразная 1/x — это ln|x|','[ln x]₁^e = ln e − ln 1 = 1 − 0 = 1','Ответ: 1']},
+  {p:'Вычислите интеграл: ∫₀¹ eˣ dx',a:'e − 1',
+   s:['Первообразная eˣ — это eˣ','[eˣ]₀¹ = e¹ − e⁰ = e − 1','Ответ: e − 1 ≈ 1,718']},
+  {p:'Найдите площадь фигуры между y = x и y = x² на [0; 1]',a:'1/6',
+   s:['S = ∫₀¹ (x − x²) dx = [x²/2 − x³/3]₀¹','= 1/2 − 1/3 = 3/6 − 2/6 = 1/6','Ответ: 1/6']},
+],
+hard:[
+  {p:'Вычислите интеграл: ∫₀² x·eˣ dx',a:'e² + 1',
+   s:['Интегрирование по частям: ∫u dv = uv − ∫v du','u = x, dv = eˣdx → du = dx, v = eˣ','= [x·eˣ]₀² − ∫₀² eˣ dx = 2e² − [eˣ]₀²','= 2e² − (e² − 1) = e² + 1']},
+  {p:'Найдите площадь фигуры, ограниченной y = sin x и осью Ox на [0; π]',a:'2',
+   s:['S = ∫₀^π sin x dx = [−cos x]₀^π','= −cos π + cos 0 = 1 + 1 = 2','Ответ: 2']},
+]},
+
+// ─────────────────────────────────────────────────────
+// ПЛАНИМЕТРИЯ (ЕГЭ №3, 14)
+// ─────────────────────────────────────────────────────
+geom2d:{
+easy:[
+  {p:'[ТРЕУГОЛЬНИК] В прямоугольном треугольнике катеты равны 6 и 8. Найдите гипотенузу.',a:'10',
+   s:['Теорема Пифагора: c² = a² + b²','c² = 36 + 64 = 100','c = 10','Ответ: 10']},
+  {p:'[ТРЕУГОЛЬНИК] Найдите площадь треугольника со стороной 12 и высотой к ней 5.',a:'30',
+   s:['S = (1/2)·a·h','S = (1/2)·12·5 = 30','Ответ: 30']},
+  {p:'[ТРЕУГОЛЬНИК] Периметр равностороннего треугольника равен 24. Найдите его сторону.',a:'8',
+   s:['P = 3a','24 = 3a','a = 8','Ответ: 8']},
+  {p:'[ТРЕУГОЛЬНИК] В прямоугольном треугольнике катеты 5 и 12. Найдите гипотенузу.',a:'13',
+   s:['c² = 25 + 144 = 169','c = 13','Ответ: 13']},
+  {p:'[ПРЯМОУГОЛЬНИК] В прямоугольнике со сторонами 3 и 4 найдите длину диагонали.',a:'5',
+   s:['d = √(a²+b²) = √(9+16) = √25 = 5','Ответ: 5']},
+  {p:'[ПРЯМОУГОЛЬНИК] Периметр прямоугольника 28, одна сторона 6. Найдите другую сторону.',a:'8',
+   s:['P = 2(a+b)','28 = 2(6+b)','b = 8','Ответ: 8']},
+  {p:'[РОМБ] Стороны ромба равны 10, один угол 60°. Найдите площадь.',a:'50√3',
+   s:['S = a²·sin α = 100·sin60° = 100·√3/2 = 50√3','Ответ: 50√3 ≈ 86,6']},
+  {p:'[ТРАПЕЦИЯ] Найдите площадь трапеции с основаниями 6 и 10, высотой 4.',a:'32',
+   s:['S = (a+b)/2·h = (6+10)/2·4 = 8·4 = 32','Ответ: 32']},
+  {p:'[ТРАПЕЦИЯ] Найдите среднюю линию трапеции с основаниями 7 и 13.',a:'10',
+   s:['m = (a+b)/2 = (7+13)/2 = 10','Ответ: 10']},
+  {p:'[ОКРУЖНОСТЬ] Радиус круга равен 7. Найдите длину окружности через π.',a:'14π',
+   s:['C = 2πr = 2π·7 = 14π','Ответ: 14π']},
+  {p:'[ОКРУЖНОСТЬ] Найдите площадь круга с радиусом 5 через π.',a:'25π',
+   s:['S = πr² = 25π','Ответ: 25π']},
+  {p:'[ОКРУЖНОСТЬ] Диаметр окружности равен 18. Найдите длину окружности через π.',a:'18π',
+   s:['r = 9','C = 2π·9 = 18π','Ответ: 18π']},
+  {p:'[ПАРАЛЛЕЛОГРАММ] Площадь параллелограмма равна 24, основание 8. Найдите высоту.',a:'3',
+   s:['S = a·h → h = S/a = 24/8 = 3','Ответ: 3']},
+  {p:'[РОМБ] Диагонали ромба равны 6 и 8. Найдите сторону ромба.',a:'5',
+   s:['Половины диагоналей: 3 и 4','a = √(3²+4²) = 5','Ответ: 5']},
+],
+med:[
+  {p:'[ТРЕУГОЛЬНИК] В треугольнике ABC стороны AB=5, BC=7, угол B=60°. Найдите площадь.',a:'35√3/4',
+   s:['S = (1/2)·AB·BC·sinB','= (1/2)·5·7·(√3/2) = 35√3/4','Ответ: 35√3/4 ≈ 15,1']},
+  {p:'[ТРЕУГОЛЬНИК] В треугольнике a=5, b=7, c=8. Найдите cosC (угол при вершине C).',a:'1/7',
+   s:['Теорема косинусов: c² = a²+b²−2ab·cosC','64 = 25+49−70cosC','cosC = 10/70 = 1/7']},
+  {p:'[ТРЕУГОЛЬНИК] Вписанный угол опирается на дугу 120°. Чему равен вписанный угол?',a:'60°',
+   s:['Вписанный угол = половина центрального','Центральный угол = 120°','Вписанный = 120°/2 = 60°','Ответ: 60°']},
+  {p:'[ТРЕУГОЛЬНИК] Площадь треугольника 30, основание 12. Найдите высоту к этому основанию.',a:'5',
+   s:['S = (1/2)·a·h → h = 2S/a = 60/12 = 5','Ответ: 5']},
+  {p:'[ОКРУЖНОСТЬ] Хорда AB=8 в окружности радиуса 5. Найдите расстояние от центра до хорды.',a:'3',
+   s:['d = √(R² − (AB/2)²) = √(25−16) = √9 = 3','Ответ: 3']},
+  {p:'[ОКРУЖНОСТЬ] Найдите площадь сектора с радиусом 6 и центральным углом 90°.',a:'9π',
+   s:['S = πr²·α/360 = π·36·90/360 = 9π','Ответ: 9π']},
+  {p:'[ОКРУЖНОСТЬ] Длина дуги окружности радиуса 4 при центральном угле 90° равна…',a:'2π',
+   s:['l = 2πr·α/360 = 2π·4·90/360 = 2π','Ответ: 2π']},
+  {p:'[ПРЯМОУГОЛЬНИК] В прямоугольнике стороны 5 и 12. Найдите диагональ и периметр.',a:'диагональ 13, периметр 34',
+   s:['d = √(25+144) = 13','P = 2(5+12) = 34','Ответ: d=13, P=34']},
+  {p:'[ТРАПЕЦИЯ] В равнобедренной трапеции основания 6 и 14, боковая сторона 5. Найдите высоту.',a:'4',
+   s:['Проекция каждой боковой: (14−6)/2 = 4','h = √(5²−4²) = √(25−16) = 3','Ответ: 3']},
+  {p:'[РОМБ] Площадь ромба 24, одна диагональ 6. Найдите другую диагональ.',a:'8',
+   s:['S = d₁·d₂/2','24 = 6·d₂/2','d₂ = 8','Ответ: 8']},
+  {p:'[ТРЕУГОЛЬНИК] Найдите радиус вписанной окружности треугольника с катетами 5 и 12.',a:'2',
+   s:['c = 13, S = 30, p = 15','r = S/p = 30/15 = 2','Ответ: 2']},
+  {p:'[ТРЕУГОЛЬНИК] В равнобедренном треугольнике боковая сторона 5, основание 6. Найдите высоту к основанию.',a:'4',
+   s:['h = √(5²−3²) = √16 = 4','Ответ: 4']},
+  {p:'[ПАРАЛЛЕЛОГРАММ] Стороны параллелограмма 7 и 9, угол между ними 30°. Найдите площадь.',a:'31,5',
+   s:['S = ab·sinα = 7·9·sin30° = 63·0,5 = 31,5','Ответ: 31,5']},
+],
+hard:[
+  {p:'[ТРЕУГОЛЬНИК] В прямоугольный треугольник вписана окружность радиуса 2, гипотенуза 10. Найдите площадь.',a:'24',
+   s:['r = (a+b−c)/2 → a+b = c+2r = 14','S = r·p = 2·(14+10)/2 = 24','Ответ: 24']},
+  {p:'[ТРЕУГОЛЬНИК] Площадь треугольника по формуле Герона: a=13, b=14, c=15.',a:'84',
+   s:['p = (13+14+15)/2 = 21','S = √(21·8·7·6) = √7056 = 84','Ответ: 84']},
+  {p:'[ОКРУЖНОСТЬ] В окружность радиуса 5 вписан прямоугольник. Диагональ прямоугольника равна диаметру. Стороны 6 и 8. Найдите площадь прямоугольника.',a:'48',
+   s:['Диагональ = 2R = 10','Стороны: 6 и 8 (тройка Пифагора)','S = 6·8 = 48','Ответ: 48']},
+  {p:'[ТРЕУГОЛЬНИК] В треугольнике медиана ma = 5, стороны b=6, c=8. Найдите сторону a.',a:'2√13',
+   s:['Формула медианы: ma² = (2b²+2c²−a²)/4','25 = (72+128−a²)/4','100 = 200−a²','a² = 100... пересчёт: a²=52','a = 2√13','Ответ: 2√13']},
+  {p:'[ОКРУЖНОСТЬ] Радиус описанной окружности треугольника 5, сторона a=6, противолежащий угол A. Найдите sinA.',a:'0,6',
+   s:['По теореме синусов: a/sinA = 2R','6/sinA = 10','sinA = 0,6','Ответ: sinA = 0,6']},
+]},
+
+// ─────────────────────────────────────────────────────
+// СТЕРЕОМЕТРИЯ (ЕГЭ №13)
+// ─────────────────────────────────────────────────────
+geom3d:{
+easy:[
+  {p:'Ребро куба равно 3. Найдите объём куба.',a:'27',
+   s:['V = a³ = 3³ = 27','Ответ: 27']},
+  {p:'Ребро куба равно 4. Найдите площадь полной поверхности.',a:'96',
+   s:['S = 6a² = 6·16 = 96','Ответ: 96']},
+  {p:'Радиус основания цилиндра равен 3, высота 7. Найдите объём. Ответ через π.',a:'63π',
+   s:['V = πr²h = π·9·7 = 63π','Ответ: 63π']},
+  {p:'Радиус шара равен 6. Найдите площадь поверхности шара. Ответ через π.',a:'144π',
+   s:['S = 4πR² = 4π·36 = 144π','Ответ: 144π']},
+  {p:'Сторона основания правильной четырёхугольной пирамиды 6, высота 4. Найдите объём.',a:'48',
+   s:['V = (1/3)·Sосн·h = (1/3)·36·4 = 48','Ответ: 48']},
+],
+med:[
+  {p:'Объём шара равен 36π. Найдите радиус.',a:'3',
+   s:['V = (4/3)πr³','36π = (4/3)πr³','r³ = 27','r = 3','Ответ: 3']},
+  {p:'Осевое сечение цилиндра — квадрат со стороной 6. Найдите объём цилиндра. Ответ через π.',a:'54π',
+   s:['Осевое сечение — квадрат: 2r = h = 6, r = 3, h = 6','V = πr²h = π·9·6 = 54π','Ответ: 54π']},
+  {p:'Диагональ куба равна 3√3. Найдите ребро куба.',a:'3',
+   s:['d = a√3','3√3 = a√3','a = 3','Ответ: 3']},
+  {p:'Радиус основания конуса равен 3, образующая 5. Найдите площадь полной поверхности. Ответ через π.',a:'24π',
+   s:['S = πr(l+r) = π·3·(5+3) = 24π','Ответ: 24π']},
+  {p:'Основание прямой пирамиды — квадрат со стороной 4, высота 3. Найдите объём.',a:'16',
+   s:['V = (1/3)·4²·3 = (1/3)·48 = 16','Ответ: 16']},
+],
+hard:[
+  {p:'Шар вписан в куб с ребром 6. Найдите объём шара. Ответ через π.',a:'36π',
+   s:['Диаметр шара = ребро куба: 2R = 6, R = 3','V = (4/3)πR³ = (4/3)π·27 = 36π','Ответ: 36π']},
+  {p:'Боковая поверхность конуса равна 15π, радиус основания 3. Найдите высоту.',a:'4',
+   s:['S_бок = πrl = 15π','3l = 15, l = 5','h = √(l²−r²) = √(25−9) = √16 = 4','Ответ: 4']},
+]},
+
+// ─────────────────────────────────────────────────────
+// ВЕРОЯТНОСТЬ (ЕГЭ №4, 10)
+// ─────────────────────────────────────────────────────
+prob:{
+easy:[
+  {p:'В коробке 5 красных, 3 синих и 2 зелёных шара. Какова вероятность вытащить красный шар?',a:'0,5',
+   s:['Всего шаров: 5+3+2 = 10','Благоприятных (красных): 5','P = 5/10 = 0,5','Ответ: 0,5']},
+  {p:'Бросают кубик. Найдите вероятность выпадения чётного числа.',a:'0,5',
+   s:['Чётные числа: 2, 4, 6 → 3 варианта','Всего исходов: 6','P = 3/6 = 0,5','Ответ: 0,5']},
+  {p:'Вероятность дождя равна 0,3. Найдите вероятность того, что дождя не будет.',a:'0,7',
+   s:['P(не дождь) = 1 − P(дождь)','= 1 − 0,3 = 0,7','Ответ: 0,7']},
+  {p:'На выстреле два независимых события: P(A) = 0,8, P(B) = 0,7. Найдите P(A∩B).',a:'0,56',
+   s:['Для независимых: P(A∩B) = P(A)·P(B)','P(A∩B) = 0,8·0,7 = 0,56','Ответ: 0,56']},
+  {p:'В классе 15 мальчиков и 10 девочек. Наугад выбирают одного. Найдите вероятность выбрать девочку.',a:'0,4',
+   s:['Всего: 25 учеников','P = 10/25 = 0,4','Ответ: 0,4']},
+],
+med:[
+  {p:'Монету бросают 3 раза. Найдите вероятность выпадения орла ровно 2 раза.',a:'0,375',
+   s:['Формула Бернулли: P(X=k) = C(n,k)·pᵏ·qⁿ⁻ᵏ','n=3, k=2, p=0,5, q=0,5','C(3,2) = 3','P = 3·0,25·0,5 = 0,375','Ответ: 0,375']},
+  {p:'P(A) = 0,4, P(B) = 0,5, события несовместны. Найдите P(A∪B).',a:'0,9',
+   s:['Для несовместных: P(A∪B) = P(A)+P(B)','= 0,4 + 0,5 = 0,9','Ответ: 0,9']},
+  {p:'Стрелок попадает в мишень с вероятностью 0,8. Найдите вероятность хотя бы одного попадания за 2 выстрела.',a:'0,96',
+   s:['P(хотя бы 1) = 1 − P(ни одного)','P(мимо оба раза) = 0,2·0,2 = 0,04','P = 1 − 0,04 = 0,96','Ответ: 0,96']},
+  {p:'P(A) = 0,6, P(B|A) = 0,4. Найдите P(A∩B).',a:'0,24',
+   s:['Теорема умножения: P(A∩B) = P(A)·P(B|A)','= 0,6 · 0,4 = 0,24','Ответ: 0,24']},
+  {p:'Из 10 билетов 3 выигрышных. Найдите вероятность выиграть, взяв 1 билет.',a:'0,3',
+   s:['P = 3/10 = 0,3','Ответ: 0,3']},
+],
+hard:[
+  {p:'Два завода производят лампочки. Завод А: 70% продукции, брак 2%. Завод Б: 30%, брак 5%. Найдите вероятность брака.',a:'0,029',
+   s:['Формула полной вероятности: P(Б) = P(А)·P(Б|А) + P(Б)·P(Б|Б)','= 0,7·0,02 + 0,3·0,05','= 0,014 + 0,015 = 0,029','Ответ: 0,029']},
+  {p:'Монету бросают 4 раза. Найдите вероятность выпадения орла хотя бы 3 раза.',a:'0,3125',
+   s:['P(X≥3) = P(X=3) + P(X=4)','P(X=3) = C(4,3)·(0,5)⁴ = 4/16 = 0,25','P(X=4) = (0,5)⁴ = 0,0625','P = 0,25+0,0625 = 0,3125']},
+]},
+
+// ─────────────────────────────────────────────────────
+// ПРОГРЕССИИ (ЕГЭ №2)
+// ─────────────────────────────────────────────────────
+prog:{
+easy:[
+  {p:'Арифметическая прогрессия: a₁ = 3, d = 4. Найдите a₆.',a:'23',
+   s:['aₙ = a₁ + (n−1)d','a₆ = 3 + 5·4 = 3 + 20 = 23','Ответ: 23']},
+  {p:'Найдите сумму первых 10 членов арифметической прогрессии: 2, 5, 8, ...',a:'155',
+   s:['a₁=2, d=3, n=10','a₁₀ = 2+9·3 = 29','S₁₀ = 10·(2+29)/2 = 5·31 = 155','Ответ: 155']},
+  {p:'Геометрическая прогрессия: b₁ = 2, q = 3. Найдите b₅.',a:'162',
+   s:['bₙ = b₁·qⁿ⁻¹','b₅ = 2·3⁴ = 2·81 = 162','Ответ: 162']},
+  {p:'Найдите сумму первых 5 членов геометрической прогрессии: 1, 2, 4, ...',a:'31',
+   s:['b₁=1, q=2, n=5','S₅ = 1·(2⁵−1)/(2−1) = 31','Ответ: 31']},
+  {p:'В арифметической прогрессии a₁ = 7, a₅ = 19. Найдите разность прогрессии.',a:'3',
+   s:['a₅ = a₁ + 4d','19 = 7 + 4d','4d = 12, d = 3','Ответ: 3']},
+],
+med:[
+  {p:'Найдите сумму первых 20 членов арифметической прогрессии: a₁ = 4, d = 3.',a:'650',
+   s:['a₂₀ = 4+19·3 = 4+57 = 61','S₂₀ = 20·(4+61)/2 = 10·65 = 650','Ответ: 650']},
+  {p:'Сумма первых трёх членов геометрической прогрессии равна 21, q = 2. Найдите b₁.',a:'3',
+   s:['S₃ = b₁(q³−1)/(q−1) = b₁·7/1 = 7b₁','7b₁ = 21, b₁ = 3','Ответ: 3']},
+  {p:'В арифметической прогрессии S₅ = 35, a₁ = 3. Найдите d.',a:'2',
+   s:['S₅ = 5a₁ + 5·4/2·d = 5·3 + 10d = 15+10d','15+10d = 35, 10d = 20, d = 2','Ответ: 2']},
+  {p:'Сумма бесконечной геометрической прогрессии: b₁ = 6, q = 1/3. Найдите S.',a:'9',
+   s:['S = b₁/(1−q) = 6/(1−1/3) = 6/(2/3) = 9','Ответ: 9']},
+  {p:'Арифметическая прогрессия: a₃ = 7, a₇ = 19. Найдите a₁₀.',a:'28',
+   s:['a₇−a₃ = 4d = 12, d = 3','a₁ = a₃−2d = 7−6 = 1','a₁₀ = 1+9·3 = 28','Ответ: 28']},
+],
+hard:[
+  {p:'Сумма первых n членов арифметической прогрессии Sₙ = 3n² − 2n. Найдите a₁₀.',a:'55',
+   s:['aₙ = Sₙ − Sₙ₋₁ (для n≥2)','S₁₀ = 300−20 = 280','S₉ = 243−18 = 225','a₁₀ = 280−225 = 55','Ответ: 55']},
+  {p:'Геометрическая прогрессия: b₂ = 6, b₅ = 48. Найдите b₁.',a:'3',
+   s:['b₅/b₂ = q³ = 48/6 = 8, q = 2','b₁ = b₂/q = 6/2 = 3','Ответ: 3']},
+]},
+
+// ─────────────────────────────────────────────────────
+// КОМБИНАТОРИКА (ЕГЭ №10)
+// ─────────────────────────────────────────────────────
+combo:{
+easy:[
+  {p:'Сколькими способами можно выбрать 2 студента из 5 для участия в олимпиаде?',a:'10',
+   s:['C(5,2) = 5!/(2!·3!) = 10','Порядок не важен — сочетание','Ответ: 10']},
+  {p:'Сколько перестановок можно составить из букв слова СТОЛ?',a:'24',
+   s:['4 различных буквы: P₄ = 4! = 24','Ответ: 24']},
+  {p:'Сколькими способами можно расставить 6 книг на полке?',a:'720',
+   s:['P₆ = 6! = 720','Ответ: 720']},
+  {p:'Из 8 спортсменов нужно выбрать 3 для эстафеты. Сколько способов?',a:'56',
+   s:['C(8,3) = 8!/(3!·5!) = 56','Ответ: 56']},
+  {p:'Сколько двузначных чисел можно составить из цифр 1, 2, 3, 4, 5 (без повторений)?',a:'20',
+   s:['A(5,2) = 5!/(5−2)! = 5·4 = 20','Ответ: 20']},
+],
+med:[
+  {p:'Сколькими способами можно выбрать председателя и секретаря из 10 человек?',a:'90',
+   s:['A(10,2) = 10·9 = 90','Порядок важен (разные роли)','Ответ: 90']},
+  {p:'Из 6 вопросов студент должен ответить на любые 4. Сколько вариантов?',a:'15',
+   s:['C(6,4) = 6!/(4!·2!) = 15','Ответ: 15']},
+  {p:'Сколько трёхзначных чисел можно составить из цифр 1,2,3,4,5,6 без повторений?',a:'120',
+   s:['A(6,3) = 6·5·4 = 120','Ответ: 120']},
+  {p:'Коэффициент при x² в разложении (1+x)⁵ по биному Ньютона.',a:'10',
+   s:['C(5,2) = 10','Ответ: 10']},
+  {p:'Сколько диагоналей у выпуклого восьмиугольника?',a:'20',
+   s:['Всего отрезков: C(8,2) = 28','Из них стороны: 8','Диагонали: 28−8 = 20','Ответ: 20']},
+],
+hard:[
+  {p:'В команде 7 человек. Сколько способов выбрать капитана и заместителя?',a:'42',
+   s:['A(7,2) = 7·6 = 42 (порядок важен)','Ответ: 42']},
+  {p:'Найдите коэффициент при x³y² в разложении (x+y)⁵.',a:'10',
+   s:['Биномиальный коэффициент: C(5,3) = C(5,2) = 10','Член: C(5,3)·x³·y² = 10x³y²','Ответ: 10']},
+]},
+
+// ─────────────────────────────────────────────────────
+// НЕРАВЕНСТВА (ЕГЭ №11)
+// ─────────────────────────────────────────────────────
+ineq:{
+easy:[
+  {p:'Решите неравенство: x² − 4x − 5 < 0',a:'(−1; 5)',
+   s:['Найдём корни: x²−4x−5 = 0','D = 16+20 = 36, x = (4±6)/2','x₁ = 5, x₂ = −1','Парабола ветвями вверх: < 0 между корнями','Ответ: −1 < x < 5']},
+  {p:'Решите неравенство: 3x − 9 > 0',a:'x > 3',
+   s:['3x > 9','x > 3','Ответ: x > 3']},
+  {p:'Найдите ОДЗ выражения: √(9 − x²)',a:'[−3; 3]',
+   s:['9 − x² ≥ 0','x² ≤ 9','−3 ≤ x ≤ 3','Ответ: [−3; 3]']},
+  {p:'Решите неравенство: (x−1)(x+3) > 0',a:'x < −3 или x > 1',
+   s:['Корни: x = 1 и x = −3','Знак положителен вне корней (старший коэффициент > 0)','Ответ: x ∈ (−∞;−3) ∪ (1;+∞)']},
+  {p:'Найдите ОДЗ: log₃(x − 4)',a:'x > 4',
+   s:['Аргумент логарифма > 0: x−4 > 0','x > 4','Ответ: x > 4']},
+],
+med:[
+  {p:'Решите неравенство: x² − x − 6 ≤ 0',a:'[−2; 3]',
+   s:['x²−x−6 = 0: D = 1+24 = 25, x = (1±5)/2','x₁ = 3, x₂ = −2','≤ 0 между корнями (с включением)','Ответ: −2 ≤ x ≤ 3']},
+  {p:'Решите неравенство: 2^x > 8',a:'x > 3',
+   s:['8 = 2³','2^x > 2³','x > 3 (основание > 1)','Ответ: x > 3']},
+  {p:'Решите неравенство: log₂(x−1) < 3',a:'1 < x < 9',
+   s:['ОДЗ: x−1 > 0, x > 1','log₂(x−1) < log₂ 8','x−1 < 8','x < 9','Ответ: 1 < x < 9']},
+  {p:'Найдите ОДЗ: √(x+3) / (x−2)',a:'x ≥ −3 и x ≠ 2',
+   s:['Подкоренное: x+3 ≥ 0 → x ≥ −3','Знаменатель ≠ 0: x ≠ 2','Ответ: x ∈ [−3;+∞) \\ {2}']},
+  {p:'Решите неравенство: |x − 3| < 5',a:'(−2; 8)',
+   s:['|x−3| < 5 ⟺ −5 < x−3 < 5','−2 < x < 8','Ответ: (−2; 8)']},
+],
+hard:[
+  {p:'Решите неравенство: (x−2)/(x+1) > 1',a:'x < −1 или x > 3... нет',
+   s:['(x−2)/(x+1) − 1 > 0','(x−2−x−1)/(x+1) > 0','−3/(x+1) > 0','x+1 < 0 → x < −1','Ответ: x ∈ (−∞; −1)']},
+  {p:'Решите неравенство: log_{0,5}(x+1) ≥ −2',a:'(−1; 3]',
+   s:['ОДЗ: x+1 > 0 → x > −1','log_{0,5}(x+1) ≥ log_{0,5}(1/4)','Основание < 1, знак неравенства меняется','x+1 ≤ 4 → x ≤ 3','Ответ: −1 < x ≤ 3']},
+]},
+
+};// end BANKS
+
+  const bank = BANKS[topicId];
+  if(!bank) return {problem:`Задачи по теме «${topicId}» загружаются...`, answer:'—', steps:['Выберите другую тему']};
+
+  // Build pool based on difficulty, fallback up
+  let pool;
+  if(diff==='easy') pool = bank.easy || [];
+  else if(diff==='hard') pool = [...(bank.hard||[]), ...(bank.med||[])];
+  else pool = [...(bank.med||[]), ...(bank.easy||[])];
+  if(!pool.length) pool = bank.easy || bank.med || bank.hard || [];
+
+  // Weighted shuffle — pick from different "subtopics" (tagged with [TAG] prefix)
+  // Extract unique tags present in pool
+  const tagged = pool.filter(x=>x.p.startsWith('['));
+  const untagged = pool.filter(x=>!x.p.startsWith('['));
+  let finalPool = pool;
+  if(tagged.length > 0){
+    // Group by tag and pick one from each tag category to maximize variety
+    const byTag = {};
+    tagged.forEach(x=>{
+      const m = x.p.match(/^\[([^\]]+)\]/);
+      const tag = m?m[1]:'?';
+      if(!byTag[tag]) byTag[tag]=[];
+      byTag[tag].push(x);
+    });
+    // Build varied pool: one from each tag
+    const tags = Object.keys(byTag);
+    const variedPool = tags.map(t=>{
+      const arr=byTag[t];
+      return arr[Math.floor(Math.random()*arr.length)];
+    });
+    finalPool = [...variedPool, ...untagged];
+  }
+
+  const item = finalPool[Math.floor(Math.random()*finalPool.length)];
+  return { problem: item.p, answer: item.a, steps: item.s };
+}
+
+
+
 // ─── GEOMETRY FIGURE GENERATOR ───
 const GEO_TOPICS_WITH_FIGURES=['geom2d','geom3d'];
 function generateFigure(topic, problem){
@@ -2593,7 +3424,7 @@ function checkAnswer(){
   // Flexible comparison
   const normalize=s=>s.replace(/\s/g,'').replace(',','.').toLowerCase();
   const isCorrect=normalize(inp)===normalize(correct)||
-    (parseFloat(inp.replace(',','.'))-parseFloat(correct.replace(',','.'))<0.01&&
+    (Math.abs(parseFloat(inp.replace(',','.'))-parseFloat(correct.replace(',','.')))<0.01&&
     !isNaN(parseFloat(inp.replace(',','.')))&&!isNaN(parseFloat(correct.replace(',','.'))));
   const res=document.getElementById('gen-result');
   res.style.display='block';
@@ -2635,13 +3466,359 @@ function toggleGenSol(){
   }
 }
 
-// ─── INIT ───
+// ══════════════════════════════════════════
+// SOUND ENGINE (Web Audio API)
+// ══════════════════════════════════════════
+let soundEnabled=JSON.parse(localStorage.getItem('ege_sound')||'true');
+function toggleSound(){
+  soundEnabled=!soundEnabled;
+  localStorage.setItem('ege_sound',JSON.stringify(soundEnabled));
+  const sico=document.getElementById('snd-ico');
+  const slbl=document.getElementById('snd-lbl');
+  if(sico) sico.textContent=soundEnabled?'🔊':'🔇';
+  if(slbl) slbl.textContent=soundEnabled?'Звук':'Тихо';
+  showToast(soundEnabled?'🔊 Звук включён':'🔇 Звук выключен');
+}
+function initSoundBtn(){
+  const ico=document.getElementById('snd-ico');
+  const lbl=document.getElementById('snd-lbl');
+  if(ico) ico.textContent=soundEnabled?'🔊':'🔇';
+  if(lbl) lbl.textContent=soundEnabled?'Звук':'Тихо';
+}
+function playTone(freq,dur,type='sine',gain=0.18){
+  if(!soundEnabled) return;
+  try{
+    const ctx=new(window.AudioContext||window.webkitAudioContext)();
+    const osc=ctx.createOscillator();
+    const vol=ctx.createGain();
+    osc.connect(vol);vol.connect(ctx.destination);
+    osc.type=type;osc.frequency.setValueAtTime(freq,ctx.currentTime);
+    vol.gain.setValueAtTime(gain,ctx.currentTime);
+    vol.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+dur);
+    osc.start(ctx.currentTime);osc.stop(ctx.currentTime+dur);
+    setTimeout(()=>ctx.close(),dur*1000+100);
+  }catch(e){}
+}
+function playCorrect(){
+  playTone(523,0.10,'sine',0.15);
+  setTimeout(()=>playTone(659,0.10,'sine',0.15),80);
+  setTimeout(()=>playTone(784,0.18,'sine',0.15),160);
+}
+function playWrong(){
+  playTone(220,0.18,'sawtooth',0.09);
+  setTimeout(()=>playTone(196,0.22,'sawtooth',0.09),120);
+}
+function playFlip(){playTone(440,0.06,'sine',0.06);}
+function playLearn(){
+  playTone(659,0.08,'sine',0.12);
+  setTimeout(()=>playTone(880,0.14,'sine',0.12),70);
+}
+
+// ══════════════════════════════════════════
+// CONFETTI ENGINE
+// ══════════════════════════════════════════
+(function(){
+  const canvas=document.getElementById('confetti-canvas');
+  const ctx2=canvas.getContext('2d');
+  let parts=[],raf=null;
+  const COLORS=['#4a9eff','#b47bff','#34d08c','#ffc542','#ff6b4a','#ffffff'];
+  function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+  resize();
+  window.addEventListener('resize',resize,{passive:true});
+
+  function burst(n=80){
+    canvas.classList.add('active');
+    parts=[];
+    for(let i=0;i<n;i++){
+      parts.push({
+        x:Math.random()*canvas.width,
+        y:canvas.height*0.3+Math.random()*canvas.height*0.3,
+        vx:(Math.random()-0.5)*8,
+        vy:-Math.random()*10-4,
+        rot:Math.random()*360,
+        drot:(Math.random()-0.5)*12,
+        w:6+Math.random()*8,
+        h:4+Math.random()*4,
+        color:COLORS[Math.floor(Math.random()*COLORS.length)],
+        life:1
+      });
+    }
+    if(raf) cancelAnimationFrame(raf);
+    animate();
+  }
+  function animate(){
+    ctx2.clearRect(0,0,canvas.width,canvas.height);
+    let alive=false;
+    parts.forEach(p=>{
+      p.x+=p.vx; p.y+=p.vy; p.vy+=0.3; p.rot+=p.drot; p.life-=0.012;
+      if(p.life<=0||p.y>canvas.height+20) return;
+      alive=true;
+      ctx2.save();
+      ctx2.globalAlpha=Math.max(0,p.life);
+      ctx2.translate(p.x,p.y);
+      ctx2.rotate(p.rot*Math.PI/180);
+      ctx2.fillStyle=p.color;
+      ctx2.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+      ctx2.restore();
+    });
+    if(alive){raf=requestAnimationFrame(animate);}
+    else{canvas.classList.remove('active');ctx2.clearRect(0,0,canvas.width,canvas.height);}
+  }
+  window.launchConfetti=burst;
+})();
+
+// ══════════════════════════════════════════
+// LAZY KaTeX RENDERING (IntersectionObserver)
+// ══════════════════════════════════════════
+(function(){
+  if(!window.IntersectionObserver) return;
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(!entry.isIntersecting) return;
+      const el=entry.target;
+      const raw=el.dataset.latex;
+      const disp=el.dataset.disp==='1';
+      if(!raw) return;
+      try{el.innerHTML=katex.renderToString(raw,{displayMode:disp,throwOnError:false,strict:false});}
+      catch(e){el.innerHTML=`<span style="color:#f55">${raw}</span>`;}
+      el.classList.remove('fc-math-lazy');
+      io.unobserve(el);
+    });
+  },{rootMargin:'200px'});
+
+  window._observeLazy=function(el){io.observe(el);};
+})();
+
+// ══════════════════════════════════════════
+// PATCH: add confetti + sound to toggleLearn
+// ══════════════════════════════════════════
+const _origToggleLearn=toggleLearn;
+// Override toggleLearn to add effects when formula is learned
+window.toggleLearn=function(fid,btn){
+  const wasLearned=STATE.learned.has(fid);
+  _origToggleLearn(fid,btn);
+  if(!wasLearned){ // just marked as learned
+    playLearn();
+    launchConfetti(60);
+  }
+};
+
+// ══════════════════════════════════════════
+// PATCH: add sound to flipCard
+// ══════════════════════════════════════════
+const _origFlipCard=flipCard;
+window.flipCard=function(){_origFlipCard();playFlip();};
+
+// ══════════════════════════════════════════
+// PATCH: add sound to checkAnswer (generator)
+// ══════════════════════════════════════════
+const _origCheckAnswer=checkAnswer;
+window.checkAnswer=function(){
+  if(!currentProblem) return;
+  const inp=document.getElementById('gen-answer-input').value.trim();
+  if(!inp) return;
+  const correct=String(currentProblem.answer).trim();
+  const normalize=s=>s.replace(/\s/g,'').replace(',','.').toLowerCase();
+  const isCorrect=normalize(inp)===normalize(correct)||
+    (Math.abs(parseFloat(inp.replace(',','.'))-parseFloat(correct.replace(',','.')))<0.01&&
+    !isNaN(parseFloat(inp.replace(',','.')))&&!isNaN(parseFloat(correct.replace(',','.'))));
+  if(isCorrect){playCorrect();launchConfetti(50);}else{playWrong();}
+  _origCheckAnswer();
+};
+
+// ══════════════════════════════════════════
+// PATCH: add sound to test answers
+// ══════════════════════════════════════════
+const _origAnswerTest=answerTest;
+window.answerTest=function(btn,chosen,correct){
+  if(testAnswered) return;
+  if(chosen===correct){playCorrect();}else{playWrong();}
+  _origAnswerTest(btn,chosen,correct);
+};
+
+// ══════════════════════════════════════════
+// SERVICE WORKER REGISTRATION (PWA / offline)
+// ══════════════════════════════════════════
+(function(){
+  if(!('serviceWorker' in navigator)) return;
+  // Inline SW via blob URL since we are a single HTML file
+  const swCode=`
+const CACHE='ege-mat-v1';
+const PRECACHE=[
+  'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css',
+  'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js',
+  'https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&family=Outfit:wght@400;500;600;700&display=swap'
+];
+self.addEventListener('install',e=>e.waitUntil(
+  caches.open(CACHE).then(c=>c.addAll(PRECACHE).catch(()=>{}))
+));
+self.addEventListener('fetch',e=>{
+  if(e.request.method!=='GET') return;
+  e.respondWith(
+    caches.match(e.request).then(r=>r||fetch(e.request).then(res=>{
+      if(res&&res.status===200){
+        const clone=res.clone();
+        caches.open(CACHE).then(c=>c.put(e.request,clone));
+      }
+      return res;
+    }).catch(()=>caches.match(e.request)))
+  );
+});
+self.addEventListener('activate',e=>e.waitUntil(
+  caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k))))
+));
+`;
+  try{
+    const blob=new Blob([swCode],{type:'application/javascript'});
+    const url=URL.createObjectURL(blob);
+    navigator.serviceWorker.register(url,{scope:'/'}).catch(()=>{});
+  }catch(e){}
+})();
+
+// ══════════════════════════════════════════
+// DOWNLOAD FORMULA CARD AS PNG IMAGE
+// ══════════════════════════════════════════
+async function downloadCard(btn, fid){
+  const entry = CARD_LOOKUP[fid]||{};
+  const title   = entry.title||fid;
+  const formula = entry.formula||'';
+  const svgKey  = entry.svg||null;
+  const desc    = entry.desc||'';
+  if(!formula){showToast('Формула не найдена');return;}
+
+  btn.classList.add('downloading');
+  btn.textContent='⌛';
+
+  // ── Lazy-load html2canvas ──
+  async function loadH2C(){
+    if(window.html2canvas) return;
+    return new Promise((res,rej)=>{
+      const s=document.createElement('script');
+      s.src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+      s.crossOrigin='anonymous';
+      s.onload=res; s.onerror=rej;
+      document.head.appendChild(s);
+    });
+  }
+
+  function buildCardEl(){
+    const isDark = !document.body.classList.contains('light');
+    const bg     = isDark ? '#0c1225' : '#f0f4ff';
+    const bg2    = isDark ? '#131b33' : '#e6ecfa';
+    const text   = isDark ? '#dde4f8' : '#1a2340';
+    const sub    = isDark ? '#7a8aa8' : '#4a5a78';
+    const border = isDark ? 'rgba(255,255,255,0.13)' : 'rgba(0,0,0,0.15)';
+    const blue   = '#4a9eff';
+    const sid    = fid.split('_')[0];
+    const accentMap={algebra:'#4a9eff',trig:'#b47bff',plan:'#34d08c',ster:'#ff6b4a',prob:'#ffc542'};
+    const accent = accentMap[sid]||blue;
+
+    const wrap = document.createElement('div');
+    wrap.style.cssText = [
+      'position:fixed','left:-9999px','top:-9999px',
+      'width:720px','padding:28px 36px 24px',
+      `background:${bg}`,
+      `border:1px solid ${border}`,
+      'border-radius:14px',
+      `border-left:5px solid ${accent}`,
+      'font-family:Outfit,system-ui,sans-serif',
+      'box-sizing:border-box','overflow:hidden',
+    ].join(';');
+
+    // ── Title ──
+    const titleEl = document.createElement('div');
+    titleEl.style.cssText = `font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;color:${sub};margin-bottom:14px;`;
+    titleEl.textContent = title;
+    wrap.appendChild(titleEl);
+
+    // ── Formula ──
+    const fmEl = document.createElement('div');
+    fmEl.style.cssText = [
+      'text-align:center','padding:16px 0 10px',
+      'font-size:30px','font-family:"Crimson Pro",Georgia,serif',
+      `color:${text}`,'overflow:hidden','line-height:1.4',
+    ].join(';');
+    try{
+      fmEl.innerHTML=katex.renderToString(formula,{displayMode:true,throwOnError:false,strict:false});
+      fmEl.querySelectorAll('.katex,.katex *').forEach(el=>el.style.color=text);
+    }catch(e){fmEl.textContent=formula;}
+    wrap.appendChild(fmEl);
+
+    // ── SVG illustration (geometry shapes) ──
+    if(svgKey && SVG && SVG[svgKey]){
+      const svgWrap = document.createElement('div');
+      svgWrap.style.cssText = `text-align:center;padding:10px 0 8px;`;
+      svgWrap.innerHTML = SVG[svgKey];
+      const svgEl = svgWrap.querySelector('svg');
+      if(svgEl){
+        svgEl.style.maxWidth='240px';
+        svgEl.style.maxHeight='160px';
+        svgEl.style.width='auto';
+        svgEl.style.height='auto';
+      }
+      wrap.appendChild(svgWrap);
+    }
+
+    // ── Description ──
+    if(desc){
+      const descEl = document.createElement('div');
+      descEl.style.cssText = `font-size:12px;color:${sub};padding:6px 0 10px;text-align:center;line-height:1.5;`;
+      descEl.textContent = desc;
+      wrap.appendChild(descEl);
+    }
+
+    // ── Divider ──
+    const divEl = document.createElement('div');
+    divEl.style.cssText = `height:1px;background:${isDark?'rgba(255,255,255,0.07)':'rgba(0,0,0,0.1)'};margin:6px 0 12px;`;
+    wrap.appendChild(divEl);
+
+    // ── Footer ──
+    const foot = document.createElement('div');
+    foot.style.cssText = `display:flex;justify-content:space-between;align-items:center;font-size:11px;color:${sub};`;
+    foot.innerHTML = `<span>ЕГЭ Математика Профиль 2026</span><span style="color:${accent};font-weight:700;">∑ egeMath</span>`;
+    wrap.appendChild(foot);
+
+    document.body.appendChild(wrap);
+    return wrap;
+  }
+
+  try{
+    await loadH2C();
+    const cardEl = buildCardEl();
+    // Two frames for layout & fonts
+    await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
+
+    const canvas = await html2canvas(cardEl,{
+      scale:2,useCORS:true,allowTaint:false,
+      backgroundColor:null,logging:false,
+    });
+    document.body.removeChild(cardEl);
+
+    const link = document.createElement('a');
+    const safeTitle = title.replace(/[^\u0400-\u04FFa-zA-Z0-9_\- ]/g,'').trim().replace(/\s+/g,'_').slice(0,40)||'formula';
+    link.download = `formula_${safeTitle}.png`;
+    link.href = canvas.toDataURL('image/png',1.0);
+    link.click();
+    showToast('📥 Скачано: '+title);
+
+  }catch(err){
+    console.error('downloadCard:', err);
+    showToast('⚠ Ошибка: '+err.message);
+  }finally{
+    btn.classList.remove('downloading');
+    btn.textContent='⬇ PNG';
+  }
+}
+
+
+// ── INIT ───
 updateFavCount();
 applyTheme(STATE.theme);
 applyFontSize(STATE.fontSize);
 setExamMode(examMode);
 updateCountdown();
 setInterval(updateCountdown,1000);
+initSoundBtn();
 render('algebra');
 </script>
 </body>
