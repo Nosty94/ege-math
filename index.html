@@ -4182,103 +4182,98 @@ async function downloadCard(btn, fid){
 
 // ══ ЛУЧШИЙ ГОЛОС: выбираем из системных по качеству ══
 let _ttsActive=null;
+let _ttsVoices=[];
+
+// Загружаем голоса и кэшируем
+function _loadVoices(){
+  if(!('speechSynthesis' in window)) return;
+  _ttsVoices=window.speechSynthesis.getVoices();
+}
+if('speechSynthesis' in window){
+  _loadVoices();
+  window.speechSynthesis.onvoiceschanged=_loadVoices;
+}
+
+// ══ ВЫБОР ЛУЧШЕГО ГОЛОСА ══
+function _getBestVoice(){
+  const all=_ttsVoices.length ? _ttsVoices : window.speechSynthesis.getVoices();
+  // Приоритет: Google онлайн > любой онлайн > локальный
+  const tests=[
+    v=>v.lang==='ru-RU' && v.name.toLowerCase().includes('google'),
+    v=>v.lang==='ru-RU' && !v.localService,
+    v=>v.lang==='ru-RU',
+    v=>v.lang.startsWith('ru') && !v.localService,
+    v=>v.lang.startsWith('ru'),
+  ];
+  for(const t of tests){ const v=all.find(t); if(v) return v; }
+  return null;
+}
 
 // ══ ПОДГОТОВКА ТЕКСТА ══
 function mathToSpeech(s){
   return s
     .replace(/²/g,' в квадрате').replace(/³/g,' в кубе')
-    .replace(/⁴/g,' в четвёртой степени').replace(/⁰/g,' в нулевой степени')
+    .replace(/⁴/g,' в четвёртой').replace(/⁰/g,' в нулевой степени')
     .replace(/\//g,' делить на ').replace(/√/g,'корень из ')
-    .replace(/∛/g,'кубический корень из ').replace(/·/g,' умножить на ')
-    .replace(/×/g,' умножить на ').replace(/±/g,'плюс-минус ')
-    .replace(/→/g,', следовательно, ').replace(/≠/g,' не равно ')
-    .replace(/≤/g,' меньше или равно ').replace(/≥/g,' больше или равно ')
-    .replace(/∈/g,' принадлежит ').replace(/∅/g,'пустое множество')
+    .replace(/·/g,' умножить на ').replace(/×/g,' умножить на ')
+    .replace(/±/g,'плюс-минус ').replace(/→/g,', значит, ')
+    .replace(/≠/g,' не равно ').replace(/≤/g,' ≤ ').replace(/≥/g,' ≥ ')
     .replace(/∞/g,'бесконечность').replace(/π/g,'пи')
-    .replace(/α/g,'альфа').replace(/β/g,'бета')
-    .replace(/γ/g,'гамма').replace(/φ/g,'фи').replace(/θ/g,'тета')
-    .replace(/\\[a-z]+\{?/gi,' ').replace(/[{}()\[\]]/g,' ')
-    .replace(/\bx\b/g,'икс').replace(/\by\b/g,'игрек')
-    .replace(/\bh\b/g,'аш').replace(/\bn\b/g,'эн').replace(/\bk\b/g,'ка')
-    .replace(/\bm\b/g,'эм').replace(/\br\b/g,'эр').replace(/\bR\b/g,'Эр')
-    .replace(/\bS\b/g,'Эс').replace(/\bV\b/g,'Вэ').replace(/\bP\b/g,'Пэ')
-    .replace(/\bD\b/g,'Дэ').replace(/\bd\b/g,'дэ').replace(/\bl\b/g,'эль')
+    .replace(/α/g,'альфа').replace(/β/g,'бета').replace(/γ/g,'гамма')
+    .replace(/φ/g,'фи').replace(/θ/g,'тета')
+    .replace(/\\[a-zA-Z]+\{?/g,' ').replace(/[{}()\[\]^_]/g,' ')
     .replace(/\s{2,}/g,' ').trim();
 }
 
 function speakCard(fid, btn){
-  // Стоп если говорим эту же карточку
-  if(_ttsActive && _ttsActive.fid===fid){
-    _stopTTS();
-    return;
+  if(!('speechSynthesis' in window)){
+    showToast('Озвучка не поддерживается в этом браузере'); return;
   }
-  _stopTTS();
+  if(_ttsActive && _ttsActive.fid===fid){
+    window.speechSynthesis.cancel();
+    btn.classList.remove('speaking'); btn.textContent='🔊'; _ttsActive=null; return;
+  }
+  if(_ttsActive){
+    window.speechSynthesis.cancel();
+    _ttsActive.btn.classList.remove('speaking'); _ttsActive.btn.textContent='🔊'; _ttsActive=null;
+  }
 
-  const entry=CARD_LOOKUP[fid];
-  if(!entry) return;
+  const entry=CARD_LOOKUP[fid]; if(!entry) return;
   const fm=ALL_FM.find(e=>e.id===fid);
 
   const parts=[];
   parts.push(mathToSpeech(entry.title)+'.');
   if(entry.desc) parts.push(mathToSpeech(entry.desc)+'.');
-  if(fm&&fm.fm.sol&&fm.fm.sol.length){
+  if(fm?.fm?.sol?.length){
     const good=fm.fm.sol.filter(s=>s.length>10).slice(0,3);
-    if(good.length){ parts.push('Запомни:'); good.forEach(s=>parts.push(mathToSpeech(s)+'.')); }
+    if(good.length){ parts.push('Запомни.'); good.forEach(s=>parts.push(mathToSpeech(s)+'.')); }
   }
   const text=parts.join(' ');
+
+  const voice=_getBestVoice();
+  const utt=new SpeechSynthesisUtterance(text);
+  utt.lang='ru-RU';
+  utt.rate=0.87;
+  utt.pitch=1.0;
+  utt.volume=1.0;
+  if(voice) utt.voice=voice;
 
   btn.classList.add('speaking'); btn.textContent='⏹';
   _ttsActive={btn,fid};
 
-  // ResponsiveVoice — загружаем при первом использовании
-  function doSpeak(){
-    if(window.responsiveVoice){
-      responsiveVoice.speak(text,'Russian Female',{
-        rate:0.9, pitch:1, volume:1,
-        onend:()=>{ btn.classList.remove('speaking'); btn.textContent='🔊'; _ttsActive=null; },
-        onerror:()=>{ _fallbackSpeak(text,btn,fid); }
-      });
-    } else {
-      _fallbackSpeak(text,btn,fid);
-    }
-  }
+  utt.onstart=()=>{ _ttsActive={btn,fid}; };
+  utt.onend=utt.onerror=()=>{
+    btn.classList.remove('speaking'); btn.textContent='🔊'; _ttsActive=null;
+  };
 
-  if(!window.responsiveVoice){
-    const script=document.createElement('script');
-    script.src='https://code.responsivevoice.org/responsivevoice.js?key=FREE';
-    script.onload=()=>setTimeout(doSpeak,300);
-    script.onerror=()=>_fallbackSpeak(text,btn,fid);
-    document.head.appendChild(script);
-  } else {
-    doSpeak();
-  }
-}
-
-function _stopTTS(){
-  if(!_ttsActive) return;
-  if(window.responsiveVoice) try{ responsiveVoice.cancel(); }catch(e){}
-  if('speechSynthesis' in window) window.speechSynthesis.cancel();
-  _ttsActive.btn.classList.remove('speaking');
-  _ttsActive.btn.textContent='🔊';
-  _ttsActive=null;
-}
-
-// Запасной вариант — Web Speech API
-function _fallbackSpeak(text,btn,fid){
-  if(!('speechSynthesis' in window)){ btn.classList.remove('speaking'); btn.textContent='🔊'; _ttsActive=null; return; }
-  const voices=window.speechSynthesis.getVoices();
-  const voice=voices.find(v=>v.lang==='ru-RU'&&!v.localService)||voices.find(v=>v.lang==='ru-RU')||voices.find(v=>v.lang.startsWith('ru'));
-  const utt=new SpeechSynthesisUtterance(text);
-  utt.lang='ru-RU'; utt.rate=0.88; utt.pitch=1.05; utt.volume=1;
-  if(voice) utt.voice=voice;
-  utt.onend=utt.onerror=()=>{ btn.classList.remove('speaking'); btn.textContent='🔊'; _ttsActive=null; };
+  // Android Chrome требует resume() перед speak()
   window.speechSynthesis.cancel();
-  setTimeout(()=>window.speechSynthesis.speak(utt),100);
-}
-
-if('speechSynthesis' in window){
-  window.speechSynthesis.getVoices();
-  window.speechSynthesis.onvoiceschanged=()=>window.speechSynthesis.getVoices();
+  if(window.speechSynthesis.paused) window.speechSynthesis.resume();
+  setTimeout(()=>{
+    // Показываем какой голос используется (один раз для отладки)
+    if(voice) console.log('TTS voice:', voice.name, voice.lang, 'online:', !voice.localService);
+    window.speechSynthesis.speak(utt);
+  }, 150);
 }
 
 // ── INIT ───
