@@ -3648,46 +3648,77 @@ function initSoundBtn(){
   if(ico) ico.textContent=soundEnabled?'🔊':'🔇';
   if(lbl) lbl.textContent=soundEnabled?'Звук':'Тихо';
 }
-function playTone(freq,dur,type='sine',gain=0.18){
+// Один общий AudioContext на всё приложение — без лагов
+let _audioCtx=null;
+function getAudioCtx(){
+  if(!_audioCtx||_audioCtx.state==='closed'){
+    try{ _audioCtx=new(window.AudioContext||window.webkitAudioContext)(); }catch(e){ return null; }
+  }
+  if(_audioCtx.state==='suspended') _audioCtx.resume();
+  return _audioCtx;
+}
+
+// Играет одну ноту: freq, начало (offset от now), длительность, gain, тип
+function _note(ctx,freq,startOffset,dur,gain=0.15,type='sine'){
+  const t=ctx.currentTime+startOffset;
+  const osc=ctx.createOscillator();
+  const vol=ctx.createGain();
+  osc.connect(vol); vol.connect(ctx.destination);
+  osc.type=type;
+  osc.frequency.setValueAtTime(freq,t);
+  vol.gain.setValueAtTime(gain,t);
+  vol.gain.exponentialRampToValueAtTime(0.001,t+dur);
+  osc.start(t); osc.stop(t+dur+0.01);
+}
+
+function playCorrect(){
   if(!soundEnabled) return;
+  const ctx=getAudioCtx(); if(!ctx) return;
   try{
-    const ctx=new(window.AudioContext||window.webkitAudioContext)();
-    const osc=ctx.createOscillator();
-    const vol=ctx.createGain();
-    osc.connect(vol);vol.connect(ctx.destination);
-    osc.type=type;osc.frequency.setValueAtTime(freq,ctx.currentTime);
-    vol.gain.setValueAtTime(gain,ctx.currentTime);
-    vol.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+dur);
-    osc.start(ctx.currentTime);osc.stop(ctx.currentTime+dur);
-    setTimeout(()=>ctx.close(),dur*1000+100);
+    // До-Ми-Соль — чистый мажорный аккорд восходящий, без лагов
+    _note(ctx, 523, 0.00, 0.12, 0.14); // C5
+    _note(ctx, 659, 0.10, 0.12, 0.14); // E5
+    _note(ctx, 784, 0.20, 0.20, 0.14); // G5
   }catch(e){}
 }
-function playCorrect(){
-  playTone(523,0.10,'sine',0.15);
-  setTimeout(()=>playTone(659,0.10,'sine',0.15),80);
-  setTimeout(()=>playTone(784,0.18,'sine',0.15),160);
-}
+
 function playWrong(){
   if(!soundEnabled) return;
-  // Мягкий нисходящий сигнал — не резкий, приятный
+  const ctx=getAudioCtx(); if(!ctx) return;
   try{
-    const ctx=new(window.AudioContext||window.webkitAudioContext)();
+    // Плавное нисходящее глиссандо — мягкое, не резкое
+    const t=ctx.currentTime;
     const osc=ctx.createOscillator();
     const vol=ctx.createGain();
-    osc.connect(vol);vol.connect(ctx.destination);
+    osc.connect(vol); vol.connect(ctx.destination);
     osc.type='sine';
-    osc.frequency.setValueAtTime(440,ctx.currentTime);
-    osc.frequency.linearRampToValueAtTime(280,ctx.currentTime+0.28);
-    vol.gain.setValueAtTime(0.13,ctx.currentTime);
-    vol.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.32);
-    osc.start(ctx.currentTime);osc.stop(ctx.currentTime+0.35);
-    setTimeout(()=>ctx.close(),500);
+    osc.frequency.setValueAtTime(400,t);
+    osc.frequency.linearRampToValueAtTime(260,t+0.30);
+    vol.gain.setValueAtTime(0.12,t);
+    vol.gain.exponentialRampToValueAtTime(0.001,t+0.33);
+    osc.start(t); osc.stop(t+0.35);
   }catch(e){}
 }
-function playFlip(){playTone(440,0.06,'sine',0.06);}
+
+function playFlip(){
+  if(!soundEnabled) return;
+  const ctx=getAudioCtx(); if(!ctx) return;
+  try{ _note(ctx,440,0,0.07,0.06); }catch(e){}
+}
+
 function playLearn(){
-  playTone(659,0.08,'sine',0.12);
-  setTimeout(()=>playTone(880,0.14,'sine',0.12),70);
+  if(!soundEnabled) return;
+  const ctx=getAudioCtx(); if(!ctx) return;
+  try{
+    _note(ctx,659,0.00,0.09,0.12);
+    _note(ctx,880,0.08,0.14,0.12);
+  }catch(e){}
+}
+
+function playTone(freq,dur,type='sine',gain=0.18){
+  if(!soundEnabled) return;
+  const ctx=getAudioCtx(); if(!ctx) return;
+  try{ _note(ctx,freq,0,dur,gain,type); }catch(e){}
 }
 
 // ══════════════════════════════════════════
@@ -3817,10 +3848,46 @@ window.answerTest=function(btn,chosen,correct){
 // ══════════════════════════════════════════
 (function(){
   if(!('serviceWorker' in navigator)) return;
-  // Register static sw.js (must be in same directory as index_final.html)
-  navigator.serviceWorker.register('./sw.js', {scope: './'})
-    .then(reg => console.log('SW registered, scope:', reg.scope))
-    .catch(err => console.warn('SW registration failed:', err));
+
+  const INLINE_SW=`
+const CACHE='ege-math-v2';
+const LOCAL=['./','./index.html','./manifest.json','./icon-192.png','./icon-512.png'];
+self.addEventListener('install',e=>{
+  e.waitUntil(caches.open(CACHE).then(c=>c.addAll(LOCAL).catch(()=>{})));
+  self.skipWaiting();
+});
+self.addEventListener('activate',e=>{
+  e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))));
+  self.clients.claim();
+});
+self.addEventListener('fetch',e=>{
+  if(e.request.method!=='GET') return;
+  e.respondWith(
+    caches.match(e.request).then(r=>{
+      if(r) return r;
+      return fetch(e.request).then(res=>{
+        if(res&&res.status===200&&res.type!=='opaque'){
+          const cl=res.clone();
+          caches.open(CACHE).then(c=>c.put(e.request,cl));
+        }
+        return res;
+      }).catch(()=>caches.match('./index.html'));
+    })
+  );
+});
+`;
+
+  // Try static sw.js first (when deployed on GitHub Pages)
+  // If 404, fall back to inline blob SW (when opened as local file or other host)
+  navigator.serviceWorker.register('./sw.js',{scope:'./'})
+    .then(()=>{})
+    .catch(()=>{
+      try{
+        const blob=new Blob([INLINE_SW],{type:'application/javascript'});
+        const url=URL.createObjectURL(blob);
+        navigator.serviceWorker.register(url,{scope:'./'}).catch(()=>{});
+      }catch(e){}
+    });
 })();
 
 // ══════════════════════════════════════════
