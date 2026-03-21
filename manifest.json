@@ -1,0 +1,35 @@
+{
+  "id": "ege-math-2026",
+  "name": "ЕГЭ Математика Профиль 2026",
+  "short_name": "ЕГЭ Мат",
+  "description": "Все формулы ЕГЭ профильная математика 2026: карточки, тесты, генератор задач с ИИ, прогресс",
+  "start_url": "./index_final.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#070c1a",
+  "theme_color": "#070c1a",
+  "orientation": "portrait-primary",
+  "lang": "ru",
+  "dir": "ltr",
+  "categories": ["education"],
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
