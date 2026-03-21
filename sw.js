@@ -1,6 +1,6 @@
 const CACHE = 'ege-math-v1';
 const ASSETS = [
-  './index_final.html',
+  './index.html',
   './manifest.json',
   './icon-192.png',
   './icon-512.png',
@@ -17,7 +17,7 @@ self.addEventListener('install', e => {
       return cache.addAll(ASSETS).catch(() => {
         // If some CDN assets fail, cache at least local files
         return cache.addAll([
-          './index_final.html',
+          './index.html',
           './manifest.json',
           './icon-192.png',
           './icon-512.png'
@@ -53,7 +53,7 @@ self.addEventListener('fetch', e => {
       }).catch(() => {
         // Offline fallback — return main page
         if (e.request.destination === 'document') {
-          return caches.match('./index_final.html');
+          return caches.match('./index.html');
         }
       });
     })
