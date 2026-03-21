@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "io.github.nosty94.twa",
+        "sha256_cert_fingerprints": ["64:EF:B5:33:63:22:4F:40:5B:2A:EE:0E:BE:43:3B:29:FD:DC:2B:EA:66:FC:0B:EB:01:40:F4:7E:88:98:BF:9F"]
+      }
+    }]
