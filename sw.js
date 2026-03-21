@@ -1,4 +1,4 @@
-const CACHE = 'ege-math-v1';
+const CACHE = 'ege-math-v3';
 const ASSETS = [
   './index.html',
   './manifest.json',
