@@ -10,62 +10,10 @@
 <meta name="apple-mobile-web-app-title" content="ЕГЭ Мат">
 <meta name="description" content="Все формулы ЕГЭ Математика профиль 2026 — карточки, тесты, прогресс">
 <title>ЕГЭ Математика Профиль 2026</title>
-<link id="pwa-manifest" rel="manifest">
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%23070c1a'/%3E%3Crect x='8' y='8' width='164' height='164' rx='33' fill='%230c1225'/%3E%3Ctext x='90' y='108' font-size='88' text-anchor='middle' font-family='Georgia,serif' fill='%234a9eff'%3E%CE%A3%3C/text%3E%3Ctext x='90' y='160' font-size='24' text-anchor='middle' font-family='Arial,sans-serif' font-weight='bold' fill='%237a8aa8' letter-spacing='2'%3E%D0%95%D0%93%D0%AD%3C/text%3E%3C/svg%3E">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23070c1a'/%3E%3Ctext x='32' y='46' font-size='40' text-anchor='middle' font-family='Georgia,serif' fill='%234a9eff'%3E%CE%A3%3C/text%3E%3C/svg%3E">
-<script>
-// Генерируем PNG-иконку через canvas и прописываем манифест —
-// это убирает оверлей браузера при добавлении на рабочий стол Android
-(function(){
-  try{
-    const c=document.createElement('canvas');
-    c.width=512;c.height=512;
-    const x=c.getContext('2d');
-    // Фон
-    x.fillStyle='#070c1a';
-    x.beginPath();
-    const r=80;const w=512;
-    x.moveTo(r,0);x.lineTo(w-r,0);x.quadraticCurveTo(w,0,w,r);
-    x.lineTo(w,w-r);x.quadraticCurveTo(w,w,w-r,w);
-    x.lineTo(r,w);x.quadraticCurveTo(0,w,0,w-r);
-    x.lineTo(0,r);x.quadraticCurveTo(0,0,r,0);
-    x.fill();
-    // Внутренний прямоугольник
-    x.fillStyle='#0c1225';
-    x.beginPath();
-    x.roundRect(18,18,476,476,62);
-    x.fill();
-    // Символ Σ
-    x.fillStyle='#4a9eff';
-    x.font='bold 300px Georgia,serif';
-    x.textAlign='center';
-    x.textBaseline='middle';
-    x.fillText('Σ',256,230);
-    // Текст ЕГЭ
-    x.fillStyle='#7a8aa8';
-    x.font='bold 80px Arial,sans-serif';
-    x.letterSpacing='8px';
-    x.fillText('ЕГЭ',256,430);
-    const iconUrl=c.toDataURL('image/png');
-    const manifest={
-      name:'ЕГЭ Математика 2026',
-      short_name:'ЕГЭ Мат',
-      description:'Все формулы ЕГЭ профиль — карточки, тесты, прогресс',
-      start_url:'./',
-      display:'standalone',
-      background_color:'#070c1a',
-      theme_color:'#070c1a',
-      orientation:'portrait',
-      icons:[
-        {src:iconUrl,sizes:'512x512',type:'image/png',purpose:'any maskable'}
-      ]
-    };
-    const blob=new Blob([JSON.stringify(manifest)],{type:'application/json'});
-    const url=URL.createObjectURL(blob);
-    document.getElementById('pwa-manifest').href=url;
-  }catch(e){}
-})();
-</script>
+<link rel="manifest" href="./manifest.json">
+<link rel="apple-touch-icon" href="./icon-512.png">
+<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -3869,38 +3817,10 @@ window.answerTest=function(btn,chosen,correct){
 // ══════════════════════════════════════════
 (function(){
   if(!('serviceWorker' in navigator)) return;
-  // Inline SW via blob URL since we are a single HTML file
-  const swCode=`
-const CACHE='ege-mat-v1';
-const PRECACHE=[
-  'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css',
-  'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js',
-  'https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&family=Outfit:wght@400;500;600;700&display=swap'
-];
-self.addEventListener('install',e=>e.waitUntil(
-  caches.open(CACHE).then(c=>c.addAll(PRECACHE).catch(()=>{}))
-));
-self.addEventListener('fetch',e=>{
-  if(e.request.method!=='GET') return;
-  e.respondWith(
-    caches.match(e.request).then(r=>r||fetch(e.request).then(res=>{
-      if(res&&res.status===200){
-        const clone=res.clone();
-        caches.open(CACHE).then(c=>c.put(e.request,clone));
-      }
-      return res;
-    }).catch(()=>caches.match(e.request)))
-  );
-});
-self.addEventListener('activate',e=>e.waitUntil(
-  caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k))))
-));
-`;
-  try{
-    const blob=new Blob([swCode],{type:'application/javascript'});
-    const url=URL.createObjectURL(blob);
-    navigator.serviceWorker.register(url,{scope:'/'}).catch(()=>{});
-  }catch(e){}
+  // Register static sw.js (must be in same directory as index_final.html)
+  navigator.serviceWorker.register('./sw.js', {scope: './'})
+    .then(reg => console.log('SW registered, scope:', reg.scope))
+    .catch(err => console.warn('SW registration failed:', err));
 })();
 
 // ══════════════════════════════════════════
