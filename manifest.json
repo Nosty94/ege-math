@@ -2,16 +2,20 @@
   "id": "ege-math-2026",
   "name": "ЕГЭ Математика Профиль 2026",
   "short_name": "ЕГЭ Мат",
-  "description": "Все формулы ЕГЭ профильная математика 2026: карточки, тесты, генератор задач с ИИ, прогресс",
-  "start_url": "./index_final.html",
+  "description": "Все формулы ЕГЭ профильная математика 2026: карточки, тесты, генератор задач с ИИ, прогресс и спейсд репетишн",
+  "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
   "background_color": "#070c1a",
   "theme_color": "#070c1a",
   "orientation": "portrait-primary",
   "lang": "ru",
   "dir": "ltr",
   "categories": ["education"],
+  "iarc_rating_id": "e84b072d-71b3-4d3e-86ae-31a8ce4e53b7",
+  "prefer_related_applications": false,
+  "related_applications": [],
   "icons": [
     {
       "src": "./icon-192.png",
@@ -30,6 +34,22 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "./screenshot-mobile.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Формулы ЕГЭ — карточки с формулами и примерами"
+    },
+    {
+      "src": "./screenshot-wide.png",
+      "sizes": "1024x768",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "ЕГЭ Математика — все разделы"
     }
   ]
 }
