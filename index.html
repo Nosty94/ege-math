@@ -1052,6 +1052,68 @@ body.light .test-opt:hover{background:var(--bg4);}
 #confetti-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:0;transition:opacity 0.3s;}
 #confetti-canvas.active{opacity:1;}
 
+/* ══ STREAK & DAILY WIDGET ══ */
+.streak-bar{
+  display:flex;align-items:center;gap:10px;
+  padding:8px 14px;
+  background:linear-gradient(90deg,rgba(255,197,66,0.07),rgba(255,107,74,0.05));
+  border-bottom:1px solid var(--border);
+  font-size:12px;
+}
+.streak-fire{font-size:20px;line-height:1;}
+.streak-info{flex:1;}
+.streak-num{font-size:17px;font-weight:800;color:var(--prob);line-height:1;}
+.streak-lbl{font-size:10px;color:var(--text3);font-weight:600;letter-spacing:0.4px;}
+.streak-best{font-size:10px;color:var(--text3);}
+
+.daily-section{
+  background:linear-gradient(135deg,rgba(74,158,255,0.05),rgba(180,123,255,0.04));
+  border:1px solid var(--border);border-radius:14px;
+  padding:14px 16px;margin-bottom:20px;
+}
+.daily-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.daily-title{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--alg);}
+.daily-refresh{background:none;border:none;color:var(--text3);cursor:pointer;font-size:14px;
+  padding:4px;border-radius:6px;transition:all 0.15s;}
+.daily-refresh:hover{color:var(--text);background:rgba(255,255,255,0.07);}
+.daily-cards{display:flex;flex-direction:column;gap:8px;}
+.daily-card{
+  background:var(--bg3);border:1px solid var(--border2);border-radius:10px;
+  padding:10px 14px;cursor:pointer;transition:all 0.15s;
+  display:flex;align-items:center;gap:10px;
+}
+.daily-card:hover{background:var(--bg4);border-color:var(--border2);}
+.daily-card-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.daily-card-title{font-size:13px;font-weight:600;color:var(--text);flex:1;}
+.daily-card-formula{font-size:11px;color:var(--text2);margin-top:2px;
+  font-family:'Crimson Pro',Georgia,serif;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.daily-card-done{font-size:14px;opacity:0.4;}
+.daily-card.done-today .daily-card-done{opacity:1;}
+
+/* ══ SHARE BUTTON ══ */
+.share-btn{
+  background:none;border:none;cursor:pointer;
+  padding:4px 6px;border-radius:6px;font-size:14px;
+  transition:all 0.15s;opacity:0.4;line-height:1;
+  min-width:32px;min-height:32px;display:flex;align-items:center;justify-content:center;
+}
+.share-btn:hover,.share-btn:active{opacity:1;background:rgba(255,255,255,0.07);}
+
+/* ══ KEYBOARD SHORTCUTS HINT ══ */
+.kbd-hint{
+  position:fixed;bottom:80px;right:12px;
+  background:var(--bg2);border:1px solid var(--border2);
+  border-radius:10px;padding:10px 14px;font-size:11px;color:var(--text2);
+  line-height:1.8;z-index:300;opacity:0;transition:opacity 0.3s;pointer-events:none;
+  box-shadow:0 4px 20px rgba(0,0,0,0.4);
+}
+.kbd-hint.visible{opacity:1;}
+.kbd-hint kbd{
+  background:var(--bg4);border:1px solid var(--border2);
+  border-radius:4px;padding:1px 5px;font-size:10px;
+  font-family:monospace;color:var(--text);
+}
+
 /* ══ PRINT CHEAT SHEET ══ */
 @media print{
   #hdr,#bktop,.modal-overlay,button.fc-btn,button.note-btn,button.ex-btn,button.sol-btn,
@@ -1184,6 +1246,18 @@ body.light .test-opt:hover{background:var(--bg4);}
 </div>
 <!-- ══ HEADER ══ -->
 <div id="hdr">
+  <!-- STREAK BAR -->
+  <div class="streak-bar" id="streak-bar">
+    <span class="streak-fire">🔥</span>
+    <div class="streak-info">
+      <div><span class="streak-num" id="streak-num">0</span> <span style="font-size:11px;color:var(--text2);font-weight:600;">дней подряд</span></div>
+      <div class="streak-best" id="streak-best">Лучший: 0 дн.</div>
+    </div>
+    <div style="text-align:right;">
+      <div style="font-size:10px;color:var(--text3);font-weight:600;">СЕГОДНЯ</div>
+      <div id="streak-today" style="font-size:18px;">📖</div>
+    </div>
+  </div>
   <!-- ROW 1: name + exam mode + settings -->
   <div class="hdr-top">
     <div class="app-name">📐 ЕГЭ Мат 2026</div>
@@ -1279,6 +1353,13 @@ body.light .test-opt:hover{background:var(--bg4);}
 <main id="content"></main>
 <button id="bktop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 <canvas id="confetti-canvas"></canvas>
+<div class="kbd-hint" id="kbd-hint">
+  <div style="font-weight:700;color:var(--text);margin-bottom:4px;">⌨ Быстрые клавиши</div>
+  <div><kbd>Space</kbd> / <kbd>Enter</kbd> — перевернуть карточку</div>
+  <div><kbd>←</kbd> <kbd>→</kbd> — назад / вперёд</div>
+  <div><kbd>F</kbd> — в избранное</div>
+  <div><kbd>Esc</kbd> — закрыть окно</div>
+</div>
 
 <!-- ══ FLASHCARD MODAL ══ -->
 <div class="modal-overlay hidden" id="flash-modal">
@@ -2133,6 +2214,7 @@ function makeCard(fm,sid,idx){
         <button class="note-btn${hasNote?' has-note':''}" onclick="toggleNote('${nid}','${fid}',this)" title="Заметка">📝</button>
         <button class="tts-btn" onclick="speakCard('${fid}',this)" title="Озвучить">🔊</button>
         <button class="dl-btn" onclick="downloadCard(this,'${fid}')" title="Скачать карточку как PNG">⬇ PNG</button>
+        <button class="share-btn" onclick="shareFormula('${fid}')" title="Поделиться">🔗</button>
         <button class="fc-btn fav-btn${isFav?' active':''}" onclick="toggleFav('${fid}',this)" title="Избранное">${isFav?'⭐':'☆'}</button>
         <button class="fc-btn learn-btn${isLearned?' active':''}" onclick="toggleLearn('${fid}',this)" title="Выучил">✓</button>
       </div>
@@ -2430,8 +2512,9 @@ function render(secId){
   if(secId==='fav'){document.getElementById('content').innerHTML=buildFavHTML();return;}
   const sec=SECTIONS.find(s=>s.id===secId);
   if(!sec) return;
-  document.getElementById('content').innerHTML=buildSectionHTML(sec);
-  requestAnimationFrame(()=>{updateProgBars();});
+  const dailyHtml = secId==='algebra' ? '<div id="daily-widget"></div>' : '';
+  document.getElementById('content').innerHTML=dailyHtml+buildSectionHTML(sec);
+  requestAnimationFrame(()=>{updateProgBars(); if(secId==='algebra') renderDailyWidget();});
 }
 
 // ─── TABS ───
@@ -2549,6 +2632,8 @@ function flipCard(){
   fcFlipped=!fcFlipped;
   document.getElementById('fc-scene').classList.toggle('flipped',fcFlipped);
   if(srMode) updateSRControls(fcFlipped);
+  haptic('tap');
+  if(fcFlipped) { window._markStreak && window._markStreak(); }
 }
 function updateSRControls(flipped){
   const srBtns=document.getElementById('sr-btns');
@@ -2773,6 +2858,7 @@ function answerTest(btn,chosen,correct){
     btn.classList.add('correct');
     testScore++;
     if(soundEnabled) playCorrect();
+    haptic('success');
   } else {
     btn.classList.add('wrong');
     testWrong.push({title,secName});
@@ -2780,7 +2866,9 @@ function answerTest(btn,chosen,correct){
       if(b.dataset.oid===correct) b.classList.add('correct');
     });
     if(soundEnabled) playWrong();
+    haptic('error');
   }
+  window._markStreak && window._markStreak();
   document.getElementById('test-next').classList.remove('hidden');
 }
 function nextTestQ(){testIdx++;testAnswered=false;renderTestQ();}
@@ -4276,6 +4364,157 @@ function speakCard(fid, btn){
   }, 150);
 }
 
+// ══ STREAK SYSTEM ══
+(function(){
+  const todayKey = new Date().toISOString().slice(0,10);
+  let sd = JSON.parse(localStorage.getItem('ege_streak')||'{"streak":0,"best":0,"lastDay":"","studiedToday":false}');
+
+  function markStudied(){
+    if(sd.studiedToday) return;
+    const prev = new Date(sd.lastDay||'2000-01-01');
+    const today = new Date(todayKey);
+    const diff = Math.round((today-prev)/86400000);
+    if(diff===1) sd.streak++;
+    else if(diff>1) sd.streak=1;
+    sd.best = Math.max(sd.best, sd.streak);
+    sd.lastDay = todayKey;
+    sd.studiedToday = true;
+    localStorage.setItem('ege_streak', JSON.stringify(sd));
+    updateStreakUI();
+  }
+
+  function updateStreakUI(){
+    document.getElementById('streak-num').textContent = sd.streak;
+    document.getElementById('streak-best').textContent = `Лучший: ${sd.best} дн.`;
+    document.getElementById('streak-today').textContent = sd.studiedToday ? '✅' : '📖';
+  }
+
+  // Засчитываем занятие при переходе по карточке или ответе теста
+  window._markStreak = markStudied;
+  updateStreakUI();
+})();
+
+// ══ DAILY FORMULAS WIDGET ══
+function renderDailyWidget(){
+  const allFm = (typeof getActiveFM === 'function') ? getActiveFM() : ALL_FM;
+  if(!allFm.length) return;
+  const todayKey = new Date().toISOString().slice(0,10);
+  let daily = JSON.parse(localStorage.getItem('ege_daily')||'{}');
+  if(daily.date !== todayKey || !daily.ids){
+    const shuffled = [...allFm].sort(()=>Math.random()-0.5);
+    daily = {date:todayKey, ids: shuffled.slice(0,3).map(e=>e.id), done:[]};
+    localStorage.setItem('ege_daily', JSON.stringify(daily));
+  }
+  const colorMap = {algebra:'var(--alg)',trig:'var(--trig)',plan:'var(--plan)',ster:'var(--ster)',prob:'var(--prob)'};
+  const cards = daily.ids.map(id=>{
+    const e = allFm.find(x=>x.id===id);
+    if(!e) return '';
+    const col = colorMap[e.sec.id] || 'var(--alg)';
+    const done = (daily.done||[]).includes(id);
+    return `<div class="daily-card${done?' done-today':''}" onclick="dailyCardClick('${id}')">
+      <div class="daily-card-dot" style="background:${col}"></div>
+      <div style="flex:1;min-width:0;">
+        <div class="daily-card-title">${e.fm.t}</div>
+        <div class="daily-card-formula">${e.sec.name} — ${e.sub.n}</div>
+      </div>
+      <div class="daily-card-done">${done?'✅':'○'}</div>
+    </div>`;
+  }).join('');
+  const done = (daily.done||[]).length;
+  const el = document.getElementById('daily-widget');
+  if(el) el.innerHTML = `
+    <div class="daily-section">
+      <div class="daily-header">
+        <div class="daily-title">📅 Формулы дня <span style="font-weight:400;color:var(--text3)">${done}/3</span></div>
+        <button class="daily-refresh" onclick="refreshDaily()" title="Обновить">🔄</button>
+      </div>
+      <div class="daily-cards">${cards}</div>
+    </div>`;
+}
+
+function dailyCardClick(id){
+  // Отметить как изученную сегодня
+  let daily = JSON.parse(localStorage.getItem('ege_daily')||'{}');
+  if(!daily.done) daily.done=[];
+  if(!daily.done.includes(id)) daily.done.push(id);
+  localStorage.setItem('ege_daily', JSON.stringify(daily));
+  window._markStreak && window._markStreak();
+  renderDailyWidget();
+  // Открываем карточки, ищем формулу
+  if(typeof openFlash === 'function') openFlash();
+  setTimeout(()=>{
+    const idx = (typeof fcList!=='undefined' ? fcList : []).findIndex(c=>c.id===id);
+    if(idx>=0){ fcIdx=idx; if(typeof showFcCard==='function') showFcCard(); }
+  }, 350);
+}
+
+function refreshDaily(){
+  localStorage.removeItem('ege_daily');
+  renderDailyWidget();
+}
+
+// ══ HAPTIC FEEDBACK ══
+function haptic(type){
+  if(!navigator.vibrate) return;
+  if(type==='success') navigator.vibrate([30,20,30]);
+  else if(type==='error') navigator.vibrate([80,30,80]);
+  else if(type==='tap') navigator.vibrate(15);
+}
+
+// ══ WEB SHARE ══
+async function shareFormula(fid){
+  const e = (ALL_FM||[]).find(x=>x.id===fid);
+  if(!e) return;
+  const text = `📐 ${e.t}\nФормула ЕГЭ Математика 2026\n\n${e.d||''}`;
+  if(navigator.share){
+    try{ await navigator.share({title:e.t, text}); }
+    catch{}
+  } else {
+    await navigator.clipboard.writeText(text);
+    showToast('📋 Скопировано в буфер обмена');
+  }
+}
+
+// ══ KEYBOARD SHORTCUTS ══
+(function(){
+  const hint = document.getElementById('kbd-hint');
+  let hintTimer;
+
+  document.addEventListener('keydown', e => {
+    const tag = document.activeElement?.tagName;
+    if(tag==='INPUT'||tag==='TEXTAREA') return;
+    const flashOpen = !document.getElementById('flash-modal')?.classList.contains('hidden');
+
+    switch(e.key){
+      case ' ':
+      case 'Enter':
+        if(flashOpen){ e.preventDefault(); document.getElementById('fc-scene')?.click(); haptic('tap'); }
+        break;
+      case 'ArrowRight':
+        if(flashOpen){ e.preventDefault(); document.getElementById('fc-next')?.click(); haptic('tap'); }
+        break;
+      case 'ArrowLeft':
+        if(flashOpen){ e.preventDefault(); document.getElementById('fc-prev')?.click(); haptic('tap'); }
+        break;
+      case 'f': case 'F': case 'а': case 'А':
+        if(flashOpen){ document.getElementById('fc-fav-btn')?.click(); haptic('tap'); }
+        break;
+      case 'Escape':
+        document.querySelector('.modal-overlay:not(.hidden) .modal-close')?.click();
+        break;
+      case '?':
+        hint.classList.toggle('visible');
+        clearTimeout(hintTimer);
+        if(hint.classList.contains('visible'))
+          hintTimer = setTimeout(()=>hint.classList.remove('visible'),4000);
+        break;
+    }
+  });
+})();
+
+// ══ INJECT SHARE BUTTON + DAILY WIDGET PLACEHOLDER ══
+// (Кнопка «Поделиться» добавляется в buildCard)
+// Daily widget монтируется в renderSection
 // ── INIT ───
 updateFavCount();
 applyTheme(STATE.theme);
