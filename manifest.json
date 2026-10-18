@@ -1,18 +1,24 @@
 {
   "id": "ege-math-2026",
-  "name": "ЕГЭ Математика Профиль 2026",
+  "name": "ЕГЭ Математика Профиль 2027",
   "short_name": "ЕГЭ Мат",
-  "description": "Все формулы ЕГЭ профильная математика 2026: карточки, тесты, генератор задач с ИИ, прогресс и спейсд репетишн",
+  "description": "Все формулы ЕГЭ профильная математика 2027: карточки, тесты, генератор задач с ИИ, прогресс и спейсд репетишн",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
-  "display_override": ["fullscreen", "standalone", "minimal-ui"],
-  "background_color": "#060b18",
-  "theme_color": "#060b18",
+  "display_override": [
+    "fullscreen",
+    "standalone",
+    "minimal-ui"
+  ],
+  "background_color": "#0b0c1a",
+  "theme_color": "#0b0c1a",
   "orientation": "portrait-primary",
   "lang": "ru",
   "dir": "ltr",
-  "categories": ["education"],
+  "categories": [
+    "education"
+  ],
   "iarc_rating_id": "e84b072d-71b3-4d3e-86ae-31a8ce4e53b7",
   "prefer_related_applications": false,
   "related_applications": [],
@@ -24,7 +30,7 @@
       "purpose": "any"
     },
     {
-      "src": "./icon-512.png",
+      "src": "./icon-maskable-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
